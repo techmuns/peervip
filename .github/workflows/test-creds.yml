@@ -36,3 +36,6 @@ jobs:
           SCREENER_EMAIL: ${{ secrets.SCREENER_EMAIL }}
           SCREENER_PASSWORD: ${{ secrets.SCREENER_PASSWORD }}
         run: node scripts/test-screener.mjs
+
+      - name: Test global (Yahoo)
+        run: node scripts/test-global.mjs

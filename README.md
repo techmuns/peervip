@@ -5,14 +5,18 @@ its *true* peers (Indian Listed · Global Listed · Private), benchmarks them ac
 every financial metric with live medians & averages, year-by-year trends, and an
 AI-crowned outperformer with a written reason.
 
-> **Live (Step 2).** A real search now runs end-to-end: type a company or
+> **Live & deep (Steps 2–3).** A real search runs end-to-end: type a company or
 > industry → a Cloudflare Pages Function dispatches a GitHub Actions run that
-> researches the peer set (Screener via Playwright + global sources + 2–3 Claude
-> calls on AWS Bedrock) → the loading screen shows live per-stage progress → the
-> report is served from KV and rendered at `#/r/<slug>`. The two committed sample
-> reports remain the **offline fallback**, and the frontend still renders 100%
-> from the same JSON data contract. See **[Go live](#go-live)** for the one-time
-> secrets/bindings setup.
+> researches the peer set and renders it at `#/r/<slug>` with live per-stage
+> progress. **Peer discovery is grounded in real sources** (Jina search + read,
+> not model memory), **Screener** fills the 26 metrics + series (incl. gross
+> margin / raw-material % via the schedules API), **global peers** come from
+> Yahoo (crumb+cookie, any country → ₹ Cr), the **outperformer "why" is grounded
+> and open-ended**, and the dashboard shows **freshness + a Refresh button +
+> citations**. Never-fail throughout: a minimal report is written even if AI is
+> down. The two committed samples remain the **offline fallback**, and the
+> frontend still renders 100% from the same JSON data contract. See
+> **[Go live](#go-live)** for the one-time secrets/bindings setup.
 
 ---
 
@@ -176,7 +180,7 @@ every search is automatic. The site works without them (seeded reports + a frien
 | `SCREENER_PASSWORD` | Screener login | |
 | `PROGRESS_URL` | progress callbacks | your Pages origin, e.g. `https://peervip.pages.dev` |
 | `PROGRESS_SECRET` | authenticates `/api/progress` | any random string (same value on Pages) |
-| `FIRECRAWL_API_KEY` | web snippets for peer discovery | *optional* |
+| `JINA_API_KEY` | grounded peer discovery + "why" engine (Jina search/read) | strongly recommended (search needs it; the reader works keyless) |
 
 ### 2. Cloudflare Pages → project **Settings**
 
@@ -203,8 +207,10 @@ the Function start a research run.)
 ### 4. Validate before a real run
 
 GitHub → **Actions → "Test credentials" → Run workflow**. It runs
-`scripts/test-bedrock.mjs` (prints a Bedrock reply) and `scripts/test-screener.mjs`
-(logs in + scrapes a sample company) so you can confirm creds without a full run.
+`scripts/test-bedrock.mjs` (prints a Bedrock reply), `scripts/test-screener.mjs`
+(logs in + scrapes STYLAMIND and prints all 26 parsed metrics + series + the
+material-cost enrichment), and `scripts/test-global.mjs` (Yahoo crumb+cookie →
+one global ticker) so you can validate the parse cheaply without a full run.
 
 Then search anything on the site — the loading screen drives from real stages and
 the dashboard renders live data.

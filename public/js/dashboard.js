@@ -18,7 +18,7 @@ const TABS = [
 ];
 const BM_BUCKETS = ['Manufacturer', 'Trader-Distributor', 'Importer-Sourcing', 'Integrated'];
 
-export function renderDashboard(appEl, report, { onBack }) {
+export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   setupCharts();
   const mm = metricMap(report.metrics);
   const allPeers = [...(report.peers.indian || []), ...(report.peers.global || []), ...(report.peers.private || [])];
@@ -46,6 +46,8 @@ export function renderDashboard(appEl, report, { onBack }) {
     finally { btn.disabled = false; btn.innerHTML = old; }
   });
   appEl.querySelector('[data-onepager]').addEventListener('click', () => { setTab('report'); setTimeout(() => window.print(), 350); });
+  const refreshBtn = appEl.querySelector('[data-refresh]');
+  if (refreshBtn) refreshBtn.addEventListener('click', () => { if (onRefresh) onRefresh(report.meta && report.meta.query); });
 
   const content = appEl.querySelector('#tab-content');
   const underline = appEl.querySelector('.pv-tab-underline');
@@ -99,7 +101,7 @@ function headerHtml(report) {
       <div class="min-w-0">
         <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight truncate">${esc(m.name)}</h1>
         <p class="text-slate-500 text-sm">${esc(m.segment || '')}${m.seed_company ? ` · searched: <span class="font-semibold text-slate-600">${esc(m.seed_company)}</span>` : ''}</p>
-        <p class="text-xs text-slate-400 mt-0.5">Updated ${esc(fmtDate(m.generated_at))} · ${esc(String((m.coverage && m.coverage.peers_total) || 0))} peers · confidence ${esc((m.coverage && m.coverage.confidence) || '—')}${m.sample ? ' · <span class="text-amber-600 font-semibold">sample data</span>' : ''}</p>
+        <p class="text-xs text-slate-400 mt-0.5">Updated ${esc(fmtDate(m.generated_at))}${timeAgo(m.generated_at) ? ` <span class="text-slate-400">(${esc(timeAgo(m.generated_at))})</span>` : ''} · ${esc(String((m.coverage && m.coverage.peers_total) || 0))} peers · <span title="peers with full financials / confidence">${esc(String((m.coverage && m.coverage.with_full_financials) ?? '—'))} with financials · confidence ${esc((m.coverage && m.coverage.confidence) || '—')}</span>${m.sample ? ' · <span class="text-amber-600 font-semibold">sample data</span>' : ''}</p>
       </div>
     </div>
     <div class="flex items-center gap-2 shrink-0 flex-wrap">
@@ -112,8 +114,25 @@ function headerHtml(report) {
       <button data-onepager class="pv-focus inline-flex items-center gap-1.5 rounded-xl brand-gradient px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg> One-pager
       </button>
+      <button data-refresh title="Re-research this ${esc(report.meta.type === 'company' ? 'company' : 'industry')} with fresh data" class="pv-focus inline-flex items-center gap-1.5 rounded-xl bg-white ring-1 ring-slate-200 px-3.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg> Refresh
+      </button>
     </div>
   </header>`;
+}
+
+/** Compact "time ago" from an ISO date (returns '' if unknown/future). */
+function timeAgo(iso) {
+  const t = Date.parse(iso || '');
+  if (!isFinite(t)) return '';
+  const s = Math.floor((Date.now() - t) / 1000);
+  if (s < 0) return '';
+  if (s < 60) return 'just now';
+  const m = Math.floor(s / 60); if (m < 60) return `${m} min ago`;
+  const h = Math.floor(m / 60); if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24); if (d < 30) return `${d}d ago`;
+  const mo = Math.floor(d / 30); if (mo < 12) return `${mo}mo ago`;
+  return `${Math.floor(mo / 12)}y ago`;
 }
 
 // ---------------------------------------------------------------- banner

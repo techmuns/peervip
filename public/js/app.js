@@ -17,6 +17,7 @@ import { esc, fmtDate } from './format.js';
 const app = () => document.getElementById('app');
 const RUN_KEY = 'peervip:run';
 const POLL_MS = 2500;
+const MAX_POLL_MS = 10 * 60 * 1000; // never spin forever (#4)
 
 const STAGES = [
   'Understanding the business',
@@ -58,6 +59,14 @@ async function route() {
  * screen. The closest weak match (if any) is stashed so the loading screen can
  * offer it as a shortcut.
  */
+// Refresh / re-research: always dispatch a fresh run (bypass the strong-match
+// cache) and show the live loading screen again (#6).
+function refreshResearch(query) {
+  if (!query) return;
+  writeRun({ q: query, slug: null, name: query, weak: null, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false });
+  go('#/loading?q=' + encodeURIComponent(query));
+}
+
 async function runQuery(query) {
   if (!query) return;
   let index = null;
@@ -263,10 +272,17 @@ function createLoadingController(el, { query, saved }) {
     weakEl.innerHTML = `<a href="#/r/${encodeURIComponent(weak.slug)}" class="text-slate-400 hover:text-indigo-600 transition">Open closest cached match: <span class="font-semibold">${esc(weak.name)}</span> →</a>`;
   }
 
-  // ---- polling ----
+  // ---- polling (with a hard cap so it never spins forever) ----
+  async function onTimeout(s) {
+    stopTimers();
+    // the run may have finished while we waited — try the report before failing
+    try { await loadReport(s, { fresh: true }); location.hash = '#/r/' + encodeURIComponent(s); }
+    catch (_) { failCard('Taking longer than expected — check the GitHub Actions run for this query, and that PROGRESS_SECRET matches in GitHub + Cloudflare.'); }
+  }
   function startPolling(s) {
     slug = s; persist();
     const step = async () => {
+      if (Date.now() - startedAt > MAX_POLL_MS) { await onTimeout(s); return; }
       try {
         const st = await fetchStatus(s);
         if (st && (st.state === 'done')) { finishLive(s); return; }
@@ -372,7 +388,7 @@ async function renderDashboardRoute(slug) {
   try {
     const report = await loadReport(slug);
     clearRun();
-    renderDashboard(el, report, { onBack: () => go('#/') });
+    renderDashboard(el, report, { onBack: () => go('#/'), onRefresh: (q) => refreshResearch(q || (report.meta && report.meta.query) || slug) });
     window.scrollTo(0, 0);
   } catch (e) {
     el.innerHTML = `<div class="min-h-screen flex items-center justify-center px-4">
