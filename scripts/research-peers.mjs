@@ -177,14 +177,16 @@ async function verifyIndianPeers(page, peerPlan) {
     await sleep(300);
   }
 
-  // BUSINESS-MATCH GATE — keep verified-listed makers unless the model is CONFIDENT
-  // they're off-family (keep-biased), so real mid-cap makers aren't dropped on a
-  // borderline call; clear noise (music, ropes) is still cut. Higher-confidence
-  // family matches sort first so the CAP.indian slice favours the strongest peers.
+  // BUSINESS-MATCH GATE — keep only peers whose Screener About matches the product
+  // FAMILY. Strict keep test (match + confidence) preserves precision: it cleanly
+  // drops music/entertainment/textile/glass names that share an industry page but
+  // aren't film makers. (A keep-biased variant was tried and reverted — it let that
+  // noise into the peer table without fixing Cosmo First, whose flakiness is at the
+  // scrape stage, not the gate.)
   const gate = await businessMatchGate(scraped, peerPlan.segment || QUERY, peerPlan.definition, peerPlan.synonyms || []);
-  const kept = scraped.filter((p) => !gate.offFamily(p.name))
+  const kept = scraped.filter((p) => gate.pass(p.name))
     .sort((a, b) => (gate.conf(b.name) - gate.conf(a.name)) || ((b.marketCap || 0) - (a.marketCap || 0)));
-  const off = scraped.filter((p) => gate.offFamily(p.name));
+  const off = scraped.filter((p) => !gate.pass(p.name));
   if (off.length) console.log(`  gate dropped (off-family): ${off.map((p) => p.name).join(', ')}`);
 
   const indian = kept.slice(0, CAP.indian).map((p) => ({
@@ -199,7 +201,7 @@ async function verifyIndianPeers(page, peerPlan) {
 
 // Batched Bedrock: per company, family-match (any business model) + business_model + a concrete products line.
 async function businessMatchGate(scraped, family, definition, synonyms = []) {
-  const none = { pass: () => true, offFamily: () => false, conf: () => 50, model: () => '', products: () => '' };
+  const none = { pass: () => true, conf: () => 50, model: () => '', products: () => '' };
   if (!scraped.length) return none;
   const map = new Map();
   try {
@@ -217,12 +219,6 @@ async function businessMatchGate(scraped, family, definition, synonyms = []) {
   const g = (name) => map.get(norm(name)) || null;
   return {
     pass: (name) => { const r = g(name); return r ? (r.match !== false && (r.confidence == null || +r.confidence >= 40)) : true; },
-    // KEEP-BIASED drop test: a company is dropped ONLY when the model is CONFIDENT
-    // it is off-family (explicit match:false at >=65 confidence). A verified-listed
-    // /market maker from the product industry is otherwise kept, so real mid-cap
-    // makers (Cosmo First, Ester) aren't dropped nondeterministically on a borderline
-    // call — while clear noise (music labels, ropes) is still confidently cut.
-    offFamily: (name) => { const r = g(name); return !!r && r.match === false && isFinite(+r.confidence) && +r.confidence >= 65; },
     conf: (name) => { const r = g(name); return r && isFinite(+r.confidence) ? +r.confidence : 50; },
     model: (name) => { const r = g(name); return r ? String(r.business_model || '') : ''; },
     products: (name) => { const r = g(name); return r ? String(r.products || '') : ''; },
