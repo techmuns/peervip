@@ -34,7 +34,7 @@ const REPORTS_DIR = path.resolve('public/data/reports');
 const INDEX_FILE = path.resolve('public/data/index.json');
 
 // Guardrails (#7): bound peers and Jina reads per run.
-const CAP = { indian: 15, global: 8, private: 6, scrape: 22, jinaReads: 6 };
+const CAP = { indian: 15, global: 8, private: 6, scrape: 26, jinaReads: 6 };
 const TOK = { scoring: 3500, report: 4500 };
 const norm = (s) => String(s || '').toLowerCase().replace(/\b(ltd|limited|inc|plc|corp|corporation|co|company|the|group|industries|india)\b/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -146,6 +146,7 @@ async function verifyIndianPeers(page, peerPlan) {
   const cands = [...(peerPlan.candidates.indian || [])].sort((a, b) => (b.code ? 1 : 0) - (a.code ? 1 : 0) || ((a.order ?? 1e9) - (b.order ?? 1e9)));
   const scraped = [], movedToPrivate = [];
   const seen = new Set();
+  const seenCodes = new Set(); // dedup by RESOLVED Screener code: a /market short name and a Bedrock full name can be the same company (e.g. "Polyplex Corpn" == "Polyplex Corporation Ltd")
   for (const c of cands) {
     if (scraped.length >= CAP.scrape) break;
     const name = String(c.name || '').trim();
@@ -156,10 +157,13 @@ async function verifyIndianPeers(page, peerPlan) {
       if (!hit) { movedToPrivate.push(c); continue; }
       // /market gave a code but no numeric id (needed for material cost) — resolve it
       if (hit.id == null) { const r = (await screenerSearch(name))[0] || (await screenerSearch(hit.code))[0]; if (r) hit = { code: r.code, id: r.id, name: r.name }; }
+      const codeKey = String(hit.code || '').toUpperCase();
+      if (codeKey && seenCodes.has(codeKey)) continue; // same company already scraped under another name
       const res = await getCompanyHtml(page, hit.code);
       if (!res) { movedToPrivate.push(c); continue; }
       const m = mapCompany(res.html);
       if (!m.listed) { movedToPrivate.push(c); continue; }
+      seenCodes.add(codeKey);
       const current = pickMetrics(m.current);
       try { const mc = await screenerMaterialCost(hit.id); if (mc) { if (current.rm_cost_pct == null) current.rm_cost_pct = mc.rm_cost_pct; if (current.gross_margin == null) current.gross_margin = mc.gross_margin; } } catch (_) { /* optional */ }
       scraped.push({
