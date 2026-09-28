@@ -34,7 +34,7 @@ const REPORTS_DIR = path.resolve('public/data/reports');
 const INDEX_FILE = path.resolve('public/data/index.json');
 
 // Guardrails (#7): bound peers and Jina reads per run.
-const CAP = { indian: 15, global: 8, private: 6, scrape: 26, jinaReads: 6 };
+const CAP = { indian: 15, global: 8, private: 6, scrape: 28, jinaReads: 6 };
 const TOK = { scoring: 3500, report: 4500 };
 const norm = (s) => String(s || '').toLowerCase().replace(/\b(ltd|limited|inc|plc|corp|corporation|co|company|the|group|industries|india)\b/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
