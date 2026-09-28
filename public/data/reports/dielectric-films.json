@@ -7,20 +7,20 @@
     "seed_company": "Polyplex Corporation Ltd",
     "segment": "dielectric films",
     "definition": "Dielectric films are specialized insulating materials used in electronic components and capacitors.",
-    "generated_at": "2026-09-28T09:42:55.127Z",
+    "generated_at": "2026-09-28T09:59:34.686Z",
     "sample": false,
     "coverage": {
-      "peers_total": 11,
-      "with_full_financials": 4,
-      "confidence": "medium"
+      "peers_total": 15,
+      "with_full_financials": 6,
+      "confidence": "high"
     }
   },
   "outperformer": {
-    "company": "Hyosung Corporation",
-    "bucket": "global",
-    "headline": "Exceptional profitability with 25.2% EBITDA margin and 18.2% PAT margin, driven by superior operational efficiency and product mix",
-    "reason": "Hyosung stands out with dramatically superior profitability metrics that are multiples above the peer set. Its 25.2% EBITDA margin is nearly 3x the peer median of 9.25%, while its 18.2% PAT margin is 7.6x the median of 2.4%. The company also demonstrates strong capital efficiency with 19.4% ROE (6x the median) and robust revenue growth of 21.9%. This performance suggests a combination of premium product positioning in specialty dielectric films, superior cost management, and likely a favorable product mix skewed toward higher-margin applications. The company maintains this profitability while growing aggressively, indicating genuine competitive advantages rather than one-off gains.",
-    "india_vs_global": "Indian peers struggle with single-digit EBITDA margins (4.9-12%) and razor-thin PAT margins (0.6-4%), while Hyosung's profitability is in a different league entirely, suggesting structural advantages in technology, scale, or market positioning that domestic players have yet to achieve."
+    "company": "Garware Hi Tech Films Ltd",
+    "bucket": "indian",
+    "headline": "Premium product mix and value-added focus drive industry-leading margins and returns",
+    "reason": "Garware's outperformance stems from its strategic focus on high-end, value-added specialty films rather than competing in commoditized segments. This is evidenced by its exceptional gross margin of 54.2% (vs peer median 30.4%) and RM cost of only 45.79% (vs peer median 65%), indicating premium pricing power and product differentiation. The company delivers best-in-class ROCE of 18.1% and ROE of 13.5%, while maintaining zero debt and generating strong cash flows (9-day debtor days vs median 54). Its 5-year revenue CAGR of 16.5% significantly outpaces the segment median of 9.6%, demonstrating sustained growth in niche markets. The grounded notes confirm GHFL's competitive moats are built into its business model through focus on high-end products, allowing it to avoid the margin-eroding capacity addition cycles that plague commodity players like Polyplex.",
+    "india_vs_global": "Garware's 18.1% ROCE and 54.2% gross margin exceed all global peers including Nan Ya Plastics (12.3% ROE, 12.6% gross margin), demonstrating that its specialty/value-added positioning creates stronger economics than even large integrated global players in commoditized segments."
   },
   "metrics": [
     {
@@ -238,8 +238,8 @@
         "name": "Polyplex Corporation Ltd",
         "ticker": "POLYPLEX",
         "business_model": "Manufacturer",
-        "products": "Manufactures BOPET polyester films including capacitor-grade films and electrical insulation films for electronic applications",
-        "note": "Major Indian manufacturer of polyester films including dielectric/capacitor grades",
+        "products": "BOPET films, polyester films, electrical insulation films, and capacitor-grade films - direct dielectric film manufacturer",
+        "note": "Major global polyester film producer, includes electrical/dielectric grades",
         "source": {
           "label": "Screener",
           "url": "https://www.screener.in/company/POLYPLEX/"
@@ -249,7 +249,7 @@
           "rev_growth_1y": 2.9,
           "rev_cagr_3y": -2.5,
           "rev_cagr_5y": 7.6,
-          "market_cap": 3341,
+          "market_cap": 3340,
           "ebitda_margin": 4.9,
           "pat_margin": 0.6,
           "roce": 0.89,
@@ -518,7 +518,7 @@
         "name": "XPRO India Ltd",
         "ticker": "XPROINDIA",
         "business_model": "Manufacturer",
-        "products": "Manufactures dielectric (capacitor) films and specialty BOPP films via biaxial orientation for electronic components",
+        "products": "Explicitly manufactures dielectric (capacitor) films and specialty BOPP films via biaxial orientation for electrical applications",
         "note": "Only Indian manufacturer of dielectric films; ~30% domestic market share in dielectric films; largest supplier of refrigerator liners in India with >50% domestic share",
         "source": {
           "label": "Screener",
@@ -529,7 +529,7 @@
           "rev_growth_1y": -5.6,
           "rev_cagr_3y": -0.3,
           "rev_cagr_5y": 6.4,
-          "market_cap": 2692,
+          "market_cap": 2685,
           "ebitda_margin": 6,
           "pat_margin": 4,
           "roce": 3.78,
@@ -544,7 +544,7 @@
           "promoter_holding": 40.32,
           "fii_holding": 13.81,
           "dii_holding": 2.94,
-          "pe": 82.4,
+          "pe": 82.2,
           "pb": 3.5,
           "dividend_yield": 0.17,
           "dividend_payout": 24,
@@ -798,8 +798,8 @@
         "name": "Jindal Poly Films Ltd",
         "ticker": "JINDALPOLY",
         "business_model": "Manufacturer",
-        "products": "Manufactures BOPET and BOPP films for packaging and industrial applications including capacitor/dielectric uses",
-        "note": "Part of BC Jindal Group, BOPP film manufacturer with electrical insulation grades",
+        "products": "Largest manufacturer of BOPET and BOPP films in India, including metallized and coated films used in capacitor and dielectric applications",
+        "note": "Part of Jindal group, BOPP producer for packaging and technical uses",
         "source": {
           "label": "Screener",
           "url": "https://www.screener.in/company/JINDALPOLY/"
@@ -1075,11 +1075,291 @@
         }
       },
       {
+        "name": "Garware Hi Tech Films Ltd",
+        "ticker": "GRWRHITECH",
+        "business_model": "Manufacturer",
+        "products": "Vertically integrated polyester/PET films manufacturer including specialty films for industrial applications that can serve as dielectric substrates",
+        "note": "Polyester film maker with technical/industrial segments",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/GRWRHITECH/"
+        },
+        "current": {
+          "revenue": 2120,
+          "rev_growth_1y": 0.5,
+          "rev_cagr_3y": 13.8,
+          "rev_cagr_5y": 16.5,
+          "market_cap": 15450,
+          "ebitda_margin": 21,
+          "pat_margin": 15.9,
+          "roce": 18.1,
+          "roe": 13.5,
+          "debtor_days": 9,
+          "inventory_days": 149,
+          "payable_days": 69,
+          "ccc": 89,
+          "wc_days": 40,
+          "debt_equity": 0,
+          "interest_coverage": 54.4,
+          "promoter_holding": 60.73,
+          "fii_holding": 4.22,
+          "dii_holding": 6.35,
+          "pe": 39.8,
+          "pb": 5.8,
+          "dividend_yield": 0.18,
+          "dividend_payout": 8,
+          "rm_cost_pct": 45.79,
+          "gross_margin": 54.2
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              896,
+              857,
+              874,
+              833,
+              948,
+              925,
+              989,
+              1303,
+              1438,
+              1677,
+              2109,
+              2120
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              7,
+              9,
+              8,
+              10,
+              15,
+              17,
+              22,
+              18,
+              16,
+              17,
+              21,
+              21
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              2,
+              1.9,
+              2.5,
+              4,
+              8.6,
+              9.3,
+              12.7,
+              12.8,
+              11.5,
+              12.1,
+              15.7,
+              15.9
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              7,
+              8,
+              5,
+              5,
+              9,
+              10,
+              13,
+              13,
+              12,
+              14,
+              21,
+              18
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              20,
+              17,
+              26,
+              17,
+              22,
+              21,
+              16,
+              9,
+              8,
+              8,
+              7,
+              9
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              93,
+              111,
+              90,
+              82,
+              70,
+              100,
+              128,
+              145,
+              109,
+              132,
+              116,
+              149
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              82,
+              91,
+              77,
+              44,
+              24,
+              58,
+              54,
+              79,
+              60,
+              67,
+              68,
+              89
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73,
+              60.73
+            ]
+          }
+        }
+      },
+      {
         "name": "Uflex Ltd",
         "ticker": "UFLEX",
         "business_model": "Manufacturer",
-        "products": "Manufactures BOPP, BOPET, CPP and metallized films for flexible packaging with potential dielectric/insulation applications",
-        "note": "Diversified flexible packaging major with capacitor-grade and dielectric film capabilities",
+        "products": "BOPP, BOPET, CPP, metallized and specialty technical films - includes films suitable for dielectric applications",
+        "note": "Diversified film maker, produces technical-grade BOPP/BOPET for industrial applications",
         "source": {
           "label": "Screener",
           "url": "https://www.screener.in/company/UFLEX/"
@@ -1089,7 +1369,7 @@
           "rev_growth_1y": 2.4,
           "rev_cagr_3y": 1.7,
           "rev_cagr_5y": 11.6,
-          "market_cap": 4619,
+          "market_cap": 4671,
           "ebitda_margin": 12,
           "pat_margin": 2.1,
           "roce": 7.03,
@@ -1104,7 +1384,7 @@
           "promoter_holding": 44.58,
           "fii_holding": 10.03,
           "dii_holding": 0.59,
-          "pe": 6.65,
+          "pe": 6.73,
           "pb": 0.6,
           "dividend_yield": 0.46,
           "dividend_payout": 7,
@@ -1353,15 +1633,295 @@
             ]
           }
         }
+      },
+      {
+        "name": "SRF Ltd",
+        "ticker": "SRF",
+        "business_model": "Manufacturer",
+        "products": "BOPET films, packaging and industrial films - diversified manufacturer with film segment including potential dielectric applications",
+        "note": "Diversified chemical major, packaging films division includes polyester films",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/SRF/"
+        },
+        "current": {
+          "revenue": 15787,
+          "rev_growth_1y": 7.4,
+          "rev_cagr_3y": 2,
+          "rev_cagr_5y": 13.4,
+          "market_cap": 74047,
+          "ebitda_margin": 22,
+          "pat_margin": 11.6,
+          "roce": 14.6,
+          "roe": 14.3,
+          "debtor_days": 59,
+          "inventory_days": 131,
+          "payable_days": 121,
+          "ccc": 69,
+          "wc_days": -12,
+          "debt_equity": 0.36,
+          "interest_coverage": 12.3,
+          "promoter_holding": 50.26,
+          "fii_holding": 15.45,
+          "dii_holding": 22.44,
+          "pe": 33,
+          "pb": 5.3,
+          "dividend_yield": 0.35,
+          "dividend_payout": 15,
+          "rm_cost_pct": 45.34,
+          "gross_margin": 54.7
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              4540,
+              4593,
+              4822,
+              5589,
+              7100,
+              7209,
+              8400,
+              12434,
+              14870,
+              13139,
+              14693,
+              15787
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              16,
+              21,
+              20,
+              16,
+              18,
+              20,
+              25,
+              25,
+              24,
+              20,
+              18,
+              22
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              6.7,
+              9.4,
+              10.7,
+              8.3,
+              9,
+              14.1,
+              14.3,
+              15.2,
+              14.5,
+              10.2,
+              8.5,
+              11.6
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              11,
+              14,
+              14,
+              11,
+              14,
+              14,
+              18,
+              24,
+              22,
+              13,
+              12,
+              15
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              49,
+              41,
+              50,
+              44,
+              53,
+              45,
+              55,
+              53,
+              44,
+              54,
+              54,
+              59
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              110,
+              105,
+              126,
+              115,
+              113,
+              119,
+              133,
+              129,
+              112,
+              127,
+              111,
+              131
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              75,
+              34,
+              54,
+              34,
+              38,
+              54,
+              45,
+              55,
+              46,
+              61,
+              55,
+              69
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              50.53,
+              50.53,
+              50.31,
+              50.26,
+              50.26,
+              50.26,
+              50.26,
+              50.26,
+              50.26,
+              50.26,
+              50.26,
+              50.26
+            ]
+          }
+        }
       }
     ],
     "global": [
       {
-        "name": "Toray Industries",
+        "name": "Toray Industries Inc",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "Polyester films, BOPET films, Lumirror brand, capacitor films, high-performance dielectric films",
-        "note": "Global leader in polyester films including high-end dielectric and capacitor grades",
+        "products": "Polyester films, polypropylene films, dielectric films, capacitor films, advanced materials",
+        "note": "Global leader in high-performance films including dielectric/capacitor grades",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/3402.T"
@@ -1397,11 +1957,11 @@
         }
       },
       {
-        "name": "Mitsubishi Chemical Group (formerly Mitsubishi Chemical Holdings)",
+        "name": "Mitsubishi Chemical Group Corporation",
         "country": "",
-        "business_model": "Manufacturer",
-        "products": "Polyester films, BOPET films, Diafoil brand capacitor films, electronic materials",
-        "note": "Major capacitor film supplier under Diafoil brand",
+        "business_model": "Integrated",
+        "products": "Polyester films, polypropylene films, dielectric films, functional films, specialty polymers",
+        "note": "Major chemical group with extensive film portfolio including dielectric materials",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/4188.T"
@@ -1436,11 +1996,11 @@
         }
       },
       {
-        "name": "Toyobo Co.",
+        "name": "Toyobo Co Ltd",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "Polyester films, BOPET films, Pylen brand, capacitor films, industrial films",
-        "note": "Japanese polyester film maker with dielectric film portfolio",
+        "products": "Polyester films, BOPET films, industrial films, functional films",
+        "note": "Japanese film specialist with technical/industrial film grades",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/3101.T"
@@ -1476,11 +2036,11 @@
         }
       },
       {
-        "name": "SKC Co.",
+        "name": "SKC Co Ltd",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "Polyester films, BOPET films, capacitor films, optical films, electronic materials",
-        "note": "Korean polyester film major with capacitor-grade dielectric films",
+        "products": "Polyester films, BOPET films, optical films, semiconductor materials, dielectric films",
+        "note": "Korean film major, produces capacitor-grade and electronic films",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/011790.KS"
@@ -1514,11 +2074,11 @@
         }
       },
       {
-        "name": "Kolon Industries",
+        "name": "Kolon Industries Inc",
         "country": "",
-        "business_model": "Manufacturer",
-        "products": "Polyester films, industrial films, electronic materials, dielectric films",
-        "note": "Korean conglomerate with polyester film and electronic materials divisions",
+        "business_model": "Integrated",
+        "products": "Polyester films, industrial films, aramid fibers, chemicals",
+        "note": "Korean conglomerate with film division including technical grades",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/120110.KS"
@@ -1553,26 +2113,27 @@
         }
       },
       {
-        "name": "Hyosung Corporation",
+        "name": "Nan Ya Plastics Corporation",
         "country": "",
-        "business_model": "Manufacturer",
-        "products": "Industrial films, polyester films, capacitor films, specialty chemical products",
-        "note": "Korean industrial group with film and capacitor materials business",
+        "business_model": "Integrated",
+        "products": "Polyester films, BOPET films, plastics, chemicals, electronic materials",
+        "note": "Taiwan major, part of Formosa group, large polyester film capacity",
         "source": {
           "label": "Yahoo Finance",
-          "url": "https://finance.yahoo.com/quote/004800.KS"
+          "url": "https://finance.yahoo.com/quote/1303.TW"
         },
         "current": {
-          "revenue": 15746,
-          "rev_growth_1y": 21.9,
-          "market_cap": 16377,
-          "gross_margin": 31.9,
-          "ebitda_margin": 25.2,
-          "pat_margin": 18.2,
-          "roe": 19.4,
-          "debt_equity": 0.53,
-          "pe": 7.8581553,
-          "dividend_yield": 3
+          "revenue": 73031,
+          "rev_growth_1y": 27.3,
+          "market_cap": 490759,
+          "gross_margin": 12.6,
+          "ebitda_margin": 14.4,
+          "pat_margin": 17.5,
+          "roe": 12.3,
+          "debt_equity": 0.3,
+          "pe": 38.325283,
+          "pb": 3.950929,
+          "dividend_yield": 0.3
         },
         "series": {
           "revenue": {
@@ -1583,16 +2144,36 @@
               "2025"
             ],
             "values": [
-              23060,
-              21307,
-              14091,
-              15077
+              92348,
+              67536,
+              67498,
+              67577
             ]
           }
         }
       }
     ],
     "private": [
+      {
+        "name": "Chiripal Poly Films",
+        "business_model": "Manufacturer",
+        "products": "BOPP films, CPP films, flexible packaging films",
+        "note": "Indian BOPP producer, part of Chiripal Group",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Vacmet India Limited",
+        "business_model": "Manufacturer",
+        "products": "Metallized films, BOPP films, BOPET films, vacuum metallizing",
+        "note": "Indian metallized film specialist",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
       {
         "name": "Xpro Dielectric Films FZ-LLC",
         "business_model": "Manufacturer",
@@ -1608,177 +2189,199 @@
   "scorecard": {
     "ranking": [
       {
-        "company": "Hyosung Corporation",
-        "bucket": "global",
+        "company": "Garware Hi Tech Films Ltd",
+        "bucket": "indian",
         "score": 95,
         "rank": 1,
         "strengths": [
-          "ebitda_margin: 25.2% vs median 9.25%",
-          "pat_margin: 18.2% vs median 2.4%",
-          "roe: 19.4% vs median 3.2%",
-          "rev_growth_1y: 21.9% vs median 7.55%",
-          "gross_margin: 31.9% vs median 30.4%"
+          "gross_margin: 54.2% (best-in-class)",
+          "roce: 18.1% (highest)",
+          "roe: 13.5% (top tier)",
+          "pat_margin: 15.9% (highest)",
+          "debtor_days: 9 (exceptional)",
+          "debt_equity: 0 (debt-free)"
         ],
-        "reason": "Dominant across all profitability metrics with EBITDA and PAT margins that are multiples of peers, combined with strong growth and capital efficiency. Clear operational excellence and superior product positioning."
+        "reason": "Premium product mix in specialty films delivers exceptional margins, returns, and cash conversion while avoiding commodity segment pressures"
+      },
+      {
+        "company": "SRF Ltd",
+        "bucket": "indian",
+        "score": 88,
+        "rank": 2,
+        "strengths": [
+          "market_cap: 74047 (largest)",
+          "gross_margin: 54.7% (highest)",
+          "ebitda_margin: 22% (strong)",
+          "roe: 14.3% (strong)",
+          "wc_days: -12 (negative working capital)",
+          "institutional_holding: 37.89% (highest FII+DII)"
+        ],
+        "reason": "Scale leader with diversified specialty chemicals portfolio delivering strong margins and returns, though slightly lower ROCE than Garware suggests less capital efficiency"
+      },
+      {
+        "company": "Nan Ya Plastics Corporation",
+        "bucket": "global",
+        "score": 82,
+        "rank": 3,
+        "strengths": [
+          "market_cap: 490759 (massive scale)",
+          "pat_margin: 17.5% (highest)",
+          "roe: 12.3% (strong)",
+          "ebitda_margin: 14.4% (solid)",
+          "rev_growth_1y: 27.3% (strong)"
+        ],
+        "reason": "Integrated petrochemical giant with strong profitability and scale, though lower gross margins suggest more commodity exposure than Indian specialty players"
       },
       {
         "company": "Uflex Ltd",
         "bucket": "indian",
-        "score": 72,
-        "rank": 2,
-        "strengths": [
-          "roce: 7.03% vs median 2.33%",
-          "ebitda_margin: 12% vs median 9.25%",
-          "rev_cagr_5y: 11.6% vs median 7%",
-          "wc_days: 12 vs median 61.5",
-          "revenue scale: ₹15,401 cr"
-        ],
-        "reason": "Best-in-class among Indian peers with superior ROCE, healthy EBITDA margins, and exceptional working capital management (12 days vs median 61.5). Scale advantages and diversified flexible packaging portfolio drive consistent performance."
-      },
-      {
-        "company": "Toyobo Co.",
-        "bucket": "global",
         "score": 68,
-        "rank": 3,
-        "strengths": [
-          "ebitda_margin: 12.7% vs median 9.25%",
-          "roe: 6.8% vs median 3.2%",
-          "dividend_yield: 2.4% vs median 1.8%",
-          "balanced debt_equity: 1.02"
-        ],
-        "reason": "Solid all-around performer with above-median profitability and returns. Diversified specialty chemicals portfolio provides stability, though lacks the exceptional margins of Hyosung."
-      },
-      {
-        "company": "Toray Industries",
-        "bucket": "global",
-        "score": 65,
         "rank": 4,
         "strengths": [
-          "revenue scale: $149,420 mn",
-          "market_cap: $102,089 mn",
-          "roe: 5.6% vs median 3.2%",
-          "rev_growth_1y: 14%"
+          "revenue: 15401 (scale)",
+          "ebitda_margin: 12% (decent)",
+          "wc_days: 12 (efficient)",
+          "rev_cagr_5y: 11.6% (solid)"
         ],
-        "reason": "Massive scale leader with strong growth momentum, but profitability metrics are closer to median. Benefits from diversification across advanced materials but lacks margin excellence in dielectric films specifically."
+        "reason": "Large diversified flexible packaging player with reasonable scale and efficiency, but operates in more commoditized segments with moderate returns"
       },
       {
-        "company": "Kolon Industries",
+        "company": "Toray Industries Inc",
         "bucket": "global",
-        "score": 62,
+        "score": 65,
         "rank": 5,
         "strengths": [
-          "revenue scale: $30,859 mn",
-          "dividend_yield: 2.9%",
-          "balanced financials",
-          "gross_margin: 27.5%"
+          "revenue: 149420 (massive scale)",
+          "market_cap: 102089 (large)",
+          "roe: 5.6% (stable)",
+          "dividend_yield: 1.8% (decent)"
         ],
-        "reason": "Steady performer with balanced metrics across profitability and leverage, but no standout competitive advantages. Solid dividend yield indicates mature, stable business."
+        "reason": "Global diversified materials conglomerate with scale but lower margins and returns suggest commodity exposure and conglomerate complexity"
+      },
+      {
+        "company": "Toyobo Co Ltd",
+        "bucket": "global",
+        "score": 62,
+        "rank": 6,
+        "strengths": [
+          "ebitda_margin: 12.7% (decent)",
+          "roe: 6.8% (moderate)",
+          "pe: 13.0 (reasonable valuation)"
+        ],
+        "reason": "Mid-sized Japanese diversified manufacturer with stable but unexceptional margins and returns"
+      },
+      {
+        "company": "Kolon Industries Inc",
+        "bucket": "global",
+        "score": 58,
+        "rank": 7,
+        "strengths": [
+          "revenue: 30859 (scale)",
+          "pe: 7.2 (cheap valuation)",
+          "dividend_yield: 2.9% (highest)"
+        ],
+        "reason": "Korean integrated player with modest margins and returns, trading at distressed valuation suggesting operational challenges"
+      },
+      {
+        "company": "Mitsubishi Chemical Group Corporation",
+        "bucket": "global",
+        "score": 52,
+        "rank": 8,
+        "strengths": [
+          "revenue: 214345 (largest)",
+          "market_cap: 88336 (large)",
+          "dividend_yield: 2.7% (high)"
+        ],
+        "reason": "Massive integrated chemical conglomerate but very weak profitability (1.4% ROE, 1.3% PAT margin) indicates structural challenges"
       },
       {
         "company": "XPRO India Ltd",
         "bucket": "indian",
-        "score": 58,
-        "rank": 6,
+        "score": 48,
+        "rank": 9,
         "strengths": [
-          "pat_margin: 4% vs median 2.4%",
-          "roce: 3.78% vs median 2.33%",
-          "inventory_days: 76 vs median 106.5",
-          "ccc: 80 vs median 85"
+          "pat_margin: 4% (positive)",
+          "debtor_days: 50 (decent)",
+          "ccc: 80 (efficient)"
         ],
-        "reason": "Small-scale player with decent profitability and working capital efficiency, but limited revenue scale (₹505 cr) and negative revenue growth (-5.6%) constrain impact. High valuation (82.4x PE) suggests market expectations not yet reflected in fundamentals."
-      },
-      {
-        "company": "Mitsubishi Chemical Group",
-        "bucket": "global",
-        "score": 52,
-        "rank": 7,
-        "strengths": [
-          "revenue scale: $214,345 mn",
-          "market_cap: $88,336 mn",
-          "gross_margin: 29.8%",
-          "rev_growth_1y: 14%"
-        ],
-        "reason": "Largest by revenue but profitability is weak with 1.3% PAT margin and 1.4% ROE, suggesting commodity exposure and integration challenges post-merger. Scale without margin power."
+        "reason": "Small player with declining revenues and weak returns, though maintaining positive profitability; high valuation (82x PE) not justified by fundamentals"
       },
       {
         "company": "Polyplex Corporation Ltd",
         "bucket": "indian",
-        "score": 45,
-        "rank": 8,
+        "score": 35,
+        "rank": 10,
         "strengths": [
-          "global scale: 7th largest PET film capacity",
-          "gross_margin: 34% vs median 30.4%",
-          "interest_coverage: 6.6x vs median 3.2x",
-          "low debt_equity: 0.22"
+          "interest_coverage: 6.6 (adequate)",
+          "debt_equity: 0.22 (low leverage)"
         ],
-        "reason": "Despite being 7th largest globally in PET film capacity, profitability is severely challenged with 0.6% PAT margin and 0.89% ROCE. High inventory days (150) and working capital cycle (153 days) indicate operational inefficiencies. Strong balance sheet but weak earnings generation."
+        "reason": "Caught in commodity BOPET/BOPP cycle with collapsing margins (0.6% PAT, 0.89% ROCE) as grounded notes confirm industry overcapacity from margin-chasing capacity additions"
       },
       {
         "company": "Jindal Poly Films Ltd",
         "bucket": "indian",
-        "score": 25,
-        "rank": 9,
+        "score": 15,
+        "rank": 11,
         "strengths": [
-          "debtor_days: 29 vs median 54",
-          "gross_margin: 35%"
+          "debtor_days: 29 (fast collection)"
         ],
-        "reason": "Severe distress with -45.7% revenue decline, -20% EBITDA margin, and -36.6% PAT margin. Despite being one of the biggest BOPET/BOPP manufacturers, the company is in deep operational crisis with negative interest coverage (-3x). Excellent receivables management cannot offset fundamental business challenges."
+        "reason": "Severe distress with -45.7% revenue decline, -36.6% PAT margin, negative EBITDA and ROCE; despite scale advantages noted historically, currently in crisis mode"
       },
       {
-        "company": "SKC Co.",
+        "company": "SKC Co Ltd",
         "bucket": "global",
-        "score": 20,
-        "rank": 10,
+        "score": 10,
+        "rank": 12,
         "strengths": [
-          "rev_growth_1y: 38.2%"
+          "rev_growth_1y: 38.2% (highest, but unprofitable)"
         ],
-        "reason": "Critical distress despite production technology and scale advantages noted in sources. Catastrophic -38.8% PAT margin, -26.7% ROE, and negative EBITDA margin (-1.3%) indicate severe operational or market challenges. Extremely low gross margin (5%) suggests commodity trap or pricing pressure overwhelming any technology advantages. High growth appears to be revenue without profitability."
+        "reason": "Severe distress with -38.8% PAT margin, -26.7% ROE, negative EBITDA; revenue growth appears to be loss-making, indicating fundamental business model failure"
       }
     ]
   },
   "report": {
-    "title": "Dielectric Films Segment: Peer Benchmarking Snapshot",
-    "summary": "The dielectric films segment shows wide performance variation, with most manufacturers operating at single-digit EBITDA margins and modest profitability. Hyosung Corporation stands apart as a clear outperformer, achieving profitability metrics 3-7x above peers while maintaining strong growth. The segment faces headwinds including raw material cost pressures (averaging 65% of revenue) and working capital intensity (85 days cash conversion cycle). Indian players show particular stress, with one major manufacturer in negative territory.",
+    "title": "Dielectric Films Segment: Peer Benchmarking",
+    "summary": "Garware Hi Tech Films stands out in the dielectric films segment by focusing on premium, specialty products rather than competing on volume. This strategy delivers exceptional margins (54% gross margin vs. 30% peer median) and superior returns (18% ROCE vs. 5% median), while most peers struggle with commodity pricing pressures and thin profitability. The segment shows a clear divide: niche players with pricing power versus volume players facing margin compression.",
     "sections": [
       {
-        "title": "Performance Standout",
-        "icon": "sparkles",
+        "title": "The Outperformer: Garware Hi Tech Films",
+        "icon": "trophy",
         "blocks": [
           {
             "type": "callout",
             "tone": "good",
-            "title": "Hyosung Corporation: Exceptional Profitability Leader",
-            "text": "Hyosung delivers 25.2% EBITDA margin (3x peer median) and 18.2% profit margin (7.6x peer median) while growing revenue 21.9% annually. This combination of premium margins and aggressive growth signals genuine competitive advantages—likely specialty product positioning and superior operational efficiency—rather than temporary gains."
+            "title": "Premium Strategy Wins Big",
+            "text": "Garware avoids the commodity trap by targeting high-end specialty films. This delivers 54% gross margins (nearly double the peer median of 30%) and best-in-class returns of 18% ROCE. The company operates debt-free, collects cash in just 9 days versus 54 days for peers, and grows revenue at 16.5% annually—far ahead of the segment's 9.6% pace."
           },
           {
             "type": "kpis",
             "items": [
               {
-                "label": "EBITDA Margin",
-                "value": "25.2%",
-                "sub": "vs. 9.3% median"
+                "label": "Gross Margin",
+                "value": "54.2%",
+                "sub": "vs 30.4% median"
               },
               {
-                "label": "Profit Margin",
-                "value": "18.2%",
-                "sub": "vs. 2.4% median"
+                "label": "ROCE",
+                "value": "18.1%",
+                "sub": "vs 5.4% median"
               },
               {
-                "label": "Return on Equity",
-                "value": "19.4%",
-                "sub": "vs. 3.2% median"
+                "label": "5-Year Revenue Growth",
+                "value": "16.5%",
+                "sub": "vs 9.6% median"
               },
               {
-                "label": "Revenue Growth",
-                "value": "21.9%",
-                "sub": "vs. 7.6% median"
+                "label": "Debt-to-Equity",
+                "value": "0.0x",
+                "sub": "vs 0.54x median"
               }
             ]
           }
         ]
       },
       {
-        "title": "Profitability & Returns Landscape",
+        "title": "Profitability: The Premium vs. Commodity Divide",
         "icon": "chart",
         "blocks": [
           {
@@ -1786,190 +2389,183 @@
             "unit": "%",
             "items": [
               {
-                "label": "Hyosung Corp",
-                "value": 25.2
+                "label": "Garware Hi Tech",
+                "value": 54.2
               },
               {
-                "label": "Toyobo",
-                "value": 12.7
+                "label": "SRF",
+                "value": 54.7
+              },
+              {
+                "label": "Polyplex",
+                "value": 34
               },
               {
                 "label": "Uflex",
-                "value": 12
+                "value": 35
               },
               {
-                "label": "Mitsubishi Chemical",
-                "value": 9.5
-              },
-              {
-                "label": "Toray Industries",
-                "value": 9.4
-              },
-              {
-                "label": "Kolon Industries",
-                "value": 9.1
+                "label": "Jindal Poly",
+                "value": 35
               },
               {
                 "label": "XPRO India",
-                "value": 6
+                "value": 31
               },
               {
-                "label": "Polyplex Corp",
-                "value": 4.9
-              },
-              {
-                "label": "SKC Co.",
-                "value": -1.3
-              },
-              {
-                "label": "Jindal Poly Films",
-                "value": -20
-              }
-            ]
-          },
-          {
-            "type": "kpis",
-            "items": [
-              {
-                "label": "Median Gross Margin",
-                "value": "30.4%",
-                "sub": "Decent pricing power"
-              },
-              {
-                "label": "Raw Material Cost",
-                "value": "65.5%",
-                "sub": "Major cost pressure"
-              },
-              {
-                "label": "Median ROCE",
-                "value": "2.3%",
-                "sub": "Capital-intensive sector"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Growth Trajectories",
-        "icon": "trend",
-        "blocks": [
-          {
-            "type": "trend",
-            "unit": "Revenue (₹ Cr / ¥ Bn)",
-            "years": [
-              "2020",
-              "2021",
-              "2022",
-              "2023",
-              "2024"
-            ],
-            "series": [
-              {
-                "label": "Hyosung (outperformer)",
-                "values": [
-                  10500,
-                  11800,
-                  12900,
-                  14100,
-                  15746
-                ]
-              },
-              {
-                "label": "Toray Industries",
-                "values": [
-                  120000,
-                  125000,
-                  131000,
-                  138000,
-                  149420
-                ]
-              },
-              {
-                "label": "Uflex",
-                "values": [
-                  10200,
-                  11800,
-                  13700,
-                  15040,
-                  15401
-                ]
-              },
-              {
-                "label": "Polyplex Corp",
-                "values": [
-                  5800,
-                  6200,
-                  6600,
-                  6887,
-                  7086
-                ]
-              },
-              {
-                "label": "Jindal Poly Films",
-                "values": [
-                  4200,
-                  4800,
-                  4500,
-                  5340,
-                  2899
-                ]
+                "label": "Peer Median",
+                "value": 30.4
               }
             ]
           },
           {
             "type": "callout",
             "tone": "info",
-            "title": "Growth Reality Check",
-            "text": "While median 1-year growth sits at 7.6%, the 3-year trend is negative (-1.4%), reflecting recent sector challenges. Hyosung and global players show resilience, while Indian manufacturers face headwinds—Jindal's 46% revenue drop signals severe distress."
+            "title": "Two Business Models",
+            "text": "Premium players (Garware, SRF) achieve 54% gross margins through product differentiation and niche positioning. Commodity-focused peers (Polyplex, Uflex, Jindal) cluster around 34% margins, facing constant pricing pressure. Raw material costs tell the story: Garware spends only 46% of revenue on materials versus 65% for typical peers."
           }
         ]
       },
       {
-        "title": "Business Model Dynamics",
-        "icon": "donut",
+        "title": "Returns on Capital: Quality Matters",
+        "icon": "trend",
         "blocks": [
           {
-            "type": "donut",
+            "type": "bars",
+            "unit": "%",
             "items": [
               {
-                "label": "Raw Materials",
-                "value": 65.5
+                "label": "Garware Hi Tech",
+                "value": 18.1
               },
               {
-                "label": "Operating Profit (EBITDA)",
-                "value": 9.3
+                "label": "SRF",
+                "value": 14.6
               },
               {
-                "label": "Other Operating Costs",
-                "value": 25.2
-              }
-            ]
-          },
-          {
-            "type": "kpis",
-            "items": [
-              {
-                "label": "Cash Conversion Cycle",
-                "value": "85 days",
-                "sub": "Working capital intensive"
+                "label": "Uflex",
+                "value": 7
               },
               {
-                "label": "Inventory Days",
-                "value": "107 days",
-                "sub": "Long production cycles"
+                "label": "Peer Median",
+                "value": 5.4
               },
               {
-                "label": "Debt-to-Equity",
-                "value": "0.68x",
-                "sub": "Moderate leverage"
+                "label": "XPRO India",
+                "value": 3.8
+              },
+              {
+                "label": "Polyplex",
+                "value": 0.9
+              },
+              {
+                "label": "Jindal Poly",
+                "value": -2
               }
             ]
           },
           {
             "type": "callout",
             "tone": "warn",
-            "title": "Margin Pressure Points",
-            "text": "Raw materials consume two-thirds of revenue, leaving limited room for profitability. Most players convert only 9-12% to EBITDA. Hyosung's 25% margin suggests either premium product mix, vertical integration advantages, or exceptional procurement efficiency."
+            "title": "Commodity Players Struggle",
+            "text": "Most peers generate single-digit returns on capital, barely covering their cost of capital. Polyplex earns less than 1% ROCE despite being a large manufacturer, while Jindal Poly is destroying value with negative returns. Only the premium-focused players (Garware, SRF) deliver double-digit returns consistently."
+          }
+        ]
+      },
+      {
+        "title": "Growth Trajectories: Diverging Paths",
+        "icon": "sparkles",
+        "blocks": [
+          {
+            "type": "trend",
+            "unit": "% CAGR",
+            "years": [
+              "3-Year",
+              "5-Year"
+            ],
+            "series": [
+              {
+                "label": "Garware Hi Tech",
+                "values": [
+                  13.8,
+                  16.5
+                ]
+              },
+              {
+                "label": "SRF",
+                "values": [
+                  2,
+                  13.4
+                ]
+              },
+              {
+                "label": "Uflex",
+                "values": [
+                  1.7,
+                  11.6
+                ]
+              },
+              {
+                "label": "Polyplex",
+                "values": [
+                  -2.5,
+                  7.6
+                ]
+              },
+              {
+                "label": "Jindal Poly",
+                "values": [
+                  -14.9,
+                  -6.6
+                ]
+              },
+              {
+                "label": "Segment Median",
+                "values": [
+                  0.7,
+                  9.6
+                ]
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "bad",
+            "title": "Commodity Cycle Casualties",
+            "text": "Jindal Poly's revenue has shrunk 15% annually over three years, with a 46% drop last year alone. Polyplex also shows negative 3-year growth. These commodity players are caught in overcapacity cycles. Meanwhile, Garware sustains 14-17% growth by serving protected niche markets."
+          }
+        ]
+      },
+      {
+        "title": "Business Model Mix",
+        "icon": "donut",
+        "blocks": [
+          {
+            "type": "donut",
+            "items": [
+              {
+                "label": "Premium Specialists (Garware, SRF)",
+                "value": 35
+              },
+              {
+                "label": "Mid-Tier Volume Players (Uflex, Polyplex)",
+                "value": 40
+              },
+              {
+                "label": "Struggling Commodity (Jindal, XPRO)",
+                "value": 15
+              },
+              {
+                "label": "Global Diversified (Toray, Mitsubishi)",
+                "value": 10
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "Strategic Positioning Defines Success",
+            "text": "The segment splits into distinct camps. Premium specialists command pricing power through differentiation. Volume players compete on scale but face margin pressure. Struggling commodity producers are trapped in unprofitable segments. Global giants leverage diversification but show modest margins in films."
           }
         ]
       },
@@ -1982,110 +2578,83 @@
             "columns": [
               "Company",
               "Revenue (₹Cr)",
-              "EBITDA %",
-              "Profit %",
-              "ROE %",
-              "Growth %",
-              "Debt/Equity"
+              "Gross Margin",
+              "ROCE",
+              "ROE",
+              "Debt/Equity",
+              "5Y Growth"
             ],
             "rows": [
               [
-                "Hyosung Corp ⭐",
-                "15,746",
-                "25.2",
-                "18.2",
-                "19.4",
-                "21.9",
-                "0.53"
+                "Garware Hi Tech ⭐",
+                "2,120",
+                "54.2%",
+                "18.1%",
+                "13.5%",
+                "0.0x",
+                "16.5%"
               ],
               [
-                "Toray Industries",
-                "149,420",
-                "9.4",
-                "3.5",
-                "5.6",
-                "14.0",
-                "0.46"
-              ],
-              [
-                "Mitsubishi Chemical",
-                "214,345",
-                "9.5",
-                "1.3",
-                "1.4",
-                "14.0",
-                "0.74"
-              ],
-              [
-                "Kolon Industries",
-                "30,859",
-                "9.1",
-                "2.7",
-                "3.6",
-                "7.8",
-                "0.62"
-              ],
-              [
-                "Toyobo Co.",
-                "24,025",
-                "12.7",
-                "3.0",
-                "6.8",
-                "7.3",
-                "1.02"
+                "SRF",
+                "15,787",
+                "54.7%",
+                "14.6%",
+                "14.3%",
+                "0.4x",
+                "13.4%"
               ],
               [
                 "Uflex",
                 "15,401",
-                "12.0",
-                "2.1",
-                "4.3",
-                "2.4",
-                "1.25"
+                "35.0%",
+                "7.0%",
+                "4.3%",
+                "1.3x",
+                "11.6%"
               ],
               [
-                "Polyplex Corp",
+                "Polyplex",
                 "7,086",
-                "4.9",
-                "0.6",
-                "0.5",
-                "2.9",
-                "0.22"
+                "34.0%",
+                "0.9%",
+                "0.5%",
+                "0.2x",
+                "7.6%"
+              ],
+              [
+                "Jindal Poly",
+                "2,899",
+                "35.0%",
+                "-2.0%",
+                "-1.0%",
+                "1.3x",
+                "-6.6%"
               ],
               [
                 "XPRO India",
                 "505",
-                "6.0",
-                "4.0",
-                "2.8",
-                "-5.6",
-                "0.43"
+                "31.0%",
+                "3.8%",
+                "2.8%",
+                "0.4x",
+                "6.4%"
               ],
               [
-                "Jindal Poly Films",
-                "2,899",
-                "-20.0",
-                "-36.6",
-                "-1.0",
-                "-45.7",
-                "1.31"
-              ],
-              [
-                "SKC Co.",
-                "12,879",
-                "-1.3",
-                "-38.8",
-                "-26.7",
-                "38.2",
-                "1.34"
+                "Peer Median",
+                "15,594",
+                "30.4%",
+                "5.4%",
+                "3.9%",
+                "0.5x",
+                "9.6%"
               ]
             ]
           },
           {
             "type": "callout",
-            "tone": "info",
-            "title": "Market Structure Insights",
-            "text": "The segment splits between large diversified chemical groups (Toray, Mitsubishi) operating at scale with modest margins, and specialized players where performance varies dramatically. Median market cap of ₹10,000 Cr suggests capital-intensive barriers to entry. Promoter holdings average 42%, indicating family/founder control remains common in Indian players."
+            "tone": "good",
+            "title": "Key Insight: Size Doesn't Equal Success",
+            "text": "Garware is smaller than most peers but commands the highest market cap (₹15,450 Cr) and valuation (40x P/E vs. 24x median). Investors reward its premium positioning and capital efficiency. Large commodity players like Uflex and Polyplex trade at deep discounts despite 7-8x higher revenues."
           }
         ]
       }
@@ -2105,44 +2674,52 @@
       "url": "https://www.screener.in/company/JINDALPOLY/"
     },
     {
+      "label": "Screener — Garware Hi Tech Films Ltd",
+      "url": "https://www.screener.in/company/GRWRHITECH/"
+    },
+    {
       "label": "Screener — Uflex Ltd",
       "url": "https://www.screener.in/company/UFLEX/"
     },
     {
-      "label": "Yahoo Finance — Toray Industries",
+      "label": "Screener — SRF Ltd",
+      "url": "https://www.screener.in/company/SRF/"
+    },
+    {
+      "label": "Yahoo Finance — Toray Industries Inc",
       "url": "https://finance.yahoo.com/quote/3402.T"
     },
     {
-      "label": "Yahoo Finance — Mitsubishi Chemical Group (formerly Mitsubishi Chemical Holdings)",
+      "label": "Yahoo Finance — Mitsubishi Chemical Group Corporation",
       "url": "https://finance.yahoo.com/quote/4188.T"
     },
     {
-      "label": "Yahoo Finance — Toyobo Co.",
+      "label": "Yahoo Finance — Toyobo Co Ltd",
       "url": "https://finance.yahoo.com/quote/3101.T"
     },
     {
-      "label": "Yahoo Finance — SKC Co.",
+      "label": "Yahoo Finance — SKC Co Ltd",
       "url": "https://finance.yahoo.com/quote/011790.KS"
     },
     {
-      "label": "Yahoo Finance — Kolon Industries",
+      "label": "Yahoo Finance — Kolon Industries Inc",
       "url": "https://finance.yahoo.com/quote/120110.KS"
     },
     {
-      "label": "Yahoo Finance — Hyosung Corporation",
-      "url": "https://finance.yahoo.com/quote/004800.KS"
+      "label": "Yahoo Finance — Nan Ya Plastics Corporation",
+      "url": "https://finance.yahoo.com/quote/1303.TW"
     },
     {
-      "label": "polyplex.com",
-      "url": "https://www.polyplex.com/about-us"
+      "label": "forum.valuepickr.com",
+      "url": "https://forum.valuepickr.com/t/polyplex-corporation-are-good-days-ahead/9761?page=4"
     },
     {
       "label": "forum.valuepickr.com",
       "url": "https://forum.valuepickr.com/t/jindal-poly-film-looks-like-a-very-good-bargain/364"
     },
     {
-      "label": "koalagains.com",
-      "url": "https://koalagains.com/stocks/KOSPI/011790"
+      "label": "shankarnath.substack.com",
+      "url": "https://shankarnath.substack.com/p/garware-hi-tech-films"
     },
     {
       "label": "Screener.in",
