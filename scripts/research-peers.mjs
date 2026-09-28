@@ -98,7 +98,7 @@ async function main() {
     );
 
     await postProgress(4, 'running');
-    const medianTable = computeMedianTable([...indian, ...global]);
+    const medianTable = computeMedianTable(indian); // globals are descriptive-only
     const coverage = {
       peers_total: indian.length + global.length + privateList.length,
       with_full_financials: indian.filter((p) => p.current && p.current.ebitda_margin != null).length,
@@ -208,7 +208,8 @@ async function businessMatchGate(scraped, family, definition, synonyms = []) {
     const out = await bedrock({
       system: [
         'For EACH company decide whether it belongs to the SAME broad product family as the query — match the FAMILY and its adjacent / parent material variants, NOT the exact phrase. A niche or specialty grade also matches the broader material/product industry it comes from (e.g. for "solar inverters", makers of string / micro / hybrid / PV inverters and power-conditioning units all match; a specialty grade of a material matches the general makers of that material).',
-        '(a) match = does it MAKE / IMPORT / DISTRIBUTE / is INTEGRATED into that family OR its parent material family, per its About? A diversified company that makes it as ONE segment still matches. (b) confidence 0-100. (c) business_model = one of "Manufacturer" | "Trader-Distributor" | "Importer-Sourcing" | "Integrated". (d) products = one concrete line: what it makes + the relevant segment.',
+        'BUSINESS MODEL IS IRRELEVANT TO THE MATCH: a company that MAKES, IMPORTS, DISTRIBUTES, MARKETS, SELLS, BRANDS or OUTSOURCES the manufacturing of products in this family — or is INTEGRATED into it — all match equally. NEVER reject a company for being a trader, brand owner, marketer or asset-light player rather than a manufacturer, as long as its product / industry is the same (e.g. a decorative-laminate brand that outsources production still matches "laminates"). Match on PRODUCT/INDUSTRY, never on business model.',
+        '(a) match = per its About, does it operate in that product family OR its parent material family in ANY of those roles? A diversified company with it as ONE segment still matches. (b) confidence 0-100. (c) business_model = one of "Manufacturer" | "Trader-Distributor" | "Importer-Sourcing" | "Integrated" (use Trader-Distributor for a brand / marketing / asset-light seller). (d) products = one concrete line: what it makes or sells + the relevant segment.',
         'Return STRICT JSON {"results":[{"name","match":true|false,"confidence":0-100,"business_model","products"}]}.',
       ].join('\n'),
       user: `Product family: ${family}${synonyms.length ? ' — the family also covers: ' + synonyms.join(', ') : ''}\nDefinition: ${definition || '(n/a)'}\n\nCompanies:\n${scraped.map((p) => `- ${p.name}: ABOUT="${(p.about || '').slice(0, 400)}" ; candidate="${p.products || ''}"`).join('\n')}`,
@@ -226,32 +227,27 @@ async function businessMatchGate(scraped, family, definition, synonyms = []) {
 }
 
 /* ------------------------------------------------------------- Stage 3: global peers */
+// Global financials come back patchy across sources, so globals are DESCRIPTIVE-ONLY
+// (name + business), exactly like private peers — shown for landscape context, never
+// benchmarked. No per-ticker financial fetch.
 async function fetchGlobalPeersV2(cands) {
-  const out = [], movedToPrivate = [], seen = new Set();
+  const out = [], seen = new Set();
   for (const c of cands) {
     if (out.length >= CAP.global) break;
     const name = String(c.name || '').trim();
     if (!name || seen.has(norm(name))) continue;
     seen.add(norm(name));
-    let g = { current: {}, series: {}, source: { label: 'web', url: '' }, ticker: null };
-    try { g = await fetchGlobalPeer(name, c.ticker); } catch (e) { console.warn(`  global ${name} failed: ${e.message}`); }
-    const current = pickMetrics(g.current || {});
-    if (!g.ticker || Object.keys(current).length === 0) {
-      // no real listed equity resolved -> effectively private/unlisted (JV, private group)
-      movedToPrivate.push({ name, products: c.products || c.segment || '', note: c.note || '', business_model: c.business_model || '' });
-      console.log(`  global->private: ${name} (unresolved)`);
-      continue;
-    }
     out.push({
-      name, country: c.country || '', business_model: canonicalModel(c.business_model || ''),
-      products: c.products || c.segment || '', note: c.note || '',
-      source: g.source && g.source.url ? g.source : { label: 'Web', url: '' },
-      current, series: g.series || {},
+      name,
+      country: c.country || '',
+      business_model: canonicalModel(c.business_model || ''),
+      products: c.products || c.segment || '',
+      note: c.note || '',
+      source: (c.source && c.source.url) ? c.source : { label: 'Web', url: '' },
     });
-    console.log(`  global: ${name} (${g.ticker}) ${Object.keys(current).length} metrics`);
-    await sleep(200);
+    console.log(`  global (descriptive): ${name}`);
   }
-  return { global: out, movedToPrivate };
+  return { global: out, movedToPrivate: [] };
 }
 
 // Private companies never reach the Screener business-match gate, and the
@@ -262,7 +258,7 @@ async function filterPrivateFamily(list, family, synonyms) {
   if (list.length <= 1) return list;
   try {
     const out = await bedrock({
-      system: 'From a list of private/unlisted companies, keep ONLY those that genuinely make, import, distribute, or are integrated into the given product family (or its parent material family). EXCLUDE research labs, universities, government bodies, and pure movie / music / media / entertainment companies. Return STRICT JSON {"keep":["<exact names to keep>"]}.',
+      system: 'From a list of private/unlisted companies, keep ONLY those that genuinely make, import, distribute, market, sell, brand, or are integrated into the given product family (or its parent material family) — business model does not matter, only that the product/industry is the same. EXCLUDE research labs, universities, government bodies, and pure movie / music / media / entertainment companies. Return STRICT JSON {"keep":["<exact names to keep>"]}.',
       user: `Product family: ${family}${synonyms && synonyms.length ? ' — also covers: ' + synonyms.join(', ') : ''}\n\nCompanies:\n${list.map((p) => `- ${p.name}${(p.products || p.note) ? ': ' + String(p.products || p.note).slice(0, 140) : ''}`).join('\n')}`,
       maxTokens: 1500,
     });
