@@ -2,26 +2,29 @@
   "reports": [
     {
       "slug": "laminates",
-      "name": "Laminates (Decorative Laminates)",
-      "type": "industry",
+      "name": "Sandur Laminates Ltd",
+      "type": "company",
       "query": "laminates",
-      "seed_company": "Stylam Industries",
+      "seed_company": "Sandur Laminates Ltd",
       "aliases": [
-        "stylam",
-        "stylam industries",
         "laminates",
-        "decorative laminates",
-        "greenlam",
-        "greenpanel",
-        "century plyboards",
-        "euro pratik",
-        "merino",
-        "surfacing",
-        "hpl"
+        "laminates are decorative surface materials used for wall panels and interior fixtures, competing with pvc and ps wall panels in the wall decorative industry.",
+        "sandur laminates ltd",
+        "greenlam industries ltd",
+        "stylam industries ltd",
+        "rushil decor ltd",
+        "archidply industries ltd",
+        "century plyboards (india) ltd",
+        "greenply industries ltd",
+        "rupal laminates ltd",
+        "premier laminates ltd",
+        "compact international ltd",
+        "premier vinyl flooring ltd",
+        "mardia samyoung"
       ],
-      "updated_at": "2026-09-28T00:00:00Z",
+      "updated_at": "2026-09-28T11:39:22.960Z",
       "peer_count": 12,
-      "sample": true
+      "sample": false
     },
     {
       "slug": "refractories",
