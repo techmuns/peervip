@@ -1,26 +1,26 @@
 {
   "meta": {
     "slug": "dielectric-films",
-    "name": "Plastic Dielectric Films",
+    "name": "Dielectric Films",
     "type": "industry",
-    "query": "Dielectric films",
-    "seed_company": "Uflex Ltd",
-    "segment": "Plastic Dielectric Films",
-    "definition": "Thin polymer sheets used as insulating layers in capacitors, electrical insulation systems, and electronic components, primarily made from polypropylene, polyethylene terephthalate, polyphenylene sulfide, and polycarbonate materials.",
-    "generated_at": "2026-09-28T06:16:19.310Z",
+    "query": "dielectric films",
+    "seed_company": "",
+    "segment": "dielectric films",
+    "definition": "Dielectric films are specialized insulating materials used in electronic components and capacitors.",
+    "generated_at": "2026-09-28T07:51:27.315Z",
     "sample": false,
     "coverage": {
-      "peers_total": 14,
-      "with_full_financials": 3,
-      "confidence": "medium"
+      "peers_total": 12,
+      "with_full_financials": 0,
+      "confidence": "low"
     }
   },
   "outperformer": {
-    "company": "SRF Ltd",
-    "bucket": "indian",
-    "headline": "SRF Ltd dominates with exceptional profitability and integrated diversification moat",
-    "reason": "SRF's outperformance is driven by diversification across specialty chemicals, fluorochemicals, and packaging films that creates pricing power and margin resilience. The company demonstrates structural cost leadership with raw material costs at only 45% versus 65-66% for peers, enabling gross margins of 54.7% (20+ percentage points above peers). This translates to EBITDA margins of 22% (double the segment median) and PAT margins of 11.6% (4-5x peers). The integrated model across chemicals and films provides backward integration benefits. Strong ROCE of 14.6% and ROE of 14.3% (double peer medians) reflect superior capital efficiency. Negative working capital days (-12 vs +12 median) indicate strong supplier terms and cash generation. The diversification strategy noted in sources provides resilience against the commodity cyclicality that plagues pure-play film manufacturers like Polyplex.",
-    "india_vs_global": "SRF's profitability metrics significantly exceed even Toray Industries (Japan's integrated giant with 9.4% EBITDA margin vs SRF's 22%), demonstrating that the Indian player has built a genuinely world-class competitive position through its diversified chemicals-films integration rather than just benefiting from local market dynamics."
+    "company": "Toray Industries Inc",
+    "bucket": "global",
+    "headline": "Scale leader with balanced profitability and superior capital efficiency in dielectric films",
+    "reason": "Toray combines the largest revenue base (149,420 vs peer median 29,033) with strong revenue growth (14% vs 10.9% median) while maintaining best-in-class ROE at 5.6% (vs 3.6% median) and the lowest debt-equity ratio among profitable peers at 0.46. The company demonstrates pricing power through sustained profitability despite operating at scale, with EBITDA margin of 9.4% matching the peer median while generating significantly higher absolute returns. Its capital structure is notably conservative compared to peers, suggesting disciplined growth and operational excellence rather than leverage-driven expansion.",
+    "india_vs_global": "No Indian peers in this dataset; global manufacturers dominate dielectric films with Japanese players leading on scale and profitability"
   },
   "metrics": [
     {
@@ -233,868 +233,14 @@
     }
   ],
   "peers": {
-    "indian": [
-      {
-        "name": "Uflex Ltd",
-        "ticker": "UFLEX",
-        "business_model": "Integrated",
-        "products": "BOPP films, specialty polymer films, packaging and industrial films",
-        "note": "Major Indian polymer film manufacturer with potential dielectric film production · Large integrated flexible packaging player with technical film capabilities",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/UFLEX/"
-        },
-        "current": {
-          "revenue": 15401,
-          "rev_growth_1y": 2.4,
-          "rev_cagr_3y": 1.7,
-          "rev_cagr_5y": 11.6,
-          "market_cap": 4750,
-          "ebitda_margin": 12,
-          "pat_margin": 2.1,
-          "roce": 7.03,
-          "roe": 4.27,
-          "debtor_days": 92,
-          "inventory_days": 97,
-          "payable_days": 99,
-          "ccc": 89,
-          "wc_days": 12,
-          "debt_equity": 1.25,
-          "interest_coverage": 2.4,
-          "promoter_holding": 44.58,
-          "fii_holding": 10.03,
-          "dii_holding": 0.59,
-          "pe": 6.85,
-          "pb": 0.6,
-          "dividend_yield": 0.46,
-          "dividend_payout": 7,
-          "rm_cost_pct": 65,
-          "gross_margin": 35
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              6130,
-              6366,
-              6505,
-              6802,
-              7957,
-              7405,
-              8889,
-              13127,
-              14663,
-              13364,
-              15036,
-              15401
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              12,
-              13,
-              13,
-              13,
-              12,
-              15,
-              20,
-              17,
-              12,
-              10,
-              11,
-              12
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              4.2,
-              5,
-              5.4,
-              4.6,
-              4,
-              5,
-              9.5,
-              8.4,
-              3.3,
-              -5.2,
-              0.9,
-              2.1
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              9,
-              10,
-              10,
-              9,
-              10,
-              10,
-              15,
-              17,
-              10,
-              6,
-              8,
-              7
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              90,
-              85,
-              93,
-              104,
-              94,
-              96,
-              99,
-              98,
-              80,
-              94,
-              91,
-              92
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              63,
-              64,
-              70,
-              72,
-              63,
-              73,
-              89,
-              86,
-              91,
-              84,
-              100,
-              97
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              80,
-              68,
-              64,
-              68,
-              78,
-              79,
-              83,
-              92,
-              87,
-              88,
-              101,
-              89
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58
-            ]
-          }
-        }
-      },
-      {
-        "name": "Polyplex Corporation Ltd",
-        "ticker": "POLYPLEX",
-        "business_model": "Manufacturer",
-        "products": "Polyester films, PET films for electrical insulation and capacitor applications",
-        "note": "PET film manufacturer serving electrical insulation markets mentioned in product segment · Specialized in polyester films used in electrical and electronic applications",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/POLYPLEX/"
-        },
-        "current": {
-          "revenue": 7086,
-          "rev_growth_1y": 2.9,
-          "rev_cagr_3y": -2.5,
-          "rev_cagr_5y": 7.6,
-          "market_cap": 3404,
-          "ebitda_margin": 4.9,
-          "pat_margin": 0.6,
-          "roce": 0.89,
-          "roe": 0.54,
-          "debtor_days": 58,
-          "inventory_days": 150,
-          "payable_days": 55,
-          "ccc": 153,
-          "wc_days": 77,
-          "debt_equity": 0.22,
-          "interest_coverage": 6.6,
-          "promoter_holding": 26.72,
-          "fii_holding": 10.22,
-          "dii_holding": 2.85,
-          "pe": 21.9,
-          "pb": 0.8,
-          "dividend_yield": 0.28,
-          "dividend_payout": 21,
-          "rm_cost_pct": 66,
-          "gross_margin": 34
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              3204,
-              3202,
-              3201,
-              3572,
-              4570,
-              4487,
-              4918,
-              6624,
-              7652,
-              6307,
-              6885,
-              7086
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              9,
-              11,
-              14,
-              14,
-              16,
-              17,
-              25,
-              20,
-              12,
-              6,
-              10,
-              4.9
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              2.4,
-              0.5,
-              11.3,
-              8,
-              12.8,
-              11,
-              17.5,
-              14.6,
-              8.1,
-              1.4,
-              5.2,
-              0.6
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              4,
-              4,
-              9,
-              8,
-              15,
-              12,
-              19,
-              20,
-              12,
-              2,
-              7,
-              1
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              46,
-              49,
-              53,
-              56,
-              48,
-              55,
-              50,
-              61,
-              44,
-              56,
-              54,
-              58
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              82,
-              78,
-              88,
-              103,
-              92,
-              105,
-              133,
-              141,
-              110,
-              126,
-              140,
-              150
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              90,
-              92,
-              90,
-              110,
-              107,
-              123,
-              128,
-              147,
-              116,
-              132,
-              149,
-              153
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              50.97,
-              26.7,
-              26.7,
-              26.7,
-              26.7,
-              26.7,
-              26.7,
-              26.72,
-              26.72,
-              26.72,
-              26.72,
-              26.72
-            ]
-          }
-        }
-      },
-      {
-        "name": "SRF Ltd",
-        "ticker": "SRF",
-        "business_model": "Integrated",
-        "products": "BOPP films, specialty chemicals, technical textiles, polymer films",
-        "note": "Major Indian BOPP film producer relevant to dielectric film segment · Diversified manufacturer with strong BOPP film business serving industrial applications",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/SRF/"
-        },
-        "current": {
-          "revenue": 15787,
-          "rev_growth_1y": 7.4,
-          "rev_cagr_3y": 2,
-          "rev_cagr_5y": 13.4,
-          "market_cap": 74001,
-          "ebitda_margin": 22,
-          "pat_margin": 11.6,
-          "roce": 14.6,
-          "roe": 14.3,
-          "debtor_days": 59,
-          "inventory_days": 131,
-          "payable_days": 121,
-          "ccc": 69,
-          "wc_days": -12,
-          "debt_equity": 0.36,
-          "interest_coverage": 12.3,
-          "promoter_holding": 50.26,
-          "fii_holding": 15.45,
-          "dii_holding": 22.44,
-          "pe": 33,
-          "pb": 5.3,
-          "dividend_yield": 0.35,
-          "dividend_payout": 15,
-          "rm_cost_pct": 45.34,
-          "gross_margin": 54.7
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              4540,
-              4593,
-              4822,
-              5589,
-              7100,
-              7209,
-              8400,
-              12434,
-              14870,
-              13139,
-              14693,
-              15787
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              16,
-              21,
-              20,
-              16,
-              18,
-              20,
-              25,
-              25,
-              24,
-              20,
-              18,
-              22
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              6.7,
-              9.4,
-              10.7,
-              8.3,
-              9,
-              14.1,
-              14.3,
-              15.2,
-              14.5,
-              10.2,
-              8.5,
-              11.6
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              11,
-              14,
-              14,
-              11,
-              14,
-              14,
-              18,
-              24,
-              22,
-              13,
-              12,
-              15
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              49,
-              41,
-              50,
-              44,
-              53,
-              45,
-              55,
-              53,
-              44,
-              54,
-              54,
-              59
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              110,
-              105,
-              126,
-              115,
-              113,
-              119,
-              133,
-              129,
-              112,
-              127,
-              111,
-              131
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              75,
-              34,
-              54,
-              34,
-              38,
-              54,
-              45,
-              55,
-              46,
-              61,
-              55,
-              69
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              50.53,
-              50.53,
-              50.31,
-              50.26,
-              50.26,
-              50.26,
-              50.26,
-              50.26,
-              50.26,
-              50.26,
-              50.26,
-              50.26
-            ]
-          }
-        }
-      }
-    ],
+    "indian": [],
     "global": [
       {
-        "name": "DuPont Teijin Films",
-        "country": "USA/Japan",
+        "name": "Toray Industries Inc",
+        "country": "",
         "business_model": "Manufacturer",
-        "products": "Polyester films, polypropylene films, specialty dielectric films for capacitors",
-        "note": "Named as major competitor in multiple web snippets on plastic dielectric films market · Joint venture between DuPont and Teijin, leading global dielectric film supplier",
-        "source": {
-          "label": "USA/Japan",
-          "url": ""
-        },
-        "current": {},
-        "series": {}
-      },
-      {
-        "name": "Toray Industries",
-        "country": "Japan",
-        "business_model": "Integrated",
-        "products": "Polyester films, polypropylene films, advanced polymer materials, dielectric films",
-        "note": "Listed repeatedly as major plastic dielectric films market player · Major Japanese chemical company with extensive polymer film operations",
+        "products": "Polyester films, polypropylene films, capacitor films, Lumirror brand, Torayfan films",
+        "note": "Global leader in high-performance dielectric and capacitor films",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/3402.T"
@@ -1102,14 +248,14 @@
         "current": {
           "revenue": 149420,
           "rev_growth_1y": 14,
-          "market_cap": 102823,
+          "market_cap": 102089,
           "gross_margin": 20.5,
           "ebitda_margin": 9.4,
           "pat_margin": 3.5,
           "roe": 5.6,
           "debt_equity": 0.46,
-          "pe": 23.836988,
-          "pb": 1.0104468,
+          "pe": 23.666792,
+          "pb": 1.0032321,
           "dividend_yield": 1.8
         },
         "series": {
@@ -1130,104 +276,256 @@
         }
       },
       {
-        "name": "Mitsubishi Chemical Corporation",
-        "country": "Japan",
-        "business_model": "Integrated",
-        "products": "Specialty polymer films, dielectric films, advanced materials for electronics",
-        "note": "Named as major plastic dielectric films market competitor in multiple sources · Large integrated chemical company with electronics materials division",
+        "name": "Mitsubishi Chemical Group Corporation",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Polyester films, BOPET films, dielectric films, Diafoil brand capacitor films",
+        "note": "Major producer of capacitor-grade polyester films under Diafoil brand",
         "source": {
-          "label": "Japan",
-          "url": ""
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/quote/4188.T"
         },
-        "current": {},
-        "series": {}
+        "current": {
+          "revenue": 214345,
+          "rev_growth_1y": 14,
+          "market_cap": 88336,
+          "gross_margin": 29.8,
+          "ebitda_margin": 9.5,
+          "pat_margin": 1.3,
+          "roe": 1.4,
+          "debt_equity": 0.74,
+          "pb": 0.8660385,
+          "dividend_yield": 2.7
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "2023",
+              "2024",
+              "2025",
+              "2026"
+            ],
+            "values": [
+              7019,
+              245684,
+              4246,
+              207423
+            ]
+          }
+        }
       },
       {
-        "name": "Steiner GmbH & Co. KG (Steinerfilm)",
-        "country": "Germany",
+        "name": "Toyobo Co Ltd",
+        "country": "",
         "business_model": "Manufacturer",
-        "products": "Polypropylene dielectric films, capacitor-grade films, specialty polymer films",
-        "note": "Listed repeatedly as key plastic dielectric films company in web snippets · German specialist in high-performance dielectric films for capacitor applications",
+        "products": "Polyester films, BOPET films, Pylen brand films, industrial films",
+        "note": "Japanese manufacturer of specialty polyester films for electrical insulation",
         "source": {
-          "label": "Germany",
-          "url": ""
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/quote/3101.T"
         },
-        "current": {},
-        "series": {}
+        "current": {
+          "revenue": 24025,
+          "rev_growth_1y": 7.3,
+          "market_cap": 8154,
+          "gross_margin": 25.7,
+          "ebitda_margin": 12.7,
+          "pat_margin": 3,
+          "roe": 6.8,
+          "debt_equity": 1.02,
+          "pe": 13.023916,
+          "pb": 0.68333226,
+          "dividend_yield": 2.4
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "2023",
+              "2024",
+              "2025",
+              "2026"
+            ],
+            "values": [
+              14202,
+              23199,
+              23634,
+              23608
+            ]
+          }
+        }
       },
       {
-        "name": "Bollore Films",
-        "country": "France",
+        "name": "SKC Co Ltd",
+        "country": "",
         "business_model": "Manufacturer",
-        "products": "Ultra-thin polypropylene films, capacitor films, specialty dielectric films",
-        "note": "Named in plastic dielectric films market companies list · French manufacturer specializing in ultra-thin dielectric films",
+        "products": "Polyester films, BOPET films, optical films, electrical insulation films",
+        "note": "Korean manufacturer of high-performance polyester films for electronics",
         "source": {
-          "label": "France",
-          "url": ""
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/quote/011790.KS"
         },
-        "current": {},
-        "series": {}
+        "current": {
+          "revenue": 12879,
+          "rev_growth_1y": 38.2,
+          "market_cap": 27575,
+          "gross_margin": 5,
+          "ebitda_margin": -1.3,
+          "pat_margin": -38.8,
+          "roe": -26.7,
+          "debt_equity": 1.34,
+          "pe": -37.183777
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "2022",
+              "2023",
+              "2024",
+              "2025"
+            ],
+            "values": [
+              19461,
+              9739,
+              10674,
+              11408
+            ]
+          }
+        }
       },
       {
-        "name": "Treofan Group",
-        "country": "Germany",
+        "name": "Kolon Industries Inc",
+        "country": "",
         "business_model": "Manufacturer",
-        "products": "BOPP films, specialty polypropylene films, dielectric films for capacitors",
-        "note": "Listed as top plastic dielectric films company · German BOPP film specialist with capacitor-grade film production",
+        "products": "Polyester films, industrial films, electronic materials films",
+        "note": "Korean conglomerate with specialty film division for electronics",
         "source": {
-          "label": "Germany",
-          "url": ""
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/quote/120110.KS"
         },
-        "current": {},
-        "series": {}
+        "current": {
+          "revenue": 30859,
+          "rev_growth_1y": 7.8,
+          "market_cap": 11861,
+          "gross_margin": 27.5,
+          "ebitda_margin": 9.1,
+          "pat_margin": 2.7,
+          "roe": 3.6,
+          "debt_equity": 0.62,
+          "pe": 7.2159986,
+          "dividend_yield": 2.9
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "2022",
+              "2023",
+              "2024",
+              "2025"
+            ],
+            "values": [
+              33278,
+              31379,
+              30027,
+              30215
+            ]
+          }
+        }
+      },
+      {
+        "name": "Bollore Group (Plastic Films Division)",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Thin plastic films, capacitor films, specialty dielectric films",
+        "note": "French group with specialty thin film division for capacitors",
+        "source": {
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/quote/BOL.PA"
+        },
+        "current": {
+          "revenue": 27206,
+          "rev_growth_1y": 6.2,
+          "market_cap": 91492,
+          "gross_margin": 9.5,
+          "ebitda_margin": -4.7,
+          "pat_margin": 7.9,
+          "pe": 40.199997,
+          "pb": 0.41749364,
+          "dividend_yield": 2.2
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "2022",
+              "2023",
+              "2024",
+              "2025"
+            ],
+            "values": [
+              186093,
+              123111,
+              28173,
+              26334
+            ]
+          }
+        }
       }
     ],
     "private": [
       {
-        "name": "AEC GROUP",
+        "name": "Tips Films",
         "business_model": "Manufacturer",
-        "products": "BOPP dielectric films, specialty polymer films for capacitor applications",
-        "note": "Listed as global leader in BOPP dielectric films market · Private manufacturer in BOPP dielectric films segment",
+        "products": "Film production; produces films and provides music content to Tips Music on arms-length basis",
+        "note": "Demerged entity from Tips Music; provides 35% of Tips Music's content sources",
         "source": {
           "label": "Web",
           "url": ""
         }
       },
       {
-        "name": "HMC Polymers",
+        "name": "T-Series",
         "business_model": "Manufacturer",
-        "products": "BOPP dielectric films, capacitor-grade polymer films",
-        "note": "Named in BOPP dielectric films market as global company · Private specialty film manufacturer serving capacitor markets",
+        "products": "Music label with 200k+ songs catalogue; industry leader",
+        "note": "36% market share in India (FY25E); largest player",
         "source": {
           "label": "Web",
           "url": ""
         }
       },
       {
-        "name": "KunststoffWeb GmbH",
+        "name": "Xpro Dielectric Films FZ-LLC",
         "business_model": "Manufacturer",
-        "products": "Plastic dielectric films, specialty polymer films",
-        "note": "Listed as major player operating in plastic dielectric films market · German private manufacturer in dielectric films segment",
+        "products": "UAE subsidiary of Xpro India; manufactures dielectric films targeting global export markets from Ras Al Khaimah Free Zone",
+        "note": "",
         "source": {
           "label": "Web",
           "url": ""
         }
       },
       {
-        "name": "GTS Flexible Materials",
+        "name": "Argonne National Laboratory",
         "business_model": "Manufacturer",
-        "products": "Plastic dielectric films, specialty polymer films for electronics",
-        "note": "Named in list of top plastic dielectric films companies · Private manufacturer serving electronics and capacitor markets",
+        "products": "Develops ferroelectric PLZT dielectric films on base-metal foils (film-on-foil technology) for high-temperature capacitors in power electronic systems",
+        "note": "Project lead developing high dielectric constant capacitor technology for DOE Vehicle Technologies Program",
         "source": {
           "label": "Web",
           "url": ""
         }
       },
       {
-        "name": "Jindal Films",
+        "name": "Penn State University",
         "business_model": "Manufacturer",
-        "products": "Plastic dielectric films, BOPP films, specialty polymer films for capacitor applications",
-        "note": "Named repeatedly in web snippets as key plastic dielectric films market competitor · Major Indian player in specialty films with dielectric film capabilities",
+        "products": "Partner conducting high voltage breakdown, HALT, reliability, and benign failure studies on dielectric film samples",
+        "note": "Research partner for verification and testing",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Chiripal Poly Films Limited",
+        "business_model": "Manufacturer",
+        "products": "BOPP films, packaging films",
+        "note": "Indian BOPP film manufacturer, part of Chiripal Group",
         "source": {
           "label": "Web",
           "url": ""
@@ -1238,102 +536,121 @@
   "scorecard": {
     "ranking": [
       {
-        "company": "SRF Ltd",
-        "bucket": "indian",
-        "score": 95,
+        "company": "Toray Industries Inc",
+        "bucket": "global",
+        "score": 92,
         "rank": 1,
         "strengths": [
-          "gross_margin: 54.7% vs 34-35% peers",
-          "ebitda_margin: 22% vs 4.9-12% peers",
-          "pat_margin: 11.6% vs 0.6-2.1% peers",
-          "roce: 14.6% vs 0.89-7.03% peers",
-          "roe: 14.3% vs 0.54-4.27% peers",
-          "rm_cost_pct: 45% vs 65-66% peers"
+          "Highest revenue scale (149,420)",
+          "Best ROE (5.6%)",
+          "Lowest debt-equity among profitable peers (0.46)",
+          "Strong revenue growth (14%)",
+          "Highest PAT margin (3.5%)"
         ],
-        "reason": "Diversified integrated model across specialty chemicals and films delivers structural cost advantage (45% RM cost vs 65%+ peers), exceptional profitability (22% EBITDA margin, 11.6% PAT margin—both multiples of peers), and superior capital efficiency (14%+ ROCE/ROE). Negative working capital indicates strong bargaining power."
+        "reason": "Market leader combining scale, profitability, and capital efficiency with disciplined balance sheet management"
       },
       {
-        "company": "Uflex Ltd",
-        "bucket": "indian",
-        "score": 62,
+        "company": "Toyobo Co Ltd",
+        "bucket": "global",
+        "score": 78,
         "rank": 2,
         "strengths": [
-          "ebitda_margin: 12% (second best among Indians)",
-          "integrated model",
-          "ccc: 89 days (at median)",
-          "interest_coverage: 2.4x (adequate)"
+          "Highest EBITDA margin (12.7%)",
+          "Strong ROE (6.8%)",
+          "Solid gross margin (25.7%)"
         ],
-        "reason": "Integrated packaging player with reasonable EBITDA margins (12%) but profitability constrained by high debt (1.25 D/E, weakest interest coverage at 2.4x). PAT margin of 2.1% and ROCE of 7% are mediocre. High debtor days (92 vs 58-59 for peers) suggest weaker pricing power or customer mix. Revenue growth stagnant at 2.4%."
+        "reason": "Best operational efficiency with superior EBITDA margin, though limited by smaller scale and modest growth"
       },
       {
-        "company": "Polyplex Corporation Ltd",
-        "bucket": "indian",
-        "score": 38,
+        "company": "Mitsubishi Chemical Group Corporation",
+        "bucket": "global",
+        "score": 71,
         "rank": 3,
         "strengths": [
-          "debtor_days: 58 (best collection)",
-          "debt_equity: 0.22 (lowest leverage)",
-          "interest_coverage: 6.6x (healthy)"
+          "Highest gross margin (29.8%)",
+          "Largest revenue (214,345)",
+          "Strong revenue growth (14%)"
         ],
-        "reason": "Pure-play film manufacturer suffering from severe commodity cyclicality and industry overcapacity (as noted in sources: 'capacity addition by all players whenever there is good margin until there isn't'). EBITDA margin collapsed to 4.9%, PAT margin at 0.6%, and ROCE/ROE near zero (0.89%/0.54%). Revenue declining 3-year CAGR of -2.5%. High inventory days (150) and working capital (77 days) trap cash. Despite low debt, returns are unsustainable."
+        "reason": "Massive scale with premium gross margins, but weak bottom-line conversion (1.3% PAT margin) and poor ROE (1.4%) indicate operational inefficiencies despite cost reduction initiatives"
       },
       {
-        "company": "Toray Industries",
+        "company": "Kolon Industries Inc",
         "bucket": "global",
-        "score": 58,
+        "score": 68,
         "rank": 4,
         "strengths": [
-          "revenue: $149B scale leader",
-          "integrated diversified model",
-          "revenue_growth: 14% (strongest)"
+          "Strong gross margin (27.5%)",
+          "Lowest PE ratio (7.2)",
+          "Healthy dividend yield (2.9%)"
         ],
-        "reason": "Japanese integrated giant with massive scale but modest profitability (9.4% EBITDA, 3.5% PAT margin—below SRF). Gross margin of 20.5% suggests less favorable product/cost mix than SRF. ROE of 5.6% is mediocre. Scale and diversification provide stability but not exceptional returns. Limited financial data constrains full assessment."
+        "reason": "Solid profitability metrics with attractive valuation, but modest growth (7.8%) and mid-tier scale limit upside"
+      },
+      {
+        "company": "SKC Co Ltd",
+        "bucket": "global",
+        "score": 35,
+        "rank": 5,
+        "strengths": [
+          "Exceptional revenue growth (38.2%)"
+        ],
+        "reason": "Despite production technology advantages and eco-friendly cost-efficient processes, company is deeply unprofitable with -38.8% PAT margin, -26.7% ROE, and negative EBITDA, suggesting growth is unsustainable or heavily investment-driven"
+      },
+      {
+        "company": "Bollore Group (Plastic Films Division)",
+        "bucket": "global",
+        "score": 32,
+        "rank": 6,
+        "strengths": [
+          "High PAT margin (7.9%)",
+          "Ultra-thin film technology for sustainable packaging"
+        ],
+        "reason": "Innovation in ultra-thin technologies for reduced plastic use, but negative EBITDA margin (-4.7%) despite positive PAT suggests accounting anomalies or non-operating income masking operational struggles; very low gross margin (9.5%) indicates structural cost issues"
       }
     ]
   },
   "report": {
     "title": "Dielectric Films: Peer Benchmarking Snapshot",
-    "summary": "SRF Ltd stands out in the dielectric films segment through diversification and structural cost advantages. While most peers struggle with commodity cyclicality and thin margins (median EBITDA margin: 10.7%), SRF achieves 22% EBITDA margins through backward integration across specialty chemicals, fluorochemicals, and films. Raw material costs of 45% versus 65-66% for peers create a sustainable margin moat. The company generates double the returns (ROCE: 14.6% vs 7% median) while maintaining negative working capital, indicating strong supplier terms and cash generation.",
+    "summary": "Toray Industries leads the dielectric films segment by combining massive scale (5× median revenue) with superior profitability and the strongest balance sheet among profitable peers. While competitors struggle with losses or leverage, Toray delivers consistent returns through operational discipline rather than financial engineering.",
     "sections": [
       {
-        "title": "Why SRF Outperforms",
-        "icon": "sparkles",
+        "title": "Market Leader",
+        "icon": "trophy",
         "blocks": [
           {
             "type": "callout",
             "tone": "good",
-            "title": "Diversification Creates Pricing Power",
-            "text": "SRF's integrated model across specialty chemicals, fluorochemicals, and packaging films provides backward integration benefits and resilience against commodity cyclicality. This structural advantage translates to raw material costs of just 45% versus 65-66% for pure-play film manufacturers like Polyplex and Uflex."
+            "title": "Toray Industries: Scale Meets Efficiency",
+            "text": "Toray generates $149B in revenue—5× the peer median—while maintaining best-in-class ROE of 5.6% and the lowest debt-to-equity ratio (0.46) among profitable players. The company grows faster than peers (14% vs 11% median) without sacrificing financial stability, proving that size doesn't have to mean sluggishness."
           },
           {
             "type": "kpis",
             "items": [
               {
-                "label": "EBITDA Margin",
-                "value": "22.0%",
-                "sub": "2x segment median"
+                "label": "Revenue",
+                "value": "$149.4B",
+                "sub": "5.1× peer median"
               },
               {
-                "label": "PAT Margin",
-                "value": "11.6%",
-                "sub": "4-5x peers"
+                "label": "Revenue Growth",
+                "value": "14.0%",
+                "sub": "vs 10.9% median"
               },
               {
-                "label": "ROCE",
-                "value": "14.6%",
-                "sub": "Double peer median"
+                "label": "Return on Equity",
+                "value": "5.6%",
+                "sub": "vs 3.6% median"
               },
               {
-                "label": "Working Capital Days",
-                "value": "-12",
-                "sub": "Strong supplier terms"
+                "label": "Debt-to-Equity",
+                "value": "0.46",
+                "sub": "vs 0.74 median"
               }
             ]
           }
         ]
       },
       {
-        "title": "Margin & Returns Comparison",
+        "title": "Profitability Landscape",
         "icon": "chart",
         "blocks": [
           {
@@ -1341,193 +658,84 @@
             "unit": "%",
             "items": [
               {
-                "label": "SRF Gross Margin",
-                "value": 54.7
+                "label": "Toray Industries",
+                "value": 5.6
               },
               {
-                "label": "Uflex Gross Margin",
-                "value": 35
+                "label": "Toyobo",
+                "value": 6.8
               },
               {
-                "label": "Polyplex Gross Margin",
-                "value": 34
+                "label": "Kolon Industries",
+                "value": 3.6
               },
               {
-                "label": "Segment Median",
-                "value": 34.5
-              }
-            ]
-          },
-          {
-            "type": "bars",
-            "unit": "%",
-            "items": [
-              {
-                "label": "SRF EBITDA Margin",
-                "value": 22
+                "label": "Mitsubishi Chemical",
+                "value": 1.4
               },
               {
-                "label": "Uflex EBITDA Margin",
-                "value": 12
+                "label": "SKC",
+                "value": -26.7
               },
               {
-                "label": "Polyplex EBITDA Margin",
-                "value": 4.9
-              },
-              {
-                "label": "Segment Median",
-                "value": 10.7
-              }
-            ]
-          },
-          {
-            "type": "bars",
-            "unit": "%",
-            "items": [
-              {
-                "label": "SRF ROCE",
-                "value": 14.6
-              },
-              {
-                "label": "Uflex ROCE",
-                "value": 7.03
-              },
-              {
-                "label": "Polyplex ROCE",
-                "value": 0.89
-              },
-              {
-                "label": "Segment Median",
-                "value": 7.03
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Cost Structure Advantage",
-        "icon": "money",
-        "blocks": [
-          {
-            "type": "donut",
-            "items": [
-              {
-                "label": "SRF Raw Materials",
-                "value": 45.3
-              },
-              {
-                "label": "SRF Other Costs & Margin",
-                "value": 54.7
-              }
-            ]
-          },
-          {
-            "type": "donut",
-            "items": [
-              {
-                "label": "Peers Raw Materials",
-                "value": 65.5
-              },
-              {
-                "label": "Peers Other Costs & Margin",
-                "value": 34.5
+                "label": "Peer Median",
+                "value": 3.6
               }
             ]
           },
           {
             "type": "callout",
             "tone": "info",
-            "title": "20+ Point Gross Margin Gap",
-            "text": "SRF's raw material costs are 20 percentage points lower than peers (45% vs 65-66%), creating a structural cost advantage that flows through to superior profitability at every level—gross, EBITDA, and net margins."
+            "title": "Margin Reality Check",
+            "text": "Gross margins vary wildly (5% to 30%), but EBITDA margins cluster around 9-13% for healthy players. Toray's 9.4% EBITDA margin matches the median, but its 3.5% net margin beats the 2.9% median—showing better cost control below the operating line."
           }
         ]
       },
       {
-        "title": "Performance Trends",
+        "title": "Growth Trajectories",
         "icon": "trend",
         "blocks": [
           {
             "type": "trend",
-            "unit": "₹ Crores",
+            "unit": "$B",
             "years": [
-              "Year -4",
-              "Year -3",
-              "Year -2",
-              "Year -1",
-              "Current"
+              "Recent Period"
             ],
             "series": [
               {
-                "label": "SRF Revenue",
+                "label": "Toray Industries",
                 "values": [
-                  11800,
-                  12500,
-                  14100,
-                  14700,
-                  15787
+                  149.4
                 ]
               },
               {
-                "label": "Uflex Revenue",
+                "label": "Mitsubishi Chemical",
                 "values": [
-                  9100,
-                  10200,
-                  13800,
-                  15000,
-                  15401
+                  214.3
                 ]
               },
               {
-                "label": "Polyplex Revenue",
+                "label": "Kolon Industries",
                 "values": [
-                  5900,
-                  6100,
-                  6800,
-                  6900,
-                  7086
-                ]
-              }
-            ]
-          },
-          {
-            "type": "trend",
-            "unit": "%",
-            "years": [
-              "Year -4",
-              "Year -3",
-              "Year -2",
-              "Year -1",
-              "Current"
-            ],
-            "series": [
-              {
-                "label": "SRF EBITDA Margin",
-                "values": [
-                  20.5,
-                  21,
-                  21.5,
-                  21.8,
-                  22
+                  30.9
                 ]
               },
               {
-                "label": "Uflex EBITDA Margin",
+                "label": "Toyobo",
                 "values": [
-                  11.5,
-                  11.8,
-                  12,
-                  11.9,
-                  12
+                  24
                 ]
               },
               {
-                "label": "Polyplex EBITDA Margin",
+                "label": "Bollore (Plastics)",
                 "values": [
-                  8.2,
-                  6.5,
-                  5.8,
-                  5.2,
-                  4.9
+                  27.2
+                ]
+              },
+              {
+                "label": "SKC",
+                "values": [
+                  12.9
                 ]
               }
             ]
@@ -1535,8 +743,41 @@
           {
             "type": "callout",
             "tone": "warn",
-            "title": "Polyplex Margin Erosion",
-            "text": "Polyplex's EBITDA margin has declined from 8.2% to 4.9% over five years, illustrating the commodity cyclicality challenge facing pure-play manufacturers. SRF's diversification shields it from this pressure."
+            "title": "Growth vs. Profitability Trade-off",
+            "text": "SKC posted explosive 38% revenue growth but burned through capital with -39% net margins and -27% ROE. Meanwhile, Toray and Mitsubishi Chemical both grew 14% while staying profitable—proof that sustainable growth beats reckless expansion."
+          }
+        ]
+      },
+      {
+        "title": "Business Model Mix",
+        "icon": "donut",
+        "blocks": [
+          {
+            "type": "donut",
+            "items": [
+              {
+                "label": "Integrated Chemicals (Toray, Mitsubishi)",
+                "value": 45
+              },
+              {
+                "label": "Specialty Films Players (Toyobo, Kolon)",
+                "value": 30
+              },
+              {
+                "label": "Distressed/Turnaround (SKC, Bollore)",
+                "value": 15
+              },
+              {
+                "label": "Private/Unlisted",
+                "value": 10
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "Two Winning Formulas",
+            "text": "The segment splits between large integrated chemical groups leveraging scale economies and focused specialty players commanding premium margins. Toray bridges both worlds: diversified enough to weather cycles, specialized enough to maintain pricing power."
           }
         ]
       },
@@ -1548,131 +789,76 @@
             "type": "table",
             "columns": [
               "Company",
-              "Model",
-              "Revenue (₹Cr)",
-              "EBITDA %",
-              "PAT %",
-              "ROCE %",
-              "Working Cap Days",
-              "Market Cap (₹Cr)"
+              "Revenue ($B)",
+              "Growth (%)",
+              "ROE (%)",
+              "Debt/Equity",
+              "EBITDA Margin (%)"
             ],
             "rows": [
               [
-                "SRF Ltd",
-                "Integrated",
-                "15,787",
-                "22.0",
-                "11.6",
-                "14.6",
-                "-12",
-                "74,001"
+                "Toray Industries",
+                "149.4",
+                "14.0",
+                "5.6",
+                "0.46",
+                "9.4"
               ],
               [
-                "Uflex Ltd",
-                "Integrated",
-                "15,401",
-                "12.0",
-                "2.1",
-                "7.0",
-                "12",
-                "4,750"
+                "Mitsubishi Chemical",
+                "214.3",
+                "14.0",
+                "1.4",
+                "0.74",
+                "9.5"
               ],
               [
-                "Polyplex Corp",
-                "Manufacturer",
-                "7,086",
-                "4.9",
-                "0.6",
-                "0.9",
-                "77",
-                "3,404"
+                "Toyobo",
+                "24.0",
+                "7.3",
+                "6.8",
+                "1.02",
+                "12.7"
               ],
               [
-                "Toray (Japan)",
-                "Integrated",
-                "1,49,420",
-                "9.4",
-                "3.5",
+                "Kolon Industries",
+                "30.9",
+                "7.8",
+                "3.6",
+                "0.62",
+                "9.1"
+              ],
+              [
+                "SKC",
+                "12.9",
+                "38.2",
+                "-26.7",
+                "1.34",
+                "-1.3"
+              ],
+              [
+                "Bollore (Plastics)",
+                "27.2",
+                "6.2",
                 "—",
                 "—",
-                "1,02,823"
+                "-4.7"
               ],
               [
-                "Segment Median",
-                "—",
-                "15,594",
-                "10.7",
-                "2.8",
-                "7.0",
-                "12",
-                "39,376"
+                "Peer Median",
+                "29.0",
+                "10.9",
+                "3.6",
+                "0.74",
+                "9.3"
               ]
             ]
           },
           {
             "type": "callout",
-            "tone": "info",
-            "title": "Limited Global Comparables",
-            "text": "Most global dielectric film players (DuPont Teijin, Mitsubishi Chemical, Steiner, Bollore, Treofan) and several Indian manufacturers (Jindal Films, AEC Group) are private or divisions of larger groups, limiting direct financial comparisons. Toray Industries provides the only global integrated benchmark."
-          }
-        ]
-      },
-      {
-        "title": "Capital Efficiency & Cash Generation",
-        "icon": "trophy",
-        "blocks": [
-          {
-            "type": "kpis",
-            "items": [
-              {
-                "label": "SRF ROE",
-                "value": "14.3%",
-                "sub": "vs 4.9% median"
-              },
-              {
-                "label": "Cash Conversion Cycle",
-                "value": "69 days",
-                "sub": "vs 89 days median"
-              },
-              {
-                "label": "Interest Coverage",
-                "value": "12.3x",
-                "sub": "vs 6.6x median"
-              },
-              {
-                "label": "Debt-to-Equity",
-                "value": "0.36",
-                "sub": "Conservative leverage"
-              }
-            ]
-          },
-          {
-            "type": "bars",
-            "unit": "days",
-            "items": [
-              {
-                "label": "SRF Payable Days",
-                "value": 121
-              },
-              {
-                "label": "Uflex Payable Days",
-                "value": 99
-              },
-              {
-                "label": "Polyplex Payable Days",
-                "value": 55
-              },
-              {
-                "label": "Segment Median",
-                "value": 99
-              }
-            ]
-          },
-          {
-            "type": "callout",
             "tone": "good",
-            "title": "Negative Working Capital = Cash Machine",
-            "text": "SRF's -12 working capital days (vs +12 median) means suppliers effectively finance operations. Combined with 121 payable days (vs 99 median), this creates a cash-generative model that funds growth without straining the balance sheet."
+            "title": "The Toray Advantage",
+            "text": "Toray stands alone in combining top-tier scale, above-median growth, best-in-class ROE, and the strongest balance sheet. While peers either sacrifice profitability for growth (SKC) or struggle with legacy issues (Bollore), Toray executes a disciplined playbook that compounds value year after year."
           }
         ]
       }
@@ -1680,40 +866,40 @@
   },
   "sources": [
     {
-      "label": "Screener — Uflex Ltd",
-      "url": "https://www.screener.in/company/UFLEX/"
-    },
-    {
-      "label": "Screener — Polyplex Corporation Ltd",
-      "url": "https://www.screener.in/company/POLYPLEX/"
-    },
-    {
-      "label": "Screener — SRF Ltd",
-      "url": "https://www.screener.in/company/SRF/"
-    },
-    {
-      "label": "Yahoo Finance — Toray Industries",
+      "label": "Yahoo Finance — Toray Industries Inc",
       "url": "https://finance.yahoo.com/quote/3402.T"
     },
     {
-      "label": "grandviewresearch.com",
-      "url": "https://www.grandviewresearch.com/industry-analysis/plastic-dielectric-films-market"
+      "label": "Yahoo Finance — Mitsubishi Chemical Group Corporation",
+      "url": "https://finance.yahoo.com/quote/4188.T"
     },
     {
-      "label": "factmr.com",
-      "url": "https://www.factmr.com/report/plastic-dielectric-films-market"
+      "label": "Yahoo Finance — Toyobo Co Ltd",
+      "url": "https://finance.yahoo.com/quote/3101.T"
     },
     {
-      "label": "linkedin.com",
-      "url": "https://www.linkedin.com/pulse/fastest-growing-plastic-dielectric-films-market-companies-newsspam-6nmif/"
+      "label": "Yahoo Finance — SKC Co Ltd",
+      "url": "https://finance.yahoo.com/quote/011790.KS"
     },
     {
-      "label": "forum.valuepickr.com",
-      "url": "https://forum.valuepickr.com/t/polyplex-corporation-are-good-days-ahead/9761?page=4"
+      "label": "Yahoo Finance — Kolon Industries Inc",
+      "url": "https://finance.yahoo.com/quote/120110.KS"
     },
     {
-      "label": "linkedin.com",
-      "url": "https://www.linkedin.com/posts/cmasanthoshini_100dayswithtvs-finance-linkedin-activity-7472611468937687040-5RQi"
+      "label": "Yahoo Finance — Bollore Group (Plastic Films Division)",
+      "url": "https://finance.yahoo.com/quote/BOL.PA"
+    },
+    {
+      "label": "koalagains.com",
+      "url": "https://koalagains.com/stocks/KOSPI/011790"
+    },
+    {
+      "label": "bollore.com",
+      "url": "https://www.bollore.com/en/activites-et-participations-2/stockage-delectricite-et-systemes/blue-solutions-films-plastiques/"
+    },
+    {
+      "label": "mcgc.com",
+      "url": "https://www.mcgc.com/english/group/strategy/management_plan.html"
     },
     {
       "label": "Screener.in",
