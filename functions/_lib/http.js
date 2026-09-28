@@ -15,6 +15,11 @@ export async function kvGet(env, key) {
   return null;
 }
 
+/** KV delete — best-effort; never throws. */
+export async function kvDelete(env, key) {
+  try { if (env && env.PEERVIP_KV) await env.PEERVIP_KV.delete(key); } catch (_) { /* ignore */ }
+}
+
 /** KV put — best-effort; never throws. `ttlSeconds` (>=60) sets an expiry. */
 export async function kvPut(env, key, value, ttlSeconds) {
   try {
