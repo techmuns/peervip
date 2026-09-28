@@ -1,0 +1,2258 @@
+{
+  "meta": {
+    "slug": "laminates",
+    "name": "Laminates (Decorative Laminates)",
+    "type": "industry",
+    "query": "laminates",
+    "seed_company": "Stylam Industries",
+    "segment": "Decorative laminates & surfacing",
+    "definition": "Companies that make or sell decorative laminates and surfacing panels used on furniture, walls and interiors.",
+    "generated_at": "2026-09-28T00:00:00Z",
+    "sample": true,
+    "coverage": {
+      "peers_total": 12,
+      "with_full_financials": 7,
+      "confidence": "medium"
+    }
+  },
+  "outperformer": {
+    "company": "Euro Pratik Sales",
+    "bucket": "indian",
+    "headline": "Highest margin in the peer set — ~32% EBITDA vs a ~13% peer median",
+    "reason": "Euro Pratik runs an asset-light, branded model: it designs and sources decorative panels instead of operating capital-heavy laminate presses. With little fixed cost, lean inventory and almost no debt, it converts sales into ~32% EBITDA margin and ~38% ROCE — well ahead of every manufacturer in the set, even though its revenue base is far smaller.",
+    "india_vs_global": "Indian branded players lead on margins and returns; the global names are far larger but earn mid-teens margins or lower."
+  },
+  "metrics": [
+    {
+      "key": "revenue",
+      "label": "Revenue",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "rev_growth_1y",
+      "label": "Rev growth (1Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_3y",
+      "label": "Rev CAGR (3Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_5y",
+      "label": "Rev CAGR (5Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "market_cap",
+      "label": "Market cap",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "neutral",
+      "format": "num0"
+    },
+    {
+      "key": "gross_margin",
+      "label": "Gross margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "ebitda_margin",
+      "label": "EBITDA margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "pat_margin",
+      "label": "PAT margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rm_cost_pct",
+      "label": "Raw material % of sales",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "roce",
+      "label": "ROCE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "roe",
+      "label": "ROE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "debtor_days",
+      "label": "Debtor days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "inventory_days",
+      "label": "Inventory days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "payable_days",
+      "label": "Payable days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "ccc",
+      "label": "Cash conversion cycle",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "wc_days",
+      "label": "Working capital days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "debt_equity",
+      "label": "Debt / Equity",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "low",
+      "format": "num2"
+    },
+    {
+      "key": "interest_coverage",
+      "label": "Interest coverage",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "high",
+      "format": "num1"
+    },
+    {
+      "key": "promoter_holding",
+      "label": "Promoter holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "pledge_pct",
+      "label": "Promoter pledge",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "fii_holding",
+      "label": "FII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dii_holding",
+      "label": "DII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "pe",
+      "label": "P/E",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "pb",
+      "label": "P/B",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "dividend_yield",
+      "label": "Dividend yield",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dividend_payout",
+      "label": "Dividend payout",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    }
+  ],
+  "peers": {
+    "indian": [
+      {
+        "name": "Stylam Industries",
+        "ticker": "STYLAMIND",
+        "is_seed": true,
+        "business_model": "Manufacturer",
+        "products": "Decorative & high-pressure laminates, exports-led",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/STYLAMIND/"
+        },
+        "current": {
+          "revenue": 1450,
+          "rev_growth_1y": 12.3,
+          "rev_cagr_3y": 18,
+          "rev_cagr_5y": 15.5,
+          "market_cap": 9000,
+          "gross_margin": 45,
+          "ebitda_margin": 23.5,
+          "pat_margin": 14.2,
+          "rm_cost_pct": 52,
+          "roce": 22,
+          "roe": 18.5,
+          "debtor_days": 70,
+          "inventory_days": 85,
+          "payable_days": 45,
+          "ccc": 110,
+          "wc_days": 95,
+          "debt_equity": 0.15,
+          "interest_coverage": 18,
+          "promoter_holding": 54,
+          "pledge_pct": 0,
+          "fii_holding": 6.5,
+          "dii_holding": 8,
+          "pe": 44,
+          "pb": 7.5,
+          "dividend_yield": 0.2,
+          "dividend_payout": 8
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              645,
+              791,
+              937,
+              1095,
+              1189,
+              1344,
+              1450
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              19.2,
+              18.9,
+              20.2,
+              21.7,
+              22.9,
+              21.6,
+              23.5
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              10.2,
+              11.5,
+              11,
+              12.8,
+              12.1,
+              13.1,
+              14.2
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              18.7,
+              18.5,
+              18.2,
+              19.6,
+              20.1,
+              22.4,
+              22
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              14.1,
+              16.7,
+              15.2,
+              17.1,
+              17.8,
+              18.9,
+              18.5
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              86,
+              79,
+              78,
+              74,
+              75,
+              69,
+              70
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              101,
+              99,
+              90,
+              87,
+              92,
+              89,
+              85
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              131,
+              130,
+              123,
+              125,
+              118,
+              119,
+              110
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              54.5,
+              53.4,
+              54.5,
+              54.3,
+              54,
+              53.9,
+              54
+            ]
+          }
+        }
+      },
+      {
+        "name": "Greenlam Industries",
+        "ticker": "GREENLAM",
+        "business_model": "Manufacturer",
+        "products": "Laminates, veneers, engineered flooring & doors",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/GREENLAM/"
+        },
+        "current": {
+          "revenue": 2400,
+          "rev_growth_1y": 15,
+          "rev_cagr_3y": 16,
+          "rev_cagr_5y": 12,
+          "market_cap": 7000,
+          "gross_margin": 42,
+          "ebitda_margin": 12.5,
+          "pat_margin": 5.5,
+          "rm_cost_pct": 55,
+          "roce": 13.5,
+          "roe": 12,
+          "debtor_days": 55,
+          "inventory_days": 80,
+          "payable_days": 50,
+          "ccc": 85,
+          "wc_days": 78,
+          "debt_equity": 0.65,
+          "interest_coverage": 6.5,
+          "promoter_holding": 51,
+          "pledge_pct": 0,
+          "fii_holding": 12,
+          "dii_holding": 10,
+          "pe": 55,
+          "pb": 6,
+          "dividend_yield": 0.1,
+          "dividend_payout": 5
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              1034,
+              1242,
+              1533,
+              1788,
+              1986,
+              2274,
+              2400
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.9,
+              10.4,
+              10.7,
+              11,
+              11.5,
+              11.7,
+              12.5
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              4.4,
+              4.4,
+              4.7,
+              4.4,
+              5.2,
+              5.4,
+              5.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              10.8,
+              11.4,
+              11.7,
+              11.5,
+              12.3,
+              13.6,
+              13.5
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.4,
+              10.2,
+              11.3,
+              11.3,
+              10.8,
+              11.8,
+              12
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              67,
+              62,
+              60,
+              63,
+              56,
+              55,
+              55
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              91,
+              94,
+              87,
+              89,
+              82,
+              79,
+              80
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              103,
+              103,
+              97,
+              95,
+              95,
+              92,
+              85
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              50.9,
+              51.2,
+              51.6,
+              50.9,
+              51.3,
+              51,
+              51
+            ]
+          }
+        }
+      },
+      {
+        "name": "Greenpanel Industries",
+        "ticker": "GREENPANEL",
+        "business_model": "Manufacturer",
+        "products": "MDF, plywood & decorative laminates",
+        "note": "MDF-heavy mix, more cyclical",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/GREENPANEL/"
+        },
+        "current": {
+          "revenue": 1600,
+          "rev_growth_1y": -5,
+          "rev_cagr_3y": 8,
+          "rev_cagr_5y": 10,
+          "market_cap": 3800,
+          "gross_margin": 48,
+          "ebitda_margin": 14,
+          "pat_margin": 6,
+          "rm_cost_pct": 50,
+          "roce": 11,
+          "roe": 10.5,
+          "debtor_days": 25,
+          "inventory_days": 70,
+          "payable_days": 30,
+          "ccc": 65,
+          "wc_days": 60,
+          "debt_equity": 0.35,
+          "interest_coverage": 8,
+          "promoter_holding": 56,
+          "pledge_pct": 0,
+          "fii_holding": 9,
+          "dii_holding": 14,
+          "pe": 30,
+          "pb": 3,
+          "dividend_yield": 0.6,
+          "dividend_payout": 15
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              717,
+              852,
+              1049,
+              1196,
+              1347,
+              1426,
+              1600
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              11.5,
+              12.5,
+              12.4,
+              13.4,
+              13.9,
+              13.7,
+              14
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              4.2,
+              4.5,
+              4.8,
+              5.6,
+              5.6,
+              6,
+              6
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              8.7,
+              9.1,
+              9.4,
+              9.7,
+              10.3,
+              11.3,
+              11
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              8.4,
+              9.4,
+              8.9,
+              10,
+              9.9,
+              9.9,
+              10.5
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              28,
+              28,
+              28,
+              26,
+              26,
+              26,
+              25
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              81,
+              80,
+              76,
+              74,
+              75,
+              75,
+              70
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              81,
+              75,
+              78,
+              70,
+              67,
+              68,
+              65
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              55.9,
+              56.2,
+              55.6,
+              56.3,
+              55.9,
+              56.5,
+              56
+            ]
+          }
+        }
+      },
+      {
+        "name": "Century Plyboards",
+        "ticker": "CENTURYPLY",
+        "business_model": "Integrated",
+        "products": "Plywood, laminates, MDF, particle board",
+        "note": "Largest diversified wood-panel player",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/CENTURYPLY/"
+        },
+        "current": {
+          "revenue": 3900,
+          "rev_growth_1y": 10,
+          "rev_cagr_3y": 12,
+          "rev_cagr_5y": 11,
+          "market_cap": 16000,
+          "gross_margin": 44,
+          "ebitda_margin": 13.5,
+          "pat_margin": 7,
+          "rm_cost_pct": 54,
+          "roce": 18,
+          "roe": 16,
+          "debtor_days": 40,
+          "inventory_days": 65,
+          "payable_days": 35,
+          "ccc": 70,
+          "wc_days": 62,
+          "debt_equity": 0.25,
+          "interest_coverage": 12,
+          "promoter_holding": 71,
+          "pledge_pct": 0,
+          "fii_holding": 8,
+          "dii_holding": 9.5,
+          "pe": 55,
+          "pb": 8.5,
+          "dividend_yield": 0.3,
+          "dividend_payout": 12
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              1839,
+              2025,
+              2381,
+              2895,
+              3107,
+              3381,
+              3900
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              10.7,
+              11.7,
+              11.9,
+              12.1,
+              12.9,
+              13.7,
+              13.5
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              5.6,
+              5.8,
+              5.6,
+              6.5,
+              6.2,
+              6.3,
+              7
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              14.2,
+              15.4,
+              14.5,
+              16.1,
+              16.2,
+              17.3,
+              18
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              13.4,
+              13.8,
+              15,
+              15.2,
+              14.9,
+              16.6,
+              16
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              46,
+              45,
+              43,
+              42,
+              44,
+              43,
+              40
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              76,
+              76,
+              71,
+              70,
+              71,
+              65,
+              65
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              82,
+              85,
+              83,
+              76,
+              78,
+              75,
+              70
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              70.2,
+              70.4,
+              71.6,
+              70.9,
+              71.2,
+              70.7,
+              71
+            ]
+          }
+        }
+      },
+      {
+        "name": "Archidply Industries",
+        "ticker": "ARCHIDPLY",
+        "business_model": "Manufacturer",
+        "products": "Plywood, laminates, decorative veneers",
+        "note": "Small-cap, thin margins",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/ARCHIDPLY/"
+        },
+        "current": {
+          "revenue": 230,
+          "rev_growth_1y": 6,
+          "rev_cagr_3y": 7,
+          "rev_cagr_5y": 4,
+          "market_cap": 180,
+          "gross_margin": 38,
+          "ebitda_margin": 8,
+          "pat_margin": 3,
+          "rm_cost_pct": 60,
+          "roce": 10,
+          "roe": 9,
+          "debtor_days": 75,
+          "inventory_days": 90,
+          "payable_days": 60,
+          "ccc": 105,
+          "wc_days": 95,
+          "debt_equity": 0.55,
+          "interest_coverage": 3.5,
+          "promoter_holding": 60,
+          "pledge_pct": 5,
+          "fii_holding": 0.5,
+          "dii_holding": 1,
+          "pe": 18,
+          "pb": 1.8,
+          "dividend_yield": 0,
+          "dividend_payout": 0
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              106,
+              128,
+              146,
+              172,
+              191,
+              208,
+              230
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              6.4,
+              7.1,
+              6.9,
+              7.3,
+              7.3,
+              8,
+              8
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              2.1,
+              2.6,
+              2.3,
+              2.8,
+              2.7,
+              3,
+              3
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              7.8,
+              8.7,
+              8.1,
+              8.7,
+              9.3,
+              9.2,
+              10
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              7.6,
+              8,
+              7.8,
+              8.6,
+              8.3,
+              9.2,
+              9
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              91,
+              89,
+              80,
+              80,
+              76,
+              80,
+              75
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              102,
+              100,
+              100,
+              96,
+              94,
+              95,
+              90
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              123,
+              122,
+              124,
+              122,
+              115,
+              108,
+              105
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              60.2,
+              59.4,
+              60.5,
+              60.5,
+              60.2,
+              60.5,
+              60
+            ]
+          }
+        }
+      },
+      {
+        "name": "Euro Pratik Sales",
+        "ticker": "EUROPRATIK",
+        "business_model": "Importer-Sourcing",
+        "products": "Decorative wall panels, laminates (asset-light brand)",
+        "note": "Asset-light branded model; margin outlier",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/EUROPRATIK/"
+        },
+        "current": {
+          "revenue": 320,
+          "rev_growth_1y": 28,
+          "rev_cagr_3y": 32,
+          "rev_cagr_5y": 30,
+          "market_cap": 4200,
+          "gross_margin": 55,
+          "ebitda_margin": 32,
+          "pat_margin": 23,
+          "rm_cost_pct": 45,
+          "roce": 38,
+          "roe": 32,
+          "debtor_days": 60,
+          "inventory_days": 40,
+          "payable_days": 55,
+          "ccc": 45,
+          "wc_days": 40,
+          "debt_equity": 0.05,
+          "interest_coverage": 45,
+          "promoter_holding": 70,
+          "pledge_pct": 0,
+          "fii_holding": 2,
+          "dii_holding": 3,
+          "pe": 42,
+          "pb": 13,
+          "dividend_yield": 0.1,
+          "dividend_payout": 6
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              138,
+              199,
+              270,
+              320
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              26.8,
+              26.8,
+              31.4,
+              32
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              18.1,
+              18.4,
+              19.6,
+              23
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              31.3,
+              33.7,
+              35.1,
+              38
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              25.4,
+              29.9,
+              31.8,
+              32
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              68,
+              66,
+              64,
+              60
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              48,
+              45,
+              43,
+              40
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              56,
+              51,
+              47,
+              45
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              null,
+              69.7,
+              69.8,
+              69.4,
+              70
+            ]
+          }
+        }
+      },
+      {
+        "name": "Rushil Decor",
+        "ticker": "RUSHIL",
+        "business_model": "Manufacturer",
+        "products": "Laminates & MDF boards",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/RUSHIL/"
+        },
+        "current": {
+          "revenue": 800,
+          "rev_growth_1y": 9,
+          "rev_cagr_3y": 14,
+          "rev_cagr_5y": 12,
+          "market_cap": 1300,
+          "gross_margin": 40,
+          "ebitda_margin": 11,
+          "pat_margin": 5,
+          "rm_cost_pct": 57,
+          "roce": 12.5,
+          "roe": 11.5,
+          "debtor_days": 65,
+          "inventory_days": 75,
+          "payable_days": 40,
+          "ccc": 100,
+          "wc_days": 88,
+          "debt_equity": 0.6,
+          "interest_coverage": 4.5,
+          "promoter_holding": 58,
+          "pledge_pct": 8,
+          "fii_holding": 1.5,
+          "dii_holding": 2.5,
+          "pe": 25,
+          "pb": 2.8,
+          "dividend_yield": 0.2,
+          "dividend_payout": 5
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              351,
+              413,
+              491,
+              588,
+              673,
+              759,
+              800
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.4,
+              9.3,
+              9.3,
+              10.4,
+              10.1,
+              11.2,
+              11
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              3.8,
+              3.7,
+              3.9,
+              4.5,
+              4.8,
+              4.7,
+              5
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.8,
+              10.2,
+              11.4,
+              11.8,
+              11.3,
+              11.3,
+              12.5
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.2,
+              10,
+              10,
+              10.9,
+              11,
+              11.3,
+              11.5
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              77,
+              74,
+              76,
+              72,
+              72,
+              66,
+              65
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              83,
+              82,
+              86,
+              82,
+              82,
+              78,
+              75
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              123,
+              121,
+              118,
+              112,
+              109,
+              99,
+              100
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              58.6,
+              58.5,
+              58.1,
+              58.6,
+              57.7,
+              57.6,
+              58
+            ]
+          }
+        }
+      }
+    ],
+    "global": [
+      {
+        "name": "Wilsonart",
+        "country": "USA",
+        "business_model": "Manufacturer",
+        "products": "HPL, engineered surfaces",
+        "source": {
+          "label": "stockanalysis.com",
+          "url": ""
+        },
+        "current": {
+          "revenue": 11000,
+          "ebitda_margin": 18,
+          "pat_margin": 8,
+          "roce": 12
+        },
+        "series": {}
+      },
+      {
+        "name": "EGGER Group",
+        "country": "Austria",
+        "business_model": "Integrated",
+        "products": "Wood-based panels, laminate flooring",
+        "source": {
+          "label": "Company reports",
+          "url": ""
+        },
+        "current": {
+          "revenue": 38000,
+          "ebitda_margin": 15,
+          "pat_margin": 6.5
+        },
+        "series": {}
+      },
+      {
+        "name": "Fletcher Building (Formica)",
+        "country": "New Zealand",
+        "business_model": "Manufacturer",
+        "products": "Laminates (Formica), building products",
+        "source": {
+          "label": "stockanalysis.com",
+          "url": ""
+        },
+        "current": {
+          "revenue": 42000,
+          "ebitda_margin": 10,
+          "pat_margin": 3.5,
+          "roce": 8
+        },
+        "series": {
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              8.2,
+              8.4,
+              9.1,
+              9.1,
+              10
+            ]
+          }
+        }
+      }
+    ],
+    "private": [
+      {
+        "name": "Merino Industries",
+        "business_model": "Integrated",
+        "products": "Laminates, panels, modular furniture, agri",
+        "note": "Large unlisted, backward-integrated",
+        "source": {
+          "label": "Web / news",
+          "url": ""
+        }
+      },
+      {
+        "name": "Airolam",
+        "business_model": "Manufacturer",
+        "products": "Decorative laminates",
+        "note": "Gujarat-based private manufacturer",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      }
+    ]
+  },
+  "scorecard": {
+    "ranking": [
+      {
+        "company": "Euro Pratik Sales",
+        "bucket": "indian",
+        "score": 88,
+        "rank": 1,
+        "strengths": [
+          "EBITDA margin",
+          "ROCE",
+          "PAT margin",
+          "Low debt"
+        ],
+        "reason": "An asset-light, branded model wins here: Euro Pratik designs and sources decorative panels rather than running heavy laminate presses, so it carries little fixed cost, minimal inventory and almost no debt. That converts into ~32% EBITDA margins and ~38% ROCE — multiples of the peer set — even though its revenue base is a fraction of the manufacturers."
+      },
+      {
+        "company": "Stylam Industries",
+        "bucket": "indian",
+        "score": 79,
+        "rank": 2,
+        "strengths": [
+          "EBITDA margin",
+          "Export mix",
+          "Return ratios"
+        ],
+        "reason": "Best-in-class among the actual manufacturers: a large export book and a modern single-location plant give Stylam operating leverage and ~23% margins with low leverage."
+      },
+      {
+        "company": "Century Plyboards",
+        "bucket": "indian",
+        "score": 74,
+        "rank": 3,
+        "strengths": [
+          "Scale",
+          "Brand",
+          "ROCE"
+        ],
+        "reason": "Scale and brand strength across plywood, laminate and MDF underpin steady mid-teens returns, though a broad product mix dilutes blended margins."
+      },
+      {
+        "company": "Greenpanel Industries",
+        "bucket": "indian",
+        "score": 62,
+        "rank": 4,
+        "strengths": [
+          "Gross margin",
+          "Lean receivables"
+        ],
+        "reason": "Tight receivables and healthy gross margins, but an MDF-weighted mix leaves earnings more cyclical than the branded laminate players."
+      },
+      {
+        "company": "Greenlam Industries",
+        "bucket": "indian",
+        "score": 60,
+        "rank": 5,
+        "strengths": [
+          "Revenue scale",
+          "Category leadership"
+        ],
+        "reason": "The largest pure-play laminate maker by revenue, but capex on new capacity and higher leverage have compressed near-term margins and returns."
+      },
+      {
+        "company": "Rushil Decor",
+        "bucket": "indian",
+        "score": 48,
+        "rank": 6,
+        "strengths": [
+          "MDF growth"
+        ],
+        "reason": "Growing MDF volumes, yet leverage and single-digit margins keep return ratios below the branded leaders."
+      },
+      {
+        "company": "Archidply Industries",
+        "bucket": "indian",
+        "score": 38,
+        "rank": 7,
+        "strengths": [],
+        "reason": "Sub-scale with thin margins and stretched working capital; needs a step-up in either volumes or mix to close the gap."
+      }
+    ]
+  },
+  "report": {
+    "title": "Laminates — Peer Benchmarking",
+    "summary": "Across the decorative-laminate peer set, branded and asset-light models earn dramatically higher margins and returns than the large manufacturers. Euro Pratik is the clear outlier on profitability, while Stylam leads the true manufacturers.",
+    "sections": [
+      {
+        "title": "The outperformer",
+        "icon": "sparkles",
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "good",
+            "title": "Euro Pratik Sales",
+            "text": "Crowned on profitability and capital efficiency. Its asset-light, design-and-source model avoids heavy manufacturing capex, so almost every incremental rupee of revenue drops through — ~32% EBITDA margin and ~38% ROCE against a peer median near 13%."
+          },
+          {
+            "type": "kpis",
+            "items": [
+              {
+                "label": "EBITDA margin",
+                "value": "32%",
+                "sub": "peer median ~13%"
+              },
+              {
+                "label": "ROCE",
+                "value": "38%",
+                "sub": "best in set"
+              },
+              {
+                "label": "Debt / Equity",
+                "value": "0.05x",
+                "sub": "near debt-free"
+              },
+              {
+                "label": "PAT margin",
+                "value": "23%"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "EBITDA margin across peers",
+        "icon": "chart",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Euro Pratik",
+                "value": 32
+              },
+              {
+                "label": "Stylam",
+                "value": 23.5
+              },
+              {
+                "label": "Greenpanel",
+                "value": 14
+              },
+              {
+                "label": "Century Ply",
+                "value": 13.5
+              },
+              {
+                "label": "Greenlam",
+                "value": 12.5
+              },
+              {
+                "label": "Rushil Decor",
+                "value": 11
+              },
+              {
+                "label": "Archidply",
+                "value": 8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Returns vs the peer set",
+        "icon": "trophy",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Euro Pratik (ROCE)",
+                "value": 38
+              },
+              {
+                "label": "Stylam (ROCE)",
+                "value": 22
+              },
+              {
+                "label": "Century Ply (ROCE)",
+                "value": 18
+              },
+              {
+                "label": "Greenlam (ROCE)",
+                "value": 13.5
+              },
+              {
+                "label": "Rushil (ROCE)",
+                "value": 12.5
+              },
+              {
+                "label": "Greenpanel (ROCE)",
+                "value": 11
+              },
+              {
+                "label": "Archidply (ROCE)",
+                "value": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "How the margin gap opened up",
+        "icon": "trend",
+        "blocks": [
+          {
+            "type": "trend",
+            "unit": "%",
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "series": [
+              {
+                "label": "Euro Pratik",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  25.6,
+                  27.8,
+                  30.1,
+                  32
+                ]
+              },
+              {
+                "label": "Stylam",
+                "values": [
+                  19.3,
+                  19.9,
+                  21,
+                  21.8,
+                  22.6,
+                  23,
+                  23.5
+                ]
+              },
+              {
+                "label": "Greenlam",
+                "values": [
+                  10.4,
+                  10.8,
+                  11.2,
+                  11.6,
+                  12,
+                  12.3,
+                  12.5
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business-model split",
+        "icon": "donut",
+        "blocks": [
+          {
+            "type": "donut",
+            "items": [
+              {
+                "label": "Manufacturer",
+                "value": 4
+              },
+              {
+                "label": "Integrated",
+                "value": 1
+              },
+              {
+                "label": "Importer-Sourcing",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "The peer set at a glance",
+        "icon": "table",
+        "blocks": [
+          {
+            "type": "table",
+            "columns": [
+              "Company",
+              "Revenue (Rs Cr)",
+              "EBITDA %",
+              "ROCE %"
+            ],
+            "rows": [
+              [
+                "Euro Pratik Sales",
+                "320",
+                "32.0",
+                "38.0"
+              ],
+              [
+                "Stylam Industries",
+                "1,450",
+                "23.5",
+                "22.0"
+              ],
+              [
+                "Century Plyboards",
+                "3,900",
+                "13.5",
+                "18.0"
+              ],
+              [
+                "Greenpanel Industries",
+                "1,600",
+                "14.0",
+                "11.0"
+              ],
+              [
+                "Greenlam Industries",
+                "2,400",
+                "12.5",
+                "13.5"
+              ],
+              [
+                "Rushil Decor",
+                "800",
+                "11.0",
+                "12.5"
+              ],
+              [
+                "Archidply Industries",
+                "230",
+                "8.0",
+                "10.0"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "title": "India vs Global",
+        "icon": "globe",
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "Different games",
+            "text": "Global names (Wilsonart, EGGER, Fletcher Building) are 10–30x the size of the Indian players but earn mid-teens or lower margins. The Indian branded players trade scale for profitability — the reverse of the global majors."
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "Screener — Stylam Industries",
+      "url": "https://www.screener.in/company/STYLAMIND/"
+    },
+    {
+      "label": "Screener — Greenlam Industries",
+      "url": "https://www.screener.in/company/GREENLAM/"
+    },
+    {
+      "label": "Screener — Century Plyboards",
+      "url": "https://www.screener.in/company/CENTURYPLY/"
+    },
+    {
+      "label": "stockanalysis.com — global peers",
+      "url": "https://stockanalysis.com/"
+    },
+    {
+      "label": "Company annual reports & investor presentations",
+      "url": ""
+    }
+  ]
+}

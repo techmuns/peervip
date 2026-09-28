@@ -1,0 +1,48 @@
+{
+  "reports": [
+    {
+      "slug": "laminates",
+      "name": "Laminates (Decorative Laminates)",
+      "type": "industry",
+      "query": "laminates",
+      "seed_company": "Stylam Industries",
+      "aliases": [
+        "stylam",
+        "stylam industries",
+        "laminates",
+        "decorative laminates",
+        "greenlam",
+        "greenpanel",
+        "century plyboards",
+        "euro pratik",
+        "merino",
+        "surfacing",
+        "hpl"
+      ],
+      "updated_at": "2026-09-28T00:00:00Z",
+      "peer_count": 12,
+      "sample": true
+    },
+    {
+      "slug": "refractories",
+      "name": "Refractories",
+      "type": "industry",
+      "query": "refractories",
+      "seed_company": "Monolithisch India",
+      "aliases": [
+        "monolithisch",
+        "monolithisch india",
+        "refractories",
+        "refractory",
+        "vesuvius",
+        "ifgl",
+        "rhi magnesita",
+        "castable",
+        "monolithics"
+      ],
+      "updated_at": "2026-09-28T00:00:00Z",
+      "peer_count": 10,
+      "sample": true
+    }
+  ]
+}
