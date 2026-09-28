@@ -55,7 +55,7 @@ jobs:
           SCREENER_PASSWORD: ${{ secrets.SCREENER_PASSWORD }}
           PROGRESS_URL: ${{ secrets.PROGRESS_URL }}
           PROGRESS_SECRET: ${{ secrets.PROGRESS_SECRET }}
-          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
         run: node scripts/research-peers.mjs
 
       - name: Commit report + index

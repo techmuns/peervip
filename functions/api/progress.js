@@ -14,9 +14,11 @@ export async function onRequestPost({ request, env }) {
     const slug = String((body && body.slug) || '').trim();
     if (!slug) return json({ ok: false, error: 'slug required' }, 400);
 
+    const STATUS_TTL = 3600;        // 1h — progress is short-lived
+    const REPORT_TTL = 7 * 24 * 3600; // 7d — the committed file is the durable copy
     if (body.report) {
-      await kvPut(env, `report:${slug}`, typeof body.report === 'string' ? body.report : JSON.stringify(body.report));
-      await kvPut(env, `status:${slug}`, { state: 'done', stage: 6, ts: Date.now() });
+      await kvPut(env, `report:${slug}`, typeof body.report === 'string' ? body.report : JSON.stringify(body.report), REPORT_TTL);
+      await kvPut(env, `status:${slug}`, { state: 'done', stage: 6, ts: Date.now() }, STATUS_TTL);
       return json({ ok: true, stored: 'report' });
     }
 
@@ -25,7 +27,7 @@ export async function onRequestPost({ request, env }) {
       stage: Number.isFinite(+body.stage) ? +body.stage : 0,
       error: body.error ? String(body.error) : null,
       ts: Date.now(),
-    });
+    }, STATUS_TTL);
     return json({ ok: true });
   } catch (e) {
     return json({ ok: false, error: String((e && e.message) || e) }, 200); // never 500

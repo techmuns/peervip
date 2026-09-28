@@ -1,8 +1,10 @@
 // POST /api/research {query}
 // Owns slug creation; fires a GitHub Actions workflow_dispatch to run the
 // research pipeline; seeds KV status; returns {slug, dispatched}. Never 500.
-import { json, kvPut } from '../_lib/http.js';
+import { json, kvPut, kvGet } from '../_lib/http.js';
 import { slugify } from '../_lib/slug.js';
+
+const COOLDOWN_MS = 5 * 60 * 1000; // don't re-dispatch a run already in flight
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -21,7 +23,20 @@ export async function onRequestPost(context) {
       return json({ ok: true, slug, dispatched: false, manual: manualSteps(query, owner, repo) });
     }
 
-    await kvPut(env, `status:${slug}`, { state: 'starting', stage: 0, ts: Date.now() });
+    // Guardrail: if a run for this slug is already in flight (< 5 min, not
+    // done/failed), don't spam another workflow_dispatch — return the live one.
+    try {
+      const raw = await kvGet(env, `status:${slug}`);
+      if (raw) {
+        const s = JSON.parse(raw);
+        const inFlight = s && s.state && s.state !== 'done' && s.state !== 'failed';
+        if (inFlight && (Date.now() - (s.ts || 0)) < COOLDOWN_MS) {
+          return json({ ok: true, slug, dispatched: true, cooldown: true });
+        }
+      }
+    } catch (_) { /* fall through to dispatch */ }
+
+    await kvPut(env, `status:${slug}`, { state: 'starting', stage: 0, ts: Date.now() }, 3600);
 
     const api = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/research.yml/dispatches`;
     try {
