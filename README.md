@@ -5,11 +5,14 @@ its *true* peers (Indian Listed · Global Listed · Private), benchmarks them ac
 every financial metric with live medians & averages, year-by-year trends, and an
 AI-crowned outperformer with a written reason.
 
-> **This repo is Step 1 of 3: the complete, polished frontend, running fully
-> offline from committed JSON.** No scrapers, no Playwright, no Bedrock, no
-> network calls, no secrets. Two realistic sample reports are seeded so every
-> screen renders end-to-end. Step 2 plugs a live pipeline in behind the *same*
-> JSON data contract.
+> **Live (Step 2).** A real search now runs end-to-end: type a company or
+> industry → a Cloudflare Pages Function dispatches a GitHub Actions run that
+> researches the peer set (Screener via Playwright + global sources + 2–3 Claude
+> calls on AWS Bedrock) → the loading screen shows live per-stage progress → the
+> report is served from KV and rendered at `#/r/<slug>`. The two committed sample
+> reports remain the **offline fallback**, and the frontend still renders 100%
+> from the same JSON data contract. See **[Go live](#go-live)** for the one-time
+> secrets/bindings setup.
 
 ---
 
@@ -48,11 +51,12 @@ and set:
 | **Production branch** | `main` |
 | **Build command** | *(leave empty — none)* |
 | **Build output directory** | `public` |
-| **Environment variables / secrets** | *(none in Step 1)* |
+| **Environment variables / secrets** | *(see [Go live](#go-live) for live research)* |
 
 Once connected, **every push to `main` auto-builds and deploys** — no manual step
-ever again. (Step 2 adds `functions/` for API routes and will introduce build-time
-secrets; none are needed now.)
+ever again. Cloudflare Pages auto-detects `functions/` and serves the API routes;
+the static seeds remain the offline fallback. The site works with no config
+(seeded reports only); the [Go live](#go-live) bindings turn on live research.
 
 ## Project structure
 
@@ -78,12 +82,29 @@ public/
     reports/
       laminates.json         # rich seed (Stylam anchor, Euro Pratik = margin outperformer)
       refractories.json      # smaller seed (Monolithisch anchor; a different outperformer reason)
-functions/
-  README.md                  # placeholder — API routes arrive in Step 2
-docs/
-  DATA_CONTRACT.md           # the precise JSON contract Step 2 must produce
+    research.js              # live pipeline client: dispatch + status polling
+functions/                   # Cloudflare Pages Functions (live API; binds PEERVIP_KV)
+  api/
+    research.js              # POST {query} -> slugify + workflow_dispatch + KV status
+    research-status.js       # GET ?slug -> KV status (done when report exists)
+    progress.js              # POST (secret) -> KV status / report (called by the Action)
+    report/[slug].js         # GET -> KV report:<slug> (404 -> seed fallback)
+  _lib/{slug.js,http.js}     # shared (slug.js identical to lib/slug.mjs)
+lib/                         # Node libs for the pipeline (run in GitHub Actions)
+  llm.mjs                    # Bedrock Converse + callClaudeJSON (repair + model fallback)
+  screener.mjs               # Screener search/login + cheerio parse -> 26 metric keys
+  global.mjs                 # global peers via Yahoo Finance (FX -> ₹ Cr), best-effort
+  metrics.mjs                # the 26-metric dictionary (verbatim) + median + canonicalModel
+  slug.mjs                   # slugify (identical to functions/_lib/slug.js)
 scripts/
+  research-peers.mjs         # the 7-stage pipeline (Screener + global + 3 Bedrock calls)
+  test-bedrock.mjs           # cred check: Bedrock connectivity
+  test-screener.mjs          # cred check: Screener login + scrape
   generate-seed-data.mjs     # regenerates the two seed reports (pure Node, no deps)
+.github/workflows/
+  research.yml               # workflow_dispatch: run pipeline + commit report/index
+  test-creds.yml             # manual: validate Bedrock + Screener creds
+docs/DATA_CONTRACT.md        # the precise JSON contract the pipeline produces
 .gitignore
 ```
 
@@ -111,10 +132,79 @@ Step 2's pipeline must produce. Key rules:
   driver (sourcing model, pricing power, integration, working-capital efficiency,
   niche, scale, a one-off, …). Nothing in the UI hardcodes a reason type.
 
-## Step 2 hook
+## How live research works
 
-The loading screen's seven stages are the *real* pipeline stages. A live backend
-can drive them by setting `window.PeerVIP.autoAdvance = false` and calling
-`window.PeerVIP.setStage(i)` / `window.PeerVIP.finish()`. `js/data.js` is the only
-place that reads data — repoint it at the live API (same JSON shape) and nothing
-else changes.
+```
+Browser  ──POST /api/research {query}──▶  Pages Function
+                                          · slugify(query) -> slug
+                                          · workflow_dispatch research.yml {query, slug}
+                                          · KV status:<slug> = {starting}
+                                          ◀── {slug}
+Browser  ──poll /api/research-status?slug (every 2.5s)──▶  KV status  ──▶ setStage(i)
+
+GitHub Action (research.yml, ~minutes)   scripts/research-peers.mjs
+   stage 0 Understanding      ─┐
+   stage 1 Find true peers     │  each stage POSTs /api/progress {slug,stage} (shared secret)
+   stage 2 Screener financials │  → KV status:<slug>
+   stage 3 Global peers        │
+   stage 4 Medians (AI ctx)    │
+   stage 5 Score outperformer  │
+   stage 6 Build report       ─┘  POST /api/progress {report}  → KV report:<slug>, status done
+                                   + commit public/data/reports/<slug>.json + index.json (redeploy)
+
+Browser  status=done ──▶ loadReport(slug) (/api/report -> KV, instant) ──▶ #/r/<slug>
+```
+
+The frontend **computes** medians/averages/winners itself, so the pipeline emits
+only raw peer numbers + the AI's verdict/reason/report text (never precomputed
+aggregates). The outperformer reason is open-ended free text.
+
+## Go live
+
+Live research is **off until you add the secrets/bindings below** — one-time, then
+every search is automatic. The site works without them (seeded reports + a friendly
+"live research isn't configured" note).
+
+### 1. GitHub → repo **Secrets** (Settings → Secrets and variables → Actions)
+
+| Secret | For | Notes |
+| --- | --- | --- |
+| `BEDROCK_API_KEY` | Claude on AWS Bedrock | Bedrock API key (used as a bearer token) |
+| `BEDROCK_REGION` | Bedrock | e.g. `us-east-1` (default if unset) |
+| `BEDROCK_MODEL_IDS` | Bedrock | *optional* comma list; default is a Sonnet chain |
+| `SCREENER_EMAIL` | Screener login | unlocks the full ratio ribbon + export |
+| `SCREENER_PASSWORD` | Screener login | |
+| `PROGRESS_URL` | progress callbacks | your Pages origin, e.g. `https://peervip.pages.dev` |
+| `PROGRESS_SECRET` | authenticates `/api/progress` | any random string (same value on Pages) |
+| `FIRECRAWL_API_KEY` | web snippets for peer discovery | *optional* |
+
+### 2. Cloudflare Pages → project **Settings**
+
+- **KV** → create a namespace, bind it to the Pages project as **`PEERVIP_KV`**
+  (Settings → Functions → KV namespace bindings).
+- **Environment variables** (Settings → Environment variables, Production):
+
+  | Var | Value |
+  | --- | --- |
+  | `GH_DISPATCH_TOKEN` | a fine-grained GitHub PAT (see below) |
+  | `GH_OWNER` | `techmuns` |
+  | `GH_REPO` | `peervip` |
+  | `GH_REF` | `main` |
+  | `PROGRESS_SECRET` | **same value** as the GitHub secret |
+
+### 3. Mint the `GH_DISPATCH_TOKEN` PAT
+
+GitHub → Settings → Developer settings → **Fine-grained personal access tokens** →
+Generate new token → **Resource owner:** `techmuns`, **Repository access:** only
+`techmuns/peervip`, **Permissions → Repository → Actions: Read and write**. Copy the
+token into the Pages `GH_DISPATCH_TOKEN` var. (This is the only credential that lets
+the Function start a research run.)
+
+### 4. Validate before a real run
+
+GitHub → **Actions → "Test credentials" → Run workflow**. It runs
+`scripts/test-bedrock.mjs` (prints a Bedrock reply) and `scripts/test-screener.mjs`
+(logs in + scrapes a sample company) so you can confirm creds without a full run.
+
+Then search anything on the site — the loading screen drives from real stages and
+the dashboard renders live data.
