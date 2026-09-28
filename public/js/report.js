@@ -28,9 +28,14 @@ export function renderReport(container, report) {
         <div style="color:#64748b;font-size:12px">PeerVIP · ${esc(report.meta.segment || '')} · Generated ${esc(fmtDate(report.meta.generated_at))}${report.meta.sample ? ' · SAMPLE DATA' : ''}</div>
       </div>
 
-      <div class="pv-card p-5 mb-5 no-print-shadow">
-        <h2 class="font-display text-2xl font-extrabold text-slate-900">${esc(rep.title || report.meta.name)}</h2>
-        ${rep.summary ? `<p class="text-slate-600 mt-2 leading-relaxed max-w-3xl">${esc(rep.summary)}</p>` : ''}
+      <div class="pv-card p-6 mb-5 no-print-shadow">
+        <div class="grid gap-5 lg:grid-cols-3 items-start">
+          <div class="lg:col-span-2">
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">${esc(rep.title || report.meta.name)}</h2>
+            ${rep.summary ? `<p class="text-slate-600 mt-3 leading-relaxed">${esc(rep.summary)}</p>` : ''}
+          </div>
+          ${coverageStats(report.meta)}
+        </div>
       </div>
 
       <div class="grid gap-5">${sections || emptyState('No report sections in this dataset.')}</div>
@@ -40,6 +45,21 @@ export function renderReport(container, report) {
 
   const btn = container.querySelector('[data-print]');
   if (btn) btn.addEventListener('click', () => window.print());
+}
+
+function coverageStats(meta) {
+  const cov = (meta && meta.coverage) || {};
+  const items = [
+    { label: 'Peers', value: cov.peers_total ?? '—' },
+    { label: 'With financials', value: cov.with_full_financials ?? '—' },
+    { label: 'Confidence', value: cov.confidence ? String(cov.confidence) : '—' },
+  ];
+  return `<div class="grid grid-cols-3 lg:grid-cols-1 gap-2">
+    ${items.map((it) => `<div class="rounded-xl bg-slate-50 px-4 py-3">
+      <div class="num font-display text-xl font-extrabold text-slate-800">${esc(String(it.value))}</div>
+      <div class="text-[0.62rem] font-semibold uppercase tracking-wide text-slate-400 mt-0.5">${esc(it.label)}</div>
+    </div>`).join('')}
+  </div>`;
 }
 
 function sectionHtml(section) {

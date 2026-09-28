@@ -95,7 +95,7 @@ search then matches on `name` / `slug` / `query` only.
         }
       }
     ],
-    "global":  [ /* same shape; current may be sparse; series may be {} */ ],
+    "global":  [ /* DESCRIPTIVE-ONLY: name, business_model, products, note, country, source — no current/series (global financials are patchy, so globals are landscape context, not benchmarked) */ ],
     "private": [ /* name, business_model, products, note, source only — no current/series */ ]
   },
 
@@ -154,5 +154,8 @@ Each `section.blocks[]` entry is one of these (rendered as sanitized inline SVG 
 4. **`outperformer.reason` and `scorecard.ranking[].reason` are open-ended free
    text.** They can describe *any* driver. Nothing in the UI hardcodes, templates
    or assumes a reason type.
-5. **Global/private peers are allowed to be sparse.** Global peers commonly have a
-   few `current` values and `series: {}`. Private peers carry no financials at all.
+5. **Global & private peers are descriptive-only.** Both carry `name`,
+   `business_model`, `products`, `note`, `source` (global also `country`) and **no
+   `current` / `series`** — global financials are too patchy to benchmark, so both
+   buckets are shown for landscape context, not scored. Only the **Indian listed
+   set** is benchmarked (medians, green/red, the comparison chart and the scorecard).

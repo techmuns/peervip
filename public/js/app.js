@@ -79,66 +79,192 @@ async function runQuery(query) {
 }
 
 // ============================================================ HOME
+const I_SEARCH = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>';
+const I_CHART = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 4-6"/></svg>';
+const I_ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
 async function renderHome() {
   const el = app();
   el.innerHTML = `
     <div class="min-h-screen">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-16">
         <div class="flex items-center justify-center gap-2.5 mb-8">
           <div class="w-10 h-10 rounded-2xl brand-gradient flex items-center justify-center text-white font-display font-extrabold text-lg shadow-sm">P</div>
           <span class="font-display text-2xl font-extrabold tracking-tight"><span class="text-slate-900">Peer</span><span class="brand-text">VIP</span></span>
         </div>
 
         <div class="text-center max-w-2xl mx-auto">
-          <div class="inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-slate-200 px-3 py-1 text-xs font-semibold text-slate-500 mb-5 pv-fade-in">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live peer research — Screener + AI · seeded samples load instantly
-          </div>
           <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
             Find a company's <span class="brand-text">true peers</span>.<br class="hidden sm:block"> Benchmark everything.
           </h1>
-          <p class="text-slate-500 mt-4 text-base sm:text-lg">Search any company or industry. PeerVIP splits the field into Indian, Global &amp; Private, benchmarks every metric, and crowns the outperformer — with the reason.</p>
+          <p class="text-slate-500 mt-4 text-base sm:text-lg">Search any company or industry. PeerVIP splits the field into Indian, Global &amp; Private and benchmarks every metric — then crowns the outperformer, with the reason.</p>
         </div>
 
-        <form data-search class="mt-8 max-w-2xl mx-auto">
-          <div class="flex flex-col sm:flex-row gap-3 bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-2">
-            <div class="flex items-center gap-2 grow px-3">
-              <svg class="text-slate-400 shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-              <input name="q" type="text" autocomplete="off" class="w-full py-2.5 bg-transparent outline-none text-slate-800 placeholder:text-slate-400"
-                placeholder="Search any company or industry — Stylam, laminates, Monolithisch..." />
+        <form data-search class="mt-8 max-w-2xl mx-auto flex flex-col sm:flex-row gap-3">
+          <div class="pv-ac-wrap">
+            <div class="pv-searchbar">
+              <span class="text-slate-400 shrink-0">${I_SEARCH}</span>
+              <input name="q" type="text" autocomplete="off" aria-label="Search a company or industry"
+                placeholder="Type a company or industry — Stylam, laminates, refractories…" />
             </div>
-            <button type="submit" class="pv-focus shrink-0 inline-flex items-center justify-center gap-2 rounded-xl brand-gradient px-5 py-2.5 font-semibold text-white shadow-sm hover:opacity-95 transition">
-              Run Peer Benchmarking
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </button>
           </div>
-          <div class="flex flex-wrap gap-2 justify-center mt-3 text-xs text-slate-400">
-            <span>Try:</span>
-            ${['Stylam', 'laminates', 'Monolithisch', 'refractories'].map((s) => `<button type="button" data-example="${esc(s)}" class="pv-focus rounded-full bg-white ring-1 ring-slate-200 px-2.5 py-1 font-medium text-slate-600 hover:ring-indigo-300 hover:text-indigo-600 transition">${esc(s)}</button>`).join('')}
-          </div>
+          <button type="submit" class="pv-focus shrink-0 inline-flex items-center justify-center gap-2 rounded-xl brand-gradient px-5 py-3 font-semibold text-white shadow-sm hover:opacity-95 transition">
+            Research it ${I_ARROW}
+          </button>
         </form>
+        <p class="text-center text-xs text-slate-400 mt-3">Try “laminates”, “Asian Paints”, or “refractories” — or pick a past run from the suggestions to open it instantly.</p>
 
         <div class="mt-12">
-          <h2 class="font-display text-sm font-bold uppercase tracking-wide text-slate-400 mb-3">Available reports</h2>
-          <div data-cards class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="text-slate-400 text-sm">Loading reports…</div>
+          <div class="flex items-center justify-between mb-2 px-1">
+            <h2 class="font-display text-sm font-bold uppercase tracking-wide text-slate-400">Your research</h2>
+            <span data-runs-count class="text-xs text-slate-400"></span>
+          </div>
+          <div class="pv-card overflow-x-auto">
+            <table class="pv-runs" data-runs><tbody><tr><td class="p-6 text-sm text-slate-400">Loading your research…</td></tr></tbody></table>
           </div>
         </div>
       </div>
     </div>`;
 
   const form = el.querySelector('[data-search]');
-  form.addEventListener('submit', (e) => { e.preventDefault(); runQuery(form.q.value.trim()); });
-  el.querySelectorAll('[data-example]').forEach((b) => b.addEventListener('click', () => { form.q.value = b.dataset.example; form.q.focus(); }));
+  const input = form.querySelector('input[name=q]');
+  const acWrap = form.querySelector('.pv-ac-wrap');
+  form.addEventListener('submit', (e) => { e.preventDefault(); runQuery(input.value.trim()); });
 
-  const cards = el.querySelector('[data-cards]');
+  const tableEl = el.querySelector('[data-runs]');
+  const countEl = el.querySelector('[data-runs-count]');
   try {
     indexData = indexData || await loadIndex();
-    const reports = indexData.reports || [];
-    cards.innerHTML = reports.length ? reports.map(cardHtml).join('') : `<div class="text-slate-400 text-sm">No reports yet — run a search above.</div>`;
-    cards.querySelectorAll('[data-slug]').forEach((c) => c.addEventListener('click', () => go('#/r/' + encodeURIComponent(c.dataset.slug))));
+    const runs = (indexData.reports || [])
+      .filter((r) => !r.sample)
+      .slice()
+      .sort((a, b) => new Date(b.updated_at || 0) - new Date(a.updated_at || 0));
+    tableEl.innerHTML = runsTableHtml(runs);
+    countEl.textContent = runs.length ? `${runs.length} run${runs.length > 1 ? 's' : ''}` : '';
+    tableEl.querySelectorAll('[data-slug]').forEach((tr) => tr.addEventListener('click', () => go('#/r/' + encodeURIComponent(tr.dataset.slug))));
   } catch (e) {
-    cards.innerHTML = `<div class="text-rose-500 text-sm">Could not load reports (${esc(e.message)}).</div>`;
+    tableEl.innerHTML = `<tbody><tr><td class="p-6 text-sm text-rose-500">Could not load your research (${esc(e.message)}).</td></tr></tbody>`;
   }
+
+  attachAutocomplete(input, acWrap, () => indexData,
+    (r) => go('#/r/' + encodeURIComponent(r.slug)),
+    (q) => runQuery(q));
+  input.focus();
+}
+
+function runsTableHtml(runs) {
+  if (!runs.length) {
+    return `<tbody><tr><td class="p-6 text-sm text-slate-400">No research yet — search above to run your first peer benchmarking.</td></tr></tbody>`;
+  }
+  const rows = runs.map((r) => {
+    const anchor = r.seed_company && r.seed_company !== r.name ? `anchor: ${esc(r.seed_company)} · ` : '';
+    const ta = timeAgo(r.updated_at);
+    return `<tr data-slug="${esc(r.slug)}">
+      <td>
+        <div class="pv-runs-name">${esc(r.name)}</div>
+        <div class="pv-runs-sub">${anchor}${esc(r.query || r.slug)}</div>
+      </td>
+      <td class="pv-runs-num">${esc(String(r.peer_count || 0))}</td>
+      <td><span class="text-slate-600">${esc(fmtDate(r.updated_at))}</span>${ta ? ` <span class="pv-runs-sub">· ${esc(ta)}</span>` : ''}</td>
+      <td style="text-align:right">
+        <span class="pv-focus inline-flex items-center gap-1.5 rounded-lg brand-gradient px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:opacity-95 transition whitespace-nowrap">View <span class="hidden sm:inline">full dashboard</span>${I_ARROW}</span>
+      </td>
+    </tr>`;
+  }).join('');
+  return `<thead><tr>
+      <th>Report</th>
+      <th class="pv-runs-num">Peers</th>
+      <th>Last updated</th>
+      <th></th>
+    </tr></thead><tbody>${rows}</tbody>`;
+}
+
+function timeAgo(iso) {
+  const then = new Date(iso || 0).getTime();
+  if (!isFinite(then) || !then) return '';
+  const s = Math.max(0, (Date.now() - then) / 1000);
+  if (s < 60) return 'just now';
+  const m = s / 60; if (m < 60) return Math.floor(m) + 'm ago';
+  const h = m / 60; if (h < 24) return Math.floor(h) + 'h ago';
+  const d = h / 24; if (d < 30) return Math.floor(d) + 'd ago';
+  const mo = d / 30; if (mo < 12) return Math.floor(mo) + 'mo ago';
+  return Math.floor(d / 365) + 'y ago';
+}
+
+// Top matches from the committed catalogue (the user's own past runs).
+function suggestReports(query, index, limit = 6) {
+  const q = String(query || '').toLowerCase().trim();
+  if (!q || !index || !Array.isArray(index.reports)) return [];
+  const scored = [];
+  for (const r of index.reports) {
+    if (r.sample) continue;
+    const hay = [r.name, r.slug, r.query, r.seed_company, ...(r.aliases || [])].filter(Boolean).map((s) => String(s).toLowerCase());
+    let score = 0;
+    for (const h of hay) {
+      if (h === q) score = Math.max(score, 100);
+      else if (h.startsWith(q) || q.startsWith(h)) score = Math.max(score, 70);
+      else if (h.includes(q)) score = Math.max(score, 45);
+      else if (q.length > 2 && h.split(/\s+/).some((t) => t.length > 2 && q.includes(t))) score = Math.max(score, 25);
+    }
+    if (score >= 25) scored.push({ r, score });
+  }
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, limit).map((x) => x.r);
+}
+
+// Autocomplete dropdown: past runs first, then a "Research <q>" fresh-run row.
+function attachAutocomplete(input, wrap, getIndex, onPick, onRun) {
+  let items = [];
+  let active = -1;
+  let dd = null;
+  let timer = null;
+  const isOpen = () => !!dd;
+  function close() { if (dd) { dd.remove(); dd = null; } active = -1; }
+  function render() {
+    const q = input.value.trim();
+    if (dd) dd.remove();
+    dd = document.createElement('div');
+    dd.className = 'pv-ac-dropdown';
+    const itemsHtml = items.map((r, i) => `
+      <div class="pv-ac-item ${i === active ? 'is-active' : ''}" data-i="${i}">
+        <span class="pv-ac-ico">${I_CHART}</span>
+        <span class="pv-ac-body">
+          <span class="pv-ac-name">${esc(r.name)}</span>
+          <span class="pv-ac-meta">${esc(String(r.peer_count || 0))} peers · updated ${esc(timeAgo(r.updated_at) || fmtDate(r.updated_at))}</span>
+        </span>
+        <span class="pv-ac-open">Open</span>
+      </div>`).join('');
+    const runHtml = q ? `
+      <div class="pv-ac-item pv-ac-run ${active === items.length ? 'is-active' : ''}" data-run="1">
+        <span class="pv-ac-ico">${I_SEARCH}</span>
+        <span class="pv-ac-body">
+          <span class="pv-ac-name">Research “${esc(q)}”</span>
+          <span class="pv-ac-meta">Run a fresh peer benchmarking</span>
+        </span>
+      </div>` : '';
+    dd.innerHTML = itemsHtml + runHtml;
+    dd.querySelectorAll('[data-i]').forEach((node) => node.addEventListener('mousedown', (e) => { e.preventDefault(); onPick(items[+node.dataset.i]); close(); }));
+    const runNode = dd.querySelector('[data-run]');
+    if (runNode) runNode.addEventListener('mousedown', (e) => { e.preventDefault(); onRun(input.value.trim()); close(); });
+    wrap.appendChild(dd);
+  }
+  input.addEventListener('input', () => {
+    const q = input.value.trim();
+    if (timer) clearTimeout(timer);
+    if (q.length < 2) { items = []; close(); return; }
+    timer = setTimeout(() => { items = suggestReports(q, getIndex(), 6); active = -1; render(); }, 160);
+  });
+  input.addEventListener('keydown', (e) => {
+    if (!isOpen()) return;
+    const total = items.length + (input.value.trim() ? 1 : 0);
+    if (e.key === 'ArrowDown') { e.preventDefault(); active = total ? (active + 1) % total : -1; render(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); active = total ? (active - 1 + total) % total : -1; render(); }
+    else if (e.key === 'Enter') {
+      if (active >= 0) { e.preventDefault(); if (active < items.length) onPick(items[active]); else onRun(input.value.trim()); close(); }
+    } else if (e.key === 'Escape') { close(); }
+  });
+  input.addEventListener('blur', () => setTimeout(close, 150));
+  return { close };
 }
 
 function cardHtml(r) {

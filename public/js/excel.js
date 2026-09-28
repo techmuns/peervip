@@ -24,11 +24,15 @@ export async function exportExcel(report) {
   const global = report.peers.global || [];
 
   if (indian.length) currentSheet(wb, 'Current-India', indian, metrics);
-  if (global.length) currentSheet(wb, 'Current-Global', global, metrics);
 
   for (const m of metricsWithSeries(indian, metrics)) trendSheet(wb, m, indian);
 
   scorecardSheet(wb, report);
+
+  // Global + Private are descriptive-only (name + business), matching the dashboard.
+  if (global.length) descriptiveSheet(wb, 'Global peers', global);
+  const priv = report.peers.private || [];
+  if (priv.length) descriptiveSheet(wb, 'Private peers', priv);
 
   const buf = await wb.xlsx.writeBuffer();
   const blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -63,6 +67,7 @@ function currentSheet(wb, name, peers, metrics) {
   }
   refRow(ws, 'Median', metrics, medianRow(peers, metrics), true);
   refRow(ws, 'Average', metrics, averageRow(peers, metrics), true);
+  ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: header.length } };
   autofit(ws);
 }
 
@@ -98,6 +103,7 @@ function trendSheet(wb, metric, peers) {
   const avg = seriesAggregate(peers, metric.key, years, 'average');
   trendRef(ws, 'Median', years, med, metric);
   trendRef(ws, 'Average', years, avg, metric);
+  ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: years.length + 1 } };
   autofit(ws);
 }
 
@@ -110,12 +116,16 @@ function trendRef(ws, label, years, vals, metric) {
 // ---- Scorecard sheet ----
 function scorecardSheet(wb, report) {
   const ws = wb.addWorksheet('Scorecard', { views: [{ state: 'frozen', ySplit: 1, showGridLines: false }] });
-  const groups = [report.peers.indian || [], report.peers.global || [], report.peers.private || []];
-  const winners = winnersAcross(groups, report.metrics);
+  const indian = report.peers.indian || [];
+  const winners = winnersAcross([indian], report.metrics);
 
-  styleHeader(ws.addRow(['Metric', 'Winner', 'Value', '', 'Rank', 'Company', 'Bucket', 'Score', 'Strengths', 'Reason']));
+  styleHeader(ws.addRow(['Metric', 'Winner', 'Value', '', 'Rank', 'Company', 'Score', 'Strengths', 'Reason']));
 
-  const ranking = (report.scorecard && report.scorecard.ranking) ? [...report.scorecard.ranking].sort((a, b) => (a.rank || 99) - (b.rank || 99)) : [];
+  let ranking = ((report.scorecard && report.scorecard.ranking) ? report.scorecard.ranking : [])
+    .filter((r) => r.bucket === 'indian').sort((a, b) => (b.score || 0) - (a.score || 0));
+  if (!ranking.length && report.scorecard && report.scorecard.ranking) {
+    ranking = [...report.scorecard.ranking].sort((a, b) => (b.score || 0) - (a.score || 0));
+  }
   const rowCount = Math.max(winners.length, ranking.length);
   for (let i = 0; i < rowCount; i++) {
     const w = winners[i];
@@ -124,24 +134,39 @@ function scorecardSheet(wb, report) {
       ? [w.metric.label, '— no winner —', '']
       : [w.metric.label, w.winner.name, fmt(w.winner.value, w.metric.format) + (w.metric.unit === '%' ? '%' : w.metric.unit === 'x' ? 'x' : '')])
       : ['', '', ''];
-    const right = r ? [r.rank, r.company, cap(r.bucket), r.score, (r.strengths || []).join(', '), r.reason || ''] : ['', '', '', '', '', ''];
+    const right = r ? [i + 1, r.company, r.score, (r.strengths || []).join(', '), r.reason || ''] : ['', '', '', '', ''];
     const row = ws.addRow([...left, '', ...right]);
-    if (r && r.rank === 1) row.eachCell((c) => { c.font = { bold: true }; });
+    if (r && i === 0) row.eachCell((c) => { c.font = { bold: true }; });
   }
-  ws.getColumn(10).width = 90; // reason
-  ws.getColumn(10).alignment = { wrapText: true, vertical: 'top' };
-  autofit(ws, { 10: 90, 9: 30 });
+  ws.getColumn(9).width = 90; // reason
+  ws.getColumn(9).alignment = { wrapText: true, vertical: 'top' };
+  ws.autoFilter = { from: { row: 1, column: 5 }, to: { row: 1, column: 9 } };
+  autofit(ws, { 9: 90, 8: 30 });
+}
+
+// ---- Descriptive sheet (Global / Private — name + business, no financials) ----
+function descriptiveSheet(wb, name, peers) {
+  const ws = wb.addWorksheet(safeName(name), { views: [{ state: 'frozen', ySplit: 1, showGridLines: false }] });
+  styleHeader(ws.addRow(['Company', 'Country', 'Business Model', 'Products', 'Note', 'Source']));
+  for (const p of peers) {
+    const row = ws.addRow([p.name, p.country || '', p.business_model || '', p.products || '', p.note || '', (p.source && (p.source.url || p.source.label)) || '']);
+    row.getCell(1).font = { bold: true, color: { argb: 'FF1E293B' } };
+  }
+  ws.getColumn(4).alignment = { wrapText: true, vertical: 'top' };
+  ws.getColumn(5).alignment = { wrapText: true, vertical: 'top' };
+  ws.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: 6 } };
+  autofit(ws, { 4: 40, 5: 46, 6: 40 });
 }
 
 // ---- helpers ----
 function styleHeader(row) {
   row.eachCell((cell) => {
-    cell.font = { bold: true, color: { argb: 'FF3730A3' } };
-    cell.fill = solid(HEADER_FILL);
-    cell.alignment = { vertical: 'middle', wrapText: true };
-    cell.border = { bottom: { style: 'thin', color: { argb: 'FFC7D2FE' } } };
+    if (cell.value == null || cell.value === '') return; // skip spacer columns
+    cell.font = { bold: true, color: { argb: 'FFFFFFFF' }, size: 11 };
+    cell.fill = solid('FF4F46E5'); // indigo-600 — colourful, bold headings
+    cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
   });
-  row.height = 26;
+  row.height = 30;
 }
 function solid(argb) { return { type: 'pattern', pattern: 'solid', fgColor: { argb } }; }
 function valOrBlank(v) { return (typeof v === 'number' && isFinite(v)) ? v : null; }

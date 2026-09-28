@@ -11,34 +11,60 @@ import {
   peersWithSeries, unionYears, seriesValueAt, seriesAggregate, metricsWithSeries,
 } from './compute.js';
 import { crossClass, trendClass } from './conditional.js';
-import { makeLine, destroyChart } from './charts.js';
+import { destroyChart } from './charts.js';
 import { openDrilldown } from './drilldown.js';
+import { saveOverlay, normName } from './peers.js';
 
-/** Render a bucket tab (peers + Current/Trends toggle) into `container`. */
-export function renderBucketView(container, { peers, report, bucket }) {
+/** Render a bucket tab (peers + Current/Trends toggle) into `container`.
+ *  When `edit` is passed (Indian tab), an Add-peer form + per-row Remove appear;
+ *  changes update report.peers.indian + the persisted overlay and re-render. */
+export function renderBucketView(container, { peers, report, bucket, edit }) {
   destroyBucketCharts(container);
-  if (!peers.length) {
+  const editable = !!edit;
+  if (!peers.length && !editable) {
     container.innerHTML = emptyState(`No ${bucket} peers in this report.`);
     return;
   }
   const state = { view: 'current' };
 
   container.innerHTML = `
-    <div class="flex items-center justify-between gap-3 flex-wrap mb-4">
+    <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
       <div class="inline-flex rounded-xl bg-slate-100 p-1 text-sm font-semibold" role="tablist" aria-label="View">
         <button data-view="current" class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Current</button>
         <button data-view="trends"  class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Trends</button>
       </div>
-      <p class="text-xs text-slate-400">${peers.length} peers · click any row for a full profile</p>
+      ${editable
+        ? `<form data-addpeer class="flex items-center gap-2">
+             <input name="pname" class="pv-add-input" placeholder="Add a peer by name…" autocomplete="off" aria-label="Add a peer by name" />
+             <button type="submit" class="pv-add-btn">+ Add peer</button>
+           </form>`
+        : `<p class="text-xs text-slate-400">${peers.length} peers · click any row for a full profile</p>`}
     </div>
+    ${editable ? `<div data-addstatus class="text-xs mb-3" hidden></div>` : ''}
     <div data-pane="current"></div>
     <div data-pane="trends" hidden></div>`;
 
   const paneCurrent = container.querySelector('[data-pane="current"]');
   const paneTrends = container.querySelector('[data-pane="trends"]');
-  paneCurrent.innerHTML = currentTableHtml(peers, report);
-  renderTrends(paneTrends, peers, report);
-  wireRowClicks(paneCurrent, peers, report);
+
+  const rerender = () => renderBucketView(container, { peers: report.peers.indian || [], report, bucket, edit });
+  const onRemove = editable ? (name) => {
+    const p = (report.peers.indian || []).find((x) => x.name === name);
+    report.peers.indian = (report.peers.indian || []).filter((x) => x.name !== name);
+    if (p && p.added_by === 'user') edit.overlay.added = edit.overlay.added.filter((a) => normName(a.name) !== normName(name));
+    else if (!edit.overlay.removed.some((n) => normName(n) === normName(name))) edit.overlay.removed.push(name);
+    saveOverlay(edit.slug, edit.overlay);
+    rerender();
+  } : null;
+
+  if (!peers.length) {
+    paneCurrent.innerHTML = emptyState('No peers left — add one by name above, or reload to restore the original set.');
+  } else {
+    paneCurrent.innerHTML = currentTableHtml(peers, report, editable);
+    renderTrends(paneTrends, peers, report);
+    wireRowClicks(paneCurrent, peers, report, onRemove);
+  }
+  if (editable) wireAddPeer(container, report, edit, rerender);
 
   const setView = (v) => {
     state.view = v;
@@ -57,13 +83,45 @@ export function renderBucketView(container, { peers, report, bucket }) {
   setView('current');
 }
 
+// Add-peer form: fetch one company on demand from /api/peer and fold it in.
+function wireAddPeer(container, report, edit, rerender) {
+  const form = container.querySelector('[data-addpeer]');
+  const statusEl = container.querySelector('[data-addstatus]');
+  if (!form) return;
+  const setStatus = (msg, tone) => {
+    const col = tone === 'bad' ? 'text-rose-600' : tone === 'warn' ? 'text-amber-600' : tone === 'good' ? 'text-emerald-600' : 'text-slate-500';
+    statusEl.hidden = !msg;
+    statusEl.className = `text-xs mb-3 ${col}`;
+    statusEl.textContent = msg || '';
+  };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = form.pname.value.trim();
+    if (!name) return;
+    const btn = form.querySelector('button');
+    const old = btn.textContent; btn.disabled = true; btn.textContent = 'Adding…';
+    setStatus(`Fetching “${name}” from Screener…`, 'info');
+    let res = null;
+    try { res = await (await fetch('/api/peer?name=' + encodeURIComponent(name))).json(); } catch (_) { res = null; }
+    btn.disabled = false; btn.textContent = old;
+    if (!res || !res.ok || !res.peer) { setStatus((res && res.error) || 'Could not fetch that company — check the name and try again.', 'bad'); return; }
+    const peer = res.peer; peer.added_by = 'user';
+    if ((report.peers.indian || []).some((x) => normName(x.name) === normName(peer.name))) { setStatus(`${peer.name} is already in the set.`, 'warn'); return; }
+    edit.overlay.removed = edit.overlay.removed.filter((n) => normName(n) !== normName(peer.name));
+    edit.overlay.added = [...edit.overlay.added.filter((a) => normName(a.name) !== normName(peer.name)), peer];
+    saveOverlay(edit.slug, edit.overlay);
+    report.peers.indian = [...(report.peers.indian || []), peer];
+    rerender();
+  });
+}
+
 /** Destroy any Chart.js instances inside a container (call before discarding it). */
 export function destroyBucketCharts(container) {
   container.querySelectorAll('canvas').forEach((c) => destroyChart(c));
 }
 
 // ---------------------------------------------------------------- Current
-function currentTableHtml(peers, report) {
+function currentTableHtml(peers, report, editable) {
   const metrics = report.metrics;
   const mRow = medianRow(peers, metrics);
   const aRow = averageRow(peers, metrics);
@@ -82,12 +140,13 @@ function currentTableHtml(peers, report) {
     const cells = metrics.map((m) => {
       const v = cur[m.key];
       const { cls, best } = crossClass(v, colVals[m.key], m.better);
-      const crown = best ? '<span class="pv-crown" title="Best in peer set">▲</span>' : '';
-      return `<td class="num ${cls} ${best ? 'cf-best' : ''}">${esc(fmt(v, m.format))}${crown}</td>`;
+      return `<td class="num ${cls} ${best ? 'cf-best' : ''}">${esc(fmt(v, m.format))}</td>`;
     }).join('');
+    const remove = editable ? `<button data-remove="${esc(p.name)}" title="Remove ${esc(p.name)}" aria-label="Remove ${esc(p.name)}" class="pv-remove">×</button>` : '';
+    const added = p.added_by === 'user' ? '<span class="pv-added" title="Added by you">+you</span>' : '';
     return `<tr class="pv-row" data-peer-idx="${idx}">
       <td class="pv-col1">
-        <div class="font-semibold text-slate-800 flex items-center gap-1.5">${esc(p.name)}${p.is_seed ? '<span class="text-amber-500" title="Searched company">★</span>' : ''}</div>
+        <div class="font-semibold text-slate-800 flex items-center gap-1.5">${remove}${esc(p.name)}${p.is_seed ? '<span class="text-amber-500" title="Searched company">★</span>' : ''}${added}</div>
         <div class="text-[0.7rem] text-slate-400 num">${esc(p.ticker || p.country || '')}</div>
       </td>
       ${cells}
@@ -105,16 +164,17 @@ function currentTableHtml(peers, report) {
     ${head}
     <tbody>${body}${refRow('Median', mRow)}${refRow('Average', aRow)}</tbody>
   </table></div>
-  <p class="text-[0.72rem] text-slate-400 mt-2">Green = better vs peers · red = worse · <span class="pv-crown">▲</span> best in column. Median &amp; Average computed live from the table.</p>`;
+  <p class="text-[0.72rem] text-slate-400 mt-2">Green = better than peers · red = worse (flipped for “lower is better” metrics like debt &amp; days). Median &amp; Average are computed live from the table.</p>`;
 }
 
-function wireRowClicks(pane, peers, report) {
+function wireRowClicks(pane, peers, report, onRemove) {
   pane.querySelectorAll('tr.pv-row').forEach((tr) => {
     tr.addEventListener('click', () => {
       const p = peers[Number(tr.dataset.peerIdx)];
       if (p) openDrilldown(p, report);
     });
   });
+  if (onRemove) pane.querySelectorAll('[data-remove]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); onRemove(b.dataset.remove); }));
 }
 
 // ---------------------------------------------------------------- Trends
@@ -123,33 +183,15 @@ function renderTrends(pane, peers, report) {
   if (!metrics.length) { pane.innerHTML = emptyState('No multi-year series available for these peers yet.'); return; }
 
   pane.innerHTML = `<div class="space-y-3">${metrics.map((m, i) => trendSectionHtml(m, i === 0)).join('')}</div>
-    <p class="text-[0.72rem] text-slate-400 mt-3">Each series starts where its real data begins — blank cells are genuinely missing, never fabricated. Green/red shade each year vs the prior year in the good direction.</p>`;
+    <p class="text-[0.72rem] text-slate-400 mt-3">Each series starts where its real data begins (FY16 onward) — blank cells are genuinely missing, never fabricated. Green shades a year that improved vs the prior year, red a year that worsened (flipped for “lower is better” metrics).</p>`;
 
-  // wire each section
   metrics.forEach((m) => {
     const sec = pane.querySelector(`[data-metric="${m.key}"]`);
     const inner = sec.querySelector('[data-inner]');
-    const mode = { current: 'table' };
-    const render = () => {
-      destroyChart(inner.querySelector('canvas'));
-      if (mode.current === 'table') inner.innerHTML = trendTableHtml(peers, report, m);
-      else { inner.innerHTML = `<div class="h-72 sm:h-80"><canvas></canvas></div>`; buildTrendChart(inner.querySelector('canvas'), peers, report, m); }
-      sec.querySelectorAll('[data-tmode]').forEach((b) => {
-        const on = b.dataset.tmode === mode.current;
-        b.classList.toggle('bg-white', on); b.classList.toggle('shadow-sm', on);
-        b.classList.toggle('text-indigo-600', on); b.classList.toggle('text-slate-500', !on);
-      });
-    };
-    sec.querySelectorAll('[data-tmode]').forEach((b) => b.addEventListener('click', (e) => {
-      e.preventDefault(); e.stopPropagation();
-      mode.current = b.dataset.tmode; render();
-    }));
-    // render table lazily on first open (and immediately for the first, open section)
     let built = false;
-    const ensure = () => { if (!built) { built = true; render(); } };
-    const details = sec;
-    details.addEventListener('toggle', () => { if (details.open) ensure(); });
-    if (details.open) ensure();
+    const ensure = () => { if (!built) { built = true; inner.innerHTML = trendTableHtml(peers, report, m); } };
+    sec.addEventListener('toggle', () => { if (sec.open) ensure(); });
+    if (sec.open) ensure();
   });
 }
 
@@ -160,10 +202,6 @@ function trendSectionHtml(metric, open) {
         <svg class="pv-chev shrink-0 text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         <span class="font-display font-bold text-slate-800 truncate">${esc(metric.label)}</span>
         <span class="text-[0.68rem] text-slate-400 hidden sm:inline">${esc(metric.group)}${metric.unit ? ' · ' + esc(metric.unit) : ''}</span>
-      </span>
-      <span class="inline-flex rounded-lg bg-slate-100 p-0.5 text-xs font-semibold shrink-0">
-        <button data-tmode="table" class="pv-focus rounded-md px-2.5 py-1 transition">Table</button>
-        <button data-tmode="charts" class="pv-focus rounded-md px-2.5 py-1 transition">Charts</button>
       </span>
     </summary>
     <div class="px-4 pb-4" data-inner></div>
@@ -196,15 +234,6 @@ function trendTableHtml(peers, report, metric) {
   return `<div class="pv-scroll" style="max-height:56vh"><table class="pv-table">
     ${head}<tbody>${rows.map(bodyRow).join('')}${refRow('Median', med)}${refRow('Average', avg)}</tbody>
   </table></div>`;
-}
-
-function buildTrendChart(canvas, peers, report, metric) {
-  const key = metric.key;
-  const years = unionYears(peers, key);
-  const rows = peersWithSeries(peers, key);
-  const series = rows.map((p) => ({ label: p.name, values: years.map((y) => seriesValueAt(p, key, y)) }));
-  const medianValues = seriesAggregate(peers, key, years, 'median');
-  makeLine(canvas, { years, series, medianValues, unit: metric.unit, area: false });
 }
 
 // ---------------------------------------------------------------- shared
