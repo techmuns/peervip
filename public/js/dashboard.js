@@ -7,6 +7,7 @@ import { setupCharts, makeHBar, destroyChart } from './charts.js';
 import { renderBucketView } from './tables.js';
 import { renderScorecard } from './scorecard.js';
 import { renderReport } from './report.js';
+import { applyOverlay } from './peers.js';
 
 const TABS = [
   { key: 'overview', label: 'Overview' },
@@ -20,6 +21,8 @@ const BM_BUCKETS = ['Manufacturer', 'Trader-Distributor', 'Importer-Sourcing', '
 
 export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   setupCharts();
+  const overlay = applyOverlay(report); // user Add/Remove-peer overlay (localStorage)
+  const editCtx = { slug: report.meta && report.meta.slug, overlay };
   const mm = metricMap(report.metrics);
   const allPeers = [...(report.peers.indian || []), ...(report.peers.global || []), ...(report.peers.private || [])];
 
@@ -74,7 +77,7 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
     const pane = document.createElement('div');
     pane.className = 'pv-fade-in';
     content.appendChild(pane);
-    renderTab(key, pane, report, mm, allPeers);
+    renderTab(key, pane, report, mm, allPeers, editCtx);
   }
 
   tabButtons.forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
@@ -83,10 +86,10 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   setTab('overview');
 }
 
-function renderTab(key, pane, report, mm, allPeers) {
+function renderTab(key, pane, report, mm, allPeers, editCtx) {
   switch (key) {
     case 'overview': return renderOverview(pane, report, mm, allPeers);
-    case 'indian': return renderBucketView(pane, { peers: report.peers.indian || [], report, bucket: 'Indian Listed' });
+    case 'indian': return renderBucketView(pane, { peers: report.peers.indian || [], report, bucket: 'Indian Listed', edit: editCtx });
     case 'global': return renderDescriptive(pane, report.peers.global || [], { title: 'Global Listed peers', subtitle: 'Global financials come back patchy, so these are shown by name and business for landscape context — not benchmarked. The numbers table focuses on the Indian listed set.' });
     case 'private': return renderDescriptive(pane, report.peers.private || [], { title: 'Private & unlisted peers', subtitle: 'Financials are not publicly disclosed for these players — shown for completeness of the peer landscape.' });
     case 'scorecard': return renderScorecard(pane, report);
@@ -168,6 +171,7 @@ function bannerHtml(report) {
 
 // ---------------------------------------------------------------- Overview
 function renderOverview(pane, report, mm, allPeers) {
+  allPeers = [...(report.peers.indian || []), ...(report.peers.global || []), ...(report.peers.private || [])]; // fresh after Add/Remove
   const finPeers = report.peers.indian || []; // Indian listed = the benchmarked set
   const o = report.outperformer || {};
 

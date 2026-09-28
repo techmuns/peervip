@@ -13,32 +13,58 @@ import {
 import { crossClass, trendClass } from './conditional.js';
 import { destroyChart } from './charts.js';
 import { openDrilldown } from './drilldown.js';
+import { saveOverlay, normName } from './peers.js';
 
-/** Render a bucket tab (peers + Current/Trends toggle) into `container`. */
-export function renderBucketView(container, { peers, report, bucket }) {
+/** Render a bucket tab (peers + Current/Trends toggle) into `container`.
+ *  When `edit` is passed (Indian tab), an Add-peer form + per-row Remove appear;
+ *  changes update report.peers.indian + the persisted overlay and re-render. */
+export function renderBucketView(container, { peers, report, bucket, edit }) {
   destroyBucketCharts(container);
-  if (!peers.length) {
+  const editable = !!edit;
+  if (!peers.length && !editable) {
     container.innerHTML = emptyState(`No ${bucket} peers in this report.`);
     return;
   }
   const state = { view: 'current' };
 
   container.innerHTML = `
-    <div class="flex items-center justify-between gap-3 flex-wrap mb-4">
+    <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
       <div class="inline-flex rounded-xl bg-slate-100 p-1 text-sm font-semibold" role="tablist" aria-label="View">
         <button data-view="current" class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Current</button>
         <button data-view="trends"  class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Trends</button>
       </div>
-      <p class="text-xs text-slate-400">${peers.length} peers · click any row for a full profile</p>
+      ${editable
+        ? `<form data-addpeer class="flex items-center gap-2">
+             <input name="pname" class="pv-add-input" placeholder="Add a peer by name…" autocomplete="off" aria-label="Add a peer by name" />
+             <button type="submit" class="pv-add-btn">+ Add peer</button>
+           </form>`
+        : `<p class="text-xs text-slate-400">${peers.length} peers · click any row for a full profile</p>`}
     </div>
+    ${editable ? `<div data-addstatus class="text-xs mb-3" hidden></div>` : ''}
     <div data-pane="current"></div>
     <div data-pane="trends" hidden></div>`;
 
   const paneCurrent = container.querySelector('[data-pane="current"]');
   const paneTrends = container.querySelector('[data-pane="trends"]');
-  paneCurrent.innerHTML = currentTableHtml(peers, report);
-  renderTrends(paneTrends, peers, report);
-  wireRowClicks(paneCurrent, peers, report);
+
+  const rerender = () => renderBucketView(container, { peers: report.peers.indian || [], report, bucket, edit });
+  const onRemove = editable ? (name) => {
+    const p = (report.peers.indian || []).find((x) => x.name === name);
+    report.peers.indian = (report.peers.indian || []).filter((x) => x.name !== name);
+    if (p && p.added_by === 'user') edit.overlay.added = edit.overlay.added.filter((a) => normName(a.name) !== normName(name));
+    else if (!edit.overlay.removed.some((n) => normName(n) === normName(name))) edit.overlay.removed.push(name);
+    saveOverlay(edit.slug, edit.overlay);
+    rerender();
+  } : null;
+
+  if (!peers.length) {
+    paneCurrent.innerHTML = emptyState('No peers left — add one by name above, or reload to restore the original set.');
+  } else {
+    paneCurrent.innerHTML = currentTableHtml(peers, report, editable);
+    renderTrends(paneTrends, peers, report);
+    wireRowClicks(paneCurrent, peers, report, onRemove);
+  }
+  if (editable) wireAddPeer(container, report, edit, rerender);
 
   const setView = (v) => {
     state.view = v;
@@ -57,13 +83,45 @@ export function renderBucketView(container, { peers, report, bucket }) {
   setView('current');
 }
 
+// Add-peer form: fetch one company on demand from /api/peer and fold it in.
+function wireAddPeer(container, report, edit, rerender) {
+  const form = container.querySelector('[data-addpeer]');
+  const statusEl = container.querySelector('[data-addstatus]');
+  if (!form) return;
+  const setStatus = (msg, tone) => {
+    const col = tone === 'bad' ? 'text-rose-600' : tone === 'warn' ? 'text-amber-600' : tone === 'good' ? 'text-emerald-600' : 'text-slate-500';
+    statusEl.hidden = !msg;
+    statusEl.className = `text-xs mb-3 ${col}`;
+    statusEl.textContent = msg || '';
+  };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = form.pname.value.trim();
+    if (!name) return;
+    const btn = form.querySelector('button');
+    const old = btn.textContent; btn.disabled = true; btn.textContent = 'Adding…';
+    setStatus(`Fetching “${name}” from Screener…`, 'info');
+    let res = null;
+    try { res = await (await fetch('/api/peer?name=' + encodeURIComponent(name))).json(); } catch (_) { res = null; }
+    btn.disabled = false; btn.textContent = old;
+    if (!res || !res.ok || !res.peer) { setStatus((res && res.error) || 'Could not fetch that company — check the name and try again.', 'bad'); return; }
+    const peer = res.peer; peer.added_by = 'user';
+    if ((report.peers.indian || []).some((x) => normName(x.name) === normName(peer.name))) { setStatus(`${peer.name} is already in the set.`, 'warn'); return; }
+    edit.overlay.removed = edit.overlay.removed.filter((n) => normName(n) !== normName(peer.name));
+    edit.overlay.added = [...edit.overlay.added.filter((a) => normName(a.name) !== normName(peer.name)), peer];
+    saveOverlay(edit.slug, edit.overlay);
+    report.peers.indian = [...(report.peers.indian || []), peer];
+    rerender();
+  });
+}
+
 /** Destroy any Chart.js instances inside a container (call before discarding it). */
 export function destroyBucketCharts(container) {
   container.querySelectorAll('canvas').forEach((c) => destroyChart(c));
 }
 
 // ---------------------------------------------------------------- Current
-function currentTableHtml(peers, report) {
+function currentTableHtml(peers, report, editable) {
   const metrics = report.metrics;
   const mRow = medianRow(peers, metrics);
   const aRow = averageRow(peers, metrics);
@@ -84,9 +142,11 @@ function currentTableHtml(peers, report) {
       const { cls, best } = crossClass(v, colVals[m.key], m.better);
       return `<td class="num ${cls} ${best ? 'cf-best' : ''}">${esc(fmt(v, m.format))}</td>`;
     }).join('');
+    const remove = editable ? `<button data-remove="${esc(p.name)}" title="Remove ${esc(p.name)}" aria-label="Remove ${esc(p.name)}" class="pv-remove">×</button>` : '';
+    const added = p.added_by === 'user' ? '<span class="pv-added" title="Added by you">+you</span>' : '';
     return `<tr class="pv-row" data-peer-idx="${idx}">
       <td class="pv-col1">
-        <div class="font-semibold text-slate-800 flex items-center gap-1.5">${esc(p.name)}${p.is_seed ? '<span class="text-amber-500" title="Searched company">★</span>' : ''}</div>
+        <div class="font-semibold text-slate-800 flex items-center gap-1.5">${remove}${esc(p.name)}${p.is_seed ? '<span class="text-amber-500" title="Searched company">★</span>' : ''}${added}</div>
         <div class="text-[0.7rem] text-slate-400 num">${esc(p.ticker || p.country || '')}</div>
       </td>
       ${cells}
@@ -107,13 +167,14 @@ function currentTableHtml(peers, report) {
   <p class="text-[0.72rem] text-slate-400 mt-2">Green = better than peers · red = worse (flipped for “lower is better” metrics like debt &amp; days). Median &amp; Average are computed live from the table.</p>`;
 }
 
-function wireRowClicks(pane, peers, report) {
+function wireRowClicks(pane, peers, report, onRemove) {
   pane.querySelectorAll('tr.pv-row').forEach((tr) => {
     tr.addEventListener('click', () => {
       const p = peers[Number(tr.dataset.peerIdx)];
       if (p) openDrilldown(p, report);
     });
   });
+  if (onRemove) pane.querySelectorAll('[data-remove]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); onRemove(b.dataset.remove); }));
 }
 
 // ---------------------------------------------------------------- Trends
