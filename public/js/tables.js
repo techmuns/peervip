@@ -11,7 +11,7 @@ import {
   peersWithSeries, unionYears, seriesValueAt, seriesAggregate, metricsWithSeries,
 } from './compute.js';
 import { crossClass, trendClass } from './conditional.js';
-import { makeLine, destroyChart } from './charts.js';
+import { destroyChart } from './charts.js';
 import { openDrilldown } from './drilldown.js';
 
 /** Render a bucket tab (peers + Current/Trends toggle) into `container`. */
@@ -82,8 +82,7 @@ function currentTableHtml(peers, report) {
     const cells = metrics.map((m) => {
       const v = cur[m.key];
       const { cls, best } = crossClass(v, colVals[m.key], m.better);
-      const crown = best ? '<span class="pv-crown" title="Best in peer set">▲</span>' : '';
-      return `<td class="num ${cls} ${best ? 'cf-best' : ''}">${esc(fmt(v, m.format))}${crown}</td>`;
+      return `<td class="num ${cls} ${best ? 'cf-best' : ''}">${esc(fmt(v, m.format))}</td>`;
     }).join('');
     return `<tr class="pv-row" data-peer-idx="${idx}">
       <td class="pv-col1">
@@ -105,7 +104,7 @@ function currentTableHtml(peers, report) {
     ${head}
     <tbody>${body}${refRow('Median', mRow)}${refRow('Average', aRow)}</tbody>
   </table></div>
-  <p class="text-[0.72rem] text-slate-400 mt-2">Green = better vs peers · red = worse · <span class="pv-crown">▲</span> best in column. Median &amp; Average computed live from the table.</p>`;
+  <p class="text-[0.72rem] text-slate-400 mt-2">Green = better than peers · red = worse (flipped for “lower is better” metrics like debt &amp; days). Median &amp; Average are computed live from the table.</p>`;
 }
 
 function wireRowClicks(pane, peers, report) {
@@ -123,33 +122,15 @@ function renderTrends(pane, peers, report) {
   if (!metrics.length) { pane.innerHTML = emptyState('No multi-year series available for these peers yet.'); return; }
 
   pane.innerHTML = `<div class="space-y-3">${metrics.map((m, i) => trendSectionHtml(m, i === 0)).join('')}</div>
-    <p class="text-[0.72rem] text-slate-400 mt-3">Each series starts where its real data begins — blank cells are genuinely missing, never fabricated. Green/red shade each year vs the prior year in the good direction.</p>`;
+    <p class="text-[0.72rem] text-slate-400 mt-3">Each series starts where its real data begins (FY16 onward) — blank cells are genuinely missing, never fabricated. Green shades a year that improved vs the prior year, red a year that worsened (flipped for “lower is better” metrics).</p>`;
 
-  // wire each section
   metrics.forEach((m) => {
     const sec = pane.querySelector(`[data-metric="${m.key}"]`);
     const inner = sec.querySelector('[data-inner]');
-    const mode = { current: 'table' };
-    const render = () => {
-      destroyChart(inner.querySelector('canvas'));
-      if (mode.current === 'table') inner.innerHTML = trendTableHtml(peers, report, m);
-      else { inner.innerHTML = `<div class="h-72 sm:h-80"><canvas></canvas></div>`; buildTrendChart(inner.querySelector('canvas'), peers, report, m); }
-      sec.querySelectorAll('[data-tmode]').forEach((b) => {
-        const on = b.dataset.tmode === mode.current;
-        b.classList.toggle('bg-white', on); b.classList.toggle('shadow-sm', on);
-        b.classList.toggle('text-indigo-600', on); b.classList.toggle('text-slate-500', !on);
-      });
-    };
-    sec.querySelectorAll('[data-tmode]').forEach((b) => b.addEventListener('click', (e) => {
-      e.preventDefault(); e.stopPropagation();
-      mode.current = b.dataset.tmode; render();
-    }));
-    // render table lazily on first open (and immediately for the first, open section)
     let built = false;
-    const ensure = () => { if (!built) { built = true; render(); } };
-    const details = sec;
-    details.addEventListener('toggle', () => { if (details.open) ensure(); });
-    if (details.open) ensure();
+    const ensure = () => { if (!built) { built = true; inner.innerHTML = trendTableHtml(peers, report, m); } };
+    sec.addEventListener('toggle', () => { if (sec.open) ensure(); });
+    if (sec.open) ensure();
   });
 }
 
@@ -160,10 +141,6 @@ function trendSectionHtml(metric, open) {
         <svg class="pv-chev shrink-0 text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
         <span class="font-display font-bold text-slate-800 truncate">${esc(metric.label)}</span>
         <span class="text-[0.68rem] text-slate-400 hidden sm:inline">${esc(metric.group)}${metric.unit ? ' · ' + esc(metric.unit) : ''}</span>
-      </span>
-      <span class="inline-flex rounded-lg bg-slate-100 p-0.5 text-xs font-semibold shrink-0">
-        <button data-tmode="table" class="pv-focus rounded-md px-2.5 py-1 transition">Table</button>
-        <button data-tmode="charts" class="pv-focus rounded-md px-2.5 py-1 transition">Charts</button>
       </span>
     </summary>
     <div class="px-4 pb-4" data-inner></div>
@@ -196,15 +173,6 @@ function trendTableHtml(peers, report, metric) {
   return `<div class="pv-scroll" style="max-height:56vh"><table class="pv-table">
     ${head}<tbody>${rows.map(bodyRow).join('')}${refRow('Median', med)}${refRow('Average', avg)}</tbody>
   </table></div>`;
-}
-
-function buildTrendChart(canvas, peers, report, metric) {
-  const key = metric.key;
-  const years = unionYears(peers, key);
-  const rows = peersWithSeries(peers, key);
-  const series = rows.map((p) => ({ label: p.name, values: years.map((y) => seriesValueAt(p, key, y)) }));
-  const medianValues = seriesAggregate(peers, key, years, 'median');
-  makeLine(canvas, { years, series, medianValues, unit: metric.unit, area: false });
 }
 
 // ---------------------------------------------------------------- shared

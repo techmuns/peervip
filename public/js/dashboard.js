@@ -3,7 +3,7 @@
 // tables.js, Scorecard to scorecard.js and the one-pager to report.js.
 import { esc, fmtDate, fmtCompact, metricMap, bmClass } from './format.js';
 import { median } from './compute.js';
-import { setupCharts, makeHBar, makeDoughnut, destroyChart } from './charts.js';
+import { setupCharts, makeHBar, destroyChart } from './charts.js';
 import { renderBucketView } from './tables.js';
 import { renderScorecard } from './scorecard.js';
 import { renderReport } from './report.js';
@@ -48,6 +48,8 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   appEl.querySelector('[data-onepager]').addEventListener('click', () => { setTab('report'); setTimeout(() => window.print(), 350); });
   const refreshBtn = appEl.querySelector('[data-refresh]');
   if (refreshBtn) refreshBtn.addEventListener('click', () => { if (onRefresh) onRefresh(report.meta && report.meta.query); });
+  const goReport = appEl.querySelector('[data-goto-report]');
+  if (goReport) goReport.addEventListener('click', () => setTab('report'));
 
   const content = appEl.querySelector('#tab-content');
   const underline = appEl.querySelector('.pv-tab-underline');
@@ -85,8 +87,8 @@ function renderTab(key, pane, report, mm, allPeers) {
   switch (key) {
     case 'overview': return renderOverview(pane, report, mm, allPeers);
     case 'indian': return renderBucketView(pane, { peers: report.peers.indian || [], report, bucket: 'Indian Listed' });
-    case 'global': return renderBucketView(pane, { peers: report.peers.global || [], report, bucket: 'Global Listed' });
-    case 'private': return renderPrivate(pane, report);
+    case 'global': return renderDescriptive(pane, report.peers.global || [], { title: 'Global Listed peers', subtitle: 'Global financials come back patchy, so these are shown by name and business for landscape context — not benchmarked. The numbers table focuses on the Indian listed set.' });
+    case 'private': return renderDescriptive(pane, report.peers.private || [], { title: 'Private & unlisted peers', subtitle: 'Financials are not publicly disclosed for these players — shown for completeness of the peer landscape.' });
     case 'scorecard': return renderScorecard(pane, report);
     case 'report': return renderReport(pane, report);
   }
@@ -150,8 +152,8 @@ function bannerHtml(report) {
           </div>
         </div>
         <div class="grow min-w-0">
-          <p class="text-slate-700 font-medium">${esc(o.headline || '')}</p>
-          ${o.reason ? `<p class="text-sm text-slate-500 mt-1 leading-relaxed">${esc(o.reason)}</p>` : ''}
+          <p class="text-slate-700 font-medium leading-snug">${esc(o.headline || o.reason || '')}</p>
+          ${o.reason ? `<button data-goto-report class="text-xs text-indigo-500 font-semibold hover:underline mt-1">Full reasoning in the Report →</button>` : ''}
         </div>
         ${o.india_vs_global ? `<div class="shrink-0 sm:max-w-xs">
           <div class="rounded-xl bg-sky-50 ring-1 ring-sky-100 px-3 py-2">
@@ -166,60 +168,75 @@ function bannerHtml(report) {
 
 // ---------------------------------------------------------------- Overview
 function renderOverview(pane, report, mm, allPeers) {
-  const headline = mm.ebitda_margin || report.metrics.find((m) => m.group === 'Profitability' && m.better !== 'neutral') || report.metrics[0];
-  // peers (any bucket) that have the headline metric, sorted best-first
-  const withVal = allPeers.filter((p) => p.current && isFinite(p.current[headline.key]))
-    .map((p) => ({ name: p.name, value: p.current[headline.key], seed: p.is_seed }))
-    .sort((a, b) => headline.better === 'low' ? a.value - b.value : b.value - a.value);
-  const medVal = median(withVal.map((d) => d.value));
+  const finPeers = report.peers.indian || []; // Indian listed = the benchmarked set
   const o = report.outperformer || {};
-  const hiIdx = withVal.findIndex((d) => d.name === o.company);
 
-  // business-model split
-  const counts = {};
-  for (const p of allPeers) {
-    const key = bmBucket(p.business_model);
-    counts[key] = (counts[key] || 0) + 1;
-  }
-  const bmLabels = Object.keys(counts);
-  const bmValues = bmLabels.map((k) => counts[k]);
+  // metrics at least one Indian peer has data for — the dropdown choices
+  const selectable = report.metrics.filter((m) => finPeers.some((p) => p.current && isFinite(p.current[m.key])));
+  const defaultMetric = (mm.ebitda_margin && selectable.includes(mm.ebitda_margin) ? mm.ebitda_margin : null)
+    || selectable.find((m) => m.group === 'Profitability' && m.better !== 'neutral')
+    || selectable[0] || report.metrics[0];
+
+  const counts = { indian: (report.peers.indian || []).length, global: (report.peers.global || []).length, private: (report.peers.private || []).length };
+  const bm = {};
+  for (const p of allPeers) { const k = bmBucket(p.business_model); bm[k] = (bm[k] || 0) + 1; }
+  const bmRows = Object.entries(bm).sort((a, b) => b[1] - a[1]).map(([k, n]) => `
+    <div class="flex items-center justify-between py-1">
+      <span class="pv-chip ${bmClass(k)} px-2 py-0.5 text-[0.68rem]">${esc(k)}</span>
+      <span class="num font-semibold text-slate-700">${n}</span>
+    </div>`).join('');
 
   pane.innerHTML = `
     <div class="grid gap-5 lg:grid-cols-3">
       <section class="pv-card p-5 lg:col-span-2">
-        <div class="flex items-baseline justify-between gap-3 flex-wrap mb-1">
-          <h3 class="font-display text-lg font-extrabold text-slate-800">${esc(headline.label)} across peers</h3>
-          <span class="text-xs text-slate-400">dashed line = median${medVal != null ? ' (' + esc(fmtCompact(medVal, headline)) + ')' : ''}</span>
+        <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
+          <h3 class="font-display text-lg font-extrabold text-slate-800">Compare peers</h3>
+          <label class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500">Metric
+            <select data-metric-select class="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+              ${selectable.map((m) => `<option value="${esc(m.key)}" ${m.key === defaultMetric.key ? 'selected' : ''}>${esc(m.label)}</option>`).join('')}
+            </select>
+          </label>
         </div>
-        <p class="text-xs text-slate-400 mb-3">All peers with data · ${esc(o.company || '')} highlighted in amber</p>
-        <div style="height:${Math.max(220, withVal.length * 34 + 40)}px"><canvas data-chart="headline"></canvas></div>
+        <p class="text-xs text-slate-400 mb-3" data-chart-note></p>
+        <div data-chart-box></div>
       </section>
 
       <section class="pv-card p-5">
-        <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">Business-model split</h3>
-        <p class="text-xs text-slate-400 mb-3">How the ${esc(String(allPeers.length))} peers make money</p>
-        <div style="height:260px"><canvas data-chart="bm"></canvas></div>
-      </section>
-    </div>
-
-    <section class="mt-5 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5">
-      <div class="flex items-start gap-3">
-        <div class="shrink-0 w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg">🏆</div>
-        <div>
-          <h3 class="font-display font-extrabold text-emerald-900">${esc(o.company || 'Outperformer')} leads the set</h3>
-          <p class="text-sm text-emerald-800/90 mt-1 leading-relaxed max-w-4xl">${esc(o.reason || o.headline || '')}</p>
+        <h3 class="font-display text-lg font-extrabold text-slate-800 mb-3">Peer landscape</h3>
+        <div class="grid grid-cols-3 gap-2 mb-4">
+          <div class="rounded-xl bg-indigo-50 p-3 text-center"><div class="num font-display text-2xl font-extrabold text-indigo-600">${counts.indian}</div><div class="text-[0.6rem] font-semibold uppercase tracking-wide text-indigo-400 mt-0.5">Indian</div></div>
+          <div class="rounded-xl bg-sky-50 p-3 text-center"><div class="num font-display text-2xl font-extrabold text-sky-600">${counts.global}</div><div class="text-[0.6rem] font-semibold uppercase tracking-wide text-sky-400 mt-0.5">Global</div></div>
+          <div class="rounded-xl bg-fuchsia-50 p-3 text-center"><div class="num font-display text-2xl font-extrabold text-fuchsia-600">${counts.private}</div><div class="text-[0.6rem] font-semibold uppercase tracking-wide text-fuchsia-400 mt-0.5">Private</div></div>
         </div>
-      </div>
-    </section>`;
+        <div class="text-[0.7rem] font-bold uppercase tracking-wide text-slate-400 mb-1">Business model</div>
+        ${bmRows}
+      </section>
+    </div>`;
 
-  makeHBar(pane.querySelector('[data-chart="headline"]'), {
-    labels: withVal.map((d) => d.name),
-    values: withVal.map((d) => d.value),
-    medianValue: medVal,
-    unit: headline.unit,
-    highlightIndex: hiIdx,
-  });
-  makeDoughnut(pane.querySelector('[data-chart="bm"]'), { labels: bmLabels, values: bmValues });
+  const box = pane.querySelector('[data-chart-box]');
+  const note = pane.querySelector('[data-chart-note]');
+  const sel = pane.querySelector('[data-metric-select]');
+
+  const drawChart = (metric) => {
+    const old = box.querySelector('canvas');
+    if (old) destroyChart(old);
+    const withVal = finPeers.filter((p) => p.current && isFinite(p.current[metric.key]))
+      .map((p) => ({ name: p.name, value: p.current[metric.key] }))
+      .sort((a, b) => metric.better === 'low' ? a.value - b.value : b.value - a.value);
+    const medVal = median(withVal.map((d) => d.value));
+    const hiIdx = withVal.findIndex((d) => d.name === o.company);
+    note.innerHTML = `${withVal.length} Indian listed peers · dashed line = median${medVal != null ? ' (' + esc(fmtCompact(medVal, metric)) + ')' : ''}${hiIdx >= 0 ? ' · ' + esc(o.company) + ' in amber' : ''}`;
+    if (!withVal.length) { box.innerHTML = `<div class="text-center text-slate-400 py-10 text-sm">No Indian peers carry this metric.</div>`; return; }
+    box.innerHTML = `<div style="height:${Math.max(200, withVal.length * 34 + 40)}px"><canvas data-chart="headline"></canvas></div>`;
+    makeHBar(box.querySelector('[data-chart="headline"]'), {
+      labels: withVal.map((d) => d.name),
+      values: withVal.map((d) => d.value),
+      medianValue: medVal, unit: metric.unit, highlightIndex: hiIdx,
+    });
+  };
+
+  drawChart(defaultMetric);
+  sel.addEventListener('change', () => drawChart(mm[sel.value] || defaultMetric));
 }
 
 function bmBucket(model) {
@@ -229,12 +246,11 @@ function bmBucket(model) {
   return found || (BM_BUCKETS.includes(first) ? first : 'Other');
 }
 
-// ---------------------------------------------------------------- Private
-function renderPrivate(pane, report) {
-  const peers = report.peers.private || [];
-  if (!peers.length) { pane.innerHTML = `<div class="pv-card p-8 text-center text-slate-400">No private peers identified for this set.</div>`; return; }
+// ------------------------------------------------- Descriptive (Global + Private)
+function renderDescriptive(pane, peers, { title, subtitle }) {
+  if (!peers.length) { pane.innerHTML = `<div class="pv-card p-8 text-center text-slate-400">No ${esc(title.toLowerCase())} in this set.</div>`; return; }
   const rows = peers.map((p) => `<tr class="border-b border-slate-100 hover:bg-slate-50 transition">
-    <td class="px-4 py-3 font-semibold text-slate-800">${esc(p.name)}</td>
+    <td class="px-4 py-3 font-semibold text-slate-800">${esc(p.name)}${p.country ? ` <span class="text-[0.7rem] font-medium text-slate-400">${esc(p.country)}</span>` : ''}</td>
     <td class="px-4 py-3"><span class="pv-chip ${bmClass(p.business_model)} px-2 py-0.5 text-[0.7rem]">${esc(p.business_model || '—')}</span></td>
     <td class="px-4 py-3 text-slate-600">${esc(p.products || '—')}</td>
     <td class="px-4 py-3 text-slate-500 text-sm">${esc(p.note || '—')}</td>
@@ -242,16 +258,16 @@ function renderPrivate(pane, report) {
   </tr>`).join('');
   pane.innerHTML = `
     <div class="pv-card p-5">
-      <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">Private &amp; unlisted peers</h3>
-      <p class="text-xs text-slate-400 mb-4">Financials are not publicly disclosed for these players — shown for completeness of the peer landscape.</p>
-      <div class="overflow-x-auto rounded-xl border border-slate-100">
-        <table class="w-full text-sm border-collapse min-w-[40rem]">
-          <thead><tr class="bg-slate-50 text-slate-500">
-            <th class="px-4 py-2.5 text-left font-semibold">Company</th>
-            <th class="px-4 py-2.5 text-left font-semibold">Business Model</th>
-            <th class="px-4 py-2.5 text-left font-semibold">Products</th>
-            <th class="px-4 py-2.5 text-left font-semibold">Note</th>
-            <th class="px-4 py-2.5 text-left font-semibold">Source</th>
+      <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">${esc(title)}</h3>
+      <p class="text-xs text-slate-400 mb-4">${esc(subtitle)}</p>
+      <div class="overflow-x-auto rounded-xl">
+        <table class="w-full text-sm border-collapse min-w-[44rem]">
+          <thead><tr class="bg-slate-50 text-slate-600 text-left">
+            <th class="px-4 py-2.5 font-bold">Company</th>
+            <th class="px-4 py-2.5 font-bold">Business Model</th>
+            <th class="px-4 py-2.5 font-bold">Products</th>
+            <th class="px-4 py-2.5 font-bold">Note</th>
+            <th class="px-4 py-2.5 font-bold">Source</th>
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>

@@ -5,6 +5,10 @@ import { yearSortKey } from './format.js';
 
 function isNum(v) { return typeof v === 'number' && isFinite(v); }
 
+// Trends never show anything before FY2016 (the user's cutoff). yearSortKey
+// turns "Mar 2019" / "2022" into a comparable year number.
+const MIN_FY = 2016;
+
 /** Numeric values only (drops null / undefined / NaN). */
 export function nums(arr) { return (arr || []).filter(isNum); }
 
@@ -96,7 +100,7 @@ export function peersWithSeries(peers, key) {
 export function unionYears(peers, key) {
   const set = new Set();
   for (const p of peersWithSeries(peers, key)) for (const y of p.series[key].years) set.add(y);
-  return [...set].sort((a, b) => yearSortKey(a) - yearSortKey(b));
+  return [...set].filter((y) => yearSortKey(y) >= MIN_FY).sort((a, b) => yearSortKey(a) - yearSortKey(b));
 }
 
 /** A peer's value for a given year label within a series (null if absent). */
