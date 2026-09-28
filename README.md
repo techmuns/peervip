@@ -8,8 +8,11 @@ AI-crowned outperformer with a written reason.
 > **Live & deep (Steps 2–3).** A real search runs end-to-end: type a company or
 > industry → a Cloudflare Pages Function dispatches a GitHub Actions run that
 > researches the peer set and renders it at `#/r/<slug>` with live per-stage
-> progress. **Peer discovery is grounded in real sources** (Jina search + read,
-> not model memory), **Screener** fills the 26 metrics + series (incl. gross
+> progress. **Peer discovery is wide and source-grounded** — full-text web
+> reports build a player ledger, Bedrock enumerates from its own knowledge, and
+> a Screener `/market` industry backstop mines the whole listed universe; a
+> strict Screener business-match gate then verifies each. **Screener** fills the
+> 26 metrics + series (incl. gross
 > margin / raw-material % via the schedules API), **global peers** come from
 > Yahoo (crumb+cookie, any country → ₹ Cr), the **outperformer "why" is grounded
 > and open-ended**, and the dashboard shows **freshness + a Refresh button +

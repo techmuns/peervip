@@ -1,7 +1,7 @@
 // POST /api/research {query}
 // Owns slug creation; fires a GitHub Actions workflow_dispatch to run the
 // research pipeline; seeds KV status; returns {slug, dispatched}. Never 500.
-import { json, kvPut, kvGet } from '../_lib/http.js';
+import { json, kvPut, kvGet, kvDelete } from '../_lib/http.js';
 import { slugify } from '../_lib/slug.js';
 
 const COOLDOWN_MS = 5 * 60 * 1000; // don't re-dispatch a run already in flight
@@ -36,6 +36,9 @@ export async function onRequestPost(context) {
       }
     } catch (_) { /* fall through to dispatch */ }
 
+    // A (re)dispatch must truly re-research: clear the stale KV report so
+    // /api/research-status doesn't immediately report 'done' from it (Refresh bug).
+    await kvDelete(env, `report:${slug}`);
     await kvPut(env, `status:${slug}`, { state: 'starting', stage: 0, ts: Date.now() }, 3600);
 
     const api = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/research.yml/dispatches`;

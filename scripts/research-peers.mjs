@@ -19,10 +19,11 @@ import { chromium } from 'playwright';
 import { slugify } from '../lib/slug.mjs';
 import { callClaudeJSON } from '../lib/llm.mjs';
 import {
-  resolveScreenerCode, screenerLogin, getCompanyHtml, mapCompany, screenerSource, screenerMaterialCost,
+  resolveScreenerCode, screenerSearch, screenerLogin, getCompanyHtml, mapCompany, screenerSource, screenerMaterialCost,
 } from '../lib/screener.mjs';
 import { fetchGlobalPeer } from '../lib/global.mjs';
 import { jinaSearch, jinaRead, jinaConfigured } from '../lib/jina.mjs';
+import { discoverCandidates } from '../lib/discovery.mjs';
 import { METRICS, METRIC_KEYS, median, canonicalModel } from '../lib/metrics.mjs';
 
 const QUERY = (process.env.QUERY || '').trim();
@@ -33,8 +34,9 @@ const REPORTS_DIR = path.resolve('public/data/reports');
 const INDEX_FILE = path.resolve('public/data/index.json');
 
 // Guardrails (#7): bound peers and Jina reads per run.
-const CAP = { indian: 12, global: 6, private: 5, jinaReads: 6 };
-const TOK = { discovery: 3500, scoring: 3500, report: 4500 };
+const CAP = { indian: 15, global: 8, private: 6, scrape: 22, jinaReads: 6 };
+const TOK = { scoring: 3500, report: 4500 };
+const norm = (s) => String(s || '').toLowerCase().replace(/\b(ltd|limited|inc|plc|corp|corporation|co|company|the|group|industries|india)\b/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let currentStage = 0;
 let jinaReadsUsed = 0;
@@ -80,16 +82,17 @@ async function main() {
     const understanding = await understandBusiness(page);
 
     await postProgress(1, 'running');
-    const grounding = await groundDiscovery(understanding);
-    const peerPlan = await findPeers(understanding, grounding);
+    const peerPlan = await discoverCandidates({ query: QUERY, understanding });
+    const t = peerPlan.trace;
+    console.log(`[discovery] synonyms=[${t.synonyms.join(', ')}] | ledger ${t.ledger} (reads ${t.reads}) + enum ${t.enumerated} + market ${t.marketUniverse} (${t.marketHrefs.length} industries) -> shortlist ${peerPlan.candidates.indian.length}i/${peerPlan.candidates.global.length}g/${peerPlan.candidates.private.length}p`);
 
     await postProgress(2, 'running');
-    const { indian, movedToPrivate } = await fetchIndianFinancials(page, peerPlan.peers.indian || []);
+    const { indian, movedToPrivate } = await verifyIndianPeers(page, peerPlan);
 
     await postProgress(3, 'running');
-    const global = await fetchGlobalPeers(peerPlan.peers.global || []);
+    const { global, movedToPrivate: globMoved } = await fetchGlobalPeersV2(peerPlan.candidates.global || []);
 
-    const privateList = normalizePrivate([...(peerPlan.peers.private || []), ...movedToPrivate]);
+    const privateList = normalizePrivate([...(peerPlan.candidates.private || []), ...movedToPrivate, ...globMoved]);
 
     await postProgress(4, 'running');
     const medianTable = computeMedianTable([...indian, ...global]);
@@ -131,167 +134,108 @@ async function understandBusiness(page) {
   return { query: QUERY, isCompany, seedCompany, seedCode: seed ? seed.code : null, seedId, segment: isCompany ? '' : QUERY, about, pros, cons, screenerPeers };
 }
 
-/* ------------------------------------------------------------- Stage 1: grounding */
-async function groundDiscovery(u) {
-  const subject = u.isCompany ? u.seedCompany : (u.segment || u.query);
-  const queries = u.isCompany
-    ? [`${u.seedCompany} competitors peers`, `${u.seedCompany} DRHP annual report competitors`, `${subject} listed companies India`, `${subject} global players market share`]
-    : [`${subject} listed companies India`, `${subject} global players companies`, `${subject} industry report players market share`, `${subject} manufacturers importers distributors`];
-  const snippets = [];
-  const urls = [];
-  for (const q of queries) {
-    const hits = await jinaSearch(q);
-    for (const h of hits.slice(0, 4)) { snippets.push(`${h.title}: ${h.snippet}`); if (h.url) urls.push(h.url); }
-    if (snippets.length > 24) break;
-  }
-  // read the most promising 2-3 sources (bounded by the global read cap)
+/* ------------------------------------------------------------- Stage 2: verify Indian peers */
+async function verifyIndianPeers(page, peerPlan) {
+  const cands = peerPlan.candidates.indian || [];
+  const scraped = [], movedToPrivate = [];
   const seen = new Set();
-  const reads = [];
-  for (const url of rankUrls(urls)) {
-    if (reads.length >= 3) break;
-    if (seen.has(url)) continue; seen.add(url);
-    const md = await boundedRead(url);
-    if (md) reads.push({ url, md: md.slice(0, 6000) });
-  }
-  return { snippets: snippets.slice(0, 24), reads };
-}
-
-function rankUrls(urls) {
-  const score = (u) => {
-    const s = u.toLowerCase();
-    let n = 0;
-    if (/drhp|prospectus|redherring|annualreport|investor/.test(s)) n += 5;
-    if (/moneycontrol|screener|equitymaster|business-standard|livemint|economictimes|trendlyne|marketsmojo/.test(s)) n += 3;
-    if (/wikipedia|ibef|researchandmarkets|mordor|grandview|imarc/.test(s)) n += 2;
-    if (/\.pdf$/.test(s)) n += 1;
-    return n;
-  };
-  return [...new Set(urls)].sort((a, b) => score(b) - score(a));
-}
-
-/* ------------------------------------------------------------- Stage 1: discovery */
-async function findPeers(u, grounding) {
-  const system = [
-    'You are an equity research analyst building a TRUE peer set for a company or industry, grounded in the sources provided.',
-    'TRUE peers = companies in the SAME end-business, INCLUDING different business models — a manufacturer, an importer/sourcing player, a trader-distributor, and an integrated player are ALL peers if they sell the same end-product. An importer with far higher margins than the manufacturers is a CRITICAL include, not an exclude. Do NOT just copy a stock screener\'s peer list; cast a wide net (missing a peer is worse than a marginal include).',
-    'Split into Indian listed, Global listed, and Private/unlisted. Classify listed-vs-private correctly (Indian listing is verified on Screener afterwards).',
-    'business_model MUST be exactly one of: "Manufacturer", "Trader-Distributor", "Importer-Sourcing", "Integrated" (a parenthetical qualifier is allowed, e.g. "Integrated (backward)").',
-    'For each peer, "provenance" = one short line on WHY it is a peer + where you found it (e.g. "named in <source>").',
-    'Return STRICT JSON only, no prose:',
-    '{"segment":"...","definition":"one plain sentence anyone understands","peers":{"indian":[{"name","ticker","business_model","products","note","provenance"}],"global":[{"name","country","business_model","products","note","provenance"}],"private":[{"name","business_model","products","note","provenance"}]}}',
-  ].join('\n');
-  const user = [
-    `QUERY: ${u.query}`,
-    u.isCompany ? `This is a COMPANY. Anchor/seed company: ${u.seedCompany}` : 'This is an INDUSTRY / segment query.',
-    u.about ? `\nSeed company "About" (Screener):\n${u.about}` : '',
-    u.pros.length ? `\nPros: ${u.pros.join('; ')}` : '',
-    u.cons.length ? `\nCons: ${u.cons.join('; ')}` : '',
-    grounding.snippets.length ? `\nWeb search snippets:\n${grounding.snippets.map((s) => `- ${s}`).join('\n')}` : '',
-    grounding.reads.length ? `\nSource extracts:\n${grounding.reads.map((r) => `From ${r.url}:\n${r.md}`).join('\n\n')}` : '',
-    '\nInclude the seed company itself if listed. Aim for 6–12 Indian, 3–6 Global, 2–5 Private peers.',
-  ].filter(Boolean).join('\n');
-
-  let out = null;
-  try { out = await bedrock({ system, user, maxTokens: TOK.discovery }); } catch (e) { console.warn('discovery failed:', e.message); }
-  if (!out || !out.peers) return fallbackPeerPlan(u);
-
-  const clip = (arr, n) => (Array.isArray(arr) ? arr : []).slice(0, n).map((p) => ({
-    ...p, business_model: canonicalModel(p.business_model), note: withProvenance(p.note, p.provenance),
-  }));
-  return {
-    segment: out.segment || u.segment || u.query,
-    definition: out.definition || '',
-    peers: { indian: clip(out.peers.indian, CAP.indian + 3), global: clip(out.peers.global, CAP.global + 3), private: clip(out.peers.private, CAP.private + 3) },
-    seedCompany: u.seedCompany, isCompany: u.isCompany,
-  };
-}
-
-// note is the only rendered free-text field on a peer, so fold provenance in.
-function withProvenance(note, provenance) {
-  const n = String(note || '').trim(); const p = String(provenance || '').trim();
-  if (!p) return n;
-  return n ? `${p} · ${n}` : p;
-}
-
-function fallbackPeerPlan(u) {
-  // AI down: seed the peer set from the seed company + Screener's peer names.
-  const indian = [];
-  if (u.seedCompany) indian.push({ name: u.seedCompany, business_model: 'Manufacturer', products: '', note: 'seed company' });
-  for (const n of u.screenerPeers || []) indian.push({ name: n, business_model: 'Manufacturer', products: '', note: 'Screener peer' });
-  return { segment: u.segment || u.query, definition: '', peers: { indian, global: [], private: [] }, seedCompany: u.seedCompany, isCompany: u.isCompany };
-}
-
-/* ------------------------------------------------------------- Stage 2 */
-async function fetchIndianFinancials(page, plan) {
-  const indian = [], movedToPrivate = [];
-  const seen = new Set();
-  for (const p of plan) {
-    if (indian.length >= CAP.indian) break;
-    const name = String(p.name || '').trim();
-    if (!name || seen.has(name.toLowerCase())) continue;
-    seen.add(name.toLowerCase());
+  for (const c of cands) {
+    if (scraped.length >= CAP.scrape) break;
+    const name = String(c.name || '').trim();
+    if (!name || seen.has(norm(name))) continue;
+    seen.add(norm(name));
     try {
-      const hit = await resolveScreenerCode(name);
-      if (!hit) { movedToPrivate.push(p); continue; }
+      let hit = c.code ? { code: c.code, id: null, name } : await resolveScreenerCode(name);
+      if (!hit) { movedToPrivate.push(c); continue; }
+      // /market gave a code but no numeric id (needed for material cost) — resolve it
+      if (hit.id == null) { const r = (await screenerSearch(name))[0] || (await screenerSearch(hit.code))[0]; if (r) hit = { code: r.code, id: r.id, name: r.name }; }
       const res = await getCompanyHtml(page, hit.code);
-      if (!res) { movedToPrivate.push(p); continue; }
+      if (!res) { movedToPrivate.push(c); continue; }
       const m = mapCompany(res.html);
-      if (!m.listed) { movedToPrivate.push(p); continue; }
+      if (!m.listed) { movedToPrivate.push(c); continue; }
       const current = pickMetrics(m.current);
-      const series = m.series || {};
-      // material cost (gross margin / raw material %) from the schedules endpoint
-      try {
-        const mc = await screenerMaterialCost(hit.id);
-        if (mc) {
-          if (current.rm_cost_pct == null) current.rm_cost_pct = mc.rm_cost_pct;
-          if (current.gross_margin == null) current.gross_margin = mc.gross_margin;
-        }
-      } catch (_) { /* optional */ }
-      indian.push({
-        name: m.name || name,
-        ticker: hit.code,
-        ...(closeName(hit.name, QUERY) ? { is_seed: true } : {}),
-        business_model: canonicalModel(p.business_model),
-        products: p.products || '',
-        note: p.note || '',
-        source: screenerSource(hit.code),
-        current, series,
+      try { const mc = await screenerMaterialCost(hit.id); if (mc) { if (current.rm_cost_pct == null) current.rm_cost_pct = mc.rm_cost_pct; if (current.gross_margin == null) current.gross_margin = mc.gross_margin; } } catch (_) { /* optional */ }
+      scraped.push({
+        name: m.name || name, ticker: hit.code, about: m.about || '',
+        products: c.products || '', segment: c.segment || '', note: c.note || '', business_model: c.business_model || '',
+        current, series: m.series || {}, marketCap: (current.market_cap ?? c.marketCap ?? null),
+        is_seed: closeName(hit.name || name, QUERY),
       });
-      console.log(`  indian: ${m.name || name} (${hit.code}) ${current.ebitda_margin != null ? '✓' : '~'} ${Object.keys(current).length}/26`);
-    } catch (e) {
-      console.warn(`  indian ${name} failed: ${e.message}`);
-      movedToPrivate.push(p);
-    }
+      console.log(`  scraped: ${m.name || name} (${hit.code}) ${Object.keys(current).length}/26`);
+    } catch (e) { console.warn(`  indian ${name} failed: ${e.message}`); movedToPrivate.push(c); }
     await sleep(300);
   }
+
+  // BUSINESS-MATCH GATE — keep only peers whose Screener About matches the product FAMILY.
+  const gate = await businessMatchGate(scraped, peerPlan.segment || QUERY, peerPlan.definition);
+  const kept = scraped.filter((p) => gate.pass(p.name))
+    .sort((a, b) => (gate.conf(b.name) - gate.conf(a.name)) || ((b.marketCap || 0) - (a.marketCap || 0)));
+  const off = scraped.filter((p) => !gate.pass(p.name));
+  if (off.length) console.log(`  gate dropped (off-family): ${off.map((p) => p.name).join(', ')}`);
+
+  const indian = kept.slice(0, CAP.indian).map((p) => ({
+    name: p.name, ticker: p.ticker, ...(p.is_seed ? { is_seed: true } : {}),
+    business_model: canonicalModel(gate.model(p.name) || p.business_model || ''),
+    products: gate.products(p.name) || p.products || (p.about ? p.about.slice(0, 180) : ''),
+    note: p.note || '',
+    source: screenerSource(p.ticker), current: p.current, series: p.series,
+  }));
   return { indian, movedToPrivate };
 }
 
-/* ------------------------------------------------------------- Stage 3 */
-async function fetchGlobalPeers(plan) {
-  const out = [];
-  const seen = new Set();
-  for (const p of plan) {
-    if (out.length >= CAP.global) break;
-    const name = String(p.name || '').trim();
-    if (!name || seen.has(name.toLowerCase())) continue;
-    seen.add(name.toLowerCase());
-    let g = { current: {}, series: {}, source: { label: 'web', url: '' } };
-    try { g = await fetchGlobalPeer(name); } catch (e) { console.warn(`  global ${name} failed: ${e.message}`); }
-    out.push({
-      name,
-      country: p.country || '',
-      business_model: canonicalModel(p.business_model),
-      products: p.products || '',
-      note: p.note || '',
-      source: g.source && g.source.url ? g.source : { label: p.country || 'Web', url: '' },
-      current: pickMetrics(g.current || {}),
-      series: g.series || {},
+// Batched Bedrock: per company, family-match (any business model) + business_model + a concrete products line.
+async function businessMatchGate(scraped, family, definition) {
+  const none = { pass: () => true, conf: () => 50, model: () => '', products: () => '' };
+  if (!scraped.length) return none;
+  const map = new Map();
+  try {
+    const out = await bedrock({
+      system: [
+        'For EACH company decide, matching the product FAMILY (not the exact phrase — e.g. for a query like "solar inverters", a maker of string / micro / hybrid / PV inverters or power-conditioning units all match the same family):',
+        '(a) match = does it MAKE / IMPORT / DISTRIBUTE / is INTEGRATED into that family, per its About? A diversified company that makes it as ONE segment still matches. (b) confidence 0-100. (c) business_model = one of "Manufacturer" | "Trader-Distributor" | "Importer-Sourcing" | "Integrated". (d) products = one concrete line: what it makes + the relevant segment.',
+        'Return STRICT JSON {"results":[{"name","match":true|false,"confidence":0-100,"business_model","products"}]}.',
+      ].join('\n'),
+      user: `Product family: ${family}\nDefinition: ${definition || '(n/a)'}\n\nCompanies:\n${scraped.map((p) => `- ${p.name}: ABOUT="${(p.about || '').slice(0, 400)}" ; candidate="${p.products || ''}"`).join('\n')}`,
+      maxTokens: 3000,
     });
-    console.log(`  global: ${name} ${g.ticker ? '(' + g.ticker + ')' : ''} ${Object.keys(g.current || {}).length} metrics`);
+    for (const r of (Array.isArray(out.results) ? out.results : [])) if (r && r.name) map.set(norm(r.name), r);
+  } catch (e) { console.warn('business-match gate failed (keeping all):', e.message); return none; }
+  const g = (name) => map.get(norm(name)) || null;
+  return {
+    pass: (name) => { const r = g(name); return r ? (r.match !== false && (r.confidence == null || +r.confidence >= 40)) : true; },
+    conf: (name) => { const r = g(name); return r && isFinite(+r.confidence) ? +r.confidence : 50; },
+    model: (name) => { const r = g(name); return r ? String(r.business_model || '') : ''; },
+    products: (name) => { const r = g(name); return r ? String(r.products || '') : ''; },
+  };
+}
+
+/* ------------------------------------------------------------- Stage 3: global peers */
+async function fetchGlobalPeersV2(cands) {
+  const out = [], movedToPrivate = [], seen = new Set();
+  for (const c of cands) {
+    if (out.length >= CAP.global) break;
+    const name = String(c.name || '').trim();
+    if (!name || seen.has(norm(name))) continue;
+    seen.add(norm(name));
+    let g = { current: {}, series: {}, source: { label: 'web', url: '' }, ticker: null };
+    try { g = await fetchGlobalPeer(name, c.ticker); } catch (e) { console.warn(`  global ${name} failed: ${e.message}`); }
+    const current = pickMetrics(g.current || {});
+    if (!g.ticker || Object.keys(current).length === 0) {
+      // no real listed equity resolved -> effectively private/unlisted (JV, private group)
+      movedToPrivate.push({ name, products: c.products || c.segment || '', note: c.note || '', business_model: c.business_model || '' });
+      console.log(`  global->private: ${name} (unresolved)`);
+      continue;
+    }
+    out.push({
+      name, country: c.country || '', business_model: canonicalModel(c.business_model || ''),
+      products: c.products || c.segment || '', note: c.note || '',
+      source: g.source && g.source.url ? g.source : { label: 'Web', url: '' },
+      current, series: g.series || {},
+    });
+    console.log(`  global: ${name} (${g.ticker}) ${Object.keys(current).length} metrics`);
     await sleep(200);
   }
-  return out;
+  return { global: out, movedToPrivate };
 }
 
 function normalizePrivate(plan) {
