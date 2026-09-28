@@ -92,7 +92,10 @@ async function main() {
     await postProgress(3, 'running');
     const { global, movedToPrivate: globMoved } = await fetchGlobalPeersV2(peerPlan.candidates.global || []);
 
-    const privateList = normalizePrivate([...(peerPlan.candidates.private || []), ...movedToPrivate, ...globMoved]);
+    const privateList = await filterPrivateFamily(
+      normalizePrivate([...(peerPlan.candidates.private || []), ...movedToPrivate, ...globMoved]),
+      peerPlan.segment || QUERY, peerPlan.synonyms || [],
+    );
 
     await postProgress(4, 'running');
     const medianTable = computeMedianTable([...indian, ...global]);
@@ -136,7 +139,11 @@ async function understandBusiness(page) {
 
 /* ------------------------------------------------------------- Stage 2: verify Indian peers */
 async function verifyIndianPeers(page, peerPlan) {
-  const cands = peerPlan.candidates.indian || [];
+  // Scrape reliable Screener-coded candidates first (verified-listed + family-
+  // filtered), then by-name ones (e.g. Bedrock names Screener classes outside
+  // the film industries), so the bounded scrape budget lands on real peers
+  // before any slow/unresolvable web-ledger names.
+  const cands = [...(peerPlan.candidates.indian || [])].sort((a, b) => (b.code ? 1 : 0) - (a.code ? 1 : 0) || ((a.order ?? 1e9) - (b.order ?? 1e9)));
   const scraped = [], movedToPrivate = [];
   const seen = new Set();
   for (const c of cands) {
@@ -167,7 +174,7 @@ async function verifyIndianPeers(page, peerPlan) {
   }
 
   // BUSINESS-MATCH GATE — keep only peers whose Screener About matches the product FAMILY.
-  const gate = await businessMatchGate(scraped, peerPlan.segment || QUERY, peerPlan.definition);
+  const gate = await businessMatchGate(scraped, peerPlan.segment || QUERY, peerPlan.definition, peerPlan.synonyms || []);
   const kept = scraped.filter((p) => gate.pass(p.name))
     .sort((a, b) => (gate.conf(b.name) - gate.conf(a.name)) || ((b.marketCap || 0) - (a.marketCap || 0)));
   const off = scraped.filter((p) => !gate.pass(p.name));
@@ -184,18 +191,18 @@ async function verifyIndianPeers(page, peerPlan) {
 }
 
 // Batched Bedrock: per company, family-match (any business model) + business_model + a concrete products line.
-async function businessMatchGate(scraped, family, definition) {
+async function businessMatchGate(scraped, family, definition, synonyms = []) {
   const none = { pass: () => true, conf: () => 50, model: () => '', products: () => '' };
   if (!scraped.length) return none;
   const map = new Map();
   try {
     const out = await bedrock({
       system: [
-        'For EACH company decide, matching the product FAMILY (not the exact phrase — e.g. for a query like "solar inverters", a maker of string / micro / hybrid / PV inverters or power-conditioning units all match the same family):',
-        '(a) match = does it MAKE / IMPORT / DISTRIBUTE / is INTEGRATED into that family, per its About? A diversified company that makes it as ONE segment still matches. (b) confidence 0-100. (c) business_model = one of "Manufacturer" | "Trader-Distributor" | "Importer-Sourcing" | "Integrated". (d) products = one concrete line: what it makes + the relevant segment.',
+        'For EACH company decide whether it belongs to the SAME broad product family as the query — match the FAMILY and its adjacent / parent material variants, NOT the exact phrase. A niche or specialty grade also matches the broader material/product industry it comes from (e.g. for "solar inverters", makers of string / micro / hybrid / PV inverters and power-conditioning units all match; a specialty grade of a material matches the general makers of that material).',
+        '(a) match = does it MAKE / IMPORT / DISTRIBUTE / is INTEGRATED into that family OR its parent material family, per its About? A diversified company that makes it as ONE segment still matches. (b) confidence 0-100. (c) business_model = one of "Manufacturer" | "Trader-Distributor" | "Importer-Sourcing" | "Integrated". (d) products = one concrete line: what it makes + the relevant segment.',
         'Return STRICT JSON {"results":[{"name","match":true|false,"confidence":0-100,"business_model","products"}]}.',
       ].join('\n'),
-      user: `Product family: ${family}\nDefinition: ${definition || '(n/a)'}\n\nCompanies:\n${scraped.map((p) => `- ${p.name}: ABOUT="${(p.about || '').slice(0, 400)}" ; candidate="${p.products || ''}"`).join('\n')}`,
+      user: `Product family: ${family}${synonyms.length ? ' — the family also covers: ' + synonyms.join(', ') : ''}\nDefinition: ${definition || '(n/a)'}\n\nCompanies:\n${scraped.map((p) => `- ${p.name}: ABOUT="${(p.about || '').slice(0, 400)}" ; candidate="${p.products || ''}"`).join('\n')}`,
       maxTokens: 3000,
     });
     for (const r of (Array.isArray(out.results) ? out.results : [])) if (r && r.name) map.set(norm(r.name), r);
@@ -236,6 +243,23 @@ async function fetchGlobalPeersV2(cands) {
     await sleep(200);
   }
   return { global: out, movedToPrivate };
+}
+
+// Private companies never reach the Screener business-match gate, and the
+// Stage-2/3 "unresolved -> private" path bypasses discovery's own filter, so an
+// ambiguous query can leak music/media labels or research labs in here. One
+// bounded Bedrock pass drops that off-family noise. Never-fail: keep all on error.
+async function filterPrivateFamily(list, family, synonyms) {
+  if (list.length <= 1) return list;
+  try {
+    const out = await bedrock({
+      system: 'From a list of private/unlisted companies, keep ONLY those that genuinely make, import, distribute, or are integrated into the given product family (or its parent material family). EXCLUDE research labs, universities, government bodies, and pure movie / music / media / entertainment companies. Return STRICT JSON {"keep":["<exact names to keep>"]}.',
+      user: `Product family: ${family}${synonyms && synonyms.length ? ' — also covers: ' + synonyms.join(', ') : ''}\n\nCompanies:\n${list.map((p) => `- ${p.name}${(p.products || p.note) ? ': ' + String(p.products || p.note).slice(0, 140) : ''}`).join('\n')}`,
+      maxTokens: 1500,
+    });
+    const keep = new Set((Array.isArray(out.keep) ? out.keep : []).map(norm));
+    return list.filter((p) => keep.has(norm(p.name)));
+  } catch (e) { console.warn('private family filter failed (keeping all):', e.message); return list; }
 }
 
 function normalizePrivate(plan) {
