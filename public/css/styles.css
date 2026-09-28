@@ -196,6 +196,51 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .bm-default { background: #f1f5f9; color: #475569; }
 
 /* ===========================================================================
+   Home search bar + autocomplete dropdown  (industryresearch-grade polish)
+   =========================================================================== */
+.pv-ac-wrap { position: relative; flex: 1 1 auto; min-width: 0; }
+.pv-searchbar {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: #fff; border: 1px solid #dbe2ee; border-radius: 0.9rem;
+  padding: 0 0.95rem; height: 3.4rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.pv-searchbar:focus-within { border-color: #c4b5fd; box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.16); }
+.pv-searchbar input { border: 0; outline: 0; width: 100%; background: transparent; color: var(--ink); font-size: 1rem; }
+.pv-searchbar input::placeholder { color: #94a3b8; }
+
+.pv-ac-dropdown {
+  position: absolute; top: calc(100% + 0.4rem); left: 0; right: 0; z-index: 50;
+  background: #fff; border: 1px solid #dbe2ee; border-radius: 0.9rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  overflow: hidden auto; max-height: 20rem; text-align: left;
+}
+.pv-ac-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0.85rem; cursor: pointer; border-bottom: 1px solid #f1f5f9; }
+.pv-ac-item:last-child { border-bottom: 0; }
+.pv-ac-item:hover, .pv-ac-item.is-active { background: #f5f3ff; }
+.pv-ac-ico { width: 2rem; height: 2rem; flex-shrink: 0; border-radius: 0.5rem; display: grid; place-items: center; background: #ede9fe; color: #6d28d9; }
+.pv-ac-body { min-width: 0; display: flex; flex-direction: column; }
+.pv-ac-name { font-size: 0.9rem; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pv-ac-meta { font-size: 0.72rem; color: #94a3b8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pv-ac-open { margin-left: auto; flex-shrink: 0; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; background-image: linear-gradient(135deg, var(--brand-1), var(--brand-2)); border-radius: 999px; padding: 0.2rem 0.6rem; }
+.pv-ac-run .pv-ac-ico { background: #eef2ff; color: var(--brand-1); }
+.pv-ac-run .pv-ac-name { color: var(--brand-2); }
+
+/* ===========================================================================
+   Home — "Your research" previous-runs table
+   =========================================================================== */
+.pv-runs { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem; }
+.pv-runs thead th { text-align: left; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #94a3b8; padding: 0.6rem 0.95rem; background: #f8fafc; }
+.pv-runs thead th.pv-runs-num { text-align: right; }
+.pv-runs tbody td { padding: 0.7rem 0.95rem; border-top: 1px solid #eef2f7; vertical-align: middle; }
+.pv-runs tbody tr { cursor: pointer; transition: background 0.12s ease; }
+.pv-runs tbody tr:hover td { background: #faf9ff; }
+.pv-runs-name { font-weight: 700; color: var(--ink); }
+.pv-runs-sub { font-size: 0.72rem; color: #94a3b8; font-weight: 500; }
+.pv-runs-num { text-align: right; font-variant-numeric: tabular-nums; color: #475569; }
+
+/* ===========================================================================
    Print stylesheet — the one-pager only
    =========================================================================== */
 @media print {
