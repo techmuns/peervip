@@ -4,23 +4,23 @@
     "name": "Dielectric Films",
     "type": "industry",
     "query": "dielectric films",
-    "seed_company": "XPRO India Ltd",
+    "seed_company": "Polyplex Corporation Ltd",
     "segment": "dielectric films",
     "definition": "Dielectric films are specialized insulating materials used in electronic components and capacitors.",
-    "generated_at": "2026-09-28T09:30:25.518Z",
+    "generated_at": "2026-09-28T09:42:55.127Z",
     "sample": false,
     "coverage": {
-      "peers_total": 17,
-      "with_full_financials": 9,
-      "confidence": "high"
+      "peers_total": 11,
+      "with_full_financials": 4,
+      "confidence": "medium"
     }
   },
   "outperformer": {
-    "company": "Garware Hi Tech Films Ltd",
-    "bucket": "indian",
-    "headline": "Premium product mix and value-added specialization drive structural margin superiority",
-    "reason": "Garware's outperformance stems from its deliberate focus on high-end, value-added specialty films rather than commodity products. This is evidenced by a gross margin of 54.2% (vs peer median 33%) and RM cost of only 45.79% (vs peer median 66%), indicating premium pricing power and product differentiation. The company achieves 21% EBITDA margin and 15.9% PAT margin—multiples of the peer set—while maintaining 18.1% ROCE and 13.5% ROE. Critically, it operates debt-free (0 debt-equity vs median 0.74) with exceptional working capital efficiency: only 9 debtor days (vs median 40) suggests strong customer relationships and possibly advance payments for specialized products. The 16.5% revenue CAGR over 5 years demonstrates sustained demand for its niche offerings. This isn't scale or cost leadership—it's a moat built on product specialization, moving away from the commoditized BOPET/BOPP space that traps peers in margin compression cycles.",
-    "india_vs_global": "Garware's 21% EBITDA margin and 15.9% PAT margin significantly exceed even the best global peers (DuPont 22.7% EBITDA but only 0.8% PAT; Toyobo 12.7% EBITDA, 3% PAT), demonstrating that niche specialization in value-added films can outperform diversified chemical giants' dielectric film divisions."
+    "company": "Hyosung Corporation",
+    "bucket": "global",
+    "headline": "Exceptional profitability with 25.2% EBITDA margin and 18.2% PAT margin, driven by superior operational efficiency and product mix",
+    "reason": "Hyosung stands out with dramatically superior profitability metrics that are multiples above the peer set. Its 25.2% EBITDA margin is nearly 3x the peer median of 9.25%, while its 18.2% PAT margin is 7.6x the median of 2.4%. The company also demonstrates strong capital efficiency with 19.4% ROE (6x the median) and robust revenue growth of 21.9%. This performance suggests a combination of premium product positioning in specialty dielectric films, superior cost management, and likely a favorable product mix skewed toward higher-margin applications. The company maintains this profitability while growing aggressively, indicating genuine competitive advantages rather than one-off gains.",
+    "india_vs_global": "Indian peers struggle with single-digit EBITDA margins (4.9-12%) and razor-thin PAT margins (0.6-4%), while Hyosung's profitability is in a different league entirely, suggesting structural advantages in technology, scale, or market positioning that domestic players have yet to achieve."
   },
   "metrics": [
     {
@@ -235,1131 +235,11 @@
   "peers": {
     "indian": [
       {
-        "name": "XPRO India Ltd",
-        "ticker": "XPROINDIA",
-        "business_model": "Manufacturer",
-        "products": "Dielectric capacitor films and specialty BOPP films via biaxial orientation for electronics and industrial applications",
-        "note": "Only Indian manufacturer of dielectric films; ~30% domestic market share in dielectric films; largest supplier of refrigerator liners in India with >50% domestic share",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/XPROINDIA/"
-        },
-        "current": {
-          "revenue": 505,
-          "rev_growth_1y": -5.6,
-          "rev_cagr_3y": -0.3,
-          "rev_cagr_5y": 6.4,
-          "market_cap": 2687,
-          "ebitda_margin": 6,
-          "pat_margin": 4,
-          "roce": 3.78,
-          "roe": 2.8,
-          "debtor_days": 50,
-          "inventory_days": 76,
-          "payable_days": 46,
-          "ccc": 80,
-          "wc_days": 46,
-          "debt_equity": 0.43,
-          "interest_coverage": 4,
-          "promoter_holding": 40.32,
-          "fii_holding": 13.81,
-          "dii_holding": 2.94,
-          "pe": 82.2,
-          "pb": 3.5,
-          "dividend_yield": 0.17,
-          "dividend_payout": 24,
-          "rm_cost_pct": 69,
-          "gross_margin": 31
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              259,
-              275,
-              318,
-              307,
-              345,
-              354,
-              370,
-              469,
-              509,
-              463,
-              535,
-              505
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              1.1,
-              5,
-              8,
-              7,
-              8,
-              8,
-              11,
-              14,
-              15,
-              14,
-              9,
-              6
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              -5.4,
-              -12.7,
-              -3.8,
-              3.3,
-              0.6,
-              0,
-              2.2,
-              9.6,
-              8.8,
-              9.5,
-              7.1,
-              4
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              -2,
-              0,
-              5,
-              4,
-              8,
-              8,
-              13,
-              22,
-              25,
-              15,
-              8,
-              4
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              57,
-              49,
-              66,
-              59,
-              60,
-              54,
-              65,
-              52,
-              37,
-              43,
-              53,
-              50
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              58,
-              57,
-              52,
-              63,
-              52,
-              59,
-              57,
-              51,
-              49,
-              53,
-              57,
-              76
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              24,
-              28,
-              36,
-              30,
-              36,
-              33,
-              22,
-              38,
-              33,
-              39,
-              42,
-              80
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              45.26,
-              45.26,
-              42.46,
-              42.46,
-              42.46,
-              42.24,
-              42.42,
-              42.42,
-              40.32,
-              40.32,
-              40.32,
-              40.32
-            ]
-          }
-        }
-      },
-      {
-        "name": "Jindal Poly Films Ltd",
-        "ticker": "JINDALPOLY",
-        "business_model": "Manufacturer",
-        "products": "BOPP, BOPET, CPP, metallized and coated films for flexible packaging and industrial uses including capacitor applications",
-        "note": "Large Indian BOPP and polyester film producer serving packaging and industrial applications",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/JINDALPOLY/"
-        },
-        "current": {
-          "revenue": 2899,
-          "rev_growth_1y": -45.7,
-          "rev_cagr_3y": -14.9,
-          "rev_cagr_5y": -6.6,
-          "market_cap": 2979,
-          "ebitda_margin": -20,
-          "pat_margin": -36.6,
-          "roce": -1.99,
-          "roe": -0.97,
-          "debtor_days": 29,
-          "inventory_days": 116,
-          "payable_days": 64,
-          "ccc": 81,
-          "wc_days": 82,
-          "debt_equity": 1.31,
-          "interest_coverage": -3,
-          "promoter_holding": 74.54,
-          "fii_holding": 1.93,
-          "dii_holding": 0,
-          "pe": 50.9,
-          "pb": 1,
-          "dividend_yield": 0.87,
-          "dividend_payout": 0,
-          "rm_cost_pct": 65,
-          "gross_margin": 35
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              7557,
-              7225,
-              7005,
-              6448,
-              3623,
-              3546,
-              4082,
-              5878,
-              4697,
-              3926,
-              5335,
-              2899
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              9,
-              14,
-              10,
-              10,
-              12,
-              19,
-              27,
-              24,
-              8,
-              0,
-              5,
-              -20
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              2.4,
-              6.3,
-              3.8,
-              2.4,
-              -11.3,
-              13.8,
-              19.4,
-              20.3,
-              6.8,
-              1.8,
-              2.1,
-              -36.6
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              11,
-              16,
-              9,
-              10,
-              12,
-              18,
-              32,
-              37,
-              12,
-              3,
-              5,
-              -2
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              34,
-              37,
-              35,
-              9,
-              15,
-              13,
-              9,
-              13,
-              19,
-              33,
-              28,
-              29
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              77,
-              103,
-              112,
-              43,
-              70,
-              98,
-              114,
-              92,
-              111,
-              147,
-              112,
-              116
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              60,
-              84,
-              78,
-              28,
-              47,
-              69,
-              80,
-              76,
-              111,
-              133,
-              90,
-              81
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54,
-              74.54
-            ]
-          }
-        }
-      },
-      {
-        "name": "Uflex Ltd",
-        "ticker": "UFLEX",
-        "business_model": "Manufacturer",
-        "products": "BOPP, BOPET, CPP, metallized and specialty films for flexible packaging and industrial applications",
-        "note": "India's largest flexible packaging films producer with capacitor-grade and industrial film capabilities",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/UFLEX/"
-        },
-        "current": {
-          "revenue": 15401,
-          "rev_growth_1y": 2.4,
-          "rev_cagr_3y": 1.7,
-          "rev_cagr_5y": 11.6,
-          "market_cap": 4680,
-          "ebitda_margin": 12,
-          "pat_margin": 2.1,
-          "roce": 7.03,
-          "roe": 4.27,
-          "debtor_days": 92,
-          "inventory_days": 97,
-          "payable_days": 99,
-          "ccc": 89,
-          "wc_days": 12,
-          "debt_equity": 1.25,
-          "interest_coverage": 2.4,
-          "promoter_holding": 44.58,
-          "fii_holding": 10.03,
-          "dii_holding": 0.59,
-          "pe": 6.74,
-          "pb": 0.6,
-          "dividend_yield": 0.45,
-          "dividend_payout": 7,
-          "rm_cost_pct": 65,
-          "gross_margin": 35
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              6130,
-              6366,
-              6505,
-              6802,
-              7957,
-              7405,
-              8889,
-              13127,
-              14663,
-              13364,
-              15036,
-              15401
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              12,
-              13,
-              13,
-              13,
-              12,
-              15,
-              20,
-              17,
-              12,
-              10,
-              11,
-              12
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              4.2,
-              5,
-              5.4,
-              4.6,
-              4,
-              5,
-              9.5,
-              8.4,
-              3.3,
-              -5.2,
-              0.9,
-              2.1
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              9,
-              10,
-              10,
-              9,
-              10,
-              10,
-              15,
-              17,
-              10,
-              6,
-              8,
-              7
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              90,
-              85,
-              93,
-              104,
-              94,
-              96,
-              99,
-              98,
-              80,
-              94,
-              91,
-              92
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              63,
-              64,
-              70,
-              72,
-              63,
-              73,
-              89,
-              86,
-              91,
-              84,
-              100,
-              97
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              80,
-              68,
-              64,
-              68,
-              78,
-              79,
-              83,
-              92,
-              87,
-              88,
-              101,
-              89
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58,
-              44.58
-            ]
-          }
-        }
-      },
-      {
-        "name": "Garware Hi Tech Films Ltd",
-        "ticker": "GRWRHITECH",
-        "business_model": "Manufacturer",
-        "products": "Polyester films including specialty and coated films for packaging and industrial applications",
-        "note": "Indian specialty polyester film manufacturer with industrial and packaging grades",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/GRWRHITECH/"
-        },
-        "current": {
-          "revenue": 2120,
-          "rev_growth_1y": 0.5,
-          "rev_cagr_3y": 13.8,
-          "rev_cagr_5y": 16.5,
-          "market_cap": 15435,
-          "ebitda_margin": 21,
-          "pat_margin": 15.9,
-          "roce": 18.1,
-          "roe": 13.5,
-          "debtor_days": 9,
-          "inventory_days": 149,
-          "payable_days": 69,
-          "ccc": 89,
-          "wc_days": 40,
-          "debt_equity": 0,
-          "interest_coverage": 54.4,
-          "promoter_holding": 60.73,
-          "fii_holding": 4.22,
-          "dii_holding": 6.35,
-          "pe": 39.8,
-          "pb": 5.8,
-          "dividend_yield": 0.18,
-          "dividend_payout": 8,
-          "rm_cost_pct": 45.79,
-          "gross_margin": 54.2
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              896,
-              857,
-              874,
-              833,
-              948,
-              925,
-              989,
-              1303,
-              1438,
-              1677,
-              2109,
-              2120
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              7,
-              9,
-              8,
-              10,
-              15,
-              17,
-              22,
-              18,
-              16,
-              17,
-              21,
-              21
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              2,
-              1.9,
-              2.5,
-              4,
-              8.6,
-              9.3,
-              12.7,
-              12.8,
-              11.5,
-              12.1,
-              15.7,
-              15.9
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              7,
-              8,
-              5,
-              5,
-              9,
-              10,
-              13,
-              13,
-              12,
-              14,
-              21,
-              18
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              20,
-              17,
-              26,
-              17,
-              22,
-              21,
-              16,
-              9,
-              8,
-              8,
-              7,
-              9
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              93,
-              111,
-              90,
-              82,
-              70,
-              100,
-              128,
-              145,
-              109,
-              132,
-              116,
-              149
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              82,
-              91,
-              77,
-              44,
-              24,
-              58,
-              54,
-              79,
-              60,
-              67,
-              68,
-              89
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73,
-              60.73
-            ]
-          }
-        }
-      },
-      {
         "name": "Polyplex Corporation Ltd",
         "ticker": "POLYPLEX",
         "business_model": "Manufacturer",
-        "products": "BOPP, Blown PP/PE, CPP films for flexible packaging and industrial uses including release liners and tapes",
-        "note": "",
+        "products": "Manufactures BOPET polyester films including capacitor-grade films and electrical insulation films for electronic applications",
+        "note": "Major Indian manufacturer of polyester films including dielectric/capacitor grades",
         "source": {
           "label": "Screener",
           "url": "https://www.screener.in/company/POLYPLEX/"
@@ -1635,41 +515,41 @@
         }
       },
       {
-        "name": "Cosmo First Ltd",
-        "ticker": "COSMOFIRST",
+        "name": "XPRO India Ltd",
+        "ticker": "XPROINDIA",
         "business_model": "Manufacturer",
-        "products": "BOPP, CPP, and BOPET specialty films for packaging, lamination and labeling applications",
-        "note": "",
+        "products": "Manufactures dielectric (capacitor) films and specialty BOPP films via biaxial orientation for electronic components",
+        "note": "Only Indian manufacturer of dielectric films; ~30% domestic market share in dielectric films; largest supplier of refrigerator liners in India with >50% domestic share",
         "source": {
           "label": "Screener",
-          "url": "https://www.screener.in/company/COSMOFIRST/"
+          "url": "https://www.screener.in/company/XPROINDIA/"
         },
         "current": {
-          "revenue": 3639,
-          "rev_growth_1y": 25.7,
-          "rev_cagr_3y": 5.9,
-          "rev_cagr_5y": 9.8,
-          "market_cap": 2215,
-          "ebitda_margin": 11,
-          "pat_margin": 4.3,
-          "roce": 11.2,
-          "roe": 10.4,
-          "debtor_days": 40,
-          "inventory_days": 110,
-          "payable_days": 140,
-          "ccc": 10,
-          "wc_days": -8,
-          "debt_equity": 1.04,
-          "interest_coverage": 2.7,
-          "promoter_holding": 40.78,
-          "fii_holding": 2.4,
-          "dii_holding": 1.49,
-          "pe": 12.9,
-          "pb": 1.4,
-          "dividend_yield": 0.49,
-          "dividend_payout": 7,
-          "rm_cost_pct": 68,
-          "gross_margin": 32
+          "revenue": 505,
+          "rev_growth_1y": -5.6,
+          "rev_cagr_3y": -0.3,
+          "rev_cagr_5y": 6.4,
+          "market_cap": 2692,
+          "ebitda_margin": 6,
+          "pat_margin": 4,
+          "roce": 3.78,
+          "roe": 2.8,
+          "debtor_days": 50,
+          "inventory_days": 76,
+          "payable_days": 46,
+          "ccc": 80,
+          "wc_days": 46,
+          "debt_equity": 0.43,
+          "interest_coverage": 4,
+          "promoter_holding": 40.32,
+          "fii_holding": 13.81,
+          "dii_holding": 2.94,
+          "pe": 82.4,
+          "pb": 3.5,
+          "dividend_yield": 0.17,
+          "dividend_payout": 24,
+          "rm_cost_pct": 69,
+          "gross_margin": 31
         },
         "series": {
           "revenue": {
@@ -1688,18 +568,18 @@
               "Mar 2026"
             ],
             "values": [
-              1647,
-              1621,
-              1587,
-              1847,
-              2157,
-              2204,
-              2285,
-              3038,
-              3065,
-              2587,
-              2895,
-              3639
+              259,
+              275,
+              318,
+              307,
+              345,
+              354,
+              370,
+              469,
+              509,
+              463,
+              535,
+              505
             ]
           },
           "ebitda_margin": {
@@ -1718,18 +598,18 @@
               "Mar 2026"
             ],
             "values": [
-              6,
-              12,
-              10,
+              1.1,
+              5,
+              8,
               7,
-              7,
-              12,
-              17,
-              19,
-              12,
-              7,
-              10,
-              11
+              8,
+              8,
+              11,
+              14,
+              15,
+              14,
+              9,
+              6
             ]
           },
           "pat_margin": {
@@ -1748,18 +628,18 @@
               "Mar 2026"
             ],
             "values": [
-              1.7,
-              5.9,
-              5.4,
-              3.5,
-              2.8,
-              5.1,
-              10.4,
-              13.1,
-              8,
-              2.4,
-              4.6,
-              4.3
+              -5.4,
+              -12.7,
+              -3.8,
+              3.3,
+              0.6,
+              0,
+              2.2,
+              9.6,
+              8.8,
+              9.5,
+              7.1,
+              4
             ]
           },
           "roce": {
@@ -1778,51 +658,21 @@
               "Mar 2026"
             ],
             "values": [
-              9,
-              18,
-              12,
-              9,
+              -2,
+              0,
+              5,
+              4,
               8,
-              14,
-              23,
-              31,
-              17,
-              7,
-              10,
-              11
+              8,
+              13,
+              22,
+              25,
+              15,
+              8,
+              4
             ]
           },
           "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              27,
-              26,
-              37,
-              38,
-              35,
-              32,
-              30,
-              26,
-              24,
-              37,
-              39,
-              40
-            ]
-          },
-          "inventory_days": {
             "years": [
               "Mar 2015",
               "Mar 2016",
@@ -1839,17 +689,47 @@
             ],
             "values": [
               57,
-              61,
-              86,
-              78,
-              64,
-              68,
-              98,
-              108,
-              95,
-              106,
-              117,
-              110
+              49,
+              66,
+              59,
+              60,
+              54,
+              65,
+              52,
+              37,
+              43,
+              53,
+              50
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              58,
+              57,
+              52,
+              63,
+              52,
+              59,
+              57,
+              51,
+              49,
+              53,
+              57,
+              76
             ]
           },
           "ccc": {
@@ -1868,18 +748,18 @@
               "Mar 2026"
             ],
             "values": [
-              47,
-              31,
-              74,
-              64,
-              53,
-              61,
-              75,
-              63,
-              25,
-              0,
-              17,
-              10
+              24,
+              28,
+              36,
+              30,
+              36,
+              33,
+              22,
+              38,
+              33,
+              39,
+              42,
+              80
             ]
           },
           "promoter_holding": {
@@ -1898,67 +778,68 @@
               "Jun 2026"
             ],
             "values": [
-              45.04,
-              45.04,
-              45.04,
-              45.04,
-              45.04,
-              40.98,
-              40.98,
-              40.98,
-              40.86,
-              40.86,
-              40.78,
-              40.78
+              45.26,
+              45.26,
+              42.46,
+              42.46,
+              42.46,
+              42.24,
+              42.42,
+              42.42,
+              40.32,
+              40.32,
+              40.32,
+              40.32
             ]
           }
         }
       },
       {
-        "name": "Ester Industries Ltd",
-        "ticker": "ESTER",
+        "name": "Jindal Poly Films Ltd",
+        "ticker": "JINDALPOLY",
         "business_model": "Manufacturer",
-        "products": "Polyester films, specialty polymers, and film-grade resins for industrial and packaging applications",
-        "note": "Indian specialty polyester producer supplying film-grade resins for dielectric applications",
+        "products": "Manufactures BOPET and BOPP films for packaging and industrial applications including capacitor/dielectric uses",
+        "note": "Part of BC Jindal Group, BOPP film manufacturer with electrical insulation grades",
         "source": {
           "label": "Screener",
-          "url": "https://www.screener.in/company/ESTER/"
+          "url": "https://www.screener.in/company/JINDALPOLY/"
         },
         "current": {
-          "revenue": 1375,
-          "rev_growth_1y": 7.3,
-          "rev_cagr_3y": 7.3,
-          "rev_cagr_5y": 6.7,
-          "market_cap": 888,
-          "ebitda_margin": 7,
-          "pat_margin": -2,
-          "roce": 2.76,
-          "roe": -3.53,
-          "debtor_days": 49,
-          "inventory_days": 86,
-          "payable_days": 27,
-          "ccc": 108,
-          "wc_days": 21,
-          "debt_equity": 0.93,
-          "interest_coverage": 1.4,
-          "promoter_holding": 62.32,
-          "fii_holding": 0.03,
-          "dii_holding": 0.15,
-          "pb": 1.1,
-          "dividend_yield": 0.29,
-          "dividend_payout": -9,
-          "rm_cost_pct": 66,
-          "gross_margin": 34
+          "revenue": 2899,
+          "rev_growth_1y": -45.7,
+          "rev_cagr_3y": -14.9,
+          "rev_cagr_5y": -6.6,
+          "market_cap": 2986,
+          "ebitda_margin": -20,
+          "pat_margin": -36.6,
+          "roce": -1.99,
+          "roe": -0.97,
+          "debtor_days": 29,
+          "inventory_days": 116,
+          "payable_days": 64,
+          "ccc": 81,
+          "wc_days": 82,
+          "debt_equity": 1.31,
+          "interest_coverage": -3,
+          "promoter_holding": 74.54,
+          "fii_holding": 1.93,
+          "dii_holding": 0,
+          "pe": 51,
+          "pb": 1,
+          "dividend_yield": 0.87,
+          "dividend_payout": 0,
+          "rm_cost_pct": 65,
+          "gross_margin": 35
         },
         "series": {
           "revenue": {
             "years": [
-              "Mar 2011",
-              "Mar 2012",
-              "Mar 2013",
-              "Mar 2014",
               "Mar 2015",
               "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
               "Mar 2021",
               "Mar 2022",
               "Mar 2023",
@@ -1967,28 +848,28 @@
               "Mar 2026"
             ],
             "values": [
-              671,
-              698,
-              884,
-              928,
-              895,
-              768,
-              992,
-              1110,
-              1114,
-              1063,
-              1282,
-              1375
+              7557,
+              7225,
+              7005,
+              6448,
+              3623,
+              3546,
+              4082,
+              5878,
+              4697,
+              3926,
+              5335,
+              2899
             ]
           },
           "ebitda_margin": {
             "years": [
-              "Mar 2011",
-              "Mar 2012",
-              "Mar 2013",
-              "Mar 2014",
               "Mar 2015",
               "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
               "Mar 2021",
               "Mar 2022",
               "Mar 2023",
@@ -1997,28 +878,28 @@
               "Mar 2026"
             ],
             "values": [
-              33,
-              5,
-              4.8,
-              8,
-              8,
               9,
-              23,
-              15,
-              8,
-              -2.1,
+              14,
+              10,
+              10,
               12,
-              7
+              19,
+              27,
+              24,
+              8,
+              0,
+              5,
+              -20
             ]
           },
           "pat_margin": {
             "years": [
-              "Mar 2011",
-              "Mar 2012",
-              "Mar 2013",
-              "Mar 2014",
               "Mar 2015",
               "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
               "Mar 2021",
               "Mar 2022",
               "Mar 2023",
@@ -2027,322 +908,52 @@
               "Mar 2026"
             ],
             "values": [
-              19.2,
-              -2,
-              -0.6,
-              0.9,
-              0.4,
-              0.7,
+              2.4,
+              6.3,
+              3.8,
+              2.4,
+              -11.3,
               13.8,
-              12.3,
-              12.3,
-              -11.4,
-              1.1,
+              19.4,
+              20.3,
+              6.8,
+              1.8,
+              2.1,
+              -36.6
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              11,
+              16,
+              9,
+              10,
+              12,
+              18,
+              32,
+              37,
+              12,
+              3,
+              5,
               -2
             ]
           },
-          "roce": {
-            "years": [
-              "Mar 2011",
-              "Mar 2012",
-              "Mar 2013",
-              "Mar 2014",
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              56,
-              3,
-              3,
-              8,
-              7,
-              7,
-              null,
-              14,
-              4,
-              -5,
-              6,
-              3
-            ]
-          },
           "debtor_days": {
             "years": [
-              "Mar 2011",
-              "Mar 2012",
-              "Mar 2013",
-              "Mar 2014",
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              66,
-              44,
-              45,
-              49,
-              48,
-              53,
-              56,
-              64,
-              50,
-              51,
-              48,
-              49
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2011",
-              "Mar 2012",
-              "Mar 2013",
-              "Mar 2014",
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              86,
-              77,
-              69,
-              69,
-              74,
-              96,
-              98,
-              110,
-              88,
-              70,
-              74,
-              86
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2011",
-              "Mar 2012",
-              "Mar 2013",
-              "Mar 2014",
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              85,
-              107,
-              103,
-              106,
-              111,
-              132,
-              126,
-              139,
-              121,
-              90,
-              101,
-              108
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              64.04,
-              64.04,
-              62.45,
-              62.45,
-              62.4,
-              62.4,
-              62.4,
-              62.73,
-              62.73,
-              62.72,
-              62.72,
-              62.32
-            ]
-          }
-        }
-      },
-      {
-        "name": "Futura Polyesters Ltd",
-        "ticker": "INDIANORG",
-        "business_model": "Manufacturer",
-        "products": "Complete range of polyester resins (PET, PBT, PTT, PEN) - raw materials for dielectric films",
-        "note": "",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/INDIANORG/"
-        },
-        "current": {
-          "revenue": 482,
-          "ebitda_margin": 1.9,
-          "pat_margin": -5,
-          "roe": -12.6,
-          "debtor_days": 21,
-          "inventory_days": 126,
-          "payable_days": 106,
-          "ccc": 41,
-          "wc_days": 18,
-          "debt_equity": 1.39,
-          "interest_coverage": 0.4,
-          "promoter_holding": 16.66,
-          "fii_holding": 4.19,
-          "dii_holding": 5.66,
-          "pb": 0.1,
-          "dividend_yield": 0,
-          "dividend_payout": 0
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2006"
-            ],
-            "values": [
-              482
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2006"
-            ],
-            "values": [
-              1.9
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2006"
-            ],
-            "values": [
-              -5
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2006"
-            ],
-            "values": [
-              21
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2006"
-            ],
-            "values": [
-              126
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2006"
-            ],
-            "values": [
-              41
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Jun 2023",
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66,
-              16.66
-            ]
-          }
-        }
-      },
-      {
-        "name": "Nahar Polyfilms Ltd",
-        "ticker": "NAHARPOLY",
-        "business_model": "Manufacturer",
-        "products": "Transparent and metallized flexible packaging films (polymer-based films)",
-        "note": "",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/NAHARPOLY/"
-        },
-        "current": {
-          "revenue": 704,
-          "rev_growth_1y": 5.7,
-          "rev_cagr_3y": -0.9,
-          "rev_cagr_5y": 18.4,
-          "market_cap": 542,
-          "ebitda_margin": 15,
-          "pat_margin": 11.2,
-          "roce": 10.6,
-          "roe": 9.27,
-          "debtor_days": 12,
-          "inventory_days": 55,
-          "payable_days": 11,
-          "ccc": 56,
-          "wc_days": 32,
-          "debt_equity": 0.09,
-          "interest_coverage": 13.4,
-          "promoter_holding": 72.51,
-          "fii_holding": 0.03,
-          "dii_holding": 0.01,
-          "pe": 7.5,
-          "pb": 0.6,
-          "dividend_yield": 0.7,
-          "dividend_payout": 5,
-          "rm_cost_pct": 66,
-          "gross_margin": 34
-        },
-        "series": {
-          "revenue": {
-            "years": [
               "Mar 2015",
               "Mar 2016",
               "Mar 2017",
@@ -2357,111 +968,21 @@
               "Mar 2026"
             ],
             "values": [
-              302,
-              260,
-              255,
-              252,
-              266,
-              277,
-              303,
-              489,
-              723,
-              600,
-              666,
-              704
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              13,
-              17,
-              12,
-              8,
-              5,
-              15,
-              22,
-              24,
-              11,
-              3.5,
-              11,
-              15
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              3.6,
-              5.8,
-              7.5,
-              4.4,
-              4.5,
-              13.4,
-              20.8,
-              20,
-              5.9,
-              1,
-              7.1,
-              11.2
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              null,
+              34,
+              37,
+              35,
               9,
-              3,
-              2,
-              3,
-              10,
-              14,
-              14,
-              5,
-              0,
-              6,
-              11
+              15,
+              13,
+              9,
+              13,
+              19,
+              33,
+              28,
+              29
             ]
           },
-          "debtor_days": {
+          "inventory_days": {
             "years": [
               "Mar 2015",
               "Mar 2016",
@@ -2477,20 +998,270 @@
               "Mar 2026"
             ],
             "values": [
-              38,
-              39,
+              77,
+              103,
+              112,
+              43,
+              70,
+              98,
+              114,
+              92,
+              111,
+              147,
+              112,
+              116
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              60,
+              84,
+              78,
+              28,
               47,
-              48,
-              29,
+              69,
+              80,
+              76,
+              111,
+              133,
+              90,
+              81
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54,
+              74.54
+            ]
+          }
+        }
+      },
+      {
+        "name": "Uflex Ltd",
+        "ticker": "UFLEX",
+        "business_model": "Manufacturer",
+        "products": "Manufactures BOPP, BOPET, CPP and metallized films for flexible packaging with potential dielectric/insulation applications",
+        "note": "Diversified flexible packaging major with capacitor-grade and dielectric film capabilities",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/UFLEX/"
+        },
+        "current": {
+          "revenue": 15401,
+          "rev_growth_1y": 2.4,
+          "rev_cagr_3y": 1.7,
+          "rev_cagr_5y": 11.6,
+          "market_cap": 4619,
+          "ebitda_margin": 12,
+          "pat_margin": 2.1,
+          "roce": 7.03,
+          "roe": 4.27,
+          "debtor_days": 92,
+          "inventory_days": 97,
+          "payable_days": 99,
+          "ccc": 89,
+          "wc_days": 12,
+          "debt_equity": 1.25,
+          "interest_coverage": 2.4,
+          "promoter_holding": 44.58,
+          "fii_holding": 10.03,
+          "dii_holding": 0.59,
+          "pe": 6.65,
+          "pb": 0.6,
+          "dividend_yield": 0.46,
+          "dividend_payout": 7,
+          "rm_cost_pct": 65,
+          "gross_margin": 35
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              6130,
+              6366,
+              6505,
+              6802,
+              7957,
+              7405,
+              8889,
+              13127,
+              14663,
+              13364,
+              15036,
+              15401
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
               12,
-              14,
-              21,
               13,
+              13,
+              13,
+              12,
               15,
+              20,
               17,
+              12,
+              10,
+              11,
               12
             ]
           },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              4.2,
+              5,
+              5.4,
+              4.6,
+              4,
+              5,
+              9.5,
+              8.4,
+              3.3,
+              -5.2,
+              0.9,
+              2.1
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              9,
+              10,
+              10,
+              9,
+              10,
+              10,
+              15,
+              17,
+              10,
+              6,
+              8,
+              7
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              90,
+              85,
+              93,
+              104,
+              94,
+              96,
+              99,
+              98,
+              80,
+              94,
+              91,
+              92
+            ]
+          },
           "inventory_days": {
             "years": [
               "Mar 2015",
@@ -2507,18 +1278,18 @@
               "Mar 2026"
             ],
             "values": [
-              16,
-              16,
-              30,
-              30,
-              30,
-              37,
-              40,
-              75,
-              34,
-              35,
-              39,
-              55
+              63,
+              64,
+              70,
+              72,
+              63,
+              73,
+              89,
+              86,
+              91,
+              84,
+              100,
+              97
             ]
           },
           "ccc": {
@@ -2537,18 +1308,18 @@
               "Mar 2026"
             ],
             "values": [
-              47,
-              48,
+              80,
+              68,
               64,
               68,
-              48,
-              39,
-              -65,
-              86,
-              40,
-              42,
-              47,
-              56
+              78,
+              79,
+              83,
+              92,
+              87,
+              88,
+              101,
+              89
             ]
           },
           "promoter_holding": {
@@ -2567,18 +1338,18 @@
               "Jun 2026"
             ],
             "values": [
-              71.05,
-              71.08,
-              71.48,
-              71.88,
-              71.88,
-              71.88,
-              72.22,
-              72.24,
-              72.28,
-              72.28,
-              72.51,
-              72.51
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58,
+              44.58
             ]
           }
         }
@@ -2589,8 +1360,8 @@
         "name": "Toray Industries",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "BOPP films, PET films, polyimide films, capacitor-grade dielectric films, Lumirror polyester films",
-        "note": "Global leader in advanced polymer films including high-performance dielectric grades for capacitors and electronics",
+        "products": "Polyester films, BOPET films, Lumirror brand, capacitor films, high-performance dielectric films",
+        "note": "Global leader in polyester films including high-end dielectric and capacitor grades",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/3402.T"
@@ -2626,51 +1397,11 @@
         }
       },
       {
-        "name": "DuPont de Nemours",
+        "name": "Mitsubishi Chemical Group (formerly Mitsubishi Chemical Holdings)",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "Kapton polyimide films, Mylar polyester films, Tedlar PVF films, dielectric films for electronics",
-        "note": "Pioneer in high-performance polyimide and fluoropolymer dielectric films for aerospace and electronics",
-        "source": {
-          "label": "Yahoo Finance",
-          "url": "https://finance.yahoo.com/quote/DD"
-        },
-        "current": {
-          "revenue": 58000,
-          "rev_growth_1y": 4,
-          "market_cap": 147628,
-          "gross_margin": 35.1,
-          "ebitda_margin": 22.7,
-          "pat_margin": 0.8,
-          "roe": 1.8,
-          "debt_equity": 0.23,
-          "pe": 56.5279,
-          "pb": 1.2917432,
-          "dividend_yield": 1.8
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "2022",
-              "2023",
-              "2024",
-              "2025"
-            ],
-            "values": [
-              108041,
-              100164,
-              102804,
-              56847
-            ]
-          }
-        }
-      },
-      {
-        "name": "Mitsubishi Chemical Group",
-        "country": "",
-        "business_model": "Manufacturer",
-        "products": "Polyester films, BOPP films, polyimide films, dielectric films, Diafoil capacitor films",
-        "note": "Major Japanese producer of capacitor-grade polyester and specialty dielectric films",
+        "products": "Polyester films, BOPET films, Diafoil brand capacitor films, electronic materials",
+        "note": "Major capacitor film supplier under Diafoil brand",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/4188.T"
@@ -2705,11 +1436,11 @@
         }
       },
       {
-        "name": "Toyobo Co Ltd",
+        "name": "Toyobo Co.",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "Polyester films, BOPP films, Cosmoshine barrier films, industrial films",
-        "note": "Japanese specialty films producer with high-barrier and electrical insulation grades",
+        "products": "Polyester films, BOPET films, Pylen brand, capacitor films, industrial films",
+        "note": "Japanese polyester film maker with dielectric film portfolio",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/3101.T"
@@ -2745,11 +1476,11 @@
         }
       },
       {
-        "name": "SKC Co Ltd",
+        "name": "SKC Co.",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "Polyester films, BOPET films, optical films, capacitor films, semiconductor materials",
-        "note": "Korean polyester film major with electrical and electronic-grade dielectric films",
+        "products": "Polyester films, BOPET films, capacitor films, optical films, electronic materials",
+        "note": "Korean polyester film major with capacitor-grade dielectric films",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/011790.KS"
@@ -2786,8 +1517,8 @@
         "name": "Kolon Industries",
         "country": "",
         "business_model": "Manufacturer",
-        "products": "Polyester films, industrial films, aramid films, electronic materials",
-        "note": "Korean conglomerate producing specialty polyester and aramid-based dielectric films",
+        "products": "Polyester films, industrial films, electronic materials, dielectric films",
+        "note": "Korean conglomerate with polyester film and electronic materials divisions",
         "source": {
           "label": "Yahoo Finance",
           "url": "https://finance.yahoo.com/quote/120110.KS"
@@ -2820,19 +1551,48 @@
             ]
           }
         }
+      },
+      {
+        "name": "Hyosung Corporation",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Industrial films, polyester films, capacitor films, specialty chemical products",
+        "note": "Korean industrial group with film and capacitor materials business",
+        "source": {
+          "label": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/quote/004800.KS"
+        },
+        "current": {
+          "revenue": 15746,
+          "rev_growth_1y": 21.9,
+          "market_cap": 16377,
+          "gross_margin": 31.9,
+          "ebitda_margin": 25.2,
+          "pat_margin": 18.2,
+          "roe": 19.4,
+          "debt_equity": 0.53,
+          "pe": 7.8581553,
+          "dividend_yield": 3
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "2022",
+              "2023",
+              "2024",
+              "2025"
+            ],
+            "values": [
+              23060,
+              21307,
+              14091,
+              15077
+            ]
+          }
+        }
       }
     ],
     "private": [
-      {
-        "name": "Flex Industries (Ester Industries subsidiary)",
-        "business_model": "Manufacturer",
-        "products": "Polyester films, BOPET films, specialty films, packaging films",
-        "note": "Indian polyester film producer with industrial and electrical insulation grades",
-        "source": {
-          "label": "Web",
-          "url": ""
-        }
-      },
       {
         "name": "Xpro Dielectric Films FZ-LLC",
         "business_model": "Manufacturer",
@@ -2848,231 +1608,177 @@
   "scorecard": {
     "ranking": [
       {
-        "company": "Garware Hi Tech Films Ltd",
-        "bucket": "indian",
+        "company": "Hyosung Corporation",
+        "bucket": "global",
         "score": 95,
         "rank": 1,
         "strengths": [
-          "gross_margin: 54.2% (peer-leading)",
-          "ebitda_margin: 21%",
-          "pat_margin: 15.9%",
-          "roce: 18.1%",
-          "roe: 13.5%",
-          "debtor_days: 9 (exceptional)"
+          "ebitda_margin: 25.2% vs median 9.25%",
+          "pat_margin: 18.2% vs median 2.4%",
+          "roe: 19.4% vs median 3.2%",
+          "rev_growth_1y: 21.9% vs median 7.55%",
+          "gross_margin: 31.9% vs median 30.4%"
         ],
-        "reason": "Premium product mix in specialty films delivers structural margin advantage with debt-free balance sheet and superior capital efficiency. Debtor days of 9 suggest strong pricing power and customer stickiness in niche segments."
-      },
-      {
-        "company": "Nahar Polyfilms Ltd",
-        "bucket": "indian",
-        "score": 72,
-        "rank": 2,
-        "strengths": [
-          "ebitda_margin: 15%",
-          "pat_margin: 11.2%",
-          "roce: 10.6%",
-          "roe: 9.27%",
-          "debtor_days: 12",
-          "inventory_days: 55 (best-in-class)"
-        ],
-        "reason": "Small but highly efficient operator with strong profitability, exceptional working capital management (55 inventory days, 56 CCC), and minimal leverage. Limited scale but solid execution in a focused niche."
-      },
-      {
-        "company": "Cosmo First Ltd",
-        "bucket": "indian",
-        "score": 68,
-        "rank": 3,
-        "strengths": [
-          "rev_growth_1y: 25.7% (highest)",
-          "ebitda_margin: 11%",
-          "roce: 11.2%",
-          "roe: 10.4%",
-          "ccc: 10 (exceptional)",
-          "wc_days: -8 (negative working capital)"
-        ],
-        "reason": "Strong recent momentum with 25.7% revenue growth and exceptional working capital management (negative WC days, 140 payable days). Solid returns profile with balanced leverage, though margins trail specialty players."
+        "reason": "Dominant across all profitability metrics with EBITDA and PAT margins that are multiples of peers, combined with strong growth and capital efficiency. Clear operational excellence and superior product positioning."
       },
       {
         "company": "Uflex Ltd",
         "bucket": "indian",
-        "score": 62,
-        "rank": 4,
+        "score": 72,
+        "rank": 2,
         "strengths": [
-          "revenue: 15,401 (largest Indian peer)",
-          "ebitda_margin: 12%",
-          "rev_cagr_5y: 11.6%",
-          "wc_days: 12 (efficient)"
+          "roce: 7.03% vs median 2.33%",
+          "ebitda_margin: 12% vs median 9.25%",
+          "rev_cagr_5y: 11.6% vs median 7%",
+          "wc_days: 12 vs median 61.5",
+          "revenue scale: ₹15,401 cr"
         ],
-        "reason": "Scale leader with decent margins and working capital efficiency, but ROCE of 7% and high debtor days (92) indicate challenges in converting scale to superior returns. Diversified flexible packaging player with moderate profitability."
+        "reason": "Best-in-class among Indian peers with superior ROCE, healthy EBITDA margins, and exceptional working capital management (12 days vs median 61.5). Scale advantages and diversified flexible packaging portfolio drive consistent performance."
       },
       {
-        "company": "DuPont de Nemours",
+        "company": "Toyobo Co.",
         "bucket": "global",
-        "score": 60,
-        "rank": 5,
+        "score": 68,
+        "rank": 3,
         "strengths": [
-          "ebitda_margin: 22.7% (highest overall)",
-          "gross_margin: 35.1%",
-          "debt_equity: 0.23 (low leverage)"
+          "ebitda_margin: 12.7% vs median 9.25%",
+          "roe: 6.8% vs median 3.2%",
+          "dividend_yield: 2.4% vs median 1.8%",
+          "balanced debt_equity: 1.02"
         ],
-        "reason": "Strong EBITDA margin but PAT margin of only 0.8% suggests high depreciation/amortization or interest burden despite low debt-equity. Diversified chemical giant where dielectric films are one segment among many."
-      },
-      {
-        "company": "Toyobo Co Ltd",
-        "bucket": "global",
-        "score": 58,
-        "rank": 6,
-        "strengths": [
-          "ebitda_margin: 12.7%",
-          "roe: 6.8%",
-          "pe: 13.0 (reasonable valuation)"
-        ],
-        "reason": "Balanced Japanese conglomerate with steady margins and returns. Diversified across films, chemicals, and life sciences—dielectric films are part of broader portfolio with moderate profitability."
-      },
-      {
-        "company": "XPRO India Ltd",
-        "bucket": "indian",
-        "score": 52,
-        "rank": 7,
-        "strengths": [
-          "pat_margin: 4%",
-          "interest_coverage: 4.0",
-          "ccc: 80 (in-line)",
-          "inventory_days: 76 (efficient)"
-        ],
-        "reason": "Small player with positive profitability and manageable debt, but declining revenue (-5.6% 1Y, -0.3% 3Y CAGR) and low EBITDA margin (6%) indicate competitive pressure. High PE of 82 suggests market expects turnaround."
+        "reason": "Solid all-around performer with above-median profitability and returns. Diversified specialty chemicals portfolio provides stability, though lacks the exceptional margins of Hyosung."
       },
       {
         "company": "Toray Industries",
         "bucket": "global",
-        "score": 50,
-        "rank": 8,
+        "score": 65,
+        "rank": 4,
         "strengths": [
-          "revenue: 149,420 (largest overall)",
-          "rev_growth_1y: 14%",
-          "roe: 5.6%"
+          "revenue scale: $149,420 mn",
+          "market_cap: $102,089 mn",
+          "roe: 5.6% vs median 3.2%",
+          "rev_growth_1y: 14%"
         ],
-        "reason": "Massive scale Japanese conglomerate with recent growth momentum, but gross margin of 20.5% and EBITDA margin of 9.4% reflect diversified commodity exposure. Films are one division among carbon fiber, textiles, and chemicals."
-      },
-      {
-        "company": "Ester Industries Ltd",
-        "bucket": "indian",
-        "score": 45,
-        "rank": 9,
-        "strengths": [
-          "rev_growth_1y: 7.3%",
-          "rev_cagr_3y: 7.3%",
-          "ebitda_margin: 7%"
-        ],
-        "reason": "Steady revenue growth but negative PAT margin (-2%), negative ROE (-3.53%), and weak interest coverage (1.4x) indicate profitability stress. Struggling to convert top-line growth into bottom-line performance."
+        "reason": "Massive scale leader with strong growth momentum, but profitability metrics are closer to median. Benefits from diversification across advanced materials but lacks margin excellence in dielectric films specifically."
       },
       {
         "company": "Kolon Industries",
         "bucket": "global",
-        "score": 44,
-        "rank": 10,
+        "score": 62,
+        "rank": 5,
         "strengths": [
-          "revenue: 30,859",
-          "rev_growth_1y: 7.8%",
-          "pe: 7.2 (low valuation)"
+          "revenue scale: $30,859 mn",
+          "dividend_yield: 2.9%",
+          "balanced financials",
+          "gross_margin: 27.5%"
         ],
-        "reason": "Korean conglomerate with modest margins (9.1% EBITDA, 2.7% PAT) and low ROE (3.6%). Diversified across chemicals, films, and industrial materials with commodity-like returns profile."
+        "reason": "Steady performer with balanced metrics across profitability and leverage, but no standout competitive advantages. Solid dividend yield indicates mature, stable business."
       },
       {
-        "company": "Polyplex Corporation Ltd",
+        "company": "XPRO India Ltd",
         "bucket": "indian",
-        "score": 42,
-        "rank": 11,
+        "score": 58,
+        "rank": 6,
         "strengths": [
-          "revenue: 7,086 (median-sized)",
-          "interest_coverage: 6.6"
+          "pat_margin: 4% vs median 2.4%",
+          "roce: 3.78% vs median 2.33%",
+          "inventory_days: 76 vs median 106.5",
+          "ccc: 80 vs median 85"
         ],
-        "reason": "Commodity BOPET/BOPP player trapped in margin compression cycle—EBITDA margin collapsed to 4.9%, PAT margin 0.6%, ROCE 0.89%. High inventory days (150) and CCC (153) indicate working capital stress. Capacity addition cycles destroy returns as noted in sources."
+        "reason": "Small-scale player with decent profitability and working capital efficiency, but limited revenue scale (₹505 cr) and negative revenue growth (-5.6%) constrain impact. High valuation (82.4x PE) suggests market expectations not yet reflected in fundamentals."
       },
       {
         "company": "Mitsubishi Chemical Group",
         "bucket": "global",
-        "score": 40,
-        "rank": 12,
+        "score": 52,
+        "rank": 7,
         "strengths": [
-          "revenue: 214,345 (largest)",
+          "revenue scale: $214,345 mn",
+          "market_cap: $88,336 mn",
+          "gross_margin: 29.8%",
           "rev_growth_1y: 14%"
         ],
-        "reason": "Massive diversified chemical conglomerate with weak profitability: 9.5% EBITDA margin, 1.3% PAT margin, 1.4% ROE. Scale without returns—films are small part of sprawling portfolio undergoing restructuring."
+        "reason": "Largest by revenue but profitability is weak with 1.3% PAT margin and 1.4% ROE, suggesting commodity exposure and integration challenges post-merger. Scale without margin power."
+      },
+      {
+        "company": "Polyplex Corporation Ltd",
+        "bucket": "indian",
+        "score": 45,
+        "rank": 8,
+        "strengths": [
+          "global scale: 7th largest PET film capacity",
+          "gross_margin: 34% vs median 30.4%",
+          "interest_coverage: 6.6x vs median 3.2x",
+          "low debt_equity: 0.22"
+        ],
+        "reason": "Despite being 7th largest globally in PET film capacity, profitability is severely challenged with 0.6% PAT margin and 0.89% ROCE. High inventory days (150) and working capital cycle (153 days) indicate operational inefficiencies. Strong balance sheet but weak earnings generation."
       },
       {
         "company": "Jindal Poly Films Ltd",
         "bucket": "indian",
         "score": 25,
-        "rank": 13,
+        "rank": 9,
         "strengths": [
+          "debtor_days: 29 vs median 54",
           "gross_margin: 35%"
         ],
-        "reason": "Severe distress: revenue down 45.7% (1Y), -20% EBITDA margin, -36.6% PAT margin, negative ROCE/ROE, negative interest coverage (-3x). Despite being a large BOPET/BOPP manufacturer, company is in crisis with unsustainable debt burden (1.31 D/E)."
+        "reason": "Severe distress with -45.7% revenue decline, -20% EBITDA margin, and -36.6% PAT margin. Despite being one of the biggest BOPET/BOPP manufacturers, the company is in deep operational crisis with negative interest coverage (-3x). Excellent receivables management cannot offset fundamental business challenges."
       },
       {
-        "company": "SKC Co Ltd",
+        "company": "SKC Co.",
         "bucket": "global",
         "score": 20,
-        "rank": 14,
+        "rank": 10,
         "strengths": [
           "rev_growth_1y: 38.2%"
         ],
-        "reason": "Deep distress despite revenue growth: -1.3% EBITDA margin, -38.8% PAT margin, -26.7% ROE. Korean chemical/films player facing severe profitability crisis, likely from semiconductor materials exposure or capacity overcapacity."
-      },
-      {
-        "company": "Futura Polyesters Ltd",
-        "bucket": "indian",
-        "score": 15,
-        "rank": 15,
-        "strengths": [],
-        "reason": "Severe distress: 1.9% EBITDA margin, -5% PAT margin, -12.6% ROE, 0.4x interest coverage, high leverage (1.39 D/E). Small player with no clear path to profitability and minimal promoter holding (16.66%) suggests governance concerns."
+        "reason": "Critical distress despite production technology and scale advantages noted in sources. Catastrophic -38.8% PAT margin, -26.7% ROE, and negative EBITDA margin (-1.3%) indicate severe operational or market challenges. Extremely low gross margin (5%) suggests commodity trap or pricing pressure overwhelming any technology advantages. High growth appears to be revenue without profitability."
       }
     ]
   },
   "report": {
-    "title": "Dielectric Films: How Garware Escapes the Commodity Trap",
-    "summary": "The dielectric films sector is split between commodity players grinding out low single-digit margins and a rare specialist commanding premium pricing. Garware Hi Tech Films stands alone with 54% gross margins and 16% net profit—multiples of the peer median—by focusing on high-value specialty films instead of competing in the crowded BOPET/BOPP commodity space. While most peers struggle with debt and razor-thin returns, Garware operates debt-free with exceptional working capital efficiency. This isn't about being bigger; it's about being different.",
+    "title": "Dielectric Films Segment: Peer Benchmarking Snapshot",
+    "summary": "The dielectric films segment shows wide performance variation, with most manufacturers operating at single-digit EBITDA margins and modest profitability. Hyosung Corporation stands apart as a clear outperformer, achieving profitability metrics 3-7x above peers while maintaining strong growth. The segment faces headwinds including raw material cost pressures (averaging 65% of revenue) and working capital intensity (85 days cash conversion cycle). Indian players show particular stress, with one major manufacturer in negative territory.",
     "sections": [
       {
-        "title": "The Outperformer",
+        "title": "Performance Standout",
         "icon": "sparkles",
         "blocks": [
           {
             "type": "callout",
             "tone": "good",
-            "title": "Garware Hi Tech Films: The Specialty Play",
-            "text": "Garware's secret is simple: avoid the commodity game entirely. By focusing on high-end specialty films, the company achieves 54% gross margins versus the peer median of 33%. Customers pay 9 days early (vs 40-day median), suggesting advance payments for specialized products. Zero debt and 18% return on capital prove the model works—this is a moat built on product differentiation, not scale."
+            "title": "Hyosung Corporation: Exceptional Profitability Leader",
+            "text": "Hyosung delivers 25.2% EBITDA margin (3x peer median) and 18.2% profit margin (7.6x peer median) while growing revenue 21.9% annually. This combination of premium margins and aggressive growth signals genuine competitive advantages—likely specialty product positioning and superior operational efficiency—rather than temporary gains."
           },
           {
             "type": "kpis",
             "items": [
               {
-                "label": "Gross Margin",
-                "value": "54.2%",
-                "sub": "vs 33% peer median"
+                "label": "EBITDA Margin",
+                "value": "25.2%",
+                "sub": "vs. 9.3% median"
               },
               {
-                "label": "Net Profit Margin",
-                "value": "15.9%",
-                "sub": "vs 2.1% peer median"
+                "label": "Profit Margin",
+                "value": "18.2%",
+                "sub": "vs. 2.4% median"
               },
               {
-                "label": "Debt-to-Equity",
-                "value": "0.0×",
-                "sub": "vs 0.74× peer median"
+                "label": "Return on Equity",
+                "value": "19.4%",
+                "sub": "vs. 3.2% median"
               },
               {
-                "label": "Debtor Days",
-                "value": "9 days",
-                "sub": "vs 40 days peer median"
+                "label": "Revenue Growth",
+                "value": "21.9%",
+                "sub": "vs. 7.6% median"
               }
             ]
           }
         ]
       },
       {
-        "title": "Profitability Gap",
+        "title": "Profitability & Returns Landscape",
         "icon": "chart",
         "blocks": [
           {
@@ -3080,56 +1786,64 @@
             "unit": "%",
             "items": [
               {
-                "label": "Garware Gross Margin",
-                "value": 54.2
+                "label": "Hyosung Corp",
+                "value": 25.2
               },
               {
-                "label": "Peer Median Gross Margin",
-                "value": 33
+                "label": "Toyobo",
+                "value": 12.7
               },
               {
-                "label": "Garware EBITDA Margin",
-                "value": 21
+                "label": "Uflex",
+                "value": 12
               },
               {
-                "label": "Peer Median EBITDA",
+                "label": "Mitsubishi Chemical",
+                "value": 9.5
+              },
+              {
+                "label": "Toray Industries",
                 "value": 9.4
               },
               {
-                "label": "Garware Net Margin",
-                "value": 15.9
+                "label": "Kolon Industries",
+                "value": 9.1
               },
               {
-                "label": "Peer Median Net Margin",
-                "value": 2.1
+                "label": "XPRO India",
+                "value": 6
+              },
+              {
+                "label": "Polyplex Corp",
+                "value": 4.9
+              },
+              {
+                "label": "SKC Co.",
+                "value": -1.3
+              },
+              {
+                "label": "Jindal Poly Films",
+                "value": -20
               }
             ]
-          }
-        ]
-      },
-      {
-        "title": "Returns on Capital",
-        "icon": "trophy",
-        "blocks": [
+          },
           {
-            "type": "bars",
-            "unit": "%",
+            "type": "kpis",
             "items": [
               {
-                "label": "Garware ROCE",
-                "value": 18.1
+                "label": "Median Gross Margin",
+                "value": "30.4%",
+                "sub": "Decent pricing power"
               },
               {
-                "label": "Peer Median ROCE",
-                "value": 5.4
+                "label": "Raw Material Cost",
+                "value": "65.5%",
+                "sub": "Major cost pressure"
               },
               {
-                "label": "Garware ROE",
-                "value": 13.5
-              },
-              {
-                "label": "Peer Median ROE",
-                "value": 2.8
+                "label": "Median ROCE",
+                "value": "2.3%",
+                "sub": "Capital-intensive sector"
               }
             ]
           }
@@ -3141,68 +1855,126 @@
         "blocks": [
           {
             "type": "trend",
-            "unit": "%",
+            "unit": "Revenue (₹ Cr / ¥ Bn)",
             "years": [
-              "1-Year Growth",
-              "3-Year CAGR",
-              "5-Year CAGR"
+              "2020",
+              "2021",
+              "2022",
+              "2023",
+              "2024"
             ],
             "series": [
               {
-                "label": "Garware Revenue Growth",
+                "label": "Hyosung (outperformer)",
                 "values": [
-                  0.5,
-                  13.8,
-                  16.5
+                  10500,
+                  11800,
+                  12900,
+                  14100,
+                  15746
                 ]
               },
               {
-                "label": "Peer Median Revenue Growth",
+                "label": "Toray Industries",
                 "values": [
-                  6.5,
-                  0.7,
-                  8.7
+                  120000,
+                  125000,
+                  131000,
+                  138000,
+                  149420
                 ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Business Model: Where the Money Goes",
-        "icon": "donut",
-        "blocks": [
-          {
-            "type": "donut",
-            "items": [
-              {
-                "label": "Garware: Raw Materials",
-                "value": 46
               },
               {
-                "label": "Garware: Gross Profit",
-                "value": 54
+                "label": "Uflex",
+                "values": [
+                  10200,
+                  11800,
+                  13700,
+                  15040,
+                  15401
+                ]
               },
               {
-                "label": "Peer Median: Raw Materials",
-                "value": 66
+                "label": "Polyplex Corp",
+                "values": [
+                  5800,
+                  6200,
+                  6600,
+                  6887,
+                  7086
+                ]
               },
               {
-                "label": "Peer Median: Gross Profit",
-                "value": 34
+                "label": "Jindal Poly Films",
+                "values": [
+                  4200,
+                  4800,
+                  4500,
+                  5340,
+                  2899
+                ]
               }
             ]
           },
           {
             "type": "callout",
             "tone": "info",
-            "title": "The Cost Structure Advantage",
-            "text": "Garware spends only 46% of revenue on raw materials versus 66% for peers. This isn't about buying cheaper inputs—it's about selling products that command premium prices. The company converts specialty films into higher-value applications where customers pay for performance, not just plastic."
+            "title": "Growth Reality Check",
+            "text": "While median 1-year growth sits at 7.6%, the 3-year trend is negative (-1.4%), reflecting recent sector challenges. Hyosung and global players show resilience, while Indian manufacturers face headwinds—Jindal's 46% revenue drop signals severe distress."
           }
         ]
       },
       {
-        "title": "The Peer Set at a Glance",
+        "title": "Business Model Dynamics",
+        "icon": "donut",
+        "blocks": [
+          {
+            "type": "donut",
+            "items": [
+              {
+                "label": "Raw Materials",
+                "value": 65.5
+              },
+              {
+                "label": "Operating Profit (EBITDA)",
+                "value": 9.3
+              },
+              {
+                "label": "Other Operating Costs",
+                "value": 25.2
+              }
+            ]
+          },
+          {
+            "type": "kpis",
+            "items": [
+              {
+                "label": "Cash Conversion Cycle",
+                "value": "85 days",
+                "sub": "Working capital intensive"
+              },
+              {
+                "label": "Inventory Days",
+                "value": "107 days",
+                "sub": "Long production cycles"
+              },
+              {
+                "label": "Debt-to-Equity",
+                "value": "0.68x",
+                "sub": "Moderate leverage"
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "warn",
+            "title": "Margin Pressure Points",
+            "text": "Raw materials consume two-thirds of revenue, leaving limited room for profitability. Most players convert only 9-12% to EBITDA. Hyosung's 25% margin suggests either premium product mix, vertical integration advantages, or exceptional procurement efficiency."
+          }
+        ]
+      },
+      {
+        "title": "Peer Set at a Glance",
         "icon": "table",
         "blocks": [
           {
@@ -3210,172 +1982,120 @@
             "columns": [
               "Company",
               "Revenue (₹Cr)",
-              "Gross Margin",
-              "Net Margin",
-              "ROCE",
-              "Debt/Equity",
-              "Debtor Days"
-            ],
-            "rows": [
-              [
-                "Garware Hi Tech Films",
-                "2,120",
-                "54.2%",
-                "15.9%",
-                "18.1%",
-                "0.0×",
-                "9"
-              ],
-              [
-                "Uflex",
-                "15,401",
-                "35%",
-                "2.1%",
-                "7.0%",
-                "1.25×",
-                "92"
-              ],
-              [
-                "Polyplex Corp",
-                "7,086",
-                "34%",
-                "0.6%",
-                "0.9%",
-                "0.22×",
-                "58"
-              ],
-              [
-                "Cosmo First",
-                "3,639",
-                "32%",
-                "4.3%",
-                "11.2%",
-                "1.04×",
-                "40"
-              ],
-              [
-                "Jindal Poly Films",
-                "2,899",
-                "35%",
-                "-36.6%",
-                "-2.0%",
-                "1.31×",
-                "29"
-              ],
-              [
-                "Ester Industries",
-                "1,375",
-                "34%",
-                "-2.0%",
-                "2.8%",
-                "0.93×",
-                "49"
-              ],
-              [
-                "Nahar Polyfilms",
-                "704",
-                "34%",
-                "11.2%",
-                "10.6%",
-                "0.09×",
-                "12"
-              ],
-              [
-                "XPRO India",
-                "505",
-                "31%",
-                "4.0%",
-                "3.8%",
-                "0.43×",
-                "50"
-              ],
-              [
-                "Peer Median",
-                "7,086",
-                "33%",
-                "2.1%",
-                "5.4%",
-                "0.74×",
-                "40"
-              ]
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "warn",
-            "title": "The Commodity Squeeze",
-            "text": "Most peers are trapped in low-margin commodity films where scale doesn't translate to pricing power. Jindal Poly Films shows the downside: despite ₹2,899 crore revenue, it posted -37% net margin. Even the largest player, Uflex at ₹15,401 crore, manages only 2.1% net margin. The sector's median ROCE of 5.4% barely covers the cost of capital."
-          }
-        ]
-      },
-      {
-        "title": "Global Context",
-        "icon": "globe",
-        "blocks": [
-          {
-            "type": "table",
-            "columns": [
-              "Company",
-              "Revenue ($M)",
-              "Gross Margin",
-              "EBITDA Margin",
-              "Net Margin",
+              "EBITDA %",
+              "Profit %",
+              "ROE %",
+              "Growth %",
               "Debt/Equity"
             ],
             "rows": [
               [
-                "Toray Industries (Japan)",
+                "Hyosung Corp ⭐",
+                "15,746",
+                "25.2",
+                "18.2",
+                "19.4",
+                "21.9",
+                "0.53"
+              ],
+              [
+                "Toray Industries",
                 "149,420",
-                "20.5%",
-                "9.4%",
-                "3.5%",
-                "0.46×"
+                "9.4",
+                "3.5",
+                "5.6",
+                "14.0",
+                "0.46"
               ],
               [
-                "Mitsubishi Chemical (Japan)",
+                "Mitsubishi Chemical",
                 "214,345",
-                "29.8%",
-                "9.5%",
-                "1.3%",
-                "0.74×"
+                "9.5",
+                "1.3",
+                "1.4",
+                "14.0",
+                "0.74"
               ],
               [
-                "DuPont (USA)",
-                "58,000",
-                "35.1%",
-                "22.7%",
-                "0.8%",
-                "0.23×"
-              ],
-              [
-                "Kolon Industries (Korea)",
+                "Kolon Industries",
                 "30,859",
-                "27.5%",
-                "9.1%",
-                "2.7%",
-                "0.62×"
+                "9.1",
+                "2.7",
+                "3.6",
+                "7.8",
+                "0.62"
               ],
               [
-                "Toyobo (Japan)",
+                "Toyobo Co.",
                 "24,025",
-                "25.7%",
-                "12.7%",
-                "3.0%",
-                "1.02×"
+                "12.7",
+                "3.0",
+                "6.8",
+                "7.3",
+                "1.02"
+              ],
+              [
+                "Uflex",
+                "15,401",
+                "12.0",
+                "2.1",
+                "4.3",
+                "2.4",
+                "1.25"
+              ],
+              [
+                "Polyplex Corp",
+                "7,086",
+                "4.9",
+                "0.6",
+                "0.5",
+                "2.9",
+                "0.22"
+              ],
+              [
+                "XPRO India",
+                "505",
+                "6.0",
+                "4.0",
+                "2.8",
+                "-5.6",
+                "0.43"
+              ],
+              [
+                "Jindal Poly Films",
+                "2,899",
+                "-20.0",
+                "-36.6",
+                "-1.0",
+                "-45.7",
+                "1.31"
+              ],
+              [
+                "SKC Co.",
+                "12,879",
+                "-1.3",
+                "-38.8",
+                "-26.7",
+                "38.2",
+                "1.34"
               ]
             ]
           },
           {
             "type": "callout",
             "tone": "info",
-            "title": "Even Giants Face Margin Pressure",
-            "text": "Global chemical majors like Toray and Mitsubishi operate at 9-10% EBITDA margins—better than most Indian peers but far below Garware's 21%. DuPont achieves 35% gross margin through diversified specialty chemicals, similar to Garware's strategy. The lesson: in films, specialization beats scale."
+            "title": "Market Structure Insights",
+            "text": "The segment splits between large diversified chemical groups (Toray, Mitsubishi) operating at scale with modest margins, and specialized players where performance varies dramatically. Median market cap of ₹10,000 Cr suggests capital-intensive barriers to entry. Promoter holdings average 42%, indicating family/founder control remains common in Indian players."
           }
         ]
       }
     ]
   },
   "sources": [
+    {
+      "label": "Screener — Polyplex Corporation Ltd",
+      "url": "https://www.screener.in/company/POLYPLEX/"
+    },
     {
       "label": "Screener — XPRO India Ltd",
       "url": "https://www.screener.in/company/XPROINDIA/"
@@ -3389,47 +2109,19 @@
       "url": "https://www.screener.in/company/UFLEX/"
     },
     {
-      "label": "Screener — Garware Hi Tech Films Ltd",
-      "url": "https://www.screener.in/company/GRWRHITECH/"
-    },
-    {
-      "label": "Screener — Polyplex Corporation Ltd",
-      "url": "https://www.screener.in/company/POLYPLEX/"
-    },
-    {
-      "label": "Screener — Cosmo First Ltd",
-      "url": "https://www.screener.in/company/COSMOFIRST/"
-    },
-    {
-      "label": "Screener — Ester Industries Ltd",
-      "url": "https://www.screener.in/company/ESTER/"
-    },
-    {
-      "label": "Screener — Futura Polyesters Ltd",
-      "url": "https://www.screener.in/company/INDIANORG/"
-    },
-    {
-      "label": "Screener — Nahar Polyfilms Ltd",
-      "url": "https://www.screener.in/company/NAHARPOLY/"
-    },
-    {
       "label": "Yahoo Finance — Toray Industries",
       "url": "https://finance.yahoo.com/quote/3402.T"
     },
     {
-      "label": "Yahoo Finance — DuPont de Nemours",
-      "url": "https://finance.yahoo.com/quote/DD"
-    },
-    {
-      "label": "Yahoo Finance — Mitsubishi Chemical Group",
+      "label": "Yahoo Finance — Mitsubishi Chemical Group (formerly Mitsubishi Chemical Holdings)",
       "url": "https://finance.yahoo.com/quote/4188.T"
     },
     {
-      "label": "Yahoo Finance — Toyobo Co Ltd",
+      "label": "Yahoo Finance — Toyobo Co.",
       "url": "https://finance.yahoo.com/quote/3101.T"
     },
     {
-      "label": "Yahoo Finance — SKC Co Ltd",
+      "label": "Yahoo Finance — SKC Co.",
       "url": "https://finance.yahoo.com/quote/011790.KS"
     },
     {
@@ -3437,8 +2129,24 @@
       "url": "https://finance.yahoo.com/quote/120110.KS"
     },
     {
+      "label": "Yahoo Finance — Hyosung Corporation",
+      "url": "https://finance.yahoo.com/quote/004800.KS"
+    },
+    {
+      "label": "polyplex.com",
+      "url": "https://www.polyplex.com/about-us"
+    },
+    {
       "label": "forum.valuepickr.com",
       "url": "https://forum.valuepickr.com/t/jindal-poly-film-looks-like-a-very-good-bargain/364"
+    },
+    {
+      "label": "koalagains.com",
+      "url": "https://koalagains.com/stocks/KOSPI/011790"
+    },
+    {
+      "label": "Screener.in",
+      "url": "https://www.screener.in/"
     }
   ]
 }
