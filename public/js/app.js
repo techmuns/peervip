@@ -1,17 +1,22 @@
 // app.js — entry point + hash router. Screens: Home (search + report cards),
-// Loading (staged progress with a setStage() API, elapsed timer, easing bar,
-// localStorage resume, Cancel), and Dashboard.
+// Loading (LIVE staged progress driven by the pipeline via polling, with an
+// error state, elapsed timer, easing bar, localStorage resume, Cancel), and
+// Dashboard.
 //
-// Step 2 hook: the loading pipeline stages are REAL. A live backend can drive
-// them by setting `window.PeerVIP.autoAdvance = false` and calling
-// `window.PeerVIP.setStage(i)` / `window.PeerVIP.finish()`.
+// Live wiring (Step 2): on Run, a STRONG index match opens the cached report;
+// anything weaker POSTs /api/research and drives the loading screen from
+// /api/research-status polling (window.PeerVIP.autoAdvance=false). On done it
+// loads /api/report and navigates to #/r/<slug>; on failed it calls
+// window.PeerVIP.fail(). Offline / no-Functions degrades gracefully.
 import { loadIndex, loadReport, matchReport } from './data.js';
+import { dispatchResearch, fetchStatus } from './research.js';
 import { renderDashboard } from './dashboard.js';
 import { setupCharts } from './charts.js';
 import { esc, fmtDate } from './format.js';
 
 const app = () => document.getElementById('app');
 const RUN_KEY = 'peervip:run';
+const POLL_MS = 2500;
 
 const STAGES = [
   'Understanding the business',
@@ -23,8 +28,8 @@ const STAGES = [
   'Building your report',
 ];
 
-// Public API for Step 2's live pipeline.
-window.PeerVIP = { autoAdvance: true, setStage: () => {}, finish: () => {}, STAGES };
+// Public API — the live pipeline drives these while the loading route is mounted.
+window.PeerVIP = { autoAdvance: true, setStage: () => {}, finish: () => {}, fail: () => {}, STAGES };
 
 let indexData = null;
 let loadingCtrl = null;
@@ -33,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => { setupCharts(); route(); })
 window.addEventListener('hashchange', route);
 
 function go(hash) { if (location.hash === hash) route(); else location.hash = hash; }
-
 function stopLoading() { if (loadingCtrl) { loadingCtrl.destroy(); loadingCtrl = null; } }
 
 async function route() {
@@ -46,6 +50,23 @@ async function route() {
   if (path === '/loading') return renderLoading(decodeURIComponent(params.get('q') || ''));
   if (path.startsWith('/r/')) return renderDashboardRoute(decodeURIComponent(path.slice(3)));
   return renderHome();
+}
+
+/**
+ * Run decision (G6): a STRONG index match (score >= 70) opens the cached
+ * dashboard; anything weaker dispatches a fresh research run via the loading
+ * screen. The closest weak match (if any) is stashed so the loading screen can
+ * offer it as a shortcut.
+ */
+async function runQuery(query) {
+  if (!query) return;
+  let index = null;
+  try { index = indexData = indexData || await loadIndex(); } catch (_) { /* offline */ }
+  const { entry, score } = matchReport(query, index || {});
+  if (entry && score >= 70) { go('#/r/' + encodeURIComponent(entry.slug)); return; }
+  const weak = entry ? { slug: entry.slug, name: entry.name } : null;
+  writeRun({ q: query, slug: null, name: query, weak, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false });
+  go('#/loading?q=' + encodeURIComponent(query));
 }
 
 // ============================================================ HOME
@@ -61,7 +82,7 @@ async function renderHome() {
 
         <div class="text-center max-w-2xl mx-auto">
           <div class="inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-slate-200 px-3 py-1 text-xs font-semibold text-slate-500 mb-5 pv-fade-in">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Sample data — live research connects in Step 2
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live peer research — Screener + AI · seeded samples load instantly
           </div>
           <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
             Find a company's <span class="brand-text">true peers</span>.<br class="hidden sm:block"> Benchmark everything.
@@ -96,17 +117,15 @@ async function renderHome() {
       </div>
     </div>`;
 
-  // wire search
   const form = el.querySelector('[data-search]');
-  form.addEventListener('submit', (e) => { e.preventDefault(); const q = form.q.value.trim(); if (q) go('#/loading?q=' + encodeURIComponent(q)); });
+  form.addEventListener('submit', (e) => { e.preventDefault(); runQuery(form.q.value.trim()); });
   el.querySelectorAll('[data-example]').forEach((b) => b.addEventListener('click', () => { form.q.value = b.dataset.example; form.q.focus(); }));
 
-  // report cards
   const cards = el.querySelector('[data-cards]');
   try {
     indexData = indexData || await loadIndex();
     const reports = indexData.reports || [];
-    cards.innerHTML = reports.length ? reports.map(cardHtml).join('') : `<div class="text-slate-400 text-sm">No reports yet.</div>`;
+    cards.innerHTML = reports.length ? reports.map(cardHtml).join('') : `<div class="text-slate-400 text-sm">No reports yet — run a search above.</div>`;
     cards.querySelectorAll('[data-slug]').forEach((c) => c.addEventListener('click', () => go('#/r/' + encodeURIComponent(c.dataset.slug))));
   } catch (e) {
     cards.innerHTML = `<div class="text-rose-500 text-sm">Could not load reports (${esc(e.message)}).</div>`;
@@ -118,7 +137,7 @@ function cardHtml(r) {
   return `<button data-slug="${esc(r.slug)}" class="pv-focus text-left pv-card p-5 hover:-translate-y-0.5 hover:shadow-md transition group">
     <div class="flex items-start justify-between gap-2">
       <span class="pv-chip ${typeChip} px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide">${esc(r.type || 'report')}</span>
-      ${r.sample ? '<span class="pv-chip bg-amber-50 text-amber-600 px-2 py-0.5 text-[0.6rem] font-bold uppercase">sample</span>' : ''}
+      ${r.sample ? '<span class="pv-chip bg-amber-50 text-amber-600 px-2 py-0.5 text-[0.6rem] font-bold uppercase">sample</span>' : '<span class="pv-chip bg-emerald-50 text-emerald-600 px-2 py-0.5 text-[0.6rem] font-bold uppercase">live</span>'}
     </div>
     <h3 class="font-display text-lg font-extrabold text-slate-900 mt-3 leading-tight group-hover:text-indigo-600 transition">${esc(r.name)}</h3>
     ${r.seed_company ? `<p class="text-xs text-slate-400 mt-0.5">anchor: ${esc(r.seed_company)}</p>` : ''}
@@ -129,22 +148,20 @@ function cardHtml(r) {
   </button>`;
 }
 
-// ============================================================ LOADING
+// ============================================================ LOADING (live)
 async function renderLoading(query) {
+  stopLoading();
   const el = app();
   if (!query) { go('#/'); return; }
 
-  // resolve match up-front (so we know where "View Full Dashboard" leads)
-  let match = null;
-  try { indexData = indexData || await loadIndex(); match = matchReport(query, indexData); } catch (_) { /* offline: no match */ }
-  const displayName = match ? match.name : query;
-
-  // resume prior in-flight run for the same query, else start fresh
+  // closest weak match (for the "open closest match" shortcut) + display name
   let saved = readRun();
-  if (!saved || saved.q !== query) {
-    saved = { q: query, slug: match ? match.slug : null, name: displayName, startedAt: Date.now(), stageIndex: 0, finished: false };
-    writeRun(saved);
+  if (!saved || saved.q !== query) saved = { q: query, slug: null, name: query, weak: null, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false };
+  if (!saved.weak) {
+    try { indexData = indexData || await loadIndex(); const m = matchReport(query, indexData); if (m.entry) saved.weak = { slug: m.entry.slug, name: m.entry.name }; } catch (_) { /* offline */ }
   }
+  writeRun(saved);
+  const displayName = saved.weak ? saved.weak.name : query;
 
   el.innerHTML = `
     <div class="min-h-screen flex items-center justify-center px-4 py-10">
@@ -163,10 +180,9 @@ async function renderLoading(query) {
 
         <div class="pv-progress-track h-2.5 mt-5"><div class="pv-progress-bar" data-bar style="width:0%"></div></div>
 
-        <ol class="mt-6 space-y-2.5" data-steps>
-          ${STAGES.map((s, i) => stepHtml(s, i)).join('')}
-        </ol>
+        <ol class="mt-6 space-y-2.5" data-steps>${STAGES.map((s, i) => stepHtml(s, i)).join('')}</ol>
 
+        <div data-weak class="mt-3 text-center text-xs" hidden></div>
         <div data-result class="mt-6" hidden></div>
 
         <div class="mt-6 text-center">
@@ -177,7 +193,7 @@ async function renderLoading(query) {
 
   el.querySelector('[data-cancel]').addEventListener('click', (e) => { e.preventDefault(); stopLoading(); clearRun(); go('#/'); });
 
-  loadingCtrl = createLoadingController(el, { query, match, saved });
+  loadingCtrl = createLoadingController(el, { query, saved });
 }
 
 function stepHtml(label, i) {
@@ -191,110 +207,162 @@ function stepHtml(label, i) {
   </li>`;
 }
 
-function createLoadingController(el, { query, match, saved }) {
+function createLoadingController(el, { query, saved }) {
   const bar = el.querySelector('[data-bar]');
   const pct = el.querySelector('[data-pct]');
   const elapsedEl = el.querySelector('[data-elapsed]');
   const steps = [...el.querySelectorAll('[data-step]')];
   const resultEl = el.querySelector('[data-result]');
+  const weakEl = el.querySelector('[data-weak]');
   const spinner = el.querySelector('[data-spinner]');
 
   let progress = 0;
   let stageIndex = saved.stageIndex || 0;
-  let finished = !!saved.finished;
+  let finished = false;
+  let done = false;
+  let slug = saved.slug || null;
+  const weak = saved.weak || null;
   const startedAt = saved.startedAt || Date.now();
-  let raf = null, advTimer = null, tick = null;
+  let raf = null, tick = null, poll = null;
+
+  window.PeerVIP.autoAdvance = false;
+  window.PeerVIP.setStage = setStage;
+  window.PeerVIP.finish = () => finishLive(slug);
+  window.PeerVIP.fail = failCard;
 
   function paintSteps() {
     steps.forEach((li, i) => {
-      const done = finished || i < stageIndex;
-      const activeNow = !finished && i === stageIndex;
+      const isDone = done || i < stageIndex;
+      const activeNow = !done && i === stageIndex;
       li.classList.toggle('is-active', activeNow);
-      li.classList.toggle('text-slate-700', activeNow || done);
+      li.classList.toggle('text-slate-700', activeNow || isDone);
       const dot = li.querySelector('.pv-step-dot');
-      const check = li.querySelector('.pv-step-check');
-      const spin = li.querySelector('.pv-step-spin');
-      check.hidden = !done;
-      spin.hidden = !activeNow;
-      dot.hidden = done || activeNow;
+      li.querySelector('.pv-step-check').hidden = !isDone;
+      li.querySelector('.pv-step-spin').hidden = !activeNow;
+      dot.hidden = isDone || activeNow;
       if (activeNow) { dot.style.borderColor = '#a855f7'; dot.style.color = '#a855f7'; }
     });
   }
+  function setStage(i) { stageIndex = Math.max(0, Math.min(STAGES.length - 1, i | 0)); persist(); paintSteps(); }
+  function persist() { writeRun({ q: query, slug, name: saved.name, weak, startedAt, stageIndex, finished, dispatched: !!slug }); }
 
-  function setStage(i) {
-    stageIndex = Math.max(0, Math.min(STAGES.length, i));
-    persist();
-    paintSteps();
-  }
-
-  function persist() { writeRun({ q: query, slug: match ? match.slug : null, name: saved.name, startedAt, stageIndex, finished }); }
-
-  function showResult() {
-    spinner.style.animationPlayState = 'paused';
-    spinner.style.borderTopColor = '#10b981';
-    resultEl.hidden = false;
-    if (match) {
-      resultEl.innerHTML = `
-        <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 flex flex-col sm:flex-row items-center gap-3 justify-between">
-          <p class="text-sm text-emerald-800 font-medium">✅ Report ready for <span class="font-bold">${esc(match.name)}</span>.</p>
-          <a data-view href="#/r/${encodeURIComponent(match.slug)}" class="pv-focus inline-flex items-center gap-2 rounded-xl brand-gradient px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition">
-            View Full Dashboard
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>`;
-    } else {
-      resultEl.innerHTML = `
-        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-center">
-          <p class="text-sm text-amber-800">🔎 <span class="font-semibold">Not cached yet.</span> Live research turns on in the next update — for now, try one of the seeded reports.</p>
-          <a href="#/" class="pv-focus inline-flex mt-3 items-center gap-2 rounded-xl bg-white ring-1 ring-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">← Back to search</a>
-        </div>`;
-    }
-  }
-
-  function finish() {
-    if (finished) { /* already */ }
-    finished = true;
-    stageIndex = STAGES.length;
-    persist();
-    progress = 100;
-    bar.style.width = '100%';
-    pct.textContent = '100%';
-    paintSteps();
-    stopTimers();
-    showResult();
-  }
-
-  function stopTimers() { if (raf) cancelAnimationFrame(raf); if (advTimer) clearTimeout(advTimer); if (tick) clearInterval(tick); raf = advTimer = tick = null; }
-
-  // progress easing toward ~90% + elapsed clock
   function loop() {
-    const target = finished ? 100 : 90;
-    progress += (target - progress) * 0.05;
-    if (progress > 99.5) progress = 99.5;
+    const target = done ? 100 : 90;
+    progress += (target - progress) * 0.045;
+    if (progress > 99 && !done) progress = 99;
     bar.style.width = progress.toFixed(1) + '%';
     pct.textContent = Math.round(progress) + '%';
     raf = requestAnimationFrame(loop);
   }
-  tick = setInterval(() => { elapsedEl.textContent = ((Date.now() - startedAt) / 1000).toFixed(1) + 's'; }, 100);
 
-  // Step-1 auto-advance (Step 2 sets PeerVIP.autoAdvance=false and calls setStage/finish)
-  function scheduleAdvance() {
-    if (!window.PeerVIP.autoAdvance || finished) return;
-    advTimer = setTimeout(() => {
-      if (stageIndex < STAGES.length - 1) { setStage(stageIndex + 1); scheduleAdvance(); }
-      else { setStage(STAGES.length - 1); finish(); }
-    }, 600 + Math.random() * 400);
+  function stopTimers() { if (raf) cancelAnimationFrame(raf); if (tick) clearInterval(tick); if (poll) clearTimeout(poll); raf = tick = poll = null; }
+
+  function showWeakLink() {
+    if (!weak || done || finished) { weakEl.hidden = true; return; }
+    weakEl.hidden = false;
+    weakEl.innerHTML = `<a href="#/r/${encodeURIComponent(weak.slug)}" class="text-slate-400 hover:text-indigo-600 transition">Open closest cached match: <span class="font-semibold">${esc(weak.name)}</span> →</a>`;
   }
 
-  // wire the public API to this controller
-  window.PeerVIP.setStage = setStage;
-  window.PeerVIP.finish = finish;
+  // ---- polling ----
+  function startPolling(s) {
+    slug = s; persist();
+    const step = async () => {
+      try {
+        const st = await fetchStatus(s);
+        if (st && (st.state === 'done')) { finishLive(s); return; }
+        if (st && st.state === 'failed') { failCard(st.error || 'Research failed.'); return; }
+        if (st && Number.isFinite(+st.stage)) setStage(+st.stage);
+      } catch (_) { /* transient — keep polling */ }
+      poll = setTimeout(step, POLL_MS);
+    };
+    step();
+  }
 
-  paintSteps();
-  if (finished) { showResult(); bar.style.width = '100%'; pct.textContent = '100%'; }
-  else { loop(); scheduleAdvance(); }
+  async function finishLive(s) {
+    if (finished) return;
+    finished = true; done = true; slug = s; stageIndex = STAGES.length; persist();
+    stopTimers();
+    progress = 100; bar.style.width = '100%'; pct.textContent = '100%'; paintSteps();
+    spinner.style.animationPlayState = 'paused'; spinner.style.borderTopColor = '#10b981';
+    weakEl.hidden = true;
+    resultEl.hidden = false;
+    resultEl.innerHTML = `
+      <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 flex flex-col sm:flex-row items-center gap-3 justify-between">
+        <p class="text-sm text-emerald-800 font-medium">✅ Report ready — opening…</p>
+        <a data-view href="#/r/${encodeURIComponent(s)}" class="pv-focus inline-flex items-center gap-2 rounded-xl brand-gradient px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition">
+          View Full Dashboard
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>`;
+    resultEl.querySelector('[data-view]').addEventListener('click', (e) => { e.preventDefault(); location.hash = '#/r/' + encodeURIComponent(s); });
+    // G2: navigate to the freshly-researched slug directly (not a captured match).
+    try { await loadReport(s, { fresh: true }); location.hash = '#/r/' + encodeURIComponent(s); }
+    catch (e) { failCard('The report was generated but could not be loaded: ' + e.message); }
+  }
 
-  return { destroy: stopTimers, setStage, finish };
+  function failCard(message) {
+    if (done) return;
+    done = true; finished = false; stopTimers();
+    spinner.style.animationPlayState = 'paused'; spinner.style.borderTopColor = '#ef4444';
+    steps.forEach((li) => { li.querySelector('.pv-step-spin').hidden = true; });
+    weakEl.hidden = true;
+    resultEl.hidden = false;
+    resultEl.innerHTML = `
+      <div class="rounded-xl border border-rose-200 bg-rose-50 p-4">
+        <p class="text-sm text-rose-800 font-semibold mb-1">⚠️ Research didn't finish</p>
+        <p class="text-sm text-rose-700/90">${esc(message || 'Something went wrong.')}</p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <button data-retry class="pv-focus inline-flex items-center gap-2 rounded-xl brand-gradient px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition">Try again</button>
+          <a href="#/" class="pv-focus inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">← Back to search</a>
+          ${weak ? `<a href="#/r/${encodeURIComponent(weak.slug)}" class="pv-focus inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">Open closest match</a>` : ''}
+        </div>
+      </div>`;
+    resultEl.querySelector('[data-retry]').addEventListener('click', () => {
+      writeRun({ q: query, slug: null, name: query, weak, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false });
+      go('#/loading?q=' + encodeURIComponent(query));
+    });
+  }
+
+  function showUnavailable(message) {
+    done = true; stopTimers();
+    spinner.style.animationPlayState = 'paused'; spinner.style.borderTopColor = '#f59e0b';
+    steps.forEach((li) => { li.querySelector('.pv-step-spin').hidden = true; });
+    weakEl.hidden = true;
+    resultEl.hidden = false;
+    resultEl.innerHTML = `
+      <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-center">
+        <p class="text-sm text-amber-800">${esc(message)}</p>
+        <div class="flex flex-wrap gap-2 justify-center mt-3">
+          ${weak ? `<a href="#/r/${encodeURIComponent(weak.slug)}" class="pv-focus inline-flex items-center gap-2 rounded-xl brand-gradient px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition">Open closest match: ${esc(weak.name)}</a>` : ''}
+          <a href="#/" class="pv-focus inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">← Back to search</a>
+        </div>
+      </div>`;
+  }
+
+  // ---- start ----
+  async function start() {
+    tick = setInterval(() => { elapsedEl.textContent = ((Date.now() - startedAt) / 1000).toFixed(1) + 's'; }, 100);
+    loop();
+    paintSteps();
+    showWeakLink();
+
+    if (slug) { startPolling(slug); return; } // resume an in-flight run
+
+    try {
+      const r = await dispatchResearch(query);
+      if (r && r.slug && r.dispatched) { startPolling(r.slug); return; }
+      // Function reachable but not configured to dispatch.
+      showUnavailable((r && r.manual) || 'Live research isn\'t configured on this deployment yet.');
+    } catch (_) {
+      // No Functions / offline (e.g. plain static hosting) — degrade gracefully.
+      showUnavailable(weak
+        ? 'Live research isn\'t available here. You can open the closest cached report instead.'
+        : 'Live research isn\'t available on this deployment. Try one of the seeded reports on the home page.');
+    }
+  }
+
+  start();
+  return { destroy: stopTimers };
 }
 
 // ============================================================ DASHBOARD
@@ -320,5 +388,5 @@ async function renderDashboardRoute(slug) {
 
 // ============================================================ run persistence
 function readRun() { try { return JSON.parse(localStorage.getItem(RUN_KEY) || 'null'); } catch (_) { return null; } }
-function writeRun(v) { try { localStorage.setItem(RUN_KEY, JSON.stringify(v)); } catch (_) {} }
-function clearRun() { try { localStorage.removeItem(RUN_KEY); } catch (_) {} }
+function writeRun(v) { try { localStorage.setItem(RUN_KEY, JSON.stringify(v)); } catch (_) { /* ignore */ } }
+function clearRun() { try { localStorage.removeItem(RUN_KEY); } catch (_) { /* ignore */ } }
