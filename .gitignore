@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local env / secrets (none needed in Step 1)
+.env
+.env.*
+.dev.vars
+
+# Build output (there is no build step; kept for Step 2 tooling)
+dist/
+.wrangler/

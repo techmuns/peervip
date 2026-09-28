@@ -1,0 +1,1726 @@
+{
+  "meta": {
+    "slug": "refractories",
+    "name": "Refractories",
+    "type": "industry",
+    "query": "refractories",
+    "seed_company": "Monolithisch India",
+    "segment": "Industrial refractories (steel, cement, glass)",
+    "definition": "Companies that make heat-resistant materials (bricks, castables, flow-control shapes) used to line furnaces in steel, cement and glass plants.",
+    "generated_at": "2026-09-28T00:00:00Z",
+    "sample": true,
+    "coverage": {
+      "peers_total": 10,
+      "with_full_financials": 5,
+      "confidence": "medium"
+    }
+  },
+  "outperformer": {
+    "company": "Monolithisch India",
+    "bucket": "indian",
+    "headline": "Best returns in the set — ~34% ROCE from a specialised, integrated niche",
+    "reason": "Monolithisch outperforms by specialisation, not size. It concentrates on monolithic (castable) refractories and has integrated backward into its key mineral inputs, which gives it pricing power and cost control in a fragmented niche the large players under-serve. That drives ~34% ROCE and 35%+ revenue CAGR from a small base with negligible debt.",
+    "india_vs_global": "The global majors are 10–100x larger but earn low-teens margins; India has both commodity-scale players and, in Monolithisch, a high-return specialist."
+  },
+  "metrics": [
+    {
+      "key": "revenue",
+      "label": "Revenue",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "rev_growth_1y",
+      "label": "Rev growth (1Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_3y",
+      "label": "Rev CAGR (3Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_5y",
+      "label": "Rev CAGR (5Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "market_cap",
+      "label": "Market cap",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "neutral",
+      "format": "num0"
+    },
+    {
+      "key": "gross_margin",
+      "label": "Gross margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "ebitda_margin",
+      "label": "EBITDA margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "pat_margin",
+      "label": "PAT margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rm_cost_pct",
+      "label": "Raw material % of sales",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "roce",
+      "label": "ROCE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "roe",
+      "label": "ROE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "debtor_days",
+      "label": "Debtor days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "inventory_days",
+      "label": "Inventory days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "payable_days",
+      "label": "Payable days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "ccc",
+      "label": "Cash conversion cycle",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "wc_days",
+      "label": "Working capital days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "debt_equity",
+      "label": "Debt / Equity",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "low",
+      "format": "num2"
+    },
+    {
+      "key": "interest_coverage",
+      "label": "Interest coverage",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "high",
+      "format": "num1"
+    },
+    {
+      "key": "promoter_holding",
+      "label": "Promoter holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "pledge_pct",
+      "label": "Promoter pledge",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "fii_holding",
+      "label": "FII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dii_holding",
+      "label": "DII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "pe",
+      "label": "P/E",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "pb",
+      "label": "P/B",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "dividend_yield",
+      "label": "Dividend yield",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dividend_payout",
+      "label": "Dividend payout",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    }
+  ],
+  "peers": {
+    "indian": [
+      {
+        "name": "Monolithisch India",
+        "ticker": "MONOLITH",
+        "is_seed": true,
+        "business_model": "Manufacturer (integrated)",
+        "products": "Monolithic (specialty castable) refractories for steel & foundries",
+        "note": "Niche monolithics; backward-integrated on key inputs",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/MONOLITH/"
+        },
+        "current": {
+          "revenue": 260,
+          "rev_growth_1y": 34,
+          "rev_cagr_3y": 40,
+          "rev_cagr_5y": 35,
+          "market_cap": 2100,
+          "gross_margin": 42,
+          "ebitda_margin": 21,
+          "pat_margin": 14.5,
+          "rm_cost_pct": 58,
+          "roce": 34,
+          "roe": 27,
+          "debtor_days": 95,
+          "inventory_days": 55,
+          "payable_days": 70,
+          "ccc": 80,
+          "wc_days": 90,
+          "debt_equity": 0.1,
+          "interest_coverage": 22,
+          "promoter_holding": 71,
+          "pledge_pct": 0,
+          "fii_holding": 1,
+          "dii_holding": 2,
+          "pe": 40,
+          "pb": 9,
+          "dividend_yield": 0.1,
+          "dividend_payout": 5
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              121,
+              151,
+              179,
+              221,
+              260
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              18,
+              18.4,
+              19.5,
+              19,
+              21
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              10.3,
+              11.4,
+              13.7,
+              14.3,
+              14.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              27.6,
+              28.7,
+              32.5,
+              31.5,
+              34
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              23.7,
+              23.3,
+              23.4,
+              24.6,
+              27
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              108,
+              108,
+              104,
+              95,
+              95
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              63,
+              59,
+              60,
+              55,
+              55
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              98,
+              89,
+              90,
+              81,
+              80
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              null,
+              null,
+              70.2,
+              71.6,
+              71.7,
+              71.3,
+              71
+            ]
+          }
+        }
+      },
+      {
+        "name": "IFGL Refractories",
+        "ticker": "IFGLEXPOR",
+        "business_model": "Manufacturer",
+        "products": "Refractories for steel flow control",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/IFGLEXPOR/"
+        },
+        "current": {
+          "revenue": 1450,
+          "rev_growth_1y": 8,
+          "rev_cagr_3y": 10,
+          "rev_cagr_5y": 9,
+          "market_cap": 2000,
+          "gross_margin": 38,
+          "ebitda_margin": 12,
+          "pat_margin": 6.5,
+          "rm_cost_pct": 60,
+          "roce": 14,
+          "roe": 12,
+          "debtor_days": 85,
+          "inventory_days": 90,
+          "payable_days": 65,
+          "ccc": 110,
+          "wc_days": 100,
+          "debt_equity": 0.2,
+          "interest_coverage": 9,
+          "promoter_holding": 74,
+          "pledge_pct": 0,
+          "fii_holding": 3,
+          "dii_holding": 6,
+          "pe": 20,
+          "pb": 2.3,
+          "dividend_yield": 0.6,
+          "dividend_payout": 12
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              638,
+              778,
+              894,
+              1008,
+              1202,
+              1305,
+              1450
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.7,
+              9.9,
+              10.9,
+              11.3,
+              11.1,
+              11.3,
+              12
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              4.8,
+              5.4,
+              5.6,
+              5.4,
+              6.1,
+              6.6,
+              6.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              11.2,
+              11.2,
+              12.8,
+              13,
+              13.9,
+              12.6,
+              14
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.5,
+              9.5,
+              10,
+              11.1,
+              11.5,
+              11.8,
+              12
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              99,
+              94,
+              96,
+              96,
+              87,
+              90,
+              85
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              105,
+              98,
+              97,
+              94,
+              99,
+              92,
+              90
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              137,
+              124,
+              129,
+              121,
+              122,
+              117,
+              110
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              74.5,
+              74.5,
+              74.3,
+              73.5,
+              73.1,
+              74.5,
+              74
+            ]
+          }
+        }
+      },
+      {
+        "name": "Vesuvius India",
+        "ticker": "VESUVIUS",
+        "business_model": "Manufacturer",
+        "products": "Flow-control & specialty refractories (MNC arm)",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/VESUVIUS/"
+        },
+        "current": {
+          "revenue": 1750,
+          "rev_growth_1y": 6,
+          "rev_cagr_3y": 12,
+          "rev_cagr_5y": 8,
+          "market_cap": 8000,
+          "gross_margin": 40,
+          "ebitda_margin": 15,
+          "pat_margin": 9.5,
+          "rm_cost_pct": 55,
+          "roce": 22,
+          "roe": 17,
+          "debtor_days": 90,
+          "inventory_days": 75,
+          "payable_days": 60,
+          "ccc": 105,
+          "wc_days": 95,
+          "debt_equity": 0,
+          "interest_coverage": 60,
+          "promoter_holding": 55,
+          "pledge_pct": 0,
+          "fii_holding": 5,
+          "dii_holding": 12,
+          "pe": 45,
+          "pb": 7,
+          "dividend_yield": 0.5,
+          "dividend_payout": 20
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              810,
+              901,
+              1061,
+              1322,
+              1497,
+              1618,
+              1750
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              12.5,
+              12.3,
+              12.6,
+              14,
+              14.1,
+              15.1,
+              15
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              7.6,
+              8.1,
+              8.5,
+              8.6,
+              9.3,
+              8.4,
+              9.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              17.2,
+              18.8,
+              19.5,
+              20.4,
+              21.5,
+              22.5,
+              22
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              13.4,
+              15.1,
+              14.7,
+              14.8,
+              16.4,
+              16.4,
+              17
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              108,
+              108,
+              99,
+              100,
+              94,
+              89,
+              90
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              86,
+              85,
+              80,
+              83,
+              80,
+              77,
+              75
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              130,
+              124,
+              120,
+              119,
+              115,
+              105,
+              105
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              54.7,
+              55.2,
+              54.4,
+              54.5,
+              55.1,
+              55.6,
+              55
+            ]
+          }
+        }
+      },
+      {
+        "name": "RHI Magnesita India",
+        "ticker": "RHIM",
+        "business_model": "Integrated",
+        "products": "Full-range basic & shaped refractories",
+        "note": "Largest by revenue; broad range",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/RHIM/"
+        },
+        "current": {
+          "revenue": 3400,
+          "rev_growth_1y": 5,
+          "rev_cagr_3y": 20,
+          "rev_cagr_5y": 18,
+          "market_cap": 11000,
+          "gross_margin": 36,
+          "ebitda_margin": 11.5,
+          "pat_margin": 5.5,
+          "rm_cost_pct": 62,
+          "roce": 12.5,
+          "roe": 10,
+          "debtor_days": 80,
+          "inventory_days": 100,
+          "payable_days": 70,
+          "ccc": 110,
+          "wc_days": 105,
+          "debt_equity": 0.15,
+          "interest_coverage": 7.5,
+          "promoter_holding": 51,
+          "pledge_pct": 0,
+          "fii_holding": 6,
+          "dii_holding": 9,
+          "pe": 42,
+          "pb": 3.5,
+          "dividend_yield": 0.3,
+          "dividend_payout": 10
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              1497,
+              1752,
+              2185,
+              2443,
+              2707,
+              3240,
+              3400
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.9,
+              9.7,
+              10.6,
+              10.2,
+              10.6,
+              10.5,
+              11.5
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              4.3,
+              4.5,
+              4.4,
+              5.1,
+              5,
+              5.4,
+              5.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              9.6,
+              10.7,
+              10.2,
+              11,
+              11.7,
+              12,
+              12.5
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              8.3,
+              8.1,
+              8.7,
+              8.6,
+              8.8,
+              9.3,
+              10
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              97,
+              94,
+              87,
+              83,
+              88,
+              79,
+              80
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              112,
+              110,
+              111,
+              103,
+              103,
+              98,
+              100
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              128,
+              135,
+              131,
+              127,
+              116,
+              116,
+              110
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              50.8,
+              50.4,
+              50.6,
+              50.5,
+              50.9,
+              51.4,
+              51
+            ]
+          }
+        }
+      },
+      {
+        "name": "Dalmia Bharat Refractories",
+        "ticker": "DBREL",
+        "business_model": "Manufacturer",
+        "products": "Refractories for steel, cement & glass",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/DBREL/"
+        },
+        "current": {
+          "revenue": 2200,
+          "rev_growth_1y": 4,
+          "rev_cagr_3y": 9,
+          "rev_cagr_5y": 7,
+          "market_cap": 2600,
+          "gross_margin": 34,
+          "ebitda_margin": 9,
+          "pat_margin": 3.5,
+          "rm_cost_pct": 64,
+          "roce": 9.5,
+          "roe": 8,
+          "debtor_days": 100,
+          "inventory_days": 95,
+          "payable_days": 75,
+          "ccc": 120,
+          "wc_days": 110,
+          "debt_equity": 0.3,
+          "interest_coverage": 4,
+          "promoter_holding": 66,
+          "pledge_pct": 0,
+          "fii_holding": 1.5,
+          "dii_holding": 4,
+          "pe": 30,
+          "pb": 2,
+          "dividend_yield": 0.2,
+          "dividend_payout": 6
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              972,
+              1250,
+              1404,
+              1643,
+              1768,
+              1994,
+              2200
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              7.8,
+              7.4,
+              8.3,
+              8.4,
+              8,
+              9,
+              9
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              2.8,
+              2.9,
+              3,
+              3.3,
+              3.2,
+              3.1,
+              3.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              7.3,
+              7.5,
+              8.1,
+              8.5,
+              9.2,
+              9.7,
+              9.5
+            ]
+          },
+          "roe": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              6.7,
+              7.2,
+              7.1,
+              7,
+              7.4,
+              7.5,
+              8
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              117,
+              121,
+              108,
+              113,
+              111,
+              100,
+              100
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              107,
+              103,
+              102,
+              100,
+              100,
+              98,
+              95
+            ]
+          },
+          "ccc": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              147,
+              136,
+              143,
+              131,
+              132,
+              124,
+              120
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "values": [
+              66.5,
+              65.3,
+              66.7,
+              66.1,
+              66.3,
+              66,
+              66
+            ]
+          }
+        }
+      }
+    ],
+    "global": [
+      {
+        "name": "RHI Magnesita N.V.",
+        "country": "Austria",
+        "business_model": "Integrated",
+        "products": "Global refractory leader, backward-integrated on magnesite",
+        "source": {
+          "label": "stockanalysis.com",
+          "url": ""
+        },
+        "current": {
+          "revenue": 32000,
+          "ebitda_margin": 13,
+          "pat_margin": 5,
+          "roce": 11
+        },
+        "series": {}
+      },
+      {
+        "name": "Vesuvius plc",
+        "country": "United Kingdom",
+        "business_model": "Manufacturer",
+        "products": "Molten-metal flow engineering & refractories",
+        "source": {
+          "label": "stockanalysis.com",
+          "url": ""
+        },
+        "current": {
+          "revenue": 18000,
+          "ebitda_margin": 14,
+          "pat_margin": 7
+        },
+        "series": {}
+      },
+      {
+        "name": "Krosaki Harima",
+        "country": "Japan",
+        "business_model": "Manufacturer",
+        "products": "Refractories & fine ceramics",
+        "source": {
+          "label": "Company reports",
+          "url": ""
+        },
+        "current": {
+          "revenue": 12000,
+          "ebitda_margin": 12
+        },
+        "series": {}
+      }
+    ],
+    "private": [
+      {
+        "name": "Calderys India",
+        "business_model": "Manufacturer",
+        "products": "Monolithic refractories & solutions",
+        "note": "Part of global Calderys (private)",
+        "source": {
+          "label": "Web / news",
+          "url": ""
+        }
+      },
+      {
+        "name": "TRL Krosaki Refractories",
+        "business_model": "Integrated",
+        "products": "Basic, shaped & monolithic refractories",
+        "note": "Tata–Krosaki JV, unlisted",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      }
+    ]
+  },
+  "scorecard": {
+    "ranking": [
+      {
+        "company": "Monolithisch India",
+        "bucket": "indian",
+        "score": 86,
+        "rank": 1,
+        "strengths": [
+          "ROCE",
+          "Revenue growth",
+          "Low debt",
+          "Niche mix"
+        ],
+        "reason": "Monolithisch wins on a focused, high-value niche rather than scale. By concentrating on monolithic (castable) refractories and backward-integrating into its key mineral inputs, it holds pricing power in a fragmented segment the majors under-serve. The result is ~34% ROCE and 35%+ revenue CAGR off a small base, with minimal debt — a specialisation-and-integration story, not a cost or sourcing one."
+      },
+      {
+        "company": "Vesuvius India",
+        "bucket": "indian",
+        "score": 78,
+        "rank": 2,
+        "strengths": [
+          "ROCE",
+          "Debt-free",
+          "MNC technology"
+        ],
+        "reason": "A debt-free balance sheet, parent technology and premium flow-control products deliver ~22% ROCE and the most consistent margins among the larger players."
+      },
+      {
+        "company": "IFGL Refractories",
+        "bucket": "indian",
+        "score": 66,
+        "rank": 3,
+        "strengths": [
+          "Export mix",
+          "Steady margins"
+        ],
+        "reason": "A solid exporter with steady low-teens margins; return ratios are respectable but working capital runs heavy."
+      },
+      {
+        "company": "RHI Magnesita India",
+        "bucket": "indian",
+        "score": 60,
+        "rank": 4,
+        "strengths": [
+          "Scale",
+          "Product breadth"
+        ],
+        "reason": "The revenue leader with the widest range, but a commodity-heavy basic-refractory mix and elevated working capital keep returns in the low teens."
+      },
+      {
+        "company": "Dalmia Bharat Refractories",
+        "bucket": "indian",
+        "score": 46,
+        "rank": 5,
+        "strengths": [],
+        "reason": "Integration is still maturing; thin margins, higher leverage and the longest cash cycle in the set weigh on returns."
+      }
+    ]
+  },
+  "report": {
+    "title": "Refractories — Peer Benchmarking",
+    "summary": "In refractories, scale does not equal quality of returns. Monolithisch India, the smallest listed name here, out-earns far larger peers by owning a specialised monolithic niche and integrating backward into raw materials.",
+    "sections": [
+      {
+        "title": "The outperformer",
+        "icon": "sparkles",
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "good",
+            "title": "Monolithisch India",
+            "text": "Crowned for capital efficiency and growth. A deliberate focus on monolithic (castable) refractories plus backward integration into key minerals gives it pricing power the volume players lack — ~34% ROCE and 35%+ revenue CAGR from a small base, with almost no debt."
+          },
+          {
+            "type": "kpis",
+            "items": [
+              {
+                "label": "ROCE",
+                "value": "34%",
+                "sub": "best in set"
+              },
+              {
+                "label": "Rev CAGR (5Y)",
+                "value": "35%"
+              },
+              {
+                "label": "EBITDA margin",
+                "value": "21%",
+                "sub": "peer median ~12%"
+              },
+              {
+                "label": "Debt / Equity",
+                "value": "0.10x"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "ROCE across peers",
+        "icon": "trophy",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Monolithisch",
+                "value": 34
+              },
+              {
+                "label": "Vesuvius India",
+                "value": 22
+              },
+              {
+                "label": "IFGL",
+                "value": 14
+              },
+              {
+                "label": "RHI Magnesita",
+                "value": 12.5
+              },
+              {
+                "label": "Dalmia Bharat",
+                "value": 9.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Growth vs the field",
+        "icon": "chart",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Monolithisch (5Y CAGR)",
+                "value": 35
+              },
+              {
+                "label": "RHI Magnesita",
+                "value": 18
+              },
+              {
+                "label": "Vesuvius India",
+                "value": 8
+              },
+              {
+                "label": "IFGL",
+                "value": 9
+              },
+              {
+                "label": "Dalmia Bharat",
+                "value": 7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "ROCE, the last few years",
+        "icon": "trend",
+        "blocks": [
+          {
+            "type": "trend",
+            "unit": "%",
+            "years": [
+              "FY19",
+              "FY20",
+              "FY21",
+              "FY22",
+              "FY23",
+              "FY24",
+              "FY25"
+            ],
+            "series": [
+              {
+                "label": "Monolithisch",
+                "values": [
+                  null,
+                  null,
+                  27.2,
+                  29.8,
+                  31.5,
+                  33,
+                  34
+                ]
+              },
+              {
+                "label": "Vesuvius India",
+                "values": [
+                  17.6,
+                  18,
+                  18.9,
+                  19.8,
+                  20.6,
+                  21.4,
+                  22
+                ]
+              },
+              {
+                "label": "RHI Magnesita",
+                "values": [
+                  10,
+                  10.4,
+                  10.9,
+                  11.3,
+                  11.8,
+                  12.2,
+                  12.5
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business-model split",
+        "icon": "donut",
+        "blocks": [
+          {
+            "type": "donut",
+            "items": [
+              {
+                "label": "Manufacturer",
+                "value": 3
+              },
+              {
+                "label": "Integrated",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "The peer set at a glance",
+        "icon": "table",
+        "blocks": [
+          {
+            "type": "table",
+            "columns": [
+              "Company",
+              "Revenue (Rs Cr)",
+              "EBITDA %",
+              "ROCE %"
+            ],
+            "rows": [
+              [
+                "RHI Magnesita India",
+                "3,400",
+                "11.5",
+                "12.5"
+              ],
+              [
+                "Dalmia Bharat Refractories",
+                "2,200",
+                "9.0",
+                "9.5"
+              ],
+              [
+                "Vesuvius India",
+                "1,750",
+                "15.0",
+                "22.0"
+              ],
+              [
+                "IFGL Refractories",
+                "1,450",
+                "12.0",
+                "14.0"
+              ],
+              [
+                "Monolithisch India",
+                "260",
+                "21.0",
+                "34.0"
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "Screener — Monolithisch India",
+      "url": "https://www.screener.in/company/MONOLITH/"
+    },
+    {
+      "label": "Screener — Vesuvius India",
+      "url": "https://www.screener.in/company/VESUVIUS/"
+    },
+    {
+      "label": "Screener — RHI Magnesita India",
+      "url": "https://www.screener.in/company/RHIM/"
+    },
+    {
+      "label": "stockanalysis.com — global peers",
+      "url": "https://stockanalysis.com/"
+    },
+    {
+      "label": "Company annual reports & investor presentations",
+      "url": ""
+    }
+  ]
+}
