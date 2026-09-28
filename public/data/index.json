@@ -43,6 +43,34 @@
       "updated_at": "2026-09-28T00:00:00Z",
       "peer_count": 10,
       "sample": true
+    },
+    {
+      "slug": "dielectric-films",
+      "name": "Plastic Dielectric Films",
+      "type": "industry",
+      "query": "Dielectric films",
+      "seed_company": "Uflex Ltd",
+      "aliases": [
+        "dielectric films",
+        "plastic dielectric films",
+        "uflex ltd",
+        "polyplex corporation ltd",
+        "srf ltd",
+        "dupont teijin films",
+        "toray industries",
+        "mitsubishi chemical corporation",
+        "steiner gmbh & co. kg (steinerfilm)",
+        "bollore films",
+        "treofan group",
+        "aec group",
+        "hmc polymers",
+        "kunststoffweb gmbh",
+        "gts flexible materials",
+        "jindal films"
+      ],
+      "updated_at": "2026-09-28T06:16:19.310Z",
+      "peer_count": 14,
+      "sample": false
     }
   ]
 }
