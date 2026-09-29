@@ -141,7 +141,8 @@ export function seriesAggregate(peers, key, years, kind = 'median') {
   return years.map((y) => fn(peersWithSeries(peers, key).map((p) => seriesValueAt(p, key, y))));
 }
 
-/** Which metrics have at least one peer with series data (for the Trends tab). */
+/** Which metrics have at least one peer with series data (for the Trends tab).
+ *  `noTrend` metrics are kept out of the trends view (they stay in the Current grid). */
 export function metricsWithSeries(peers, metrics) {
-  return metrics.filter((m) => peersWithSeries(peers, m.key).length > 0);
+  return metrics.filter((m) => !m.noTrend && peersWithSeries(peers, m.key).length > 0);
 }

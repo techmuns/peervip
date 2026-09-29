@@ -53,7 +53,7 @@ function panelHtml(peer, report, mm) {
   }).join('');
 
   const sparks = report.metrics
-    .filter((m) => peer.series && peer.series[m.key] && peer.series[m.key].values.some((x) => x != null))
+    .filter((m) => !m.noTrend && peer.series && peer.series[m.key] && peer.series[m.key].values.some((x) => x != null))
     .map((m) => sparkRow(peer.series[m.key], m)).join('');
 
   const src = peer.source && peer.source.url
