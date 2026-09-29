@@ -4,7 +4,7 @@
 //   auto-fit columns, and light conditional colour-grading matching the UI.
 import { fmt } from './format.js';
 import {
-  currentValues, medianRow, averageRow, winnersAcross,
+  currentValues, medianRow, averageRow, winnersAcross, compositeScores,
   peersWithSeries, unionYears, seriesValueAt, seriesAggregate, metricsWithSeries,
 } from './compute.js';
 import { crossFill, trendFill } from './conditional.js';
@@ -121,11 +121,16 @@ function scorecardSheet(wb, report) {
 
   styleHeader(ws.addRow(['Metric', 'Winner', 'Value', '', 'Rank', 'Company', 'Score', 'Strengths', 'Reason']));
 
-  let ranking = ((report.scorecard && report.scorecard.ranking) ? report.scorecard.ranking : [])
-    .filter((r) => r.bucket === 'indian').sort((a, b) => (b.score || 0) - (a.score || 0));
-  if (!ranking.length && report.scorecard && report.scorecard.ranking) {
-    ranking = [...report.scorecard.ranking].sort((a, b) => (b.score || 0) - (a.score || 0));
-  }
+  // Live ranking over the CURRENT Indian set (so added peers appear, removed ones
+  // drop) — AI research score where scored, else scored live from the metrics.
+  const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  const aiMap = new Map(((report.scorecard && report.scorecard.ranking) || []).map((r) => [norm(r.company), r]));
+  const compMap = new Map(compositeScores(indian, report.metrics).map((s) => [norm(s.name), s.score]));
+  const ranking = indian.map((p) => {
+    const a = aiMap.get(norm(p.name));
+    const score = (a && Number.isFinite(a.score)) ? a.score : (compMap.get(norm(p.name)) ?? 0);
+    return { company: p.name, score, strengths: (a && a.strengths) || [], reason: (a && a.reason) || (p.added_by === 'user' ? 'Added by user; scored live from metrics.' : '') };
+  }).sort((x, y) => (y.score || 0) - (x.score || 0));
   const rowCount = Math.max(winners.length, ranking.length);
   for (let i = 0; i < rowCount; i++) {
     const w = winners[i];

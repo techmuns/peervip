@@ -2,13 +2,14 @@
 // animated tabs, and the Overview / Private tabs. Delegates Indian/Global to
 // tables.js, Scorecard to scorecard.js and the one-pager to report.js.
 import { esc, fmtDate, fmtCompact, metricMap, bmClass } from './format.js';
-import { median } from './compute.js';
+import { median, compositeScores } from './compute.js';
 import { setupCharts, makeHBar, destroyChart } from './charts.js';
 import { renderBucketView } from './tables.js';
 import { renderScorecard } from './scorecard.js';
 import { renderReport } from './report.js';
 import { applyOverlay } from './peers.js';
 
+const normN = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 const TABS = [
   { key: 'overview', label: 'Overview' },
   { key: 'indian', label: 'Indian Listed' },
@@ -23,13 +24,20 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   setupCharts();
   const overlay = applyOverlay(report); // user Add/Remove-peer overlay (localStorage)
   const editCtx = { slug: report.meta && report.meta.slug, overlay };
+  editCtx.refreshBanner = () => {
+    const b = appEl.querySelector('[data-banner]');
+    if (!b) return;
+    b.innerHTML = bannerHtml(report);
+    const g = b.querySelector('[data-goto-report]');
+    if (g) g.addEventListener('click', () => setTab('report'));
+  };
   const mm = metricMap(report.metrics);
   const allPeers = [...(report.peers.indian || []), ...(report.peers.global || []), ...(report.peers.private || [])];
 
   appEl.innerHTML = `
     <div class="max-w-[110rem] mx-auto px-4 sm:px-6 py-5">
       ${headerHtml(report)}
-      ${bannerHtml(report)}
+      <div data-banner>${bannerHtml(report)}</div>
       <div class="pv-tabs mt-6 border-b border-slate-200 overflow-x-auto">
         <div class="flex gap-1 sm:gap-2 min-w-max relative" role="tablist">
           ${TABS.map((t) => `<button class="pv-tab pv-focus px-3 sm:px-4 py-2.5 text-sm font-semibold text-slate-500" role="tab" data-tab="${t.key}">${t.label}</button>`).join('')}
@@ -142,21 +150,29 @@ function timeAgo(iso) {
 
 // ---------------------------------------------------------------- banner
 function bannerHtml(report) {
-  const o = report.outperformer;
-  if (!o) return '';
+  const raw = report.outperformer;
+  if (!raw) return '';
+  const indian = report.peers.indian || [];
+  const present = raw.company && indian.some((p) => normN(p.name) === normN(raw.company));
+  let o = raw, live = false;
+  if (!present && indian.length) {
+    const s = compositeScores(indian, report.metrics).filter((x) => x.score != null).sort((a, b) => b.score - a.score)[0];
+    if (s) { o = { company: s.name, headline: 'Top of your current peer set by the live composite score', reason: '', india_vs_global: '' }; live = true; }
+  }
   return `<div class="mt-5 rounded-2xl p-[1.5px] brand-gradient shadow-sm">
     <div class="rounded-2xl bg-white px-5 py-4 sm:px-6 sm:py-5">
       <div class="flex flex-col sm:flex-row sm:items-center gap-4">
         <div class="shrink-0 flex items-center gap-3">
           <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-2xl shadow-sm">👑</div>
           <div>
-            <div class="text-[0.7rem] font-bold uppercase tracking-wide text-slate-400">Outperformer</div>
+            <div class="text-[0.7rem] font-bold uppercase tracking-wide text-slate-400">${live ? 'Top of your set' : 'Outperformer'}</div>
             <div class="font-display text-xl font-extrabold text-slate-900 leading-tight">${esc(o.company)}</div>
           </div>
         </div>
         <div class="grow min-w-0">
           <p class="text-slate-700 font-medium leading-snug">${esc(o.headline || o.reason || '')}</p>
           ${o.reason ? `<button data-goto-report class="text-xs text-indigo-500 font-semibold hover:underline mt-1">Full reasoning in the Report →</button>` : ''}
+          ${live ? `<p class="text-[0.7rem] text-slate-400 mt-1">The AI's original crowned pick was removed — this is the current leader by the live score.</p>` : ''}
         </div>
         ${o.india_vs_global ? `<div class="shrink-0 sm:max-w-xs">
           <div class="rounded-xl bg-sky-50 ring-1 ring-sky-100 px-3 py-2">

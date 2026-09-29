@@ -89,6 +89,28 @@ export function isBest(value, allValues, better) {
   return value === target;
 }
 
+/**
+ * Live composite 0–100 score per peer: the average percentile rank (vs the current
+ * peer set, honouring each metric's `better`) across every non-neutral metric the
+ * peer has data for. Used to score peers that have no AI research score (e.g. ones
+ * the user added), so the scorecard can re-rank the instant a peer is added/removed.
+ * Returns [{ name, score, n }] (score null when there's no scorable data).
+ */
+export function compositeScores(peers, metrics) {
+  const scored = metrics.filter((m) => m.better !== 'neutral');
+  const colVals = {};
+  for (const m of scored) colVals[m.key] = currentValues(peers, m.key);
+  return peers.map((p) => {
+    const cur = p.current || {};
+    let sum = 0, n = 0;
+    for (const m of scored) {
+      const pos = rankPosition(cur[m.key], colVals[m.key], m.better);
+      if (pos != null) { sum += pos; n += 1; }
+    }
+    return { name: p.name, score: n ? Math.round((sum / n) * 100) : null, n };
+  });
+}
+
 // ---- Series helpers (Trends) ----
 
 /** Peers in a bucket that carry a real series for `key`. */
