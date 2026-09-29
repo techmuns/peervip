@@ -84,7 +84,7 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .pv-table th, .pv-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #eef2f7; text-align: right; white-space: nowrap; }
 .pv-table thead th {
   position: sticky; top: 0; z-index: 3;
-  background: #f8fafc; color: #1e293b; font-weight: 700; text-align: right;
+  background: #f8fafc; color: #1e293b; font-weight: 700; text-align: center;
   vertical-align: bottom; white-space: normal; line-height: 1.25;
   letter-spacing: -0.01em;
   min-width: 5.75rem; max-width: 9rem;
@@ -100,6 +100,8 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 }
 @media (max-width: 640px) { .pv-col1 { min-width: 9rem; max-width: 11rem; } }
 .pv-table thead th.pv-col1 { z-index: 4; background: #f8fafc; }
+/* Company column always left-aligned — beats the base `.pv-table td { text-align:right }` on specificity */
+.pv-table td.pv-col1, .pv-table th.pv-col1 { text-align: left; }
 .pv-table tbody tr:hover .pv-col1 { background: #f8fafc; }
 .pv-table tbody tr.pv-row { cursor: pointer; }
 .pv-table tbody tr.pv-row:hover td { background-color: #f8fafc; }

@@ -31,7 +31,7 @@ export function setupCharts() {
   Chart.defaults.plugins.tooltip.usePointStyle = true;
   Chart.defaults.plugins.tooltip.titleFont = { weight: '700', size: 12.5 };
   Chart.defaults.maintainAspectRatio = false;
-  Chart.register(medianRefPlugin);
+  Chart.register(medianRefPlugin, barValuePlugin);
 }
 
 // Draws a dashed reference line at a single value on the value axis
@@ -68,6 +68,31 @@ const medianRefPlugin = {
       ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillText(label, area.right - tw / 2 - 2, px);
     }
+    ctx.restore();
+  },
+};
+
+// Draws each horizontal bar's value as a direct label at the bar's end. Doubles as
+// the "visible labels" relief the palette validator asks for on light surfaces.
+const barValuePlugin = {
+  id: 'barValues',
+  afterDatasetsDraw(chart, _args, opts) {
+    if (!opts || !opts.show) return;
+    const meta = chart.getDatasetMeta(0);
+    if (!meta || !meta.data) return;
+    const data = chart.data.datasets[0].data;
+    const { ctx } = chart;
+    ctx.save();
+    ctx.font = "700 11px 'Inter', ui-sans-serif, sans-serif";
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#334155';
+    meta.data.forEach((bar, i) => {
+      const v = data[i];
+      if (v == null || !isFinite(v)) return;
+      const neg = (bar.base != null && bar.x < bar.base);
+      ctx.textAlign = neg ? 'right' : 'left';
+      ctx.fillText(unitVal(v, opts.unit || ''), bar.x + (neg ? -6 : 6), bar.y);
+    });
     ctx.restore();
   },
 };
@@ -150,8 +175,9 @@ export function makeLine(canvas, { years, series, medianValues, unit = '', area 
   });
 }
 
-/** Horizontal bar across peers with a single dashed median reference line. */
-export function makeHBar(canvas, { labels, values, medianValue, unit = '', highlightIndex = -1 }) {
+/** Horizontal bar across peers: per-peer colour, rounded ends, direct value labels,
+ *  a dashed median reference line and a rich per-bar hover tooltip. */
+export function makeHBar(canvas, { labels, values, medianValue, unit = '', label = '', highlightIndex = -1 }) {
   if (!reset(canvas)) return null;
   const colors = values.map((_, i) => (i === highlightIndex ? '#f59e0b' : color(i)));
   return new Chart(canvas, {
@@ -159,20 +185,32 @@ export function makeHBar(canvas, { labels, values, medianValue, unit = '', highl
     data: {
       labels,
       datasets: [{
-        data: values, backgroundColor: colors, borderRadius: 6, borderSkipped: false,
-        maxBarThickness: 26, hoverBackgroundColor: colors.map((c) => hexA(c, 0.85)),
+        label: label || 'Value',
+        data: values,
+        backgroundColor: colors,
+        borderRadius: 6, borderSkipped: false,
+        maxBarThickness: 30, categoryPercentage: 0.82, barPercentage: 0.92,
+        hoverBackgroundColor: colors, hoverBorderColor: '#ffffff', hoverBorderWidth: 2,
       }],
     },
     options: {
       indexAxis: 'y',
-      interaction: { mode: 'nearest', intersect: false },
+      layout: { padding: { right: 54, left: 4, top: 4, bottom: 2 } },
+      interaction: { mode: 'nearest', axis: 'y', intersect: false },
       plugins: {
+        legend: { display: false },
         medianRef: medianValue == null ? {} : { value: medianValue, label: 'Median ' + unitVal(medianValue, unit) },
-        tooltip: { callbacks: { label: (c) => ' ' + unitVal(c.parsed.x, unit) } },
+        barValues: { show: true, unit },
+        tooltip: {
+          callbacks: {
+            title: (items) => (items && items[0] ? items[0].label : ''),
+            label: (c) => (label ? label + ': ' : '') + unitVal(c.parsed.x, unit),
+          },
+        },
       },
       scales: {
-        x: { grid: { color: GRID }, border: { display: false }, ticks: { color: AXIS, callback: unitTick(unit) } },
-        y: { grid: { display: false }, ticks: { color: '#334155', font: { weight: '600' } } },
+        x: { grid: { color: GRID, drawTicks: false }, border: { display: false }, ticks: { color: AXIS, callback: unitTick(unit), padding: 6 } },
+        y: { grid: { display: false }, border: { display: false }, ticks: { color: '#334155', font: { weight: '600', size: 12 }, padding: 4 } },
       },
     },
   });
