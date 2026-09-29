@@ -301,3 +301,25 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
   #print-region .pv-report-section { break-inside: avoid; }
 }
 .pv-print-only { display: none; }
+
+/* ===========================================================================
+   Red-flag scanner badges/chips (Overview)
+   =========================================================================== */
+.pv-flag-badge { font-size: 0.7rem; font-weight: 800; padding: 0.1rem 0.5rem; border-radius: 999px; white-space: nowrap; }
+.pv-flag-clean { font-size: 0.72rem; font-weight: 700; color: #059669; white-space: nowrap; }
+.pv-flag-high { background: #fee2e2; color: #b91c1c; }
+.pv-flag-med { background: #fef3c7; color: #b45309; }
+.pv-flag-chip { font-size: 0.68rem; padding: 0.12rem 0.5rem; border-radius: 7px; font-weight: 600; }
+.pv-flag-chip.pv-flag-high { background: #fef2f2; color: #be123c; }
+.pv-flag-chip.pv-flag-med { background: #fffbeb; color: #b45309; }
+
+/* Industry tab: keep the "then vs now" table headers left/right sensible */
+.pv-ind-tvn thead th { text-align: right; }
+.pv-ind-tvn thead th.pv-col1 { text-align: left; }
+
+/* Industry PDF export — stack the two-up chart grids so nothing squishes on paper */
+@media print {
+  .pv-industry .pv-ind-grid { grid-template-columns: 1fr !important; }
+  .pv-industry canvas { max-height: 250px !important; }
+  .pv-industry section.pv-card { break-inside: avoid; }
+}

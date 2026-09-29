@@ -80,6 +80,36 @@ function sectionTable(html, id) {
   }
   return { periods: heads.slice(1), rows };
 }
+// The pre-rendered YEARLY shareholding table (<div id="yearly-shp">) — annual
+// snapshots (Mar 2017 … Mar 2026) rather than the last ~12 quarters. Same shape
+// as sectionTable so seriesOf/latest work unchanged.
+function yearlyShpTable(html) {
+  const i = String(html).indexOf('<div id="yearly-shp"');
+  if (i < 0) return null;
+  const tStart = html.indexOf('<table', i);
+  if (tStart < 0) return null;
+  const tEnd = html.indexOf('</table>', tStart);
+  if (tEnd < 0) return null;
+  const table = html.slice(tStart, tEnd + 8);
+  const heads = [...table.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/gi)].map((m) => stripTags(m[1]));
+  const rows = [];
+  for (const tr of table.match(/<tr[\s\S]*?<\/tr>/gi) || []) {
+    const tds = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((m) => stripTags(m[1]));
+    if (tds.length) rows.push({ label: tds[0], values: tds.slice(1) });
+  }
+  return { periods: heads.slice(1), rows };
+}
+// Keep one point per fiscal year (drops a trailing latest-quarter column).
+function annualize(s) {
+  if (!s || !s.years) return null;
+  const years = [], values = [], seen = new Set();
+  s.years.forEach((y, i) => {
+    const k = (String(y).match(/(\d{4})/) || [])[1];
+    if (!k || seen.has(k)) return;
+    seen.add(k); years.push(y); values.push(s.values[i]);
+  });
+  return years.length ? { years, values } : null;
+}
 function findRow(section, re) { return section && section.rows.find((r) => re.test(r.label)); }
 function latest(section, re) {
   const row = findRow(section, re);
@@ -253,13 +283,14 @@ export async function fetchPeer(name) {
   const investSeries = cf && seriesOf(cf, /cash from investing/i);
   const fcfSeries = (cf && seriesOf(cf, /free cash flow/i)) || combineSeries(cfoSeries, investSeries, (c, i) => (isNum(c) && isNum(i)) ? +(c + i).toFixed(0) : null);
   const cfoOpSeries = combineSeries(cfoSeries, opSeries, (c, o) => (isNum(c) && isNum(o) && o !== 0) ? +((c / o) * 100).toFixed(1) : null);
-  // ---- Shareholding ----
-  const promoterSeries = sh && seriesOf(sh, /promoter/i);
-  const fiiSeries = sh && seriesOf(sh, /fiis?|foreign/i);
-  const diiSeries = sh && seriesOf(sh, /diis?|domestic/i);
-  const publicSeries = sh && seriesOf(sh, /^public/i);
+  // ---- Shareholding (YEARLY snapshots for trends; quarterly for pledge/current) ----
+  const shy = yearlyShpTable(html) || sh;
+  const promoterSeries = annualize(seriesOf(shy, /promoter/i));
+  const fiiSeries = annualize(seriesOf(shy, /fiis?|foreign/i));
+  const diiSeries = annualize(seriesOf(shy, /diis?|domestic/i));
+  const publicSeries = annualize(seriesOf(shy, /^public/i));
   const pledgeSeries = sh && seriesOf(sh, /pledge/i);
-  const shCountSeries = sh && seriesOf(sh, /shareholders/i);
+  const shCountSeries = annualize(seriesOf(shy, /shareholders/i));
 
   let patMarginSeries = null;
   if (salesSeries && npSeries) {
@@ -332,12 +363,12 @@ export async function fetchPeer(name) {
     fcf: lastOf(fcfSeries),
     cfo_op: lastOf(cfoOpSeries),
     investing_cf: lastOf(investSeries),
-    promoter_holding: promoterSeries ? lastNum(promoterSeries.values) : (sh ? latest(sh, /promoter/i) : null),
+    promoter_holding: (sh ? latest(sh, /promoter/i) : null) ?? lastOf(promoterSeries),
     pledge_pct: lastOf(pledgeSeries) ?? (sh ? latest(sh, /pledge/i) : null),
-    fii_holding: lastOf(fiiSeries),
-    dii_holding: lastOf(diiSeries),
-    public_holding: lastOf(publicSeries),
-    num_shareholders: lastOf(shCountSeries),
+    fii_holding: (sh ? latest(sh, /fiis?|foreign/i) : null) ?? lastOf(fiiSeries),
+    dii_holding: (sh ? latest(sh, /diis?|domestic/i) : null) ?? lastOf(diiSeries),
+    public_holding: (sh ? latest(sh, /^public/i) : null) ?? lastOf(publicSeries),
+    num_shareholders: (sh ? latest(sh, /shareholders/i) : null) ?? lastOf(shCountSeries),
     pe: ribbon(top, /stock p\/e|^p\/e|price to earning/),
     pb,
     dividend_yield: ribbon(top, /dividend yield/),

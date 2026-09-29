@@ -146,3 +146,93 @@ export function seriesAggregate(peers, key, years, kind = 'median') {
 export function metricsWithSeries(peers, metrics) {
   return metrics.filter((m) => !m.noTrend && peersWithSeries(peers, m.key).length > 0);
 }
+
+// ============================================================================
+// Industry analysis — aggregates ACROSS the peer set, year by year (FY16+).
+// Everything below is derived live, so it recomputes when peers are added/removed.
+// ============================================================================
+
+/** Industry timeline for a metric: { years, values } aggregated across peers.
+ *  kind: 'median' (default) · 'average' · 'sum' (e.g. total industry revenue). */
+export function industryLine(peers, key, kind = 'median') {
+  const years = unionYears(peers, key);
+  const withS = peersWithSeries(peers, key);
+  const values = years.map((y) => {
+    const vs = withS.map((p) => seriesValueAt(p, key, y)).filter(isNum);
+    if (!vs.length) return null;
+    if (kind === 'sum') return vs.reduce((a, b) => a + b, 0);
+    if (kind === 'average') return vs.reduce((a, b) => a + b, 0) / vs.length;
+    return median(vs);
+  });
+  return { years, values };
+}
+
+/** Leader concentration over time: top-1 and top-3 share of summed `key` (revenue). */
+export function leaderShareLine(peers, key = 'revenue') {
+  const years = unionYears(peers, key);
+  const withS = peersWithSeries(peers, key);
+  const top1 = [], top3 = [];
+  for (const y of years) {
+    const vs = withS.map((p) => seriesValueAt(p, key, y)).filter(isNum).sort((a, b) => b - a);
+    const total = vs.reduce((a, b) => a + b, 0);
+    top1.push(total ? +((vs[0] / total) * 100).toFixed(1) : null);
+    top3.push(total ? +((vs.slice(0, 3).reduce((a, b) => a + b, 0) / total) * 100).toFixed(1) : null);
+  }
+  return { years, top1, top3 };
+}
+
+/** Cross-peer spread (std-dev) of a metric per year — widening = winners pulling away. */
+export function dispersionLine(peers, key) {
+  const years = unionYears(peers, key);
+  const withS = peersWithSeries(peers, key);
+  const values = years.map((y) => {
+    const vs = withS.map((p) => seriesValueAt(p, key, y)).filter(isNum);
+    if (vs.length < 2) return null;
+    const m = vs.reduce((a, b) => a + b, 0) / vs.length;
+    return +Math.sqrt(vs.reduce((a, b) => a + (b - m) ** 2, 0) / vs.length).toFixed(1);
+  });
+  return { years, values };
+}
+
+/** Latest-year revenue share per peer (for the market-share doughnut), largest first. */
+export function revenueShare(peers) {
+  const rows = peers
+    .map((p) => ({ name: p.name, value: (p.current && isNum(p.current.revenue)) ? p.current.revenue : null }))
+    .filter((r) => r.value != null)
+    .sort((a, b) => b.value - a.value);
+  const total = rows.reduce((s, r) => s + r.value, 0) || 1;
+  return rows.map((r) => ({ ...r, pct: +((r.value / total) * 100).toFixed(1) }));
+}
+
+/** "Then vs now" for one metric: earliest, latest and window-average of the industry line. */
+export function thenVsNow(peers, metric) {
+  const line = industryLine(peers, metric.key, metric.key === 'revenue' ? 'sum' : 'median');
+  const pts = line.values.map((v, i) => ({ y: line.years[i], v })).filter((o) => isNum(o.v));
+  if (pts.length < 2) return null;
+  const first = pts[0], last = pts[pts.length - 1];
+  const avg = pts.reduce((s, o) => s + o.v, 0) / pts.length;
+  return {
+    key: metric.key, label: metric.label, unit: metric.unit, format: metric.format, better: metric.better,
+    firstYear: first.y, firstVal: first.v, latestYear: last.y, latestVal: last.v, avg: +avg.toFixed(2),
+  };
+}
+
+/** Auto risk-scanner for one company → [{ t, s }] (s: 'high' | 'med'). Pure data rules. */
+export function redFlags(peer) {
+  const c = peer.current || {}, s = peer.series || {};
+  const flags = [];
+  const trend = (key) => {
+    const v = ((s[key] && s[key].values) || []).filter(isNum);
+    return v.length >= 2 ? { first: v[0], last: v[v.length - 1] } : null;
+  };
+  if (isNum(c.debt_equity) && c.debt_equity > 1) flags.push({ t: `High leverage — debt/equity ${c.debt_equity.toFixed(2)}×`, s: 'high' });
+  if (isNum(c.interest_coverage) && c.interest_coverage < 3) flags.push({ t: `Thin interest cover (${c.interest_coverage.toFixed(1)}×)`, s: 'high' });
+  if (isNum(c.pledge_pct) && c.pledge_pct > 5) flags.push({ t: `Promoter shares pledged (${Math.round(c.pledge_pct)}%)`, s: 'high' });
+  const dd = trend('debtor_days'); if (dd && dd.last > dd.first * 1.25 && dd.last - dd.first > 10) flags.push({ t: `Receivable days rising (${Math.round(dd.first)}→${Math.round(dd.last)})`, s: 'med' });
+  const wc = trend('wc_days'); if (wc && wc.last > wc.first * 1.3 && wc.last - wc.first > 15) flags.push({ t: `Working capital stretching (${Math.round(wc.first)}→${Math.round(wc.last)} days)`, s: 'med' });
+  if (isNum(c.cfo_op) && c.cfo_op < 70) flags.push({ t: `Weak cash conversion — CFO ${Math.round(c.cfo_op)}% of profit`, s: 'med' });
+  if (isNum(c.fcf) && c.fcf < 0) flags.push({ t: `Negative free cash flow`, s: 'med' });
+  const em = trend('ebitda_margin'); if (em && em.last < em.first - 3) flags.push({ t: `Margins eroding (${em.first.toFixed(0)}%→${em.last.toFixed(0)}%)`, s: 'med' });
+  const ph = trend('promoter_holding'); if (ph && ph.last < ph.first - 3) flags.push({ t: `Promoters trimming stake (${ph.first.toFixed(0)}%→${ph.last.toFixed(0)}%)`, s: 'med' });
+  return flags;
+}

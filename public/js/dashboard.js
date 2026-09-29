@@ -2,16 +2,18 @@
 // animated tabs, and the Overview / Private tabs. Delegates Indian/Global to
 // tables.js, Scorecard to scorecard.js and the one-pager to report.js.
 import { esc, fmtDate, fmtCompact, metricMap, bmClass } from './format.js';
-import { median, compositeScores } from './compute.js';
-import { setupCharts, makeHBar, destroyChart } from './charts.js';
+import { median, compositeScores, redFlags, revenueShare } from './compute.js';
+import { setupCharts, makeHBar, makeDoughnut, destroyChart } from './charts.js';
 import { renderBucketView } from './tables.js';
 import { renderScorecard } from './scorecard.js';
 import { renderReport } from './report.js';
+import { renderIndustry } from './industry.js';
 import { applyOverlay } from './peers.js';
 
 const normN = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 const TABS = [
   { key: 'overview', label: 'Overview' },
+  { key: 'industry', label: 'Industry' },
   { key: 'indian', label: 'Indian Listed' },
   { key: 'global', label: 'Global Listed' },
   { key: 'private', label: 'Private' },
@@ -103,6 +105,7 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
 function renderTab(key, pane, report, mm, allPeers, editCtx) {
   switch (key) {
     case 'overview': return renderOverview(pane, report, mm, allPeers);
+    case 'industry': return renderIndustry(pane, report);
     case 'indian': return renderBucketView(pane, { peers: report.peers.indian || [], report, bucket: 'Indian Listed', edit: editCtx });
     case 'global': return renderDescriptive(pane, report.peers.global || [], { title: 'Global Listed peers', subtitle: 'Global financials come back patchy, so these are shown by name and business for landscape context — not benchmarked. The numbers table focuses on the Indian listed set.' });
     case 'private': return renderDescriptive(pane, report.peers.private || [], { title: 'Private & unlisted peers', subtitle: 'Financials are not publicly disclosed for these players — shown for completeness of the peer landscape.' });
@@ -213,6 +216,20 @@ function renderOverview(pane, report, mm, allPeers) {
       <span class="num font-semibold text-slate-700">${n}</span>
     </div>`).join('');
 
+  // Overview extras: auto red-flag scanner + market-share doughnut (from the trends).
+  const flagged = finPeers.map((p) => ({ p, flags: redFlags(p) })).sort((a, b) => b.flags.length - a.flags.length);
+  const totalFlags = flagged.reduce((s, f) => s + f.flags.length, 0);
+  const rfHtml = flagged.map(({ p, flags }) => {
+    const high = flags.some((f) => f.s === 'high');
+    const badge = flags.length === 0
+      ? '<span class="pv-flag-clean">✓ clean</span>'
+      : `<span class="pv-flag-badge ${high ? 'pv-flag-high' : 'pv-flag-med'}">⚑ ${flags.length}</span>`;
+    const chips = flags.length ? `<div class="flex flex-wrap gap-1 mt-1">${flags.map((f) => `<span class="pv-flag-chip ${f.s === 'high' ? 'pv-flag-high' : 'pv-flag-med'}">${esc(f.t)}</span>`).join('')}</div>` : '';
+    return `<div class="py-2 border-b border-slate-50 last:border-0">
+      <div class="flex items-center justify-between gap-2"><span class="font-semibold text-slate-800 text-sm truncate">${esc(p.name)}</span>${badge}</div>${chips}</div>`;
+  }).join('');
+  const share = revenueShare(finPeers);
+
   pane.innerHTML = `
     <div class="grid gap-5 lg:grid-cols-3">
       <section class="pv-card p-5 lg:col-span-2">
@@ -237,6 +254,22 @@ function renderOverview(pane, report, mm, allPeers) {
         </div>
         <div class="text-[0.7rem] font-bold uppercase tracking-wide text-slate-400 mb-1">Business model</div>
         ${bmRows}
+      </section>
+    </div>
+
+    <div class="grid gap-5 lg:grid-cols-3 mt-5">
+      <section class="pv-card p-5">
+        <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">Market share</h3>
+        <p class="text-xs text-slate-400 mb-3">Share of combined peer revenue (latest year).</p>
+        <div style="height:250px"><canvas data-chart="share"></canvas></div>
+      </section>
+      <section class="pv-card p-5 lg:col-span-2">
+        <div class="flex items-center justify-between gap-2 mb-1">
+          <h3 class="font-display text-lg font-extrabold text-slate-800">Red flags</h3>
+          <span class="text-xs font-semibold text-slate-400">${totalFlags} flag${totalFlags === 1 ? '' : 's'} · auto-scanned from the trends</span>
+        </div>
+        <p class="text-xs text-slate-400 mb-2">Risk signals pulled straight from the data — riskiest first.</p>
+        <div class="max-h-[22rem] overflow-y-auto pr-1">${rfHtml || '<div class="text-slate-400 text-sm py-6 text-center">No peers to scan.</div>'}</div>
       </section>
     </div>`;
 
@@ -264,6 +297,9 @@ function renderOverview(pane, report, mm, allPeers) {
 
   drawChart(defaultMetric);
   sel.addEventListener('change', () => drawChart(mm[sel.value] || defaultMetric));
+
+  const shareCanvas = pane.querySelector('[data-chart="share"]');
+  if (shareCanvas && share.length) makeDoughnut(shareCanvas, { labels: share.map((r) => r.name), values: share.map((r) => r.value) });
 }
 
 function bmBucket(model) {
