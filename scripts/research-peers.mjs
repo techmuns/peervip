@@ -166,14 +166,22 @@ async function verifyIndianPeers(page, peerPlan) {
       if (!m.listed) { movedToPrivate.push(c); continue; }
       seenCodes.add(codeKey);
       const current = pickMetrics(m.current);
-      try { const mc = await screenerMaterialCost(hit.id); if (mc) { if (current.rm_cost_pct == null) current.rm_cost_pct = mc.rm_cost_pct; if (current.gross_margin == null) current.gross_margin = mc.gross_margin; } } catch (_) { /* optional */ }
+      const series = { ...(m.series || {}) };
+      // Cost-structure (raw-material / mfg / employee / other %) from the expenses schedule.
+      try {
+        const mc = await screenerMaterialCost(hit.id);
+        if (mc && mc.current) {
+          for (const [k, v] of Object.entries(mc.current)) if (v != null && current[k] == null) current[k] = v;
+          Object.assign(series, mc.series || {});
+        }
+      } catch (_) { /* optional */ }
       scraped.push({
         name: m.name || name, ticker: hit.code, about: m.about || '',
         products: c.products || '', segment: c.segment || '', note: c.note || '', business_model: c.business_model || '',
-        current, series: m.series || {}, marketCap: (current.market_cap ?? c.marketCap ?? null),
+        current, series, marketCap: (current.market_cap ?? c.marketCap ?? null),
         is_seed: closeName(hit.name || name, QUERY),
       });
-      console.log(`  scraped: ${m.name || name} (${hit.code}) ${Object.keys(current).length}/26`);
+      console.log(`  scraped: ${m.name || name} (${hit.code}) ${Object.keys(current).length}/${METRIC_KEYS.length}`);
     } catch (e) { console.warn(`  indian ${name} failed: ${e.message}`); movedToPrivate.push(c); }
     await sleep(300);
   }

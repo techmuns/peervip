@@ -100,6 +100,17 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 }
 @media (max-width: 640px) { .pv-col1 { min-width: 9rem; max-width: 11rem; } }
 .pv-table thead th.pv-col1 { z-index: 4; background: #f8fafc; }
+/* group band: a spanning row above the metric names, colour-coded, sticky on top */
+.pv-table thead tr.pv-group-band th {
+  top: 0; z-index: 4; height: 26px; padding: 0.2rem 0.75rem;
+  background: #eef2ff; color: #4338ca; font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; text-align: center;
+  border-bottom: 1px solid #e0e7ff;
+}
+.pv-table thead tr.pv-group-band th + th { border-left: 2px solid #fff; }
+.pv-table thead tr.pv-metric-head th { top: 26px; }
+.pv-table thead tr.pv-group-band th.pv-col1 { z-index: 6; background: #eef2ff; border-bottom-color: #e0e7ff; }
+.pv-table thead tr.pv-metric-head th.pv-col1 { z-index: 5; }
 /* Company column always left-aligned — beats the base `.pv-table td { text-align:right }` on specificity */
 .pv-table td.pv-col1, .pv-table th.pv-col1 { text-align: left; }
 .pv-table tbody tr:hover .pv-col1 { background: #f8fafc; }

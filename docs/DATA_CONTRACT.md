@@ -70,9 +70,17 @@ search then matches on `name` / `slug` / `query` only.
       "unit": "%",              // "%" | "x" | "days" | "Rs Cr" | ""
       "group": "Profitability", // section grouping in the drill-down
       "better": "high",         // "high" | "low" | "neutral"  (neutral = no winner, no green/red)
-      "format": "pct1"          // "num0" | "num1" | "num2" | "pct1"
+      "format": "pct1",         // "num0" | "num1" | "num2" | "pct1"
+      "trendOnly": false,       // optional: true = absolute/magnitude metric shown ONLY in the
+                                //   year-by-year Trends tab (hidden from the cross-sectional Current
+                                //   grid + excluded from the composite score). Default false.
+      "composite": true         // optional: false = market/return metric excluded from the
+                                //   business-quality composite ranking. Default true.
     }
-    // … the full metric dictionary (see any seed file for all 26)
+    // … the full metric dictionary (see lib/metrics.mjs — 51 metrics across
+    //   Size & Growth, Profitability, Returns, Working Capital, Balance Sheet,
+    //   Cash Flow, Ownership, Valuation). Absolute-rupee P&L / balance-sheet /
+    //   cash-flow lines + EPS + shareholder count are trendOnly.
   ],
 
   "peers": {

@@ -12,7 +12,7 @@ const normN = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 export function renderScorecard(container, report) {
   const indian = report.peers.indian || [];
   const metrics = report.metrics;
-  const winners = winnersAcross([indian], metrics);
+  const winners = winnersAcross([indian], metrics.filter((m) => !m.trendOnly));
 
   const ai = new Map();
   for (const r of (report.scorecard && report.scorecard.ranking) || []) ai.set(normN(r.company), r);

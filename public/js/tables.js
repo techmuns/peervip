@@ -124,14 +124,29 @@ export function destroyBucketCharts(container) {
 
 // ---------------------------------------------------------------- Current
 function currentTableHtml(peers, report, editable) {
-  const metrics = report.metrics;
+  // Absolute-magnitude / trend-only metrics live in the Trends tab, not this
+  // wide cross-sectional grid (keeps it readable and off the composite score).
+  const metrics = (report.metrics || []).filter((m) => !m.trendOnly);
   const mRow = medianRow(peers, metrics);
   const aRow = averageRow(peers, metrics);
   // per-metric value arrays for conditional formatting (relative to shown peers)
   const colVals = {};
   for (const m of metrics) colVals[m.key] = currentValues(peers, m.key);
 
-  const head = `<thead><tr>
+  // group band: one spanning header per metric group (Size & Growth, Profitability, …)
+  const groups = [];
+  for (const m of metrics) {
+    const last = groups[groups.length - 1];
+    if (last && last.group === m.group) last.count += 1;
+    else groups.push({ group: m.group, count: 1 });
+  }
+  const band = `<tr class="pv-group-band">
+    <th class="pv-col1"></th>
+    ${groups.map((g) => `<th colspan="${g.count}">${esc(g.group)}</th>`).join('')}
+    <th></th>
+  </tr>`;
+
+  const head = `<thead>${band}<tr class="pv-metric-head">
     <th class="pv-col1">Company</th>
     ${metrics.map((m) => `<th title="${esc(m.label)}${m.unit ? ' (' + esc(m.unit) + ')' : ''}">${esc(m.label)}<span class="pv-th-unit">${esc(unitLabel(m))}</span></th>`).join('')}
     <th style="text-align:center">Business<br>Model</th>

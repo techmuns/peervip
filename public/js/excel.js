@@ -23,7 +23,7 @@ export async function exportExcel(report) {
   const indian = report.peers.indian || [];
   const global = report.peers.global || [];
 
-  if (indian.length) currentSheet(wb, 'Current-India', indian, metrics);
+  if (indian.length) currentSheet(wb, 'Current-India', indian, metrics.filter((m) => !m.trendOnly));
 
   for (const m of metricsWithSeries(indian, metrics)) trendSheet(wb, m, indian);
 
@@ -117,7 +117,7 @@ function trendRef(ws, label, years, vals, metric) {
 function scorecardSheet(wb, report) {
   const ws = wb.addWorksheet('Scorecard', { views: [{ state: 'frozen', ySplit: 1, showGridLines: false }] });
   const indian = report.peers.indian || [];
-  const winners = winnersAcross([indian], report.metrics);
+  const winners = winnersAcross([indian], report.metrics.filter((m) => !m.trendOnly));
 
   styleHeader(ws.addRow(['Metric', 'Winner', 'Value', '', 'Rank', 'Company', 'Score', 'Strengths', 'Reason']));
 
