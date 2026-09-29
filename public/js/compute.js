@@ -175,6 +175,24 @@ function peerYearMap(peer, key) {
   });
   return m;
 }
+// Bridge a peer's INTERIOR gaps (a missing year between two reported years — e.g. a
+// fiscal-year-change transition that dropped a stub) by linear interpolation, so the
+// company stays in the peer set across its active span and totals aren't deflated by
+// a phantom hole. Never extrapolates before its first / after its last reported year.
+function fillInterior(map) {
+  const yrs = [...map.keys()].sort((a, b) => a - b);
+  if (yrs.length < 2) return map;
+  const lo = yrs[0], hi = yrs[yrs.length - 1];
+  const out = new Map(map);
+  for (let y = lo + 1; y < hi; y++) {
+    if (out.has(y)) continue;
+    let a = y - 1; while (a > lo && !map.has(a)) a--;
+    let b = y + 1; while (b < hi && !map.has(b)) b++;
+    if (map.has(a) && map.has(b)) out.set(y, map.get(a) + (map.get(b) - map.get(a)) * ((y - a) / (b - a)));
+  }
+  return out;
+}
+const filledMaps = (peers, key) => peersWithSeries(peers, key).map((p) => fillInterior(peerYearMap(p, key)));
 // Fiscal years where enough peers report to be trustworthy (drops thin early years).
 function gatedYears(maps) {
   const total = maps.filter((m) => m.size).length;
@@ -188,7 +206,7 @@ function gatedYears(maps) {
  *  bucketed by fiscal year and gated to years with enough reporting peers.
  *  kind: 'median' (default) · 'average' · 'sum' (e.g. total industry revenue). */
 export function industryLine(peers, key, kind = 'median') {
-  const maps = peersWithSeries(peers, key).map((p) => peerYearMap(p, key));
+  const maps = filledMaps(peers, key);
   const years = gatedYears(maps);
   let minC = Infinity, maxC = 0;
   const values = years.map((fy) => {
@@ -204,7 +222,7 @@ export function industryLine(peers, key, kind = 'median') {
 
 /** Leader concentration over time: top-1 and top-3 share of summed `key` (revenue). */
 export function leaderShareLine(peers, key = 'revenue') {
-  const maps = peersWithSeries(peers, key).map((p) => peerYearMap(p, key));
+  const maps = filledMaps(peers, key);
   const years = gatedYears(maps);
   const top1 = [], top3 = [];
   for (const fy of years) {
@@ -218,7 +236,7 @@ export function leaderShareLine(peers, key = 'revenue') {
 
 /** Cross-peer spread (std-dev) of a metric per year — widening = winners pulling away. */
 export function dispersionLine(peers, key) {
-  const maps = peersWithSeries(peers, key).map((p) => peerYearMap(p, key));
+  const maps = filledMaps(peers, key);
   const years = gatedYears(maps);
   const values = years.map((fy) => {
     const vs = maps.map((m) => m.get(fy)).filter(isNum);
