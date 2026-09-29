@@ -1,7 +1,7 @@
 // compute.js — the frontend computes medians, averages and winner-per-metric
 // ITSELF from peers[].current and peers[].series, so every table is internally
 // consistent. No dependencies.
-import { yearSortKey } from './format.js';
+import { yearSortKey, fiscalYear } from './format.js';
 
 function isNum(v) { return typeof v === 'number' && isFinite(v); }
 
@@ -120,19 +120,30 @@ export function peersWithSeries(peers, key) {
   return peers.filter((p) => p.series && p.series[key] && Array.isArray(p.series[key].years) && p.series[key].years.length);
 }
 
-/** Union of all year labels across peers for a metric, sorted chronologically. */
+/** One canonical label per fiscal year across peers (prefers a March-ending label),
+ *  FY16+. Collapses mismatched year-ends ("Mar 2016" / "Dec 2016") and drops
+ *  transition stubs so mixed-calendar peer sets share one clean axis. */
 export function unionYears(peers, key) {
-  const set = new Set();
-  for (const p of peersWithSeries(peers, key)) for (const y of p.series[key].years) set.add(y);
-  return [...set].filter((y) => yearSortKey(y) >= MIN_FY).sort((a, b) => yearSortKey(a) - yearSortKey(b));
+  const byFY = new Map();
+  for (const p of peersWithSeries(peers, key)) {
+    for (const y of p.series[key].years) {
+      const fy = fiscalYear(y);
+      if (fy == null || fy < MIN_FY) continue;
+      if (!byFY.has(fy) || /^\s*mar/i.test(String(y))) byFY.set(fy, y);
+    }
+  }
+  return [...byFY.entries()].sort((a, b) => a[0] - b[0]).map(([, label]) => label);
 }
 
-/** A peer's value for a given year label within a series (null if absent). */
-export function seriesValueAt(peer, key, year) {
+/** A peer's value for the fiscal year of `yearLabel` (matched by FY, not exact
+ *  label, so a Dec-year company still slots into the right column). */
+export function seriesValueAt(peer, key, yearLabel) {
   const s = peer.series && peer.series[key];
   if (!s) return null;
-  const i = s.years.indexOf(year);
-  return i === -1 ? null : (isNum(s.values[i]) ? s.values[i] : null);
+  const fy = fiscalYear(yearLabel);
+  if (fy == null) { const i = s.years.indexOf(yearLabel); return i === -1 ? null : (isNum(s.values[i]) ? s.values[i] : null); }
+  for (let i = 0; i < s.years.length; i++) if (fiscalYear(s.years[i]) === fy) return isNum(s.values[i]) ? s.values[i] : null;
+  return null;
 }
 
 /** Per-year median/average across peers for a metric series. */
@@ -152,28 +163,70 @@ export function metricsWithSeries(peers, metrics) {
 // Everything below is derived live, so it recomputes when peers are added/removed.
 // ============================================================================
 
-/** Industry timeline for a metric: { years, values } aggregated across peers.
+// FY→value for one peer (drops pre-FY16 and transition stubs; one value per year).
+function peerYearMap(peer, key) {
+  const s = peer.series && peer.series[key];
+  const m = new Map();
+  if (!s || !Array.isArray(s.years)) return m;
+  s.years.forEach((y, i) => {
+    const fy = fiscalYear(y);
+    if (fy == null || fy < MIN_FY) return;
+    if (isNum(s.values[i])) m.set(fy, s.values[i]);
+  });
+  return m;
+}
+// Bridge a peer's INTERIOR gaps (a missing year between two reported years — e.g. a
+// fiscal-year-change transition that dropped a stub) by linear interpolation, so the
+// company stays in the peer set across its active span and totals aren't deflated by
+// a phantom hole. Never extrapolates before its first / after its last reported year.
+function fillInterior(map) {
+  const yrs = [...map.keys()].sort((a, b) => a - b);
+  if (yrs.length < 2) return map;
+  const lo = yrs[0], hi = yrs[yrs.length - 1];
+  const out = new Map(map);
+  for (let y = lo + 1; y < hi; y++) {
+    if (out.has(y)) continue;
+    let a = y - 1; while (a > lo && !map.has(a)) a--;
+    let b = y + 1; while (b < hi && !map.has(b)) b++;
+    if (map.has(a) && map.has(b)) out.set(y, map.get(a) + (map.get(b) - map.get(a)) * ((y - a) / (b - a)));
+  }
+  return out;
+}
+const filledMaps = (peers, key) => peersWithSeries(peers, key).map((p) => fillInterior(peerYearMap(p, key)));
+// Fiscal years where enough peers report to be trustworthy (drops thin early years).
+function gatedYears(maps) {
+  const total = maps.filter((m) => m.size).length;
+  const minCov = Math.max(3, Math.ceil(0.4 * total));
+  const counts = new Map();
+  for (const m of maps) for (const fy of m.keys()) counts.set(fy, (counts.get(fy) || 0) + 1);
+  return [...counts.entries()].filter(([, c]) => c >= minCov).map(([fy]) => fy).sort((a, b) => a - b);
+}
+
+/** Industry timeline for a metric: { years:[FY ints], values, coverage:{min,max} },
+ *  bucketed by fiscal year and gated to years with enough reporting peers.
  *  kind: 'median' (default) · 'average' · 'sum' (e.g. total industry revenue). */
 export function industryLine(peers, key, kind = 'median') {
-  const years = unionYears(peers, key);
-  const withS = peersWithSeries(peers, key);
-  const values = years.map((y) => {
-    const vs = withS.map((p) => seriesValueAt(p, key, y)).filter(isNum);
+  const maps = filledMaps(peers, key);
+  const years = gatedYears(maps);
+  let minC = Infinity, maxC = 0;
+  const values = years.map((fy) => {
+    const vs = maps.map((m) => m.get(fy)).filter(isNum);
+    minC = Math.min(minC, vs.length); maxC = Math.max(maxC, vs.length);
     if (!vs.length) return null;
     if (kind === 'sum') return vs.reduce((a, b) => a + b, 0);
     if (kind === 'average') return vs.reduce((a, b) => a + b, 0) / vs.length;
     return median(vs);
   });
-  return { years, values };
+  return { years, values, coverage: { min: isFinite(minC) ? minC : 0, max: maxC } };
 }
 
 /** Leader concentration over time: top-1 and top-3 share of summed `key` (revenue). */
 export function leaderShareLine(peers, key = 'revenue') {
-  const years = unionYears(peers, key);
-  const withS = peersWithSeries(peers, key);
+  const maps = filledMaps(peers, key);
+  const years = gatedYears(maps);
   const top1 = [], top3 = [];
-  for (const y of years) {
-    const vs = withS.map((p) => seriesValueAt(p, key, y)).filter(isNum).sort((a, b) => b - a);
+  for (const fy of years) {
+    const vs = maps.map((m) => m.get(fy)).filter(isNum).sort((a, b) => b - a);
     const total = vs.reduce((a, b) => a + b, 0);
     top1.push(total ? +((vs[0] / total) * 100).toFixed(1) : null);
     top3.push(total ? +((vs.slice(0, 3).reduce((a, b) => a + b, 0) / total) * 100).toFixed(1) : null);
@@ -183,13 +236,13 @@ export function leaderShareLine(peers, key = 'revenue') {
 
 /** Cross-peer spread (std-dev) of a metric per year — widening = winners pulling away. */
 export function dispersionLine(peers, key) {
-  const years = unionYears(peers, key);
-  const withS = peersWithSeries(peers, key);
-  const values = years.map((y) => {
-    const vs = withS.map((p) => seriesValueAt(p, key, y)).filter(isNum);
-    if (vs.length < 2) return null;
-    const m = vs.reduce((a, b) => a + b, 0) / vs.length;
-    return +Math.sqrt(vs.reduce((a, b) => a + (b - m) ** 2, 0) / vs.length).toFixed(1);
+  const maps = filledMaps(peers, key);
+  const years = gatedYears(maps);
+  const values = years.map((fy) => {
+    const vs = maps.map((m) => m.get(fy)).filter(isNum);
+    if (vs.length < 3) return null; // need a few peers for a meaningful spread
+    const mean = vs.reduce((a, b) => a + b, 0) / vs.length;
+    return +Math.sqrt(vs.reduce((a, b) => a + (b - mean) ** 2, 0) / vs.length).toFixed(1);
   });
   return { years, values };
 }
