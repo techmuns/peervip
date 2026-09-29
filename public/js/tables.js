@@ -55,6 +55,7 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
     else if (!edit.overlay.removed.some((n) => normName(n) === normName(name))) edit.overlay.removed.push(name);
     saveOverlay(edit.slug, edit.overlay);
     rerender();
+    if (edit.refreshBanner) edit.refreshBanner();
   } : null;
 
   if (!peers.length) {
@@ -112,6 +113,7 @@ function wireAddPeer(container, report, edit, rerender) {
     saveOverlay(edit.slug, edit.overlay);
     report.peers.indian = [...(report.peers.indian || []), peer];
     rerender();
+    if (edit.refreshBanner) edit.refreshBanner();
   });
 }
 
