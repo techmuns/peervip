@@ -90,7 +90,8 @@ async function main() {
     const { indian, movedToPrivate } = await verifyIndianPeers(page, peerPlan);
 
     await postProgress(3, 'running');
-    const { global, movedToPrivate: globMoved } = await fetchGlobalPeersV2(peerPlan.candidates.global || []);
+    const { global: globalRaw, movedToPrivate: globMoved } = await fetchGlobalPeersV2(peerPlan.candidates.global || []);
+    const global = await filterGlobalCurrent(globalRaw, peerPlan.segment || QUERY, peerPlan.synonyms || []);
 
     const privateList = await filterPrivateFamily(
       normalizePrivate([...(peerPlan.candidates.private || []), ...movedToPrivate, ...globMoved]),
@@ -265,6 +266,24 @@ async function filterPrivateFamily(list, family, synonyms) {
     const keep = new Set((Array.isArray(out.keep) ? out.keep : []).map(norm));
     return list.filter((p) => keep.has(norm(p.name)));
   } catch (e) { console.warn('private family filter failed (keeping all):', e.message); return list; }
+}
+
+// Global peers are descriptive-only, so an out-of-date model name (a company since
+// acquired, merged, delisted or renamed) can slip in. One bounded Bedrock pass keeps
+// only currently-independent, actively-operating companies. Never-fail, and never
+// wipes the whole bucket on a bad/empty response.
+async function filterGlobalCurrent(list, family, synonyms) {
+  if (list.length <= 1) return list;
+  try {
+    const out = await bedrock({
+      system: 'From a list of GLOBAL companies in a product family, keep ONLY those that, to the best of your knowledge, are CURRENTLY INDEPENDENT and actively operating today (a live publicly-listed company or a live private group). DROP any that have been ACQUIRED BY / MERGED INTO another company, delisted, dissolved or renamed (e.g. drop Valspar — now part of Sherwin-Williams; drop Tikkurila — now part of PPG). Product/industry match is assumed; judge only current independent existence. Return STRICT JSON {"keep":["<exact names to keep>"]}.',
+      user: `Product family: ${family}${synonyms && synonyms.length ? ' — also covers: ' + synonyms.join(', ') : ''}\n\nCompanies:\n${list.map((p) => `- ${p.name}${p.country ? ' (' + p.country + ')' : ''}`).join('\n')}`,
+      maxTokens: 800,
+    });
+    const keep = new Set((Array.isArray(out.keep) ? out.keep : []).map(norm));
+    const kept = list.filter((p) => keep.has(norm(p.name)));
+    return kept.length ? kept : list; // a bad response never empties the bucket
+  } catch (e) { console.warn('global-current filter failed (keeping all):', e.message); return list; }
 }
 
 function normalizePrivate(plan) {
