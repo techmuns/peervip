@@ -1,0 +1,3219 @@
+{
+  "meta": {
+    "slug": "paints-and-coatings",
+    "name": "Paints And Coatings",
+    "type": "industry",
+    "query": "Paints and Coatings",
+    "seed_company": "Asian Paints Ltd",
+    "segment": "Paints and Coatings",
+    "definition": "Paints, coatings, and specialty materials for architectural, automotive, aerospace, industrial, protective, marine, packaging, and traffic applications.",
+    "generated_at": "2026-09-29T06:25:51.454Z",
+    "sample": false,
+    "coverage": {
+      "peers_total": 23,
+      "with_full_financials": 9,
+      "confidence": "high"
+    }
+  },
+  "outperformer": {
+    "company": "Asian Paints Ltd",
+    "bucket": "indian",
+    "headline": "Market leader with superior margins, capital efficiency, and scale moat",
+    "reason": "Asian Paints dominates across every profitability and efficiency metric. Its gross margin of 50.7% (vs peer median 46%) reflects pricing power and premium/branded product mix, while its EBITDA margin of 19% and PAT margin of 12.4% are the highest among manufacturers. The company achieves best-in-class ROCE of 26.3% and ROE of 21.8%, demonstrating superior capital allocation. Its working capital efficiency is exceptional—debtor days of just 46 (vs median 67) and CCC of 84 days show strong distribution control and bargaining power. With revenue of ₹35,584 crore, Asian Paints has unmatched scale advantages in procurement, manufacturing, and distribution. The RM cost at 49.31% (lowest among large peers) indicates either backward integration benefits or superior sourcing. This combination of scale, pricing power, operational excellence, and capital efficiency creates a formidable competitive moat that smaller peers cannot replicate.",
+    "india_vs_global": "Asian Paints outperforms on all available metrics; global peers lack financials for comparison, but Asian Paints' margins and returns rival best-in-class global paint manufacturers."
+  },
+  "metrics": [
+    {
+      "key": "revenue",
+      "label": "Revenue",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "rev_growth_1y",
+      "label": "Rev growth (1Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_3y",
+      "label": "Rev CAGR (3Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_5y",
+      "label": "Rev CAGR (5Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "market_cap",
+      "label": "Market cap",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "neutral",
+      "format": "num0"
+    },
+    {
+      "key": "gross_margin",
+      "label": "Gross margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "ebitda_margin",
+      "label": "EBITDA margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "pat_margin",
+      "label": "PAT margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rm_cost_pct",
+      "label": "Raw material % of sales",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "roce",
+      "label": "ROCE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "roe",
+      "label": "ROE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "debtor_days",
+      "label": "Debtor days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "inventory_days",
+      "label": "Inventory days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "payable_days",
+      "label": "Payable days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "ccc",
+      "label": "Cash conversion cycle",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "wc_days",
+      "label": "Working capital days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "debt_equity",
+      "label": "Debt / Equity",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "low",
+      "format": "num2"
+    },
+    {
+      "key": "interest_coverage",
+      "label": "Interest coverage",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "high",
+      "format": "num1"
+    },
+    {
+      "key": "promoter_holding",
+      "label": "Promoter holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "pledge_pct",
+      "label": "Promoter pledge",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "fii_holding",
+      "label": "FII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dii_holding",
+      "label": "DII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "pe",
+      "label": "P/E",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "pb",
+      "label": "P/B",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "dividend_yield",
+      "label": "Dividend yield",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dividend_payout",
+      "label": "Dividend payout",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    }
+  ],
+  "peers": {
+    "indian": [
+      {
+        "name": "Asian Paints Ltd",
+        "ticker": "ASIANPAINT",
+        "business_model": "Manufacturer",
+        "products": "Wall paints, texture coatings, waterproofing coatings, automotive refinish and OEM coatings",
+        "note": "Largest paints company in India; among top 10 players globally; number one in Decorative Lighting, Wallcoverings & Textures and Integrated Home Décor; number two in Fabric and Furn",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/ASIANPAINT/"
+        },
+        "current": {
+          "revenue": 35584,
+          "rev_growth_1y": 4.9,
+          "rev_cagr_3y": 1,
+          "rev_cagr_5y": 10.4,
+          "market_cap": 232308,
+          "ebitda_margin": 19,
+          "pat_margin": 12.4,
+          "roce": 26.3,
+          "roe": 21.8,
+          "debtor_days": 46,
+          "inventory_days": 118,
+          "payable_days": 79,
+          "ccc": 84,
+          "wc_days": 38,
+          "debt_equity": 0.18,
+          "interest_coverage": 34.4,
+          "promoter_holding": 52.63,
+          "fii_holding": 13.32,
+          "dii_holding": 20.7,
+          "pe": 47.6,
+          "pb": 10.9,
+          "dividend_yield": 1.15,
+          "dividend_payout": 61,
+          "rm_cost_pct": 49.31,
+          "gross_margin": 50.7
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              13615,
+              14271,
+              15062,
+              16825,
+              19240,
+              20211,
+              21713,
+              29101,
+              34489,
+              35495,
+              33906,
+              35584
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              16,
+              19,
+              20,
+              19,
+              20,
+              21,
+              22,
+              17,
+              18,
+              21,
+              18,
+              19
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              10.5,
+              12.6,
+              13.4,
+              12.5,
+              11.5,
+              13.7,
+              14.8,
+              10.6,
+              12.2,
+              15.7,
+              10.9,
+              12.4
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              42,
+              42,
+              38,
+              36,
+              33,
+              33,
+              34,
+              29,
+              34,
+              38,
+              26,
+              26
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              32,
+              30,
+              35,
+              38,
+              36,
+              32,
+              44,
+              49,
+              49,
+              50,
+              46,
+              46
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              123,
+              108,
+              138,
+              117,
+              119,
+              127,
+              134,
+              142,
+              121,
+              122,
+              142,
+              118
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              70,
+              54,
+              72,
+              60,
+              65,
+              79,
+              59,
+              94,
+              99,
+              93,
+              107,
+              84
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63,
+              52.63
+            ]
+          }
+        }
+      },
+      {
+        "name": "Berger Paints India Ltd",
+        "ticker": "BERGEPAINT",
+        "business_model": "Manufacturer",
+        "products": "Decorative paints, industrial coatings, automotive coatings, powder coatings, wood finishes",
+        "note": "Second largest paint company in India, strong in decorative and industrial segments",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/BERGEPAINT/"
+        },
+        "current": {
+          "revenue": 11880,
+          "rev_growth_1y": 2.9,
+          "rev_cagr_3y": 4,
+          "rev_cagr_5y": 11.7,
+          "market_cap": 52937,
+          "ebitda_margin": 15,
+          "pat_margin": 9.5,
+          "roce": 21.6,
+          "roe": 17.3,
+          "debtor_days": 48,
+          "inventory_days": 144,
+          "payable_days": 105,
+          "ccc": 87,
+          "wc_days": 49,
+          "debt_equity": 0.09,
+          "interest_coverage": 31.6,
+          "promoter_holding": 74.98,
+          "fii_holding": 4.82,
+          "dii_holding": 11.78,
+          "pe": 43.1,
+          "pb": 7.7,
+          "dividend_yield": 0.88,
+          "dividend_payout": 41,
+          "rm_cost_pct": 52,
+          "gross_margin": 48
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              4170,
+              4223,
+              4552,
+              5166,
+              6062,
+              6366,
+              6818,
+              8762,
+              10568,
+              11199,
+              11545,
+              11880
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              12,
+              15,
+              16,
+              16,
+              15,
+              17,
+              17,
+              15,
+              14,
+              17,
+              16,
+              15
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              6.4,
+              8.8,
+              10.4,
+              8.9,
+              8.1,
+              10.3,
+              10.6,
+              9.5,
+              8.1,
+              10.4,
+              10.2,
+              9.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              25,
+              30,
+              31,
+              29,
+              27,
+              28,
+              27,
+              26,
+              24,
+              28,
+              25,
+              22
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              47,
+              47,
+              46,
+              49,
+              40,
+              41,
+              55,
+              44,
+              43,
+              42,
+              49,
+              48
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              104,
+              108,
+              153,
+              140,
+              138,
+              142,
+              174,
+              178,
+              142,
+              134,
+              143,
+              144
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              70,
+              56,
+              75,
+              56,
+              67,
+              65,
+              67,
+              83,
+              77,
+              73,
+              86,
+              87
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              75,
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.98,
+              74.98,
+              74.98
+            ]
+          }
+        }
+      },
+      {
+        "name": "Kansai Nerolac Paints Ltd",
+        "ticker": "KANSAINER",
+        "business_model": "Manufacturer",
+        "products": "Decorative paints, industrial coatings, automotive coatings, powder coatings",
+        "note": "Part of Kansai Paint Group Japan, strong automotive and industrial coatings presence",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/KANSAINER/"
+        },
+        "current": {
+          "revenue": 8052,
+          "rev_growth_1y": 2.9,
+          "rev_cagr_3y": 2.2,
+          "rev_cagr_5y": 9.7,
+          "market_cap": 14470,
+          "ebitda_margin": 12,
+          "pat_margin": 7.2,
+          "roce": 12,
+          "roe": 8.82,
+          "debtor_days": 67,
+          "inventory_days": 119,
+          "payable_days": 91,
+          "ccc": 95,
+          "wc_days": 69,
+          "debt_equity": 0.05,
+          "interest_coverage": 30.5,
+          "promoter_holding": 74.96,
+          "fii_holding": 4.02,
+          "dii_holding": 11.88,
+          "pe": 22.5,
+          "pb": 2.2,
+          "dividend_yield": 1.41,
+          "dividend_payout": 51,
+          "rm_cost_pct": 58,
+          "gross_margin": 42
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              3505,
+              3767,
+              4053,
+              4658,
+              5424,
+              5280,
+              5074,
+              6369,
+              7543,
+              7801,
+              7823,
+              8052
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              13,
+              16,
+              18,
+              17,
+              14,
+              15,
+              17,
+              10,
+              11,
+              13,
+              12,
+              12
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              7.8,
+              23.9,
+              12.6,
+              11,
+              8.3,
+              9.8,
+              10.4,
+              5.4,
+              6.2,
+              15.1,
+              14.2,
+              7.2
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              25,
+              25,
+              26,
+              25,
+              20,
+              18,
+              17,
+              11,
+              14,
+              17,
+              13,
+              12
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              54,
+              53,
+              53,
+              55,
+              51,
+              54,
+              69,
+              63,
+              60,
+              62,
+              63,
+              67
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              95,
+              90,
+              123,
+              107,
+              132,
+              127,
+              158,
+              153,
+              134,
+              136,
+              133,
+              119
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              93,
+              58,
+              78,
+              72,
+              101,
+              106,
+              107,
+              123,
+              115,
+              110,
+              109,
+              95
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.99,
+              74.98,
+              74.98,
+              74.98,
+              74.98,
+              74.96,
+              74.96
+            ]
+          }
+        }
+      },
+      {
+        "name": "JSW Dulux Ltd",
+        "ticker": "JSWDULUX",
+        "business_model": "Manufacturer",
+        "products": "Paints and related coating products",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/JSWDULUX/"
+        },
+        "current": {
+          "revenue": 3599,
+          "rev_growth_1y": -11.6,
+          "rev_cagr_3y": -1.8,
+          "rev_cagr_5y": 8.3,
+          "market_cap": 14101,
+          "ebitda_margin": 14,
+          "pat_margin": 54.8,
+          "roce": 22.7,
+          "roe": 19.1,
+          "debtor_days": 61,
+          "inventory_days": 99,
+          "payable_days": 131,
+          "ccc": 29,
+          "wc_days": 32,
+          "debt_equity": 0.03,
+          "interest_coverage": 42.4,
+          "promoter_holding": 61.2,
+          "fii_holding": 8.49,
+          "dii_holding": 21.96,
+          "pe": 36.8,
+          "pb": 5.8,
+          "dividend_yield": 1.58,
+          "dividend_payout": 47,
+          "rm_cost_pct": 59,
+          "gross_margin": 41
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2009",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              856,
+              2640,
+              2572,
+              2719,
+              2918,
+              2662,
+              2421,
+              3149,
+              3802,
+              3962,
+              4069,
+              3599
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2009",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              -20,
+              10,
+              13,
+              11,
+              12,
+              14,
+              14,
+              14,
+              14,
+              16,
+              16,
+              14
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2009",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              34.5,
+              8.1,
+              9.6,
+              14.7,
+              7.2,
+              8.9,
+              8.6,
+              9.2,
+              8.8,
+              10.8,
+              10.6,
+              54.8
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2009",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              13,
+              null,
+              27,
+              40,
+              24,
+              27,
+              22,
+              28,
+              35,
+              42,
+              42,
+              23
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2009",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              32,
+              49,
+              58,
+              53,
+              56,
+              54,
+              62,
+              57,
+              53,
+              53,
+              52,
+              61
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2009",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              81,
+              89,
+              107,
+              84,
+              85,
+              107,
+              135,
+              129,
+              95,
+              100,
+              95,
+              99
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2009",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              -37,
+              -7,
+              1,
+              -22,
+              9,
+              -10,
+              -23,
+              22,
+              11,
+              -10,
+              -3,
+              29
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              74.76,
+              74.76,
+              74.76,
+              74.76,
+              74.76,
+              74.76,
+              74.76,
+              74.76,
+              69.76,
+              61.2,
+              61.2,
+              61.2
+            ]
+          }
+        }
+      },
+      {
+        "name": "Indigo Paints Ltd",
+        "ticker": "INDIGOPNTS",
+        "business_model": "Manufacturer",
+        "products": "Decorative paints, emulsions, enamels, wood finishes, primers",
+        "note": "Fast-growing decorative paints player, focus on innovation and premium products",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/INDIGOPNTS/"
+        },
+        "current": {
+          "revenue": 1405,
+          "rev_growth_1y": 4.8,
+          "rev_cagr_3y": 9.4,
+          "market_cap": 5227,
+          "ebitda_margin": 18,
+          "pat_margin": 10.5,
+          "roce": 18.6,
+          "roe": 13.7,
+          "debtor_days": 74,
+          "inventory_days": 87,
+          "payable_days": 106,
+          "ccc": 55,
+          "wc_days": 29,
+          "debt_equity": 0.02,
+          "interest_coverage": 85,
+          "promoter_holding": 53.88,
+          "fii_holding": 5.73,
+          "dii_holding": 25.25,
+          "pe": 31.7,
+          "pb": 4.5,
+          "dividend_yield": 0.46,
+          "dividend_payout": 16,
+          "rm_cost_pct": 53,
+          "gross_margin": 47
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              1073,
+              1306,
+              1341,
+              1405
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              17,
+              18,
+              17,
+              18
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              12.3,
+              11.4,
+              10.6,
+              10.5
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              23,
+              19,
+              19
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              68,
+              62,
+              66,
+              74
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              72,
+              91,
+              77,
+              87
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              18,
+              31,
+              55,
+              55
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              53.95,
+              53.94,
+              53.94,
+              53.94,
+              53.93,
+              53.93,
+              53.93,
+              53.93,
+              53.88,
+              53.88,
+              53.88,
+              53.88
+            ]
+          }
+        }
+      },
+      {
+        "name": "Sirca Paints India Ltd",
+        "ticker": "SIRCA",
+        "business_model": "Manufacturer",
+        "products": "Wood coatings and decorative paints",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/SIRCA/"
+        },
+        "current": {
+          "revenue": 492,
+          "rev_growth_1y": 32.3,
+          "rev_cagr_3y": 23.1,
+          "rev_cagr_5y": 28.4,
+          "market_cap": 2298,
+          "ebitda_margin": 20,
+          "pat_margin": 13.2,
+          "roce": 20.3,
+          "roe": 15.8,
+          "debtor_days": 115,
+          "inventory_days": 151,
+          "payable_days": 74,
+          "ccc": 193,
+          "wc_days": 152,
+          "debt_equity": 0.07,
+          "interest_coverage": 19.8,
+          "promoter_holding": 65.19,
+          "fii_holding": 6.08,
+          "dii_holding": 3.53,
+          "pe": 34.3,
+          "pb": 4.8,
+          "dividend_yield": 0.49,
+          "dividend_payout": 17,
+          "rm_cost_pct": 54,
+          "gross_margin": 46
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              134,
+              141,
+              196,
+              264,
+              311,
+              372,
+              492
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              23,
+              9,
+              19,
+              23,
+              22,
+              18,
+              20
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              18.7,
+              12.1,
+              14.3,
+              17.4,
+              16.4,
+              13.2,
+              13.2
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              11,
+              18,
+              25,
+              24,
+              19,
+              20
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              124,
+              112,
+              85,
+              71,
+              77,
+              92,
+              115
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              265,
+              282,
+              217,
+              248,
+              206,
+              198,
+              151
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              285,
+              242,
+              204,
+              229,
+              213,
+              218,
+              193
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              67.55,
+              67.55,
+              67.55,
+              67.55,
+              67.55,
+              67.55,
+              67.55,
+              67.54,
+              65.19,
+              65.19,
+              65.19,
+              65.19
+            ]
+          }
+        }
+      },
+      {
+        "name": "Shalimar Paints Ltd",
+        "ticker": "SHALPAINTS",
+        "business_model": "Manufacturer",
+        "products": "Decorative paints, industrial coatings, automotive coatings, wood finishes",
+        "note": "Legacy paint company, presence in decorative and industrial segments",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/SHALPAINTS/"
+        },
+        "current": {
+          "revenue": 576,
+          "rev_growth_1y": -4,
+          "rev_cagr_3y": 6,
+          "rev_cagr_5y": 12.1,
+          "market_cap": 609,
+          "ebitda_margin": -3.9,
+          "pat_margin": -11.3,
+          "roce": -7.93,
+          "roe": -21.4,
+          "debtor_days": 88,
+          "inventory_days": 96,
+          "payable_days": 166,
+          "ccc": 18,
+          "wc_days": -75,
+          "debt_equity": 0.66,
+          "interest_coverage": -0.9,
+          "promoter_holding": 74.96,
+          "fii_holding": 0.04,
+          "dii_holding": 0.03,
+          "pb": 2.4,
+          "dividend_yield": 0,
+          "dividend_payout": 0,
+          "rm_cost_pct": 68,
+          "gross_margin": 32
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              416,
+              384,
+              350,
+              271,
+              288,
+              344,
+              326,
+              358,
+              484,
+              535,
+              600,
+              576
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              2.1,
+              8,
+              4.1,
+              -13,
+              -21,
+              -10,
+              1.1,
+              -6,
+              -3,
+              -10,
+              -10,
+              -3.9
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              -2.6,
+              1.3,
+              -2.9,
+              -17,
+              -28.5,
+              -11,
+              -15.3,
+              -16.8,
+              -7.4,
+              -13.8,
+              -13.5,
+              -11.3
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              2,
+              13,
+              3,
+              -12,
+              -18,
+              -10,
+              -1,
+              -7,
+              -4,
+              -13,
+              -13,
+              -8
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              135,
+              136,
+              130,
+              142,
+              126,
+              76,
+              89,
+              80,
+              81,
+              76,
+              90,
+              88
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              126,
+              154,
+              139,
+              129,
+              118,
+              136,
+              146,
+              130,
+              120,
+              110,
+              112,
+              96
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              73,
+              72,
+              75,
+              28,
+              82,
+              61,
+              52,
+              77,
+              98,
+              52,
+              41,
+              18
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              39.93,
+              31.9,
+              75.72,
+              75.72,
+              75.72,
+              75.72,
+              74.96,
+              74.96,
+              74.96,
+              74.96,
+              74.96,
+              74.96
+            ]
+          }
+        }
+      },
+      {
+        "name": "Siddhika Coatings Ltd",
+        "ticker": "SIDDHIKA",
+        "business_model": "Trader-Distributor",
+        "products": "Paint contracting services and paint products distribution",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/SIDDHIKA/"
+        },
+        "current": {
+          "revenue": 58,
+          "rev_growth_1y": 16,
+          "rev_cagr_3y": 19.5,
+          "rev_cagr_5y": 27.8,
+          "market_cap": 129,
+          "ebitda_margin": 22,
+          "pat_margin": 17.2,
+          "roce": 31.6,
+          "roe": 23.6,
+          "debtor_days": 43,
+          "inventory_days": 95,
+          "payable_days": 32,
+          "ccc": 106,
+          "wc_days": 16,
+          "debt_equity": 0,
+          "promoter_holding": 63.09,
+          "fii_holding": 0,
+          "dii_holding": 0.92,
+          "pe": 12.8,
+          "pb": 2.7,
+          "dividend_yield": 1.92,
+          "dividend_payout": 24,
+          "rm_cost_pct": 27.03,
+          "gross_margin": 73
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              32,
+              30,
+              17,
+              21,
+              34,
+              38,
+              50,
+              58
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              15,
+              13,
+              8,
+              10,
+              14,
+              16,
+              20,
+              22
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              12.5,
+              10,
+              5.9,
+              9.5,
+              11.8,
+              13.2,
+              18,
+              17.2
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              25,
+              8,
+              10,
+              20,
+              23,
+              31,
+              32
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              64,
+              66,
+              104,
+              55,
+              48,
+              63,
+              27,
+              43
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              103,
+              106,
+              227,
+              166,
+              135,
+              80,
+              80,
+              95
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              154,
+              167,
+              323,
+              206,
+              170,
+              124,
+              93,
+              106
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Mar 2021",
+              "Apr 2021",
+              "Sep 2021",
+              "Mar 2022",
+              "Sep 2022",
+              "Mar 2023",
+              "Sep 2023",
+              "Mar 2024",
+              "Sep 2024",
+              "Mar 2025",
+              "Sep 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              83.65,
+              61.34,
+              63.09,
+              63.09,
+              63.09,
+              63.09,
+              63.09,
+              63.09,
+              63.09,
+              63.09,
+              63.09,
+              63.09
+            ]
+          }
+        }
+      },
+      {
+        "name": "Kamdhenu Ventures Ltd",
+        "ticker": "KAMOPAINTS",
+        "business_model": "Manufacturer",
+        "products": "Paint products manufacturing and trading",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/KAMOPAINTS/"
+        },
+        "current": {
+          "revenue": 245,
+          "rev_growth_1y": -7.9,
+          "rev_cagr_3y": -2,
+          "market_cap": 135,
+          "ebitda_margin": 3.9,
+          "pat_margin": 0,
+          "roce": 2.23,
+          "roe": 0.12,
+          "debtor_days": 219,
+          "inventory_days": 178,
+          "payable_days": 169,
+          "ccc": 227,
+          "wc_days": 173,
+          "debt_equity": 0.19,
+          "interest_coverage": 2.5,
+          "promoter_holding": 52.54,
+          "fii_holding": 0,
+          "dii_holding": 0.01,
+          "pb": 0.8,
+          "dividend_yield": 0,
+          "dividend_payout": 0,
+          "rm_cost_pct": 98.89,
+          "gross_margin": 1.1
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              0,
+              260,
+              292,
+              266,
+              245
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              -0.1,
+              8,
+              6,
+              3.9
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              -4.2,
+              4.8,
+              2.6,
+              0
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              -7,
+              12,
+              7,
+              2
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              146,
+              180,
+              189,
+              219
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              148,
+              186,
+              203,
+              178
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              132,
+              167,
+              233,
+              227
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              50.33,
+              50.33,
+              50.33,
+              50.33,
+              50.33,
+              50.33,
+              50.33,
+              50.33,
+              50.33,
+              50.33,
+              52.54,
+              52.54
+            ]
+          }
+        }
+      }
+    ],
+    "global": [
+      {
+        "name": "Nippon Paint Holdings Co. Ltd.",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Architectural coatings, automotive coatings, industrial coatings, marine coatings, traffic paint",
+        "note": "Asia's largest paint company, strong presence in China and Southeast Asia",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "BASF SE",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Automotive OEM coatings, refinish coatings, industrial coatings, decorative paints (within broader chemicals portfolio)",
+        "note": "World's largest chemical company, coatings is one segment within diversified portfolio",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Kansai Paint Co. Ltd.",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Automotive coatings, industrial coatings, decorative paints, marine coatings, protective coatings",
+        "note": "Japanese paint major, strong in automotive OEM, parent of Kansai Nerolac",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Jotun A/S",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Decorative paints, marine coatings, protective coatings, powder coatings",
+        "note": "Norwegian paint company, global leader in marine and protective coatings",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Valspar Corporation",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Architectural coatings, industrial coatings, packaging coatings, wood coatings",
+        "note": "Acquired by Sherwin-Williams in 2017, now part of SHW",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Tikkurila Oyj",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Decorative paints, industrial coatings, wood coatings",
+        "note": "Finnish paint company, acquired by PPG in 2021",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Cromology",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Decorative paints, architectural coatings, industrial coatings",
+        "note": "French paint company, formerly part of Materis Paints",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Cabot Corporation",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Carbon black, specialty chemicals, inkjet colorants (raw materials for coatings)",
+        "note": "Produces carbon black and pigments used in coatings and inks",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      }
+    ],
+    "private": [
+      {
+        "name": "Benjamin Moore",
+        "business_model": "Manufacturer",
+        "products": "Coatings manufacturer competing in Performance Coatings segment",
+        "note": "Premium architectural paint brand, owned by Berkshire Hathaway",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Hempel A/S",
+        "business_model": "Manufacturer",
+        "products": "Coatings manufacturer competing in Performance Coatings segment",
+        "note": "Danish coatings company, strong in marine and protective segments",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "VersaFlex",
+        "business_model": "Manufacturer",
+        "products": "Protective coatings (acquired by PPG to enhance infrastructure segment portfolio)",
+        "note": "",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Metal Coatings (India) Ltd",
+        "business_model": "Manufacturer",
+        "products": "",
+        "note": "",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Organic Coatings Ltd",
+        "business_model": "Manufacturer",
+        "products": "",
+        "note": "",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Durlax Top Surface Ltd",
+        "business_model": "Manufacturer",
+        "products": "",
+        "note": "",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      }
+    ]
+  },
+  "scorecard": {
+    "ranking": [
+      {
+        "company": "Asian Paints Ltd",
+        "bucket": "indian",
+        "score": 95,
+        "rank": 1,
+        "strengths": [
+          "Highest gross margin (50.7%)",
+          "Highest EBITDA margin (19%)",
+          "Highest PAT margin (12.4%)",
+          "Best ROCE (26.3%)",
+          "Best ROE (21.8%)",
+          "Lowest debtor days (46)"
+        ],
+        "reason": "Market leader with pricing power, superior margins, exceptional capital efficiency, and scale moat across procurement and distribution."
+      },
+      {
+        "company": "Siddhika Coatings Ltd",
+        "bucket": "indian",
+        "score": 82,
+        "rank": 2,
+        "strengths": [
+          "Highest gross margin (73%)",
+          "Highest EBITDA margin (22%)",
+          "Highest PAT margin (17.2%)",
+          "Best ROCE (31.6%)",
+          "Best ROE (23.6%)",
+          "Strong revenue CAGR 5Y (27.8%)"
+        ],
+        "reason": "Asset-light trader-distributor model with exceptional margins and returns, driven by strong culture and leadership (per grounded notes). Small scale limits impact but efficiency metrics are outstanding."
+      },
+      {
+        "company": "Berger Paints India Ltd",
+        "bucket": "indian",
+        "score": 78,
+        "rank": 3,
+        "strengths": [
+          "Strong ROCE (21.6%)",
+          "Strong ROE (17.3%)",
+          "Good gross margin (48%)",
+          "Low debt (0.09 D/E)",
+          "Solid scale (₹11,880 cr revenue)"
+        ],
+        "reason": "Strong #2 player with solid profitability and capital efficiency, though margins and growth trail Asian Paints. Well-managed with balanced financials."
+      },
+      {
+        "company": "Sirca Paints India Ltd",
+        "bucket": "indian",
+        "score": 75,
+        "rank": 4,
+        "strengths": [
+          "Highest revenue growth 1Y (32.3%)",
+          "Highest revenue CAGR 3Y (23.1%)",
+          "Highest revenue CAGR 5Y (28.4%)",
+          "Strong EBITDA margin (20%)",
+          "Strong PAT margin (13.2%)"
+        ],
+        "reason": "High-growth niche player with strong margins, but working capital management is weak (193 CCC days, 152 WC days). Growth momentum is impressive but efficiency needs improvement."
+      },
+      {
+        "company": "JSW Dulux Ltd",
+        "bucket": "indian",
+        "score": 68,
+        "rank": 5,
+        "strengths": [
+          "Best CCC (29 days)",
+          "Low inventory days (99)",
+          "Strong ROCE (22.7%)",
+          "Strong ROE (19.1%)",
+          "Exceptional PAT margin (54.8% - likely one-off)"
+        ],
+        "reason": "Excellent working capital efficiency and strong returns, but negative revenue growth (-11.6% 1Y, -1.8% 3Y CAGR) is concerning. PAT margin of 54.8% appears to be a one-off exceptional item."
+      },
+      {
+        "company": "Indigo Paints Ltd",
+        "bucket": "indian",
+        "score": 72,
+        "rank": 6,
+        "strengths": [
+          "Strong EBITDA margin (18%)",
+          "Good revenue CAGR 3Y (9.4%)",
+          "Low CCC (55 days)",
+          "Low WC days (29)",
+          "Lowest debt (0.02 D/E)",
+          "Highest interest coverage (85x)"
+        ],
+        "reason": "Emerging player with strong margins and efficient working capital, but scale is limited and returns (18.6% ROCE, 13.7% ROE) lag larger peers."
+      },
+      {
+        "company": "Kansai Nerolac Paints Ltd",
+        "bucket": "indian",
+        "score": 58,
+        "rank": 7,
+        "strengths": [
+          "Reasonable scale (₹8,052 cr)",
+          "Low debt (0.05 D/E)"
+        ],
+        "reason": "Underperforming across profitability metrics—lowest gross margin (42%), EBITDA margin (12%), PAT margin (7.2%), ROCE (12%), and ROE (8.82%) among major peers. Struggling with high RM costs (58%)."
+      },
+      {
+        "company": "Shalimar Paints Ltd",
+        "bucket": "indian",
+        "score": 25,
+        "rank": 8,
+        "strengths": [],
+        "reason": "In financial distress with negative EBITDA margin (-3.9%), PAT margin (-11.3%), ROCE (-7.93%), and ROE (-21.4%). High debt (0.66 D/E) and negative interest coverage. Despite premiumisation efforts noted in sources, execution is failing."
+      },
+      {
+        "company": "Kamdhenu Ventures Ltd",
+        "bucket": "indian",
+        "score": 30,
+        "rank": 9,
+        "strengths": [],
+        "reason": "Extremely weak fundamentals—near-zero gross margin (1.1%), PAT margin (0%), ROCE (2.23%), and ROE (0.12%). Very high RM costs (98.89%) and poor working capital (227 CCC days). Recent break into profitability per sources, but still far from viable."
+      }
+    ]
+  },
+  "report": {
+    "title": "Paints and Coatings: Peer Benchmarking",
+    "summary": "Asian Paints stands out as the clear segment leader, combining massive scale (₹35,584 crore revenue) with best-in-class profitability and efficiency. The company's 50.7% gross margin and 19% EBITDA margin significantly outpace peers, while its working capital management (46 debtor days vs. 67 median) demonstrates exceptional distribution control. Most peers operate at much smaller scale with lower margins, though some like Sirca Paints show strong growth momentum. The segment shows wide performance dispersion—from Asian Paints' 26.3% ROCE down to negative returns at Shalimar Paints.",
+    "sections": [
+      {
+        "title": "Performance Spotlight",
+        "icon": "trophy",
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "good",
+            "title": "Asian Paints: The Undisputed Leader",
+            "text": "Asian Paints dominates every key metric. Its 50.7% gross margin reflects strong pricing power and premium product mix, while 19% EBITDA margin is 4 points above the peer median. The company collects cash from customers in just 46 days (vs. 67 for peers) and achieves 26.3% ROCE—demonstrating superior capital efficiency. With 25x the revenue of the median peer, Asian Paints enjoys unmatched scale advantages in procurement, manufacturing, and distribution that smaller players simply cannot replicate."
+          },
+          {
+            "type": "kpis",
+            "items": [
+              {
+                "label": "Asian Paints Revenue",
+                "value": "₹35,584 cr",
+                "sub": "25x peer median"
+              },
+              {
+                "label": "Gross Margin",
+                "value": "50.7%",
+                "sub": "vs 46% median"
+              },
+              {
+                "label": "EBITDA Margin",
+                "value": "19.0%",
+                "sub": "vs 15% median"
+              },
+              {
+                "label": "ROCE",
+                "value": "26.3%",
+                "sub": "vs 20.3% median"
+              },
+              {
+                "label": "Debtor Days",
+                "value": "46 days",
+                "sub": "vs 67 median"
+              },
+              {
+                "label": "Cash Conversion Cycle",
+                "value": "84 days",
+                "sub": "vs 87 median"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Profitability Comparison",
+        "icon": "chart",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Asian Paints",
+                "value": 50.7
+              },
+              {
+                "label": "Berger Paints",
+                "value": 48
+              },
+              {
+                "label": "Indigo Paints",
+                "value": 47
+              },
+              {
+                "label": "Sirca Paints",
+                "value": 46
+              },
+              {
+                "label": "Kansai Nerolac",
+                "value": 42
+              },
+              {
+                "label": "JSW Dulux",
+                "value": 41
+              },
+              {
+                "label": "Peer Median",
+                "value": 46
+              }
+            ]
+          },
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Asian Paints",
+                "value": 19
+              },
+              {
+                "label": "Sirca Paints",
+                "value": 20
+              },
+              {
+                "label": "Indigo Paints",
+                "value": 18
+              },
+              {
+                "label": "Berger Paints",
+                "value": 15
+              },
+              {
+                "label": "JSW Dulux",
+                "value": 14
+              },
+              {
+                "label": "Kansai Nerolac",
+                "value": 12
+              },
+              {
+                "label": "Peer Median",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Returns on Capital",
+        "icon": "trend",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Asian Paints ROCE",
+                "value": 26.3
+              },
+              {
+                "label": "JSW Dulux ROCE",
+                "value": 22.7
+              },
+              {
+                "label": "Berger Paints ROCE",
+                "value": 21.6
+              },
+              {
+                "label": "Sirca Paints ROCE",
+                "value": 20.3
+              },
+              {
+                "label": "Indigo Paints ROCE",
+                "value": 18.6
+              },
+              {
+                "label": "Kansai Nerolac ROCE",
+                "value": 12
+              },
+              {
+                "label": "Peer Median",
+                "value": 20.3
+              }
+            ]
+          },
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "Asian Paints ROE",
+                "value": 21.8
+              },
+              {
+                "label": "JSW Dulux ROE",
+                "value": 19.1
+              },
+              {
+                "label": "Berger Paints ROE",
+                "value": 17.3
+              },
+              {
+                "label": "Sirca Paints ROE",
+                "value": 15.8
+              },
+              {
+                "label": "Indigo Paints ROE",
+                "value": 13.7
+              },
+              {
+                "label": "Kansai Nerolac ROE",
+                "value": 8.8
+              },
+              {
+                "label": "Peer Median",
+                "value": 15.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Growth Trajectories",
+        "icon": "sparkles",
+        "blocks": [
+          {
+            "type": "trend",
+            "unit": "₹ crore",
+            "years": [
+              "5Y CAGR",
+              "3Y CAGR",
+              "1Y Growth"
+            ],
+            "series": [
+              {
+                "label": "Asian Paints",
+                "values": [
+                  10.4,
+                  1,
+                  4.9
+                ]
+              },
+              {
+                "label": "Berger Paints",
+                "values": [
+                  11.7,
+                  4,
+                  2.9
+                ]
+              },
+              {
+                "label": "Sirca Paints",
+                "values": [
+                  28.4,
+                  23.1,
+                  32.3
+                ]
+              },
+              {
+                "label": "Indigo Paints",
+                "values": [
+                  null,
+                  9.4,
+                  4.8
+                ]
+              },
+              {
+                "label": "Kansai Nerolac",
+                "values": [
+                  9.7,
+                  2.2,
+                  2.9
+                ]
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "Growth vs. Scale Trade-off",
+            "text": "Smaller players like Sirca Paints (28% 5-year CAGR) and Indigo Paints (9% 3-year CAGR) show stronger growth rates as they expand from lower bases. Large incumbents Asian Paints and Berger Paints grow more slowly (1-4% recently) but from massive revenue bases, reflecting market maturity. The segment shows a classic pattern: high growth at small scale, or dominant market share with moderate growth."
+          }
+        ]
+      },
+      {
+        "title": "Working Capital Efficiency",
+        "icon": "money",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "days",
+            "items": [
+              {
+                "label": "Asian Paints (Debtor)",
+                "value": 46
+              },
+              {
+                "label": "Berger Paints (Debtor)",
+                "value": 48
+              },
+              {
+                "label": "JSW Dulux (Debtor)",
+                "value": 61
+              },
+              {
+                "label": "Kansai Nerolac (Debtor)",
+                "value": 67
+              },
+              {
+                "label": "Indigo Paints (Debtor)",
+                "value": 74
+              },
+              {
+                "label": "Sirca Paints (Debtor)",
+                "value": 115
+              },
+              {
+                "label": "Peer Median",
+                "value": 67
+              }
+            ]
+          },
+          {
+            "type": "bars",
+            "unit": "days",
+            "items": [
+              {
+                "label": "JSW Dulux (CCC)",
+                "value": 29
+              },
+              {
+                "label": "Indigo Paints (CCC)",
+                "value": 55
+              },
+              {
+                "label": "Asian Paints (CCC)",
+                "value": 84
+              },
+              {
+                "label": "Berger Paints (CCC)",
+                "value": 87
+              },
+              {
+                "label": "Kansai Nerolac (CCC)",
+                "value": 95
+              },
+              {
+                "label": "Sirca Paints (CCC)",
+                "value": 193
+              },
+              {
+                "label": "Peer Median",
+                "value": 87
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "good",
+            "title": "Asian Paints' Distribution Muscle",
+            "text": "Asian Paints collects from customers in just 46 days—21 days faster than the median peer. This reflects strong bargaining power with dealers and distributors, enabled by brand strength and product demand. Combined with efficient inventory management (118 days, in line with peers), the company's 84-day cash conversion cycle is among the best, freeing up capital for growth and returns to shareholders."
+          }
+        ]
+      },
+      {
+        "title": "Business Model Mix",
+        "icon": "donut",
+        "blocks": [
+          {
+            "type": "donut",
+            "items": [
+              {
+                "label": "Raw Material Costs",
+                "value": 54
+              },
+              {
+                "label": "Operating Expenses",
+                "value": 31
+              },
+              {
+                "label": "EBITDA",
+                "value": 15
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "Cost Structure (Peer Median)",
+            "text": "Raw materials represent 54% of revenue for the typical paint manufacturer, with operating expenses at 31% and EBITDA margin at 15%. Asian Paints achieves better economics: 49% RM costs and 19% EBITDA margin, suggesting superior sourcing, possible backward integration, or higher value-added products. Struggling players like Shalimar face 68% RM costs, leaving no room for profitability."
+          }
+        ]
+      },
+      {
+        "title": "Peer Set at a Glance",
+        "icon": "table",
+        "blocks": [
+          {
+            "type": "table",
+            "columns": [
+              "Company",
+              "Revenue (₹cr)",
+              "Gross Margin",
+              "EBITDA Margin",
+              "ROCE",
+              "Debtor Days",
+              "Market Cap (₹cr)"
+            ],
+            "rows": [
+              [
+                "Asian Paints",
+                "35,584",
+                "50.7%",
+                "19.0%",
+                "26.3%",
+                "46",
+                "2,32,308"
+              ],
+              [
+                "Berger Paints",
+                "11,880",
+                "48.0%",
+                "15.0%",
+                "21.6%",
+                "48",
+                "52,937"
+              ],
+              [
+                "Kansai Nerolac",
+                "8,052",
+                "42.0%",
+                "12.0%",
+                "12.0%",
+                "67",
+                "14,470"
+              ],
+              [
+                "JSW Dulux",
+                "3,599",
+                "41.0%",
+                "14.0%",
+                "22.7%",
+                "61",
+                "14,101"
+              ],
+              [
+                "Indigo Paints",
+                "1,405",
+                "47.0%",
+                "18.0%",
+                "18.6%",
+                "74",
+                "5,227"
+              ],
+              [
+                "Sirca Paints",
+                "492",
+                "46.0%",
+                "20.0%",
+                "20.3%",
+                "115",
+                "2,298"
+              ],
+              [
+                "Shalimar Paints",
+                "576",
+                "32.0%",
+                "-3.9%",
+                "-7.9%",
+                "88",
+                "609"
+              ],
+              [
+                "Peer Median",
+                "1,405",
+                "46.0%",
+                "15.0%",
+                "20.3%",
+                "67",
+                "5,227"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Key Takeaways",
+        "icon": "flag",
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "Segment Dynamics",
+            "text": "The Indian paints sector is dominated by Asian Paints, which has built an unassailable competitive position through scale, brand strength, and operational excellence. Mid-sized players like Berger and Kansai Nerolac are profitable but lack Asian Paints' margin power. Smaller specialists like Sirca and Indigo show promise with strong growth and decent returns, while legacy players like Shalimar struggle with outdated cost structures. The segment rewards scale and brand—barriers to entry are high, and the leader's advantages compound over time."
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "Screener — Asian Paints Ltd",
+      "url": "https://www.screener.in/company/ASIANPAINT/"
+    },
+    {
+      "label": "Screener — Berger Paints India Ltd",
+      "url": "https://www.screener.in/company/BERGEPAINT/"
+    },
+    {
+      "label": "Screener — Kansai Nerolac Paints Ltd",
+      "url": "https://www.screener.in/company/KANSAINER/"
+    },
+    {
+      "label": "Screener — JSW Dulux Ltd",
+      "url": "https://www.screener.in/company/JSWDULUX/"
+    },
+    {
+      "label": "Screener — Indigo Paints Ltd",
+      "url": "https://www.screener.in/company/INDIGOPNTS/"
+    },
+    {
+      "label": "Screener — Sirca Paints India Ltd",
+      "url": "https://www.screener.in/company/SIRCA/"
+    },
+    {
+      "label": "Screener — Shalimar Paints Ltd",
+      "url": "https://www.screener.in/company/SHALPAINTS/"
+    },
+    {
+      "label": "Screener — Siddhika Coatings Ltd",
+      "url": "https://www.screener.in/company/SIDDHIKA/"
+    },
+    {
+      "label": "Screener — Kamdhenu Ventures Ltd",
+      "url": "https://www.screener.in/company/KAMOPAINTS/"
+    },
+    {
+      "label": "linkedin.com",
+      "url": "https://www.linkedin.com/posts/shalimar-paints_premiumisation-in-paints-an-urban-story-activity-7473267956412645377-MgIg"
+    },
+    {
+      "label": "simplywall.st",
+      "url": "https://simplywall.st/stocks/in/materials/nse-kamopaints/kamdhenu-ventures-shares/news/returns-at-kamdhenu-ventures-nsekamopaints-are-on-the-way-up-1"
+    },
+    {
+      "label": "linkedin.com",
+      "url": "https://www.linkedin.com/posts/indiacsrnetwork_indiacsr-siddhikacoatings-csrindia-activity-7472142826965786626-jRKX"
+    },
+    {
+      "label": "Screener.in",
+      "url": "https://www.screener.in/"
+    }
+  ]
+}

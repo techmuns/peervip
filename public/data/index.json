@@ -83,6 +83,42 @@
       "updated_at": "2026-09-28T10:41:30.140Z",
       "peer_count": 14,
       "sample": false
+    },
+    {
+      "slug": "paints-and-coatings",
+      "name": "Paints And Coatings",
+      "type": "industry",
+      "query": "Paints and Coatings",
+      "seed_company": "Asian Paints Ltd",
+      "aliases": [
+        "paints and coatings",
+        "asian paints ltd",
+        "berger paints india ltd",
+        "kansai nerolac paints ltd",
+        "jsw dulux ltd",
+        "indigo paints ltd",
+        "sirca paints india ltd",
+        "shalimar paints ltd",
+        "siddhika coatings ltd",
+        "kamdhenu ventures ltd",
+        "nippon paint holdings co. ltd.",
+        "basf se",
+        "kansai paint co. ltd.",
+        "jotun a/s",
+        "valspar corporation",
+        "tikkurila oyj",
+        "cromology",
+        "cabot corporation",
+        "benjamin moore",
+        "hempel a/s",
+        "versaflex",
+        "metal coatings (india) ltd",
+        "organic coatings ltd",
+        "durlax top surface ltd"
+      ],
+      "updated_at": "2026-09-29T06:25:51.454Z",
+      "peer_count": 23,
+      "sample": false
     }
   ]
 }
