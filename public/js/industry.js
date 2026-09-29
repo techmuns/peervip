@@ -8,7 +8,10 @@ import { makeLine, makeDoughnut, color, destroyChart } from './charts.js';
 import { industryLine, leaderShareLine, dispersionLine, revenueShare, thenVsNow } from './compute.js';
 
 const isNum = (v) => typeof v === 'number' && isFinite(v);
-const fyLabel = (y) => { const m = /(\d{4})/.exec(String(y || '')); return m ? 'FY' + m[1].slice(-2) : String(y || ''); };
+const fyLabel = (y) => {
+  if (typeof y === 'number' && isFinite(y)) return 'FY' + String(y).slice(-2);
+  const m = /(\d{4})/.exec(String(y || '')); return m ? 'FY' + m[1].slice(-2) : String(y || '');
+};
 
 function unitFmt(v, unit) {
   if (!isNum(v)) return '—';
@@ -24,7 +27,7 @@ function firstLast(line) {
 }
 function cagr(line) {
   const fl = firstLast(line); if (!fl || fl.a.v <= 0 || fl.b.v <= 0) return null;
-  const yrs = (parseInt(/(\d{4})/.exec(fl.b.y)[1], 10) - parseInt(/(\d{4})/.exec(fl.a.y)[1], 10)) || 1;
+  const yrs = (fl.b.y - fl.a.y) || 1;
   return +(((fl.b.v / fl.a.v) ** (1 / yrs) - 1) * 100).toFixed(1);
 }
 function arrowSpan(delta, good) {
@@ -70,9 +73,9 @@ function buildFindings(peers) {
   // 2) Revenue growth phase — accelerating or cooling
   const rev = L('revenue', 'sum'), rt = traj(rev);
   if (rt) {
-    const yrsAll = (parseInt(/(\d{4})/.exec(rt.last.fy)[1], 10) - parseInt(/(\d{4})/.exec(rt.first.fy)[1], 10)) || 1;
+    const yrsAll = (rt.last.fy - rt.first.fy) || 1;
     const cagrAll = rt.first.v > 0 ? (((rt.last.v / rt.first.v) ** (1 / yrsAll) - 1) * 100) : null;
-    const recentYrs = (parseInt(/(\d{4})/.exec(rt.last.fy)[1], 10) - parseInt(/(\d{4})/.exec(rt.mid.fy)[1], 10)) || 1;
+    const recentYrs = (rt.last.fy - rt.mid.fy) || 1;
     const cagrRecent = rt.mid.v > 0 ? (((rt.last.v / rt.mid.v) ** (1 / recentYrs) - 1) * 100) : null;
     if (cagrAll != null) {
       const accel = cagrRecent != null && cagrRecent > cagrAll + 1.5, cool = cagrRecent != null && cagrRecent < cagrAll - 1.5;
@@ -177,6 +180,7 @@ export function renderIndustry(pane, report) {
   const leader = leaderShareLine(peers, 'revenue');
   const disp = dispersionLine(peers, 'ebitda_margin');
   const share = revenueShare(peers);
+  const cov = (margin && margin.coverage) || (rev && rev.coverage) || { min: 0, max: 0 };
 
   const lastNum = (line) => { const fl = firstLast(line); return fl ? fl.b.v : null; };
   const deltaOf = (line) => { const fl = firstLast(line); return fl ? +(fl.b.v - fl.a.v).toFixed(1) : null; };
@@ -263,7 +267,7 @@ export function renderIndustry(pane, report) {
 
     <section class="pv-card p-5">
       <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">The sector over the years</h3>
-      <p class="text-xs text-slate-400 mb-4">Median across peers each year — the shape of the industry.</p>
+      <p class="text-xs text-slate-400 mb-4">Median across peers each year, bucketed by fiscal year — typically ${cov.min}–${cov.max} of the ${withData.length} peers report each year (companies with shorter histories join from the year their data begins).</p>
       <div class="pv-ind-grid grid md:grid-cols-2 gap-5">
         ${chartBlock('rev', 'Industry size (total revenue)', cap(rev, 'Rs Cr'))}
         ${chartBlock('margin', 'Profitability (median EBITDA margin)', cap(margin, '%'))}
@@ -299,11 +303,11 @@ export function renderIndustry(pane, report) {
       <div class="pv-ind-grid grid lg:grid-cols-2 gap-5 mt-2">
         <div>
           <p class="text-xs text-slate-500 mb-2">${leadVerdict}</p>
-          ${chartBlock('leader', '', 'Top-1 vs Top-3 share of peer revenue', 210)}
+          ${chartBlock('leader', '', 'Largest peer vs top 3 combined — share of peer revenue', 210)}
         </div>
         <div>
           <p class="text-xs text-slate-500 mb-2">${dispVerdict}</p>
-          ${chartBlock('disp', '', cap(disp, '%') + ' spread', 210)}
+          ${chartBlock('disp', '', 'Margin gap: ' + cap(disp, '%'), 210)}
         </div>
       </div>
     </section>
@@ -329,8 +333,8 @@ export function renderIndustry(pane, report) {
   makeLine(C('roce'), { years: roce.years.map(fyLabel), series: [{ label: 'ROCE', values: roce.values }], unit: '%', area: true });
   makeLine(C('ccc'), { years: ccc.years.map(fyLabel), series: [{ label: 'Cash-conversion days', values: ccc.values }], unit: 'days', area: true });
   makeLine(C('rm'), { years: rm.years.map(fyLabel), series: [{ label: 'Raw material %', values: rm.values }], unit: '%', area: true });
-  makeLine(C('leader'), { years: leader.years.map(fyLabel), series: [{ label: 'Top company', values: leader.top1 }, { label: 'Top 3', values: leader.top3 }], unit: '%', area: false });
-  makeLine(C('disp'), { years: disp.years.map(fyLabel), series: [{ label: 'Margin spread (std-dev)', values: disp.values }], unit: '%', area: true });
+  makeLine(C('leader'), { years: leader.years.map(fyLabel), series: [{ label: 'Largest peer', values: leader.top1 }, { label: 'Top 3 combined', values: leader.top3 }], unit: '%', area: false });
+  makeLine(C('disp'), { years: disp.years.map(fyLabel), series: [{ label: 'Margin gap across peers', values: disp.values }], unit: '%', area: true });
   makeLine(C('cwip'), { years: cwip.years.map(fyLabel), series: [{ label: 'Capital WIP', values: cwip.values }], unit: 'Rs Cr', area: true });
   makeLine(C('inst'), { years: fii.years.map(fyLabel), series: [{ label: 'FII', values: fii.values }, { label: 'DII', values: dii.values }], unit: '%', area: false });
   if (C('share')) makeDoughnut(C('share'), { labels: share.map((r) => r.name), values: share.map((r) => r.value) });

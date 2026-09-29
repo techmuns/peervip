@@ -78,6 +78,20 @@ export function yearSortKey(y) {
   return m ? parseInt(m[1], 10) : 0;
 }
 
+/**
+ * Fiscal year (integer) from a Screener period label, or null.
+ * Buckets differing year-ends by their stated year ("Mar 2016" & "Dec 2016" → 2016)
+ * and SKIPS non-annual transition stubs like "Mar 2016 9m" / "Mar 2023 15m", which
+ * aren't comparable full-year figures. Lets peers with mismatched fiscal calendars
+ * be aligned onto one FY axis.
+ */
+export function fiscalYear(label) {
+  const s = String(label == null ? '' : label);
+  if (/\b\d{1,2}\s*m\b/i.test(s)) return null; // 9m / 15m / 18m transition period
+  const m = /(\d{4})/.exec(s);
+  return m ? parseInt(m[1], 10) : null;
+}
+
 /** Human date, e.g. "28 Sep 2026". */
 export function fmtDate(iso) {
   if (!iso) return '';
