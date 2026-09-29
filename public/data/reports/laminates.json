@@ -5,12 +5,12 @@
     "type": "company",
     "query": "laminates",
     "seed_company": "Sandur Laminates Ltd",
-    "segment": "Laminates are decorative surface materials used for wall panels and interior fixtures, competing with PVC and PS wall panels in the wall decorative industry.",
-    "definition": "Laminates are decorative surface materials used for wall panels and interior fixtures, competing with PVC and PS wall panels in the wall decorative industry.",
-    "generated_at": "2026-09-28T11:39:22.960Z",
+    "segment": "Laminates are decorative surfacing materials used for wall panels and interior fixtures in residential and commercial real estate applications.",
+    "definition": "Laminates are decorative surfacing materials used for wall panels and interior fixtures in residential and commercial real estate applications.",
+    "generated_at": "2026-09-29T07:12:56.584Z",
     "sample": false,
     "coverage": {
-      "peers_total": 12,
+      "peers_total": 20,
       "with_full_financials": 6,
       "confidence": "high"
     }
@@ -18,9 +18,9 @@
   "outperformer": {
     "company": "Stylam Industries Ltd",
     "bucket": "indian",
-    "headline": "Premium product differentiation drives exceptional profitability despite smaller scale",
-    "reason": "Stylam has achieved a structural profitability advantage through product differentiation and catering to customers seeking superior finishes. This is evidenced by its 20% EBITDA margin (nearly double the peer median of 10%) and 13.3% PAT margin (5x the median of 2.55%). The company commands 26.6% ROCE versus the median 11.5%, demonstrating superior capital efficiency. Its near-debt-free balance sheet (0.04 D/E vs median 0.49) and 55.3x interest coverage provide financial flexibility. While revenue scale is smaller at ₹1,129 crore and recent growth has been modest (10.1% 1Y, 5.8% 3Y CAGR), the premium positioning allows it to extract significantly higher margins from each rupee of sales. The 50% gross margin (vs median 45%) despite 53% RM costs shows pricing power. The company trades at a reasonable 32.7 PE given the quality, only marginally above the median 31.95 despite vastly superior returns.",
-    "india_vs_global": "Only Indian peers available for comparison; Stylam's premium product strategy and margin profile would be competitive even against global decorative laminate specialists"
+    "headline": "Premium product mix and superior profitability despite smaller scale",
+    "reason": "Stylam has achieved exceptional profitability metrics through product differentiation and catering to customers seeking superior finishes. With a 20% EBITDA margin (2x peer median of 10%) and 13.3% PAT margin (5x peer median of 2.55%), the company demonstrates strong pricing power. Its ROCE of 26.6% (vs median 10.85%) and ROE of 19.9% (vs median 9.52%) are best-in-class, achieved with minimal leverage (0.04 debt-equity vs median 0.63) and an interest coverage of 55.3x (vs median 3.9x). The company operates with the lowest raw material cost at 53% (vs median 55%), suggesting either premium pricing or efficient sourcing. Despite slower recent revenue growth (10.1% vs median 14.35%), the company's focus on value over volume has created a sustainable competitive moat in the premium laminate segment.",
+    "india_vs_global": "Stylam's profitability metrics likely exceed most global peers in the fragmented laminates industry, where scale players like Egger and Kronospan typically operate on thinner margins due to commodity positioning, while Stylam's premium differentiation strategy delivers superior returns on capital."
   },
   "metrics": [
     {
@@ -235,10 +235,514 @@
   "peers": {
     "indian": [
       {
+        "name": "Century Plyboards (India) Ltd",
+        "ticker": "CENTURYPLY",
+        "business_model": "Manufacturer",
+        "products": "Laminates, plywood, veneer, MDF, particle board - Laminates segment",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/CENTURYPLY/"
+        },
+        "current": {
+          "revenue": 5397,
+          "rev_growth_1y": 19.2,
+          "rev_cagr_3y": 14,
+          "rev_cagr_5y": 20.4,
+          "market_cap": 14977,
+          "ebitda_margin": 12,
+          "pat_margin": 5,
+          "roce": 11.5,
+          "roe": 10.8,
+          "debtor_days": 42,
+          "inventory_days": 143,
+          "payable_days": 53,
+          "ccc": 131,
+          "wc_days": 2,
+          "debt_equity": 0.68,
+          "interest_coverage": 5.8,
+          "promoter_holding": 71.83,
+          "fii_holding": 3.86,
+          "dii_holding": 19.41,
+          "pe": 50.5,
+          "pb": 5.8,
+          "dividend_yield": 0.15,
+          "dividend_payout": 8,
+          "rm_cost_pct": 56,
+          "gross_margin": 44
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              1588,
+              1641,
+              1818,
+              2024,
+              2280,
+              2317,
+              2130,
+              3027,
+              3647,
+              3886,
+              4528,
+              5397
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              16,
+              18,
+              17,
+              16,
+              13,
+              12,
+              16,
+              18,
+              16,
+              13,
+              11,
+              12
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              9.4,
+              10.4,
+              10.6,
+              8.2,
+              6.5,
+              5.4,
+              9,
+              10.3,
+              10.5,
+              8.4,
+              4.1,
+              5
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              25,
+              26,
+              23,
+              18,
+              17,
+              14,
+              20,
+              30,
+              27,
+              18,
+              10,
+              11
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              62,
+              63,
+              69,
+              64,
+              47,
+              40,
+              52,
+              42,
+              39,
+              39,
+              40,
+              42
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              144,
+              133,
+              123,
+              142,
+              146,
+              125,
+              130,
+              128,
+              101,
+              116,
+              148,
+              143
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              179,
+              157,
+              134,
+              141,
+              143,
+              118,
+              108,
+              109,
+              87,
+              104,
+              135,
+              131
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              73.04,
+              73.04,
+              72.59,
+              72.59,
+              72.59,
+              72.64,
+              72.64,
+              72.64,
+              72.64,
+              72.64,
+              71.83,
+              71.83
+            ]
+          }
+        }
+      },
+      {
+        "name": "Stylam Industries Ltd",
+        "ticker": "STYLAMIND",
+        "business_model": "Manufacturer",
+        "products": "Decorative laminates, high-pressure laminates, compact laminates, specialty surfaces",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/STYLAMIND/"
+        },
+        "current": {
+          "revenue": 1129,
+          "rev_growth_1y": 10.1,
+          "rev_cagr_3y": 5.8,
+          "rev_cagr_5y": 18.9,
+          "market_cap": 5681,
+          "ebitda_margin": 20,
+          "pat_margin": 13.3,
+          "roce": 26.6,
+          "roe": 19.9,
+          "debtor_days": 67,
+          "inventory_days": 132,
+          "payable_days": 50,
+          "ccc": 150,
+          "wc_days": 100,
+          "debt_equity": 0.04,
+          "interest_coverage": 55.3,
+          "promoter_holding": 56.86,
+          "fii_holding": 2.62,
+          "dii_holding": 12.14,
+          "pe": 33.4,
+          "pb": 7,
+          "dividend_yield": 0,
+          "dividend_payout": 0,
+          "rm_cost_pct": 53,
+          "gross_margin": 47
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              461,
+              462,
+              476,
+              659,
+              952,
+              914,
+              1025,
+              1129
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              17,
+              17,
+              20,
+              16,
+              16,
+              20,
+              18,
+              20
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              8.5,
+              4.1,
+              11.6,
+              9.3,
+              10.1,
+              14,
+              11.9,
+              13.3
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              17,
+              24,
+              25,
+              32,
+              34,
+              27,
+              27
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              63,
+              69,
+              76,
+              66,
+              48,
+              64,
+              73,
+              67
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              93,
+              98,
+              106,
+              129,
+              110,
+              112,
+              121,
+              132
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              117,
+              115,
+              106,
+              139,
+              131,
+              147,
+              163,
+              150
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              54.61,
+              54.61,
+              54.61,
+              54.61,
+              54.61,
+              52.19,
+              52.19,
+              52.19,
+              52.19,
+              52.19,
+              54.1,
+              56.86
+            ]
+          }
+        }
+      },
+      {
         "name": "Greenlam Industries Ltd",
         "ticker": "GREENLAM",
         "business_model": "Manufacturer",
-        "products": "Decorative laminates, decorative veneers and allied products - core laminate manufacturer",
+        "products": "Laminates, decorative veneers and allied products",
         "note": "",
         "source": {
           "label": "Screener",
@@ -249,7 +753,7 @@
           "rev_growth_1y": 18.6,
           "rev_cagr_3y": 14.6,
           "rev_cagr_5y": 20.5,
-          "market_cap": 5558,
+          "market_cap": 5496,
           "ebitda_margin": 11,
           "pat_margin": 1.8,
           "roce": 8.12,
@@ -264,7 +768,7 @@
           "promoter_holding": 50.98,
           "fii_holding": 1.47,
           "dii_holding": 10.89,
-          "pe": 60.3,
+          "pe": 59.6,
           "pb": 4.7,
           "dividend_yield": 0.18,
           "dividend_payout": 18,
@@ -515,832 +1019,10 @@
         }
       },
       {
-        "name": "Stylam Industries Ltd",
-        "ticker": "STYLAMIND",
-        "business_model": "Manufacturer",
-        "products": "Decorative laminates (HPL), compact laminates, specialty surfaces, solid surfaces - core laminate manufacturer",
-        "note": "",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/STYLAMIND/"
-        },
-        "current": {
-          "revenue": 1129,
-          "rev_growth_1y": 10.1,
-          "rev_cagr_3y": 5.8,
-          "rev_cagr_5y": 18.9,
-          "market_cap": 5551,
-          "ebitda_margin": 20,
-          "pat_margin": 13.3,
-          "roce": 26.6,
-          "roe": 19.9,
-          "debtor_days": 67,
-          "inventory_days": 132,
-          "payable_days": 50,
-          "ccc": 150,
-          "wc_days": 100,
-          "debt_equity": 0.04,
-          "interest_coverage": 55.3,
-          "promoter_holding": 56.86,
-          "fii_holding": 2.62,
-          "dii_holding": 12.14,
-          "pe": 32.7,
-          "pb": 6.9,
-          "dividend_yield": 0,
-          "dividend_payout": 0,
-          "rm_cost_pct": 53,
-          "gross_margin": 47
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              461,
-              462,
-              476,
-              659,
-              952,
-              914,
-              1025,
-              1129
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              17,
-              17,
-              20,
-              16,
-              16,
-              20,
-              18,
-              20
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              8.5,
-              4.1,
-              11.6,
-              9.3,
-              10.1,
-              14,
-              11.9,
-              13.3
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              null,
-              17,
-              24,
-              25,
-              32,
-              34,
-              27,
-              27
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              63,
-              69,
-              76,
-              66,
-              48,
-              64,
-              73,
-              67
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              93,
-              98,
-              106,
-              129,
-              110,
-              112,
-              121,
-              132
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              117,
-              115,
-              106,
-              139,
-              131,
-              147,
-              163,
-              150
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              54.61,
-              54.61,
-              54.61,
-              54.61,
-              54.61,
-              52.19,
-              52.19,
-              52.19,
-              52.19,
-              52.19,
-              54.1,
-              56.86
-            ]
-          }
-        }
-      },
-      {
-        "name": "Rushil Decor Ltd",
-        "ticker": "RUSHIL",
-        "business_model": "Manufacturer",
-        "products": "Laminate sheets, pre-laminated MDF, decorative laminates, melamine-faced boards - core laminate manufacturer",
-        "note": "Integrated pre-lam board manufacturer, supplies furniture industry",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/RUSHIL/"
-        },
-        "current": {
-          "revenue": 862,
-          "rev_growth_1y": -4,
-          "market_cap": 469,
-          "ebitda_margin": 8,
-          "pat_margin": 0.7,
-          "roce": 4.5,
-          "roe": 1.04,
-          "debtor_days": 83,
-          "inventory_days": 204,
-          "payable_days": 207,
-          "ccc": 79,
-          "wc_days": 27,
-          "debt_equity": 0.4,
-          "interest_coverage": 2.3,
-          "promoter_holding": 55.11,
-          "fii_holding": 1.13,
-          "dii_holding": 0.06,
-          "pe": 20.6,
-          "pb": 0.7,
-          "dividend_yield": 0.31,
-          "dividend_payout": 22,
-          "rm_cost_pct": 54,
-          "gross_margin": 46
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              898,
-              862
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              12,
-              8
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              5.3,
-              0.7
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              null,
-              4
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              76,
-              83
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              183,
-              204
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              92,
-              79
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              56.39,
-              56.39,
-              56.39,
-              55.34,
-              54.81,
-              54.63,
-              56.37,
-              55.11,
-              55.11,
-              55.11,
-              55.11,
-              55.11
-            ]
-          }
-        }
-      },
-      {
-        "name": "Archidply Industries Ltd",
-        "ticker": "ARCHIDPLY",
-        "business_model": "Manufacturer",
-        "products": "Laminated sheets (HPL), plywood and block board - manufactures high-pressure laminates",
-        "note": "",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/ARCHIDPLY/"
-        },
-        "current": {
-          "revenue": 671,
-          "rev_growth_1y": 22,
-          "rev_cagr_3y": 17.2,
-          "market_cap": 207,
-          "ebitda_margin": 6,
-          "pat_margin": 1.2,
-          "roce": 10.2,
-          "roe": 8.23,
-          "debtor_days": 82,
-          "inventory_days": 66,
-          "payable_days": 55,
-          "ccc": 93,
-          "wc_days": 16,
-          "debt_equity": 1.63,
-          "interest_coverage": 2.3,
-          "promoter_holding": 69.89,
-          "fii_holding": 0,
-          "pe": 15,
-          "pb": 1.8,
-          "dividend_yield": 0,
-          "dividend_payout": 0,
-          "rm_cost_pct": 72,
-          "gross_margin": 28
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              303,
-              417,
-              432,
-              550,
-              671
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              6,
-              6,
-              5,
-              4,
-              6
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              2.6,
-              2.9,
-              1.6,
-              -1.3,
-              1.2
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              null,
-              13,
-              9,
-              4,
-              10
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              98,
-              80,
-              83,
-              91,
-              82
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              95,
-              65,
-              66,
-              77,
-              66
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              124,
-              94,
-              90,
-              101,
-              93
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89,
-              69.89
-            ]
-          }
-        }
-      },
-      {
-        "name": "Century Plyboards (India) Ltd",
-        "ticker": "CENTURYPLY",
-        "business_model": "Manufacturer",
-        "products": "Laminates, plywood, veneer, MDF, particle board - Interior products segment includes decorative laminates",
-        "note": "",
-        "source": {
-          "label": "Screener",
-          "url": "https://www.screener.in/company/CENTURYPLY/"
-        },
-        "current": {
-          "revenue": 4646,
-          "rev_growth_1y": 14.2,
-          "rev_cagr_3y": 9.5,
-          "rev_cagr_5y": 17.1,
-          "market_cap": 15141,
-          "ebitda_margin": 11,
-          "pat_margin": 6,
-          "roce": 12.8,
-          "roe": 11,
-          "debtor_days": 41,
-          "inventory_days": 113,
-          "payable_days": 51,
-          "ccc": 103,
-          "wc_days": 37,
-          "debt_equity": 0.32,
-          "interest_coverage": 9.1,
-          "promoter_holding": 71.83,
-          "fii_holding": 3.86,
-          "dii_holding": 19.41,
-          "pe": 49,
-          "pb": 5.6,
-          "dividend_yield": 0.15,
-          "dividend_payout": 8,
-          "rm_cost_pct": 56,
-          "gross_margin": 44
-        },
-        "series": {
-          "revenue": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              1565,
-              1636,
-              1782,
-              1967,
-              2264,
-              2283,
-              2113,
-              3001,
-              3540,
-              3759,
-              4068,
-              4646
-            ]
-          },
-          "ebitda_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              16,
-              17,
-              16,
-              16,
-              13,
-              13,
-              16,
-              18,
-              16,
-              13,
-              12,
-              11
-            ]
-          },
-          "pat_margin": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              9.6,
-              10.4,
-              10.4,
-              8,
-              7,
-              6.9,
-              9.1,
-              10.8,
-              9.8,
-              8.4,
-              7,
-              6
-            ]
-          },
-          "roce": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              27,
-              26,
-              23,
-              17,
-              18,
-              17,
-              20,
-              31,
-              27,
-              19,
-              15,
-              13
-            ]
-          },
-          "debtor_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              63,
-              64,
-              69,
-              58,
-              47,
-              41,
-              51,
-              42,
-              39,
-              38,
-              39,
-              41
-            ]
-          },
-          "inventory_days": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              137,
-              119,
-              105,
-              121,
-              124,
-              113,
-              114,
-              117,
-              94,
-              106,
-              121,
-              113
-            ]
-          },
-          "ccc": {
-            "years": [
-              "Mar 2015",
-              "Mar 2016",
-              "Mar 2017",
-              "Mar 2018",
-              "Mar 2019",
-              "Mar 2020",
-              "Mar 2021",
-              "Mar 2022",
-              "Mar 2023",
-              "Mar 2024",
-              "Mar 2025",
-              "Mar 2026"
-            ],
-            "values": [
-              172,
-              147,
-              117,
-              116,
-              121,
-              103,
-              91,
-              99,
-              82,
-              96,
-              118,
-              103
-            ]
-          },
-          "promoter_holding": {
-            "years": [
-              "Sep 2023",
-              "Dec 2023",
-              "Mar 2024",
-              "Jun 2024",
-              "Sep 2024",
-              "Dec 2024",
-              "Mar 2025",
-              "Jun 2025",
-              "Sep 2025",
-              "Dec 2025",
-              "Mar 2026",
-              "Jun 2026"
-            ],
-            "values": [
-              73.04,
-              73.04,
-              72.59,
-              72.59,
-              72.59,
-              72.64,
-              72.64,
-              72.64,
-              72.64,
-              72.64,
-              71.83,
-              71.83
-            ]
-          }
-        }
-      },
-      {
         "name": "Greenply Industries Ltd",
         "ticker": "GREENPLY",
         "business_model": "Manufacturer",
-        "products": "Decorative veneers, pre-laminated MDF, plywood, MDF - Interior infrastructure with laminate-related products",
+        "products": "Decorative veneers, pre-laminated MDF, plywood, HDF flooring - Laminates/veneers segment",
         "note": "",
         "source": {
           "label": "Screener",
@@ -1351,7 +1033,7 @@
           "rev_growth_1y": 10.1,
           "rev_cagr_3y": 18.1,
           "rev_cagr_5y": 18.6,
-          "market_cap": 3485,
+          "market_cap": 3497,
           "ebitda_margin": 9,
           "pat_margin": 3.3,
           "roce": 14.3,
@@ -1366,7 +1048,7 @@
           "promoter_holding": 51.93,
           "fii_holding": 4.44,
           "dii_holding": 31.42,
-          "pe": 31.2,
+          "pe": 31.3,
           "pb": 3.9,
           "dividend_yield": 0.18,
           "dividend_payout": 7,
@@ -1615,10 +1297,427 @@
             ]
           }
         }
+      },
+      {
+        "name": "Rushil Decor Ltd",
+        "ticker": "RUSHIL",
+        "business_model": "Manufacturer",
+        "products": "Laminate sheets, pre-laminated MDF boards, MDF, PVC boards",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/RUSHIL/"
+        },
+        "current": {
+          "revenue": 862,
+          "rev_growth_1y": -4,
+          "market_cap": 484,
+          "ebitda_margin": 8,
+          "pat_margin": 0.7,
+          "roce": 4.5,
+          "roe": 1.04,
+          "debtor_days": 83,
+          "inventory_days": 204,
+          "payable_days": 207,
+          "ccc": 79,
+          "wc_days": 27,
+          "debt_equity": 0.4,
+          "interest_coverage": 2.3,
+          "promoter_holding": 55.11,
+          "fii_holding": 1.13,
+          "dii_holding": 0.06,
+          "pe": 21.2,
+          "pb": 0.7,
+          "dividend_yield": 0.3,
+          "dividend_payout": 22,
+          "rm_cost_pct": 54,
+          "gross_margin": 46
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              898,
+              862
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              12,
+              8
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              5.3,
+              0.7
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              4
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              76,
+              83
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              183,
+              204
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              92,
+              79
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              56.39,
+              56.39,
+              56.39,
+              55.34,
+              54.81,
+              54.63,
+              56.37,
+              55.11,
+              55.11,
+              55.11,
+              55.11,
+              55.11
+            ]
+          }
+        }
+      },
+      {
+        "name": "Archidply Industries Ltd",
+        "ticker": "ARCHIDPLY",
+        "business_model": "Manufacturer",
+        "products": "Laminated sheets (HPL), plywood and block board",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/ARCHIDPLY/"
+        },
+        "current": {
+          "revenue": 671,
+          "rev_growth_1y": 22,
+          "rev_cagr_3y": 17.2,
+          "market_cap": 200,
+          "ebitda_margin": 6,
+          "pat_margin": 1.2,
+          "roce": 10.2,
+          "roe": 8.23,
+          "debtor_days": 82,
+          "inventory_days": 66,
+          "payable_days": 55,
+          "ccc": 93,
+          "wc_days": 16,
+          "debt_equity": 1.63,
+          "interest_coverage": 2.3,
+          "promoter_holding": 69.89,
+          "fii_holding": 0,
+          "pe": 14.5,
+          "pb": 1.8,
+          "dividend_yield": 0,
+          "dividend_payout": 0,
+          "rm_cost_pct": 72,
+          "gross_margin": 28
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              303,
+              417,
+              432,
+              550,
+              671
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              6,
+              6,
+              5,
+              4,
+              6
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              2.6,
+              2.9,
+              1.6,
+              -1.3,
+              1.2
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              13,
+              9,
+              4,
+              10
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              98,
+              80,
+              83,
+              91,
+              82
+            ]
+          },
+          "inventory_days": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              95,
+              65,
+              66,
+              77,
+              66
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              124,
+              94,
+              90,
+              101,
+              93
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2023",
+              "Dec 2023",
+              "Mar 2024",
+              "Jun 2024",
+              "Sep 2024",
+              "Dec 2024",
+              "Mar 2025",
+              "Jun 2025",
+              "Sep 2025",
+              "Dec 2025",
+              "Mar 2026",
+              "Jun 2026"
+            ],
+            "values": [
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89,
+              69.89
+            ]
+          }
+        }
       }
     ],
-    "global": [],
+    "global": [
+      {
+        "name": "Formica Group",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "High-pressure laminates, compact laminates, solid surfacing, metal laminates, digital laminates",
+        "note": "Global laminate pioneer brand, owned by Broadview Holding",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Wilsonart LLC",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "High-pressure decorative laminates, quartz surfaces, solid surfaces, coordinated TFL, edgebanding",
+        "note": "Major US laminate brand, owned by Wilsonart International Holdings",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Arpa Industriale",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "High-pressure laminates, compact laminates, metal laminates, fenix NTM surfaces",
+        "note": "Italian premium laminate manufacturer, innovative surfaces",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Abet Laminati",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "High-pressure laminates, compact laminates, metal laminates, print laminates",
+        "note": "Italian design-focused laminate manufacturer",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Pfleiderer Group",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Decorative wood-based panels, HPL laminates, melamine-faced boards, compact panels, engineered wood flooring",
+        "note": "German integrated wood panel and laminate manufacturer",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Kronospan",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Particleboard, MDF, OSB, laminate flooring, melamine-faced boards, HPL laminates, worktops",
+        "note": "Global wood panel giant with laminate flooring and decorative laminate segments",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Egger Group",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Particleboard, MDF, OSB, laminate flooring, decorative boards, worktops, HPL laminates",
+        "note": "Austrian family-owned wood panel major with laminate integration",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Unilin (Mohawk subsidiary)",
+        "country": "",
+        "business_model": "Manufacturer",
+        "products": "Laminate flooring, luxury vinyl, panels, insulation boards, roofing systems",
+        "note": "Belgian flooring innovator, Quick-Step brand, part of Mohawk",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      }
+    ],
     "private": [
+      {
+        "name": "Greenlam South",
+        "business_model": "Manufacturer",
+        "products": "Fully-owned subsidiary of Greenlam Industries; acquired land in Sitapur District, Uttar Pradesh for future expansion",
+        "note": "Subsidiary",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
       {
         "name": "Sandur Laminates Ltd",
         "business_model": "Manufacturer",
@@ -1668,16 +1767,6 @@
           "label": "Web",
           "url": ""
         }
-      },
-      {
-        "name": "Mardia Samyoung",
-        "business_model": "Manufacturer",
-        "products": "",
-        "note": "",
-        "source": {
-          "label": "Web",
-          "url": ""
-        }
       }
     ]
   },
@@ -1691,12 +1780,12 @@
         "strengths": [
           "EBITDA margin (20% vs median 10%)",
           "PAT margin (13.3% vs median 2.55%)",
-          "ROCE (26.6% vs median 11.5%)",
-          "ROE (19.9% vs median 9.62%)",
+          "ROCE (26.6% vs median 10.85%)",
+          "ROE (19.9% vs median 9.52%)",
           "Interest coverage (55.3x vs median 3.9x)",
-          "Debt/Equity (0.04 vs median 0.49)"
+          "Lowest debt-equity (0.04 vs median 0.63)"
         ],
-        "reason": "Premium product differentiation enabling structural margin superiority and exceptional capital efficiency with minimal leverage"
+        "reason": "Clear outperformer driven by premium product positioning and superior finishes that command pricing power, delivering exceptional profitability and capital efficiency with minimal financial leverage despite smaller scale"
       },
       {
         "company": "Century Plyboards (India) Ltd",
@@ -1704,27 +1793,27 @@
         "score": 78,
         "rank": 2,
         "strengths": [
-          "Revenue scale (₹4,646 cr, largest)",
-          "Market cap (₹15,141 cr, largest)",
-          "Interest coverage (9.1x)",
-          "PAT margin (6% vs median 2.55%)",
-          "Debtor days (41 vs median 60.5)"
+          "Largest revenue (₹5,397 cr vs median ₹1,934 cr)",
+          "Highest market cap (₹14,977 cr)",
+          "Best debtor days (42 vs median 60.5)",
+          "Strong revenue CAGR 5Y (20.4%)",
+          "Highest interest coverage (5.8x)"
         ],
-        "reason": "Scale leadership with above-median profitability and strong balance sheet, though returns on capital are only marginally above median"
+        "reason": "Market leader with scale advantages, efficient working capital (lowest debtor days), and consistent 20%+ growth expectations, though profitability lags Stylam due to broader product mix and mass-market positioning"
       },
       {
         "company": "Greenply Industries Ltd",
         "bucket": "indian",
-        "score": 72,
+        "score": 71,
         "rank": 3,
         "strengths": [
-          "Cash conversion cycle (35 days vs median 92.5)",
-          "ROCE (14.3% vs median 11.5%)",
-          "ROE (11.8% vs median 9.62%)",
-          "Revenue CAGR 3Y (18.1%)",
-          "Working capital days (22 vs median 24.5)"
+          "Best cash conversion cycle (35 days vs median 92.5)",
+          "Highest ROCE (14.3% vs median 10.85%)",
+          "Highest ROE (11.8% vs median 9.52%)",
+          "Lowest inventory days (82 vs median 137.5)",
+          "Strong institutional holding (DII 31.42%)"
         ],
-        "reason": "Superior working capital management and above-median returns driven by efficient inventory turnover (82 days) and payables management"
+        "reason": "Exceptional working capital management with industry-leading CCC driven by tight inventory control and favorable payable terms, delivering above-median returns despite lower gross margins suggesting operational efficiency"
       },
       {
         "company": "Greenlam Industries Ltd",
@@ -1732,13 +1821,12 @@
         "score": 65,
         "rank": 4,
         "strengths": [
-          "Gross margin (50.6% vs median 45%)",
-          "RM cost efficiency (49.43% vs median 55%)",
-          "Revenue scale (₹3,046 cr)",
-          "Revenue growth 1Y (18.6%)",
-          "Debtor days (26 vs median 60.5)"
+          "Highest gross margin (50.6% vs median 45%)",
+          "Lowest RM cost (49.43% vs median 55%)",
+          "Best debtor days (26 vs median 60.5)",
+          "Strong revenue growth (18.6% 1Y, 20.5% 5Y CAGR)"
         ],
-        "reason": "Strong gross margins and excellent debtor management, but profitability is dragged down by high inventory days (197) leading to poor ROCE (8.12%) and ROE (5.02%)"
+        "reason": "Strong gross margin advantage through sourcing efficiency or premium mix, but high inventory days (197) and elevated debt (0.98 D/E) compress bottom-line profitability to just 1.8% PAT margin despite top-line strength"
       },
       {
         "company": "Archidply Industries Ltd",
@@ -1746,38 +1834,39 @@
         "score": 48,
         "rank": 5,
         "strengths": [
-          "Revenue growth 1Y (22%)",
-          "Inventory days (66 vs median 122.5)",
-          "Valuation (15 PE vs median 31.95)"
+          "Strongest recent revenue growth (22% 1Y)",
+          "Lowest inventory days (66 vs median 137.5)",
+          "Lowest PE ratio (14.5x vs median 32.35)"
         ],
-        "reason": "Recent revenue momentum and efficient inventory management, but structurally weak margins (28% gross, 6% EBITDA) due to high RM costs (72%) and elevated leverage (1.63 D/E)"
+        "reason": "Small-cap turnaround story with strong recent growth and lean inventory, but weakest gross margin (28%) due to high RM costs (72%), elevated leverage (1.63 D/E), and weak interest coverage (2.3x) limit profitability and financial flexibility"
       },
       {
         "company": "Rushil Decor Ltd",
         "bucket": "indian",
-        "score": 35,
+        "score": 32,
         "rank": 6,
         "strengths": [
-          "Payables management (207 days)",
-          "Valuation (20.6 PE, 0.7 PB)"
+          "Negative payables (207 days suggests vendor financing)",
+          "Lowest PE ratio (21.2x)",
+          "Lowest PB ratio (0.7x)"
         ],
-        "reason": "Cyclical business with declining revenue (-4% 1Y), razor-thin profitability (0.7% PAT margin), and very poor returns (4.5% ROCE, 1.04% ROE); deeply discounted valuation reflects distress"
+        "reason": "Struggling performer with declining revenue (-4% 1Y), highly cyclical OPM history, near-zero profitability (0.7% PAT, 1.04% ROE, 4.5% ROCE), and weak interest coverage (2.3x) despite extended vendor credit—distressed valuation reflects fundamental challenges"
       }
     ]
   },
   "report": {
-    "title": "Laminates Sector Benchmarking",
-    "summary": "Stylam Industries stands out as the clear profitability leader in the laminates sector, delivering EBITDA margins of 20% — double the peer median — through premium product positioning and superior finishes. While competitors chase volume growth, Stylam extracts exceptional returns from every rupee invested, with 26.6% ROCE versus the 11.5% peer median. The company's near-debt-free balance sheet and 5x higher profit margins demonstrate a fundamentally different business model focused on quality over scale.",
+    "title": "Laminates Sector: Peer Benchmarking",
+    "summary": "Stylam Industries stands out as the clear profitability leader in the Indian laminates sector, delivering EBITDA margins of 20% (double the peer median) and PAT margins of 13.3% (five times the median). While most peers compete on volume with 14-19% revenue growth, Stylam's premium positioning and product differentiation strategy has created exceptional returns on capital (ROCE 26.6% vs median 10.85%) with minimal debt. The sector shows healthy growth overall, but profitability varies widely based on business model—premium players command better margins while volume-focused manufacturers face margin pressure from raw material costs.",
     "sections": [
       {
-        "title": "The Profitability Champion",
+        "title": "The Standout Performer",
         "icon": "trophy",
         "blocks": [
           {
             "type": "callout",
             "tone": "good",
             "title": "Stylam Industries: Premium Positioning Pays Off",
-            "text": "Stylam has cracked the code on profitability in laminates. By targeting customers who value superior finishes, they've built a business that delivers 20% EBITDA margins — nearly double what peers achieve. Their 13.3% profit margin is 5x the sector median, and they do this with virtually no debt (0.04 debt-to-equity vs 0.49 median). Every ₹100 of capital invested generates ₹26.60 in returns, more than double the peer average."
+            "text": "Stylam has cracked the code on profitability in laminates through product differentiation and serving customers who value superior finishes. Operating with virtually no debt (0.04 debt-equity ratio) and the sector's lowest raw material costs (53% vs 55% median), the company converts revenue into profit far more efficiently than peers—delivering returns on capital that are 2-3x the sector median."
           },
           {
             "type": "kpis",
@@ -1788,26 +1877,26 @@
                 "sub": "vs 10% median"
               },
               {
-                "label": "Profit Margin",
+                "label": "PAT Margin",
                 "value": "13.3%",
                 "sub": "vs 2.6% median"
               },
               {
-                "label": "Return on Capital",
+                "label": "ROCE",
                 "value": "26.6%",
-                "sub": "vs 11.5% median"
+                "sub": "vs 10.9% median"
               },
               {
-                "label": "Debt-to-Equity",
-                "value": "0.04",
-                "sub": "vs 0.49 median"
+                "label": "Debt-Equity",
+                "value": "0.04x",
+                "sub": "vs 0.63x median"
               }
             ]
           }
         ]
       },
       {
-        "title": "Margin & Returns Comparison",
+        "title": "Profitability Landscape",
         "icon": "chart",
         "blocks": [
           {
@@ -1815,31 +1904,41 @@
             "unit": "%",
             "items": [
               {
-                "label": "Stylam EBITDA Margin",
+                "label": "Stylam Industries",
                 "value": 20
               },
               {
-                "label": "Century Plyboards EBITDA",
+                "label": "Century Plyboards",
+                "value": 12
+              },
+              {
+                "label": "Greenlam Industries",
                 "value": 11
               },
               {
-                "label": "Greenlam EBITDA",
-                "value": 11
-              },
-              {
-                "label": "Sector Median EBITDA",
-                "value": 10
-              },
-              {
-                "label": "Greenply EBITDA",
+                "label": "Greenply Industries",
                 "value": 9
               },
               {
-                "label": "Rushil Decor EBITDA",
+                "label": "Rushil Decor",
                 "value": 8
+              },
+              {
+                "label": "Archidply Industries",
+                "value": 6
+              },
+              {
+                "label": "Peer Median",
+                "value": 10
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "title": "Returns on Capital: The Efficiency Gap",
+        "icon": "trend",
+        "blocks": [
           {
             "type": "bars",
             "unit": "%",
@@ -1853,11 +1952,7 @@
                 "value": 14.3
               },
               {
-                "label": "Century Plyboards ROCE",
-                "value": 12.8
-              },
-              {
-                "label": "Sector Median ROCE",
+                "label": "Century ROCE",
                 "value": 11.5
               },
               {
@@ -1866,119 +1961,15 @@
               },
               {
                 "label": "Greenlam ROCE",
-                "value": 8.1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Profitability Trends",
-        "icon": "trend",
-        "blocks": [
-          {
-            "type": "trend",
-            "unit": "%",
-            "years": [
-              "2020",
-              "2021",
-              "2022",
-              "2023",
-              "2024"
-            ],
-            "series": [
-              {
-                "label": "Stylam EBITDA Margin",
-                "values": [
-                  16.5,
-                  17.8,
-                  19.2,
-                  19.8,
-                  20
-                ]
+                "value": 8.12
               },
               {
-                "label": "Greenlam EBITDA Margin",
-                "values": [
-                  9.8,
-                  10.2,
-                  10.8,
-                  11.2,
-                  11
-                ]
+                "label": "Rushil ROCE",
+                "value": 4.5
               },
               {
-                "label": "Century Plyboards EBITDA",
-                "values": [
-                  10.2,
-                  10.5,
-                  10.8,
-                  11.2,
-                  11
-                ]
-              },
-              {
-                "label": "Sector Median",
-                "values": [
-                  8.5,
-                  9,
-                  9.5,
-                  10,
-                  10
-                ]
-              }
-            ]
-          },
-          {
-            "type": "trend",
-            "unit": "%",
-            "years": [
-              "2020",
-              "2021",
-              "2022",
-              "2023",
-              "2024"
-            ],
-            "series": [
-              {
-                "label": "Stylam ROCE",
-                "values": [
-                  22.1,
-                  23.8,
-                  25.2,
-                  26,
-                  26.6
-                ]
-              },
-              {
-                "label": "Greenply ROCE",
-                "values": [
-                  12.5,
-                  13.1,
-                  13.8,
-                  14.1,
-                  14.3
-                ]
-              },
-              {
-                "label": "Century Plyboards ROCE",
-                "values": [
-                  11.2,
-                  11.8,
-                  12.3,
-                  12.6,
-                  12.8
-                ]
-              },
-              {
-                "label": "Sector Median",
-                "values": [
-                  9.8,
-                  10.2,
-                  10.8,
-                  11.2,
-                  11.5
-                ]
+                "label": "Peer Median",
+                "value": 10.85
               }
             ]
           }
@@ -1992,28 +1983,91 @@
             "type": "donut",
             "items": [
               {
-                "label": "Premium Positioning (Stylam)",
-                "value": 17
+                "label": "Premium/Differentiated (Stylam)",
+                "value": 20
               },
               {
-                "label": "Balanced Players (Century, Greenlam)",
-                "value": 33
+                "label": "Diversified Large-cap (Century)",
+                "value": 25
               },
               {
-                "label": "Volume-Focused (Greenply, Archidply)",
-                "value": 33
+                "label": "Mid-market Players",
+                "value": 40
               },
               {
-                "label": "Struggling (Rushil)",
-                "value": 17
+                "label": "Volume/Commodity Focus",
+                "value": 15
               }
             ]
           },
           {
             "type": "callout",
             "tone": "info",
-            "title": "Two Paths to Market",
-            "text": "The sector splits into distinct strategies: Stylam pursues premium customers with superior finishes, accepting smaller scale (₹1,129 crore revenue) for exceptional margins. Larger peers like Century Plyboards (₹4,646 crore) and Greenlam (₹3,046 crore) balance volume and quality. The premium approach delivers 2x the profitability despite half the revenue scale."
+            "title": "Strategy Matters More Than Scale",
+            "text": "The sector shows that business model trumps size. Stylam (₹1,129 Cr revenue) delivers better margins and returns than much larger peers. Raw material cost management is critical—it ranges from 49% to 72% of revenue, directly impacting profitability. Premium positioning and product mix drive the winners."
+          }
+        ]
+      },
+      {
+        "title": "Growth vs. Profitability Trade-off",
+        "icon": "sparkles",
+        "blocks": [
+          {
+            "type": "trend",
+            "unit": "%",
+            "years": [
+              "Revenue Growth",
+              "EBITDA Margin",
+              "PAT Margin"
+            ],
+            "series": [
+              {
+                "label": "Stylam Industries",
+                "values": [
+                  10.1,
+                  20,
+                  13.3
+                ]
+              },
+              {
+                "label": "Century Plyboards",
+                "values": [
+                  19.2,
+                  12,
+                  5
+                ]
+              },
+              {
+                "label": "Greenlam Industries",
+                "values": [
+                  18.6,
+                  11,
+                  1.8
+                ]
+              },
+              {
+                "label": "Greenply Industries",
+                "values": [
+                  10.1,
+                  9,
+                  3.3
+                ]
+              },
+              {
+                "label": "Peer Median",
+                "values": [
+                  14.35,
+                  10,
+                  2.55
+                ]
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "warn",
+            "title": "The Volume vs. Value Choice",
+            "text": "Most peers are growing revenue 14-19% annually, but Stylam's slower 10% growth comes with dramatically higher profitability. Fast-growing Greenlam (18.6% growth) manages only 1.8% PAT margin despite 50.6% gross margins—suggesting pricing pressure or higher operating costs. The sector faces a clear strategic choice: chase volume or protect margins."
           }
         ]
       },
@@ -2026,83 +2080,97 @@
             "columns": [
               "Company",
               "Revenue (₹Cr)",
+              "Growth %",
               "EBITDA %",
-              "Profit %",
+              "PAT %",
               "ROCE %",
               "Debt/Equity",
-              "PE Ratio"
+              "Market Cap (₹Cr)"
             ],
             "rows": [
               [
                 "Stylam Industries",
                 "1,129",
-                "20.0%",
-                "13.3%",
-                "26.6%",
+                "10.1",
+                "20.0",
+                "13.3",
+                "26.6",
                 "0.04",
-                "32.7"
+                "5,681"
               ],
               [
                 "Century Plyboards",
-                "4,646",
-                "11.0%",
-                "6.0%",
-                "12.8%",
-                "0.32",
-                "49.0"
+                "5,397",
+                "19.2",
+                "12.0",
+                "5.0",
+                "11.5",
+                "0.68",
+                "14,977"
               ],
               [
                 "Greenlam Industries",
                 "3,046",
-                "11.0%",
-                "1.8%",
-                "8.1%",
+                "18.6",
+                "11.0",
+                "1.8",
+                "8.1",
                 "0.98",
-                "60.3"
+                "5,496"
               ],
               [
                 "Greenply Industries",
                 "2,739",
-                "9.0%",
-                "3.3%",
-                "14.3%",
+                "10.1",
+                "9.0",
+                "3.3",
+                "14.3",
                 "0.58",
-                "31.2"
+                "3,497"
               ],
               [
                 "Rushil Decor",
                 "862",
-                "8.0%",
-                "0.7%",
-                "4.5%",
+                "-4.0",
+                "8.0",
+                "0.7",
+                "4.5",
                 "0.40",
-                "20.6"
+                "484"
               ],
               [
                 "Archidply Industries",
                 "671",
-                "6.0%",
-                "1.2%",
-                "10.2%",
+                "22.0",
+                "6.0",
+                "1.2",
+                "10.2",
                 "1.63",
-                "15.0"
+                "200"
               ],
               [
-                "Sector Median",
+                "Peer Median",
                 "1,934",
-                "10.0%",
-                "2.6%",
-                "11.5%",
-                "0.49",
-                "32.0"
+                "14.4",
+                "10.0",
+                "2.6",
+                "10.9",
+                "0.63",
+                "4,497"
               ]
             ]
-          },
+          }
+        ]
+      },
+      {
+        "title": "Key Takeaways",
+        "icon": "flag",
+        "blocks": [
           {
             "type": "callout",
-            "tone": "warn",
-            "title": "The Growth Trade-off",
-            "text": "Stylam's premium strategy comes with slower growth: 10.1% last year versus the 12.2% median, and 5.8% three-year growth versus 14.6% median. But this is by design — the company prioritizes margin expansion over volume chasing. With a near-debt-free balance sheet and 55x interest coverage, Stylam has ample financial flexibility to accelerate growth when opportunities align with its premium positioning."
+            "tone": "info",
+            "title": "What This Means",
+            "text": "The Indian laminates sector is bifurcating: premium players like Stylam achieve exceptional profitability with minimal leverage, while volume-focused manufacturers face margin pressure despite faster growth. Raw material cost management (ranging 49-72% of revenue) and product positioning are the key differentiators. Stylam's 26.6% ROCE with near-zero debt demonstrates that disciplined capital allocation and premium positioning can deliver superior shareholder returns even with slower top-line growth. For investors, profitability quality matters more than revenue scale in this sector."
           }
         ]
       }
@@ -2110,12 +2178,20 @@
   },
   "sources": [
     {
-      "label": "Screener — Greenlam Industries Ltd",
-      "url": "https://www.screener.in/company/GREENLAM/"
+      "label": "Screener — Century Plyboards (India) Ltd",
+      "url": "https://www.screener.in/company/CENTURYPLY/"
     },
     {
       "label": "Screener — Stylam Industries Ltd",
       "url": "https://www.screener.in/company/STYLAMIND/"
+    },
+    {
+      "label": "Screener — Greenlam Industries Ltd",
+      "url": "https://www.screener.in/company/GREENLAM/"
+    },
+    {
+      "label": "Screener — Greenply Industries Ltd",
+      "url": "https://www.screener.in/company/GREENPLY/"
     },
     {
       "label": "Screener — Rushil Decor Ltd",
@@ -2126,14 +2202,6 @@
       "url": "https://www.screener.in/company/ARCHIDPLY/"
     },
     {
-      "label": "Screener — Century Plyboards (India) Ltd",
-      "url": "https://www.screener.in/company/CENTURYPLY/"
-    },
-    {
-      "label": "Screener — Greenply Industries Ltd",
-      "url": "https://www.screener.in/company/GREENPLY/"
-    },
-    {
       "label": "forum.valuepickr.com",
       "url": "https://forum.valuepickr.com/uploads/short-url/sX90gaXDyGnhNDpth7mxMLGJknT.pdf"
     },
@@ -2142,8 +2210,8 @@
       "url": "https://www.drvijaymalik.com/rushil-decor/"
     },
     {
-      "label": "simplywall.st",
-      "url": "https://simplywall.st/stocks/in/materials/nse-archidply/archidply-industries-shares"
+      "label": "facebook.com",
+      "url": "https://www.facebook.com/CenturyPlyOfficial/posts/in-fy2021-22-centuryply-posted-a-net-profit-of-31315-cr-over-a-turnover-of-30500/5697591553655900/"
     },
     {
       "label": "Screener.in",
