@@ -89,7 +89,13 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   }
 
   tabButtons.forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
-  window.addEventListener('resize', () => { const on = tabButtons.find((b) => b.dataset.tab === active); if (on) moveUnderline(on); });
+  // Web fonts (Plus Jakarta Sans) load async and change tab widths, so the
+  // underline measured at first paint can be off — realign once fonts are ready.
+  const realignUnderline = () => { const on = tabButtons.find((b) => b.dataset.tab === active); if (on) moveUnderline(on); };
+  window.addEventListener('resize', realignUnderline);
+  window.addEventListener('load', realignUnderline);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(realignUnderline);
+  setTimeout(realignUnderline, 250);
 
   setTab('overview');
 }
@@ -170,8 +176,9 @@ function bannerHtml(report) {
           </div>
         </div>
         <div class="grow min-w-0">
-          <p class="text-slate-700 font-medium leading-snug">${esc(o.headline || o.reason || '')}</p>
-          ${o.reason ? `<button data-goto-report class="text-xs text-indigo-500 font-semibold hover:underline mt-1">Full reasoning in the Report →</button>` : ''}
+          <p class="text-slate-800 font-semibold leading-snug">${esc(o.headline || '')}</p>
+          ${o.reason ? `<p class="text-sm text-slate-600 mt-1 leading-relaxed">${esc(o.reason)}</p>` : ''}
+          ${(!live && o.reason) ? `<button data-goto-report class="text-xs text-indigo-500 font-semibold hover:underline mt-1.5">More in the Report →</button>` : ''}
           ${live ? `<p class="text-[0.7rem] text-slate-400 mt-1">The AI's original crowned pick was removed — this is the current leader by the live score.</p>` : ''}
         </div>
         ${o.india_vs_global ? `<div class="shrink-0 sm:max-w-xs">
@@ -251,7 +258,7 @@ function renderOverview(pane, report, mm, allPeers) {
     makeHBar(box.querySelector('[data-chart="headline"]'), {
       labels: withVal.map((d) => d.name),
       values: withVal.map((d) => d.value),
-      medianValue: medVal, unit: metric.unit, highlightIndex: hiIdx,
+      medianValue: medVal, unit: metric.unit, label: metric.label, highlightIndex: hiIdx,
     });
   };
 
