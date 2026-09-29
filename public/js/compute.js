@@ -97,7 +97,9 @@ export function isBest(value, allValues, better) {
  * Returns [{ name, score, n }] (score null when there's no scorable data).
  */
 export function compositeScores(peers, metrics) {
-  const scored = metrics.filter((m) => m.better !== 'neutral');
+  // Business-quality score: skip neutral metrics, absolute-size (trendOnly) metrics,
+  // and market/return metrics explicitly opted out (composite:false).
+  const scored = metrics.filter((m) => m.better !== 'neutral' && !m.trendOnly && m.composite !== false);
   const colVals = {};
   for (const m of scored) colVals[m.key] = currentValues(peers, m.key);
   return peers.map((p) => {
