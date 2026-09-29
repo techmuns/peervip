@@ -17,7 +17,7 @@ import { esc, fmtDate } from './format.js';
 const app = () => document.getElementById('app');
 const RUN_KEY = 'peervip:run';
 const POLL_MS = 2500;
-const MAX_POLL_MS = 10 * 60 * 1000; // never spin forever (#4)
+const MAX_POLL_MS = 20 * 60 * 1000; // never spin forever — a slow run (Bedrock throttling) can take 12+ min (#4)
 
 const STAGES = [
   'Understanding the business',
@@ -403,7 +403,7 @@ function createLoadingController(el, { query, saved }) {
     stopTimers();
     // the run may have finished while we waited — try the report before failing
     try { await loadReport(s, { fresh: true }); location.hash = '#/r/' + encodeURIComponent(s); }
-    catch (_) { failCard('Taking longer than expected — check the GitHub Actions run for this query, and that PROGRESS_SECRET matches in GitHub + Cloudflare.'); }
+    catch (_) { failCard('Still working — this run is taking longer than usual (a busy AI backend can stretch it past ' + Math.round(MAX_POLL_MS / 60000) + ' minutes). It keeps running in the background and will appear on your home page when it finishes — reopen it from there, or hit Try again.'); }
   }
   function startPolling(s) {
     slug = s; persist();
