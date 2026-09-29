@@ -4,9 +4,9 @@
 // aggregated live across the Indian listed set, recomputed on add/remove peer.
 // Minimal prose; each chart carries one computed insight line. PDF via the shared
 // #print-region + window.print().
-import { esc, fmt } from './format.js';
-import { makeLine, makeDoughnut, destroyChart } from './charts.js';
-import { industryLine, leaderShareLine, dispersionLine, revenueShare, median, currentValues } from './compute.js';
+import { esc, fmt, metricMap } from './format.js';
+import { makeLine, makeDoughnut, makeHBar, destroyChart } from './charts.js';
+import { industryLine, leaderShareLine, dispersionLine, revenueShare, median, currentValues, winnerForMetric } from './compute.js';
 
 const isNum = (v) => typeof v === 'number' && isFinite(v);
 const WINDOW = 6; // last 6 fiscal years shown = ~5 years of change (FY21→FY26)
@@ -252,6 +252,39 @@ export function renderIndustry(pane, report) {
     ? `Largest peer <b class="text-slate-800">${leader.top1[leader.top1.length - 1]}%</b> · top 3 <b class="text-slate-800">${leader.top3[leader.top3.length - 1]}%</b> of listed-peer revenue`
     : '';
 
+  // #1 current-year leaderboard — who leads each dimension right now (winnerForMetric honours `better`).
+  const mm = metricMap(report.metrics);
+  const lbSpec = [
+    { cat: 'Biggest', key: 'revenue' }, { cat: 'Most profitable', key: 'ebitda_margin' },
+    { cat: 'Best returns', key: 'roce' }, { cat: 'Fastest growing', key: 'rev_growth_1y' },
+    { cat: 'Best cash conversion', key: 'cfo_op' }, { cat: 'Leanest balance sheet', key: 'debt_equity' },
+  ];
+  const lbHtml = lbSpec.map((x) => {
+    const mt = mm[x.key]; if (!mt) return '';
+    const w = winnerForMetric(peers, mt); if (!w) return '';
+    return `<div class="flex items-center justify-between gap-3 py-2 border-b border-slate-50 last:border-0">
+      <div class="min-w-0"><div class="text-[0.66rem] font-bold uppercase tracking-wide text-slate-400">${esc(x.cat)}</div><div class="font-semibold text-slate-800 truncate">${esc(w.name)}</div></div>
+      <div class="num font-semibold text-slate-700 shrink-0">${esc(unitFmt(w.value, mt.unit))}</div></div>`;
+  }).join('');
+
+  // #5 balance-sheet & cash health — how many peers clear each bar this year.
+  const withCur = peers.filter((p) => p.current);
+  const cnt = (fn) => withCur.filter(fn).length;
+  const health = [
+    { n: cnt((p) => isNum(p.current.fcf) && p.current.fcf > 0), label: 'Free-cash-flow positive', tone: 'good' },
+    { n: cnt((p) => isNum(p.current.debt_equity) && p.current.debt_equity < 0.1), label: 'Debt-light (D/E &lt; 0.1)', tone: 'good' },
+    { n: cnt((p) => isNum(p.current.debt_equity) && p.current.debt_equity > 1), label: 'Highly levered (D/E &gt; 1)', tone: 'bad' },
+    { n: cnt((p) => isNum(p.current.dividend_payout) && p.current.dividend_payout > 0), label: 'Dividend-payers', tone: 'neutral' },
+  ];
+  const healthHtml = health.map((h) => {
+    const tc = h.tone === 'good' ? 'text-emerald-600' : h.tone === 'bad' ? 'text-rose-500' : 'text-indigo-600';
+    return `<div class="flex items-center justify-between py-2 border-b border-slate-50 last:border-0"><span class="text-slate-500 text-sm">${h.label}</span><span class="num font-display font-extrabold ${tc}">${h.n}<span class="text-slate-300 text-sm font-semibold">/${withCur.length}</span></span></div>`;
+  }).join('');
+
+  // #6 "where every peer sits" — latest-year bar across peers on a chosen metric.
+  const selectable = (report.metrics || []).filter((m) => peers.some((p) => p.current && isNum(p.current[m.key])));
+  const defaultBar = selectable.find((m) => m.key === 'ebitda_margin') || selectable.find((m) => m.group === 'Profitability' && m.better !== 'neutral') || selectable[0];
+
   // ================= layout =================
   pane.innerHTML = `
   <div id="print-region" class="pv-industry space-y-5">
@@ -337,6 +370,32 @@ export function renderIndustry(pane, report) {
 
   const currentHtml = `
     <div class="space-y-5">
+      <div class="pv-ind-grid grid lg:grid-cols-3 gap-5">
+        <section class="pv-card p-5 lg:col-span-2">
+          <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">Sector leaderboard</h3>
+          <p class="text-xs text-slate-400 mb-2">Who leads each dimension this year.</p>
+          <div>${lbHtml || '<div class="text-slate-400 text-sm py-4">No data.</div>'}</div>
+        </section>
+        <section class="pv-card p-5">
+          <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">Balance-sheet &amp; cash health</h3>
+          <p class="text-xs text-slate-400 mb-2">How many of the ${withCur.length} peers clear each bar.</p>
+          <div>${healthHtml}</div>
+        </section>
+      </div>
+
+      <section class="pv-card p-5">
+        <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
+          <h3 class="font-display text-lg font-extrabold text-slate-800">Where every peer sits</h3>
+          <label class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 no-print">Metric
+            <select data-ind-metric class="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+              ${selectable.map((m) => `<option value="${esc(m.key)}" ${defaultBar && m.key === defaultBar.key ? 'selected' : ''}>${esc(m.label)}</option>`).join('')}
+            </select>
+          </label>
+        </div>
+        <p class="text-xs text-slate-400 mb-3">Latest reported year across peers · dashed line = industry median.</p>
+        <div data-peerbar-box></div>
+      </section>
+
       <div class="pv-ind-grid grid lg:grid-cols-2 gap-5">
         <section class="pv-card p-5">
           <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">Market share</h3>
@@ -379,6 +438,24 @@ export function renderIndustry(pane, report) {
     if (C('share') && share.length) makeDoughnut(C('share'), { labels: share.map((r) => r.name), values: share.map((r) => r.value) });
     if (C('cake') && cake.length) makeDoughnut(C('cake'), { labels: cake.map((s) => s.label), values: cake.map((s) => +s.v.toFixed(1)) });
     if (C('own') && own.length) makeDoughnut(C('own'), { labels: own.map((s) => s.label), values: own.map((s) => +s.v.toFixed(1)) });
+    // #6 where every peer sits (latest year) — bar + median, driven by the dropdown.
+    const sel = pane.querySelector('[data-ind-metric]');
+    const box = pane.querySelector('[data-peerbar-box]');
+    const outperf = (report.outperformer && report.outperformer.company) || '';
+    const drawBar = (mt) => {
+      if (!box || !mt) return;
+      const old = box.querySelector('canvas'); if (old) destroyChart(old);
+      const rows = peers.filter((p) => p.current && isNum(p.current[mt.key])).map((p) => ({ name: p.name, value: p.current[mt.key] }))
+        .sort((a, b) => mt.better === 'low' ? a.value - b.value : b.value - a.value);
+      if (!rows.length) { box.innerHTML = '<div class="text-center text-slate-400 py-8 text-sm">No peers carry this metric.</div>'; return; }
+      const medVal = median(rows.map((r) => r.value));
+      box.innerHTML = `<div style="height:${Math.max(180, rows.length * 34 + 44)}px"><canvas></canvas></div>`;
+      makeHBar(box.querySelector('canvas'), {
+        labels: rows.map((r) => r.name), values: rows.map((r) => r.value),
+        medianValue: medVal, unit: mt.unit, label: mt.label, highlightIndex: rows.findIndex((r) => r.name === outperf),
+      });
+    };
+    if (sel && defaultBar) { drawBar(defaultBar); sel.addEventListener('change', () => drawBar(mm[sel.value] || defaultBar)); }
   }
 
   const btns = [...pane.querySelectorAll('[data-ind-view]')];
