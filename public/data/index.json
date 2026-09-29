@@ -127,6 +127,42 @@
       "updated_at": "2026-09-29T06:25:51.454Z",
       "peer_count": 23,
       "sample": false
+    },
+    {
+      "slug": "cement",
+      "name": "India Cements Ltd",
+      "type": "company",
+      "query": "cement",
+      "seed_company": "India Cements Ltd",
+      "aliases": [
+        "cement",
+        "cement is a binding material used in construction, typically made by heating limestone and clay, which hardens when mixed with water.",
+        "india cements ltd",
+        "ultratech cement ltd",
+        "grasim industries ltd",
+        "ambuja cements ltd",
+        "shree cement ltd",
+        "j k cements ltd",
+        "dalmia bharat ltd",
+        "acc ltd",
+        "the ramco cements ltd",
+        "jsw cement ltd",
+        "nuvoco vistas corporation ltd",
+        "star cement ltd",
+        "birla corporation ltd",
+        "jk lakshmi cement ltd",
+        "prism johnson ltd",
+        "holcim limited",
+        "anhui conch cement company limited",
+        "cnbm (china national building material company limited)",
+        "crh plc",
+        "cemex s.a.b. de c.v.",
+        "heidelbergcement ag",
+        "buzzi unicem s.p.a."
+      ],
+      "updated_at": "2026-09-29T09:58:39.546Z",
+      "peer_count": 27,
+      "sample": false
     }
   ]
 }
