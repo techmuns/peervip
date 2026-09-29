@@ -34,15 +34,35 @@ export async function loadReport(slug, { fresh = false } = {}) {
 }
 
 async function fetchReport(slug) {
-  // 1) live KV via the Function (present only for freshly-researched slugs).
-  try {
-    const res = await fetch(apiReportUrl(slug), { cache: 'no-store' });
-    if (res.ok) return await res.json();
-  } catch (_) { /* Function not deployed / offline → fall back to the seed */ }
-  // 2) committed seed (offline fallback + already-redeployed reports).
-  const res2 = await fetch(seedReportUrl(slug), { cache: 'no-cache' });
-  if (!res2.ok) throw new Error(`report ${slug} (${res2.status})`);
-  return res2.json();
+  // Fetch the live-KV copy (instant, present for freshly-researched slugs) AND the
+  // committed seed in parallel, then keep whichever is FRESHER by meta timestamp.
+  // The seed wins ties — it's the durable copy (see functions/api/progress.js: KV
+  // carries only a 7-day TTL). This way a fresh research run renders instantly from
+  // KV before the repo redeploys, while an edited/backfilled seed is never shadowed
+  // by a stale KV entry.
+  const [kv, seed] = await Promise.all([fetchKV(slug), fetchSeed(slug)]);
+  if (kv && seed) return freshness(kv) > freshness(seed) ? kv : seed;
+  const r = kv || seed;
+  if (!r) throw new Error(`report ${slug} unavailable`);
+  return r;
+}
+async function fetchKV(slug) {
+  try { const res = await fetch(apiReportUrl(slug), { cache: 'no-store' }); if (res.ok) return await res.json(); } catch (_) { /* offline / not deployed */ }
+  return null;
+}
+async function fetchSeed(slug) {
+  try { const res = await fetch(seedReportUrl(slug), { cache: 'no-cache' }); if (res.ok) return await res.json(); } catch (_) { /* missing seed */ }
+  return null;
+}
+/** Newest meta timestamp on a report (updated_at ▸ enriched_at ▸ generated_at), ms. */
+function freshness(r) {
+  const m = (r && r.meta) || {};
+  let max = 0;
+  for (const v of [m.updated_at, m.enriched_at, m.generated_at]) {
+    const t = v ? Date.parse(v) : NaN;
+    if (isFinite(t) && t > max) max = t;
+  }
+  return max;
 }
 
 const norm = (s) => String(s || '').toLowerCase().trim().replace(/\s+/g, ' ');
