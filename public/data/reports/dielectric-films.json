@@ -14,7 +14,7 @@
       "with_full_financials": 4,
       "confidence": "medium"
     },
-    "enriched_at": "2026-09-29T09:54:01.618Z"
+    "enriched_at": "2026-09-29T10:08:55.446Z"
   },
   "outperformer": {
     "company": "Garware Hi Tech Films Ltd",
@@ -169,7 +169,8 @@
       "unit": "%",
       "group": "Profitability",
       "better": "neutral",
-      "format": "pct1"
+      "format": "pct1",
+      "noTrend": true
     },
     {
       "key": "roce",
@@ -296,33 +297,6 @@
       "trendOnly": true
     },
     {
-      "key": "net_worth",
-      "label": "Net worth",
-      "unit": "Rs Cr",
-      "group": "Balance Sheet",
-      "better": "high",
-      "format": "num0",
-      "trendOnly": true
-    },
-    {
-      "key": "total_assets",
-      "label": "Total assets",
-      "unit": "Rs Cr",
-      "group": "Balance Sheet",
-      "better": "neutral",
-      "format": "num0",
-      "trendOnly": true
-    },
-    {
-      "key": "fixed_assets",
-      "label": "Fixed assets",
-      "unit": "Rs Cr",
-      "group": "Balance Sheet",
-      "better": "neutral",
-      "format": "num0",
-      "trendOnly": true
-    },
-    {
       "key": "cwip",
       "label": "Capital WIP",
       "unit": "Rs Cr",
@@ -356,15 +330,6 @@
       "group": "Cash Flow",
       "better": "high",
       "format": "pct1"
-    },
-    {
-      "key": "investing_cf",
-      "label": "Investing cash flow",
-      "unit": "Rs Cr",
-      "group": "Cash Flow",
-      "better": "neutral",
-      "format": "num0",
-      "trendOnly": true
     },
     {
       "key": "promoter_holding",

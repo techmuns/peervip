@@ -74,10 +74,12 @@ search then matches on `name` / `slug` / `query` only.
       "trendOnly": false,       // optional: true = absolute/magnitude metric shown ONLY in the
                                 //   year-by-year Trends tab (hidden from the cross-sectional Current
                                 //   grid + excluded from the composite score). Default false.
-      "composite": true         // optional: false = market/return metric excluded from the
+      "composite": true,        // optional: false = market/return metric excluded from the
                                 //   business-quality composite ranking. Default true.
+      "noTrend": false          // optional: true = keep the Current-grid column but hide the
+                                //   metric from the Trends tab + drill-down sparklines.
     }
-    // … the full metric dictionary (see lib/metrics.mjs — 51 metrics across
+    // … the full metric dictionary (see lib/metrics.mjs — 47 metrics across
     //   Size & Growth, Profitability, Returns, Working Capital, Balance Sheet,
     //   Cash Flow, Ownership, Valuation). Absolute-rupee P&L / balance-sheet /
     //   cash-flow lines + EPS + shareholder count are trendOnly.
