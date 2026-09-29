@@ -47,7 +47,9 @@ async function enrichReport(slug) {
     await sleep(400);
   }
   report.metrics = METRICS; // swap in the full catalog verbatim
-  if (report.meta) report.meta.enriched_at = new Date().toISOString().slice(0, 10);
+  // Full ISO timestamp (not date-only) so the frontend's freshness check prefers
+  // this enriched seed over an older KV copy that shares the same generated_at.
+  if (report.meta) report.meta.enriched_at = new Date().toISOString();
   await writeFile(file, JSON.stringify(report, null, 2) + '\n');
   console.log(`  → wrote ${slug}.json (metrics: ${METRICS.length})`);
 }
