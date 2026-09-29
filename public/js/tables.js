@@ -184,7 +184,7 @@ function renderTrends(pane, peers, report) {
   const metrics = metricsWithSeries(peers, report.metrics);
   if (!metrics.length) { pane.innerHTML = emptyState('No multi-year series available for these peers yet.'); return; }
 
-  pane.innerHTML = `<div class="space-y-3">${metrics.map((m, i) => trendSectionHtml(m, i === 0)).join('')}</div>
+  pane.innerHTML = `<div class="space-y-3">${metrics.map((m) => trendSectionHtml(m, true)).join('')}</div>
     <p class="text-[0.72rem] text-slate-400 mt-3">Each series starts where its real data begins (FY16 onward) — blank cells are genuinely missing, never fabricated. Green shades a year that improved vs the prior year, red a year that worsened (flipped for “lower is better” metrics).</p>`;
 
   metrics.forEach((m) => {
