@@ -1,0 +1,1848 @@
+{
+  "meta": {
+    "slug": "data-center",
+    "name": "Data Center",
+    "type": "industry",
+    "query": "Data Center",
+    "seed_company": "ESDS Software Solution Ltd",
+    "segment": "Data Center",
+    "definition": "Data centers are facilities that house computing infrastructure including servers, storage systems, networking equipment, power distribution, cooling systems, and security systems to support IT operations and cloud services.",
+    "generated_at": "2026-10-01T13:10:37.424Z",
+    "sample": false,
+    "coverage": {
+      "peers_total": 11,
+      "with_full_financials": 2,
+      "confidence": "low"
+    }
+  },
+  "outperformer": {
+    "company": "ESDS Software Solution Ltd",
+    "bucket": "indian",
+    "headline": "Dominant profitability and operational efficiency in integrated data center services",
+    "reason": "ESDS delivers a 25.6% PAT margin versus the peer median of 9.55%, and maintains a 30.2% ROCE matching the peer median while achieving significantly higher absolute profitability (₹121 cr net profit vs ₹52.5 cr median). The company demonstrates exceptional operational leverage with 50% EBITDA margin (in line with the 50.5% median) but converts this far more efficiently to bottom-line profit. Its negative working capital cycle of -806 days indicates strong cash generation dynamics, allowing it to fund growth while maintaining low debt (0.18 debt-to-equity). The combination of scale advantages in its integrated data center model, disciplined cost management (despite 24.55% employee costs vs 19.89% median, it still achieves superior margins), and strong cash conversion (₹1,368 cr CFO with 584.6% CFO-to-operating-profit ratio) positions ESDS as the clear segment leader.",
+    "india_vs_global": "ESDS outperforms as the only profitable, scaled Indian integrated data center player with complete financials; global peers lack comparable disclosure, while E2E Networks remains loss-making despite similar margins."
+  },
+  "metrics": [
+    {
+      "key": "revenue",
+      "label": "Revenue",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "rev_growth_1y",
+      "label": "Rev growth (1Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_3y",
+      "label": "Rev CAGR (3Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rev_cagr_5y",
+      "label": "Rev CAGR (5Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "net_profit",
+      "label": "Net profit",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "num0",
+      "trendOnly": true
+    },
+    {
+      "key": "operating_profit",
+      "label": "Operating profit",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "num0",
+      "trendOnly": true
+    },
+    {
+      "key": "eps",
+      "label": "EPS",
+      "unit": "Rs",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "num1",
+      "trendOnly": true
+    },
+    {
+      "key": "profit_cagr_3y",
+      "label": "Profit CAGR (3Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "profit_cagr_5y",
+      "label": "Profit CAGR (5Y)",
+      "unit": "%",
+      "group": "Size & Growth",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "market_cap",
+      "label": "Market cap",
+      "unit": "Rs Cr",
+      "group": "Size & Growth",
+      "better": "neutral",
+      "format": "num0"
+    },
+    {
+      "key": "gross_margin",
+      "label": "Gross margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "ebitda_margin",
+      "label": "EBITDA margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "pat_margin",
+      "label": "PAT margin",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "rm_cost_pct",
+      "label": "Raw material % of sales",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "manufacturing_cost_pct",
+      "label": "Mfg cost % of sales",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "employee_cost_pct",
+      "label": "Employee cost % of sales",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "other_cost_pct",
+      "label": "Other cost % of sales",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "tax_rate",
+      "label": "Effective tax rate",
+      "unit": "%",
+      "group": "Profitability",
+      "better": "neutral",
+      "format": "pct1",
+      "noTrend": true
+    },
+    {
+      "key": "roce",
+      "label": "ROCE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "roe",
+      "label": "ROE",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "avg_roe_3y",
+      "label": "Avg ROE (3Y)",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "avg_roe_5y",
+      "label": "Avg ROE (5Y)",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "price_cagr_1y",
+      "label": "Stock price CAGR (1Y)",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1",
+      "composite": false
+    },
+    {
+      "key": "price_cagr_3y",
+      "label": "Stock price CAGR (3Y)",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1",
+      "composite": false
+    },
+    {
+      "key": "price_cagr_5y",
+      "label": "Stock price CAGR (5Y)",
+      "unit": "%",
+      "group": "Returns",
+      "better": "high",
+      "format": "pct1",
+      "composite": false
+    },
+    {
+      "key": "debtor_days",
+      "label": "Debtor days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "inventory_days",
+      "label": "Inventory days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "payable_days",
+      "label": "Payable days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "high",
+      "format": "num0"
+    },
+    {
+      "key": "ccc",
+      "label": "Cash conversion cycle",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "wc_days",
+      "label": "Working capital days",
+      "unit": "days",
+      "group": "Working Capital",
+      "better": "low",
+      "format": "num0"
+    },
+    {
+      "key": "debt_equity",
+      "label": "Debt / Equity",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "low",
+      "format": "num2"
+    },
+    {
+      "key": "interest_coverage",
+      "label": "Interest coverage",
+      "unit": "x",
+      "group": "Balance Sheet",
+      "better": "high",
+      "format": "num1"
+    },
+    {
+      "key": "total_debt",
+      "label": "Total debt",
+      "unit": "Rs Cr",
+      "group": "Balance Sheet",
+      "better": "low",
+      "format": "num0",
+      "trendOnly": true
+    },
+    {
+      "key": "cwip",
+      "label": "Capital WIP",
+      "unit": "Rs Cr",
+      "group": "Balance Sheet",
+      "better": "neutral",
+      "format": "num0",
+      "trendOnly": true
+    },
+    {
+      "key": "cfo",
+      "label": "Operating cash flow",
+      "unit": "Rs Cr",
+      "group": "Cash Flow",
+      "better": "high",
+      "format": "num0",
+      "trendOnly": true
+    },
+    {
+      "key": "fcf",
+      "label": "Free cash flow",
+      "unit": "Rs Cr",
+      "group": "Cash Flow",
+      "better": "high",
+      "format": "num0",
+      "trendOnly": true
+    },
+    {
+      "key": "cfo_op",
+      "label": "Cash conversion (CFO/OP)",
+      "unit": "%",
+      "group": "Cash Flow",
+      "better": "high",
+      "format": "pct1"
+    },
+    {
+      "key": "promoter_holding",
+      "label": "Promoter holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "pledge_pct",
+      "label": "Promoter pledge",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "low",
+      "format": "pct1"
+    },
+    {
+      "key": "fii_holding",
+      "label": "FII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dii_holding",
+      "label": "DII holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "public_holding",
+      "label": "Public holding",
+      "unit": "%",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "num_shareholders",
+      "label": "No. of shareholders",
+      "unit": "",
+      "group": "Ownership",
+      "better": "neutral",
+      "format": "num0",
+      "trendOnly": true
+    },
+    {
+      "key": "pe",
+      "label": "P/E",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "pb",
+      "label": "P/B",
+      "unit": "x",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "num1"
+    },
+    {
+      "key": "dividend_yield",
+      "label": "Dividend yield",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    },
+    {
+      "key": "dividend_payout",
+      "label": "Dividend payout",
+      "unit": "%",
+      "group": "Valuation",
+      "better": "neutral",
+      "format": "pct1"
+    }
+  ],
+  "peers": {
+    "indian": [
+      {
+        "name": "ESDS Software Solution Ltd",
+        "ticker": "ESDS",
+        "business_model": "Integrated",
+        "products": "Enterprise cloud infrastructure, data centers, and AI infrastructure facilities",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/ESDS/"
+        },
+        "current": {
+          "revenue": 472,
+          "rev_growth_1y": 30.7,
+          "rev_cagr_3y": 31.4,
+          "rev_cagr_5y": 22.4,
+          "net_profit": 121,
+          "operating_profit": 234,
+          "eps": 11.98,
+          "profit_cagr_5y": 89.1,
+          "market_cap": 16837,
+          "ebitda_margin": 50,
+          "pat_margin": 25.6,
+          "tax_rate": 28,
+          "roce": 30.2,
+          "roe": 24.9,
+          "avg_roe_3y": 18,
+          "avg_roe_5y": 12,
+          "debtor_days": 128,
+          "ccc": 128,
+          "wc_days": -806,
+          "debt_equity": 0.18,
+          "interest_coverage": 19.5,
+          "total_debt": 96,
+          "cwip": 4,
+          "cfo": 1368,
+          "fcf": 1243,
+          "cfo_op": 584.6,
+          "promoter_holding": 39.46,
+          "fii_holding": 1.01,
+          "dii_holding": 8.5,
+          "public_holding": 49.9,
+          "num_shareholders": 180892,
+          "pe": 136,
+          "dividend_yield": 0,
+          "dividend_payout": 0,
+          "manufacturing_cost_pct": 0,
+          "employee_cost_pct": 24.55,
+          "other_cost_pct": 34
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              172,
+              195,
+              208,
+              287,
+              361,
+              472
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              36,
+              28,
+              23,
+              35,
+              43,
+              50
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              2.9,
+              -1.5,
+              -10.6,
+              4.9,
+              15.5,
+              25.6
+            ]
+          },
+          "net_profit": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              5,
+              -3,
+              -22,
+              14,
+              56,
+              121
+            ]
+          },
+          "operating_profit": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              62,
+              55,
+              47,
+              101,
+              155,
+              234
+            ]
+          },
+          "eps": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              10.51,
+              -0.3,
+              -2.42,
+              1.35,
+              5.54,
+              11.98
+            ]
+          },
+          "tax_rate": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              37,
+              24,
+              -19,
+              39,
+              33,
+              28
+            ]
+          },
+          "roce": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              null,
+              4,
+              1,
+              12,
+              21,
+              30
+            ]
+          },
+          "roe": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              2.7,
+              -1.5,
+              -10.5,
+              6.2,
+              13.4,
+              22.2
+            ]
+          },
+          "debtor_days": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              99,
+              183,
+              100,
+              154,
+              145,
+              128
+            ]
+          },
+          "ccc": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              99,
+              183,
+              100,
+              154,
+              145,
+              128
+            ]
+          },
+          "wc_days": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              -117,
+              -61,
+              50,
+              108,
+              84,
+              -806
+            ]
+          },
+          "debt_equity": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              0.62,
+              1.04,
+              0.85,
+              1.15,
+              0.3,
+              0.18
+            ]
+          },
+          "total_debt": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              116,
+              215,
+              179,
+              259,
+              127,
+              96
+            ]
+          },
+          "net_worth": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              186,
+              206,
+              210,
+              226,
+              418,
+              544
+            ]
+          },
+          "total_assets": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              460,
+              523,
+              501,
+              548,
+              656,
+              1938
+            ]
+          },
+          "fixed_assets": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              211,
+              306,
+              208,
+              322,
+              353,
+              388
+            ]
+          },
+          "cwip": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              5,
+              0,
+              0,
+              0,
+              0,
+              4
+            ]
+          },
+          "cfo": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              49,
+              16,
+              55,
+              57,
+              163,
+              1368
+            ]
+          },
+          "fcf": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              -7,
+              -44,
+              19,
+              34,
+              49,
+              1243
+            ]
+          },
+          "cfo_op": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              79,
+              29.1,
+              117,
+              56.4,
+              105.2,
+              584.6
+            ]
+          },
+          "investing_cf": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              -57,
+              -69,
+              -54,
+              -1,
+              -112,
+              -130
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Sep 2026"
+            ],
+            "values": [
+              39.46
+            ]
+          },
+          "fii_holding": {
+            "years": [
+              "Sep 2026"
+            ],
+            "values": [
+              1.01
+            ]
+          },
+          "dii_holding": {
+            "years": [
+              "Sep 2026"
+            ],
+            "values": [
+              8.5
+            ]
+          },
+          "public_holding": {
+            "years": [
+              "Sep 2026"
+            ],
+            "values": [
+              49.9
+            ]
+          },
+          "num_shareholders": {
+            "years": [
+              "Sep 2026"
+            ],
+            "values": [
+              180892
+            ]
+          },
+          "dividend_payout": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "manufacturing_cost_pct": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              5.57,
+              6.68,
+              8.2,
+              11.77,
+              7.22,
+              0
+            ]
+          },
+          "employee_cost_pct": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              33.72,
+              35.27,
+              36.84,
+              29.97,
+              26.32,
+              24.55
+            ]
+          },
+          "other_cost_pct": {
+            "years": [
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              23.41,
+              28.29,
+              31.02,
+              24.15,
+              23.45,
+              34
+            ]
+          }
+        }
+      },
+      {
+        "name": "E2E Networks Ltd",
+        "ticker": "E2E",
+        "business_model": "Integrated",
+        "products": "Hyperscale cloud platform and cloud infrastructure for AI/ML applications",
+        "note": "",
+        "source": {
+          "label": "Screener",
+          "url": "https://www.screener.in/company/E2E/"
+        },
+        "current": {
+          "revenue": 246,
+          "net_profit": -16,
+          "operating_profit": 126,
+          "eps": -0.76,
+          "market_cap": 13341,
+          "ebitda_margin": 51,
+          "pat_margin": -6.5,
+          "tax_rate": -27,
+          "price_cagr_1y": 93,
+          "price_cagr_3y": 153,
+          "price_cagr_5y": 171,
+          "interest_coverage": 10.5,
+          "promoter_holding": 39.45,
+          "fii_holding": 1.27,
+          "dii_holding": 6.07,
+          "public_holding": 53.15,
+          "num_shareholders": 86433,
+          "pe": 428,
+          "dividend_yield": 0,
+          "dividend_payout": 0,
+          "rm_cost_pct": 26.85,
+          "gross_margin": 73.2,
+          "manufacturing_cost_pct": 0.75,
+          "employee_cost_pct": 15.24,
+          "other_cost_pct": 5.74
+        },
+        "series": {
+          "revenue": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              246
+            ]
+          },
+          "ebitda_margin": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              51
+            ]
+          },
+          "pat_margin": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              -6.5
+            ]
+          },
+          "net_profit": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              -16
+            ]
+          },
+          "operating_profit": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              126
+            ]
+          },
+          "eps": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              -0.76
+            ]
+          },
+          "tax_rate": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              -27
+            ]
+          },
+          "promoter_holding": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              58.38,
+              58.38,
+              58.51,
+              59.71,
+              59.71,
+              59.71,
+              43.6,
+              39.45
+            ]
+          },
+          "fii_holding": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              1.66,
+              1.67,
+              3.82,
+              0.91
+            ]
+          },
+          "dii_holding": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              14.37,
+              14.37,
+              14.23,
+              33.34,
+              15.01,
+              5.75,
+              3.8,
+              6.58
+            ]
+          },
+          "public_holding": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              27.24,
+              27.25,
+              27.25,
+              45.82,
+              23.15,
+              32.65,
+              48.65,
+              52.98
+            ]
+          },
+          "num_shareholders": {
+            "years": [
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              405,
+              320,
+              346,
+              636,
+              1682,
+              8153,
+              44598,
+              68946
+            ]
+          },
+          "dividend_payout": {
+            "years": [
+              "Mar 2026"
+            ],
+            "values": [
+              0
+            ]
+          },
+          "rm_cost_pct": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              30.91,
+              25.99,
+              27.39,
+              27.8,
+              31.94,
+              43.55,
+              36.06,
+              29.71,
+              25.59,
+              21.34,
+              18.59,
+              26.85
+            ]
+          },
+          "gross_margin": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              69.1,
+              74,
+              72.6,
+              72.2,
+              68.1,
+              56.5,
+              63.9,
+              70.3,
+              74.4,
+              78.7,
+              81.4,
+              73.2
+            ]
+          },
+          "manufacturing_cost_pct": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              0,
+              0,
+              0.27,
+              1,
+              3.7,
+              5.54,
+              3.12,
+              0.21,
+              0.91,
+              2.06,
+              0.88,
+              0.75
+            ]
+          },
+          "employee_cost_pct": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              15.35,
+              10.29,
+              11.54,
+              17.65,
+              24.8,
+              41.91,
+              24.65,
+              19.57,
+              18.29,
+              18.61,
+              14.36,
+              15.24
+            ]
+          },
+          "other_cost_pct": {
+            "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
+              "Mar 2025",
+              "Mar 2026"
+            ],
+            "values": [
+              6.26,
+              3.04,
+              3.62,
+              4.02,
+              7.17,
+              13.78,
+              6.88,
+              6.28,
+              5.26,
+              7.23,
+              7.21,
+              5.74
+            ]
+          }
+        }
+      }
+    ],
+    "global": [
+      {
+        "name": "Equinix",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Colocation data centers, interconnection services, edge data centers, IBX data centers across 70+ metros globally",
+        "note": "Global leader in colocation and interconnection with 250+ data centers worldwide",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Digital Realty Trust",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Wholesale and retail colocation, hyperscale data centers, interconnection services, PlatformDIGITAL",
+        "note": "Major global data center REIT with 300+ facilities across 6 continents",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "NTT Ltd (Nippon Telegraph and Telephone)",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Data centers, cloud infrastructure, managed services, colocation through NTT Global Data Centers",
+        "note": "Operates 160+ data centers globally through NTT Global Data Centers division",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "China Telecom",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Data centers, cloud services, IDC services, server hosting, colocation facilities",
+        "note": "Largest IDC operator in China with 700+ data centers",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "China Mobile",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Data centers, cloud computing infrastructure, IDC services, edge computing facilities",
+        "note": "Operates extensive data center network across China",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "China Unicom",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Data centers, cloud services, IDC colocation, network infrastructure",
+        "note": "Major Chinese telecom with significant data center operations",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Iron Mountain",
+        "country": "",
+        "business_model": "Integrated",
+        "products": "Data center colocation, storage services, asset lifecycle management, data centers through Iron Mountain Data Centers division",
+        "note": "Operates 15 data centers globally alongside records management business",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      }
+    ],
+    "private": [
+      {
+        "name": "Centerac Technologies Ltd",
+        "business_model": "Manufacturer",
+        "products": "",
+        "note": "",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      },
+      {
+        "name": "Netweb Technol.",
+        "business_model": "Manufacturer",
+        "products": "",
+        "note": "",
+        "source": {
+          "label": "Web",
+          "url": ""
+        }
+      }
+    ]
+  },
+  "scorecard": {
+    "ranking": [
+      {
+        "company": "ESDS Software Solution Ltd",
+        "bucket": "indian",
+        "score": 95,
+        "rank": 1,
+        "strengths": [
+          "PAT margin leadership at 25.6% vs 9.55% median",
+          "Strong absolute profitability at ₹121 cr net profit",
+          "Exceptional cash generation with ₹1,368 cr CFO",
+          "Negative working capital cycle of -806 days",
+          "Solid ROCE of 30.2% with ROE of 24.9%"
+        ],
+        "reason": "Clear segment leader with superior profitability conversion, strong cash dynamics, and proven integrated data center model at scale. The company's ability to maintain 50% EBITDA margins while converting to 25.6% PAT margins demonstrates exceptional operational efficiency and pricing power in the integrated services segment."
+      },
+      {
+        "company": "E2E Networks Ltd",
+        "bucket": "indian",
+        "score": 62,
+        "rank": 2,
+        "strengths": [
+          "Strong gross margin at 73.2% matching peer median",
+          "Healthy EBITDA margin of 51% above median",
+          "Impressive stock price CAGR (93% 1Y, 153% 3Y, 171% 5Y)",
+          "Low employee cost at 15.24% vs 19.89% median",
+          "Lean other costs at 5.74% vs 19.87% median"
+        ],
+        "reason": "Despite strong top-line margins and market enthusiasm reflected in stock performance, E2E remains loss-making with -6.5% PAT margin and negative ₹16 cr net profit. The company shows promise in its cost structure and gross margin profile but has yet to achieve profitability, likely due to growth investments and scale challenges in the competitive cloud infrastructure space."
+      },
+      {
+        "company": "Equinix",
+        "bucket": "global",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "No financial data available for comparison; global data center REIT leader by reputation but cannot be scored without metrics."
+      },
+      {
+        "company": "Digital Realty Trust",
+        "bucket": "global",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "No financial data available for comparison; major global player but unscored due to missing financials."
+      },
+      {
+        "company": "NTT Ltd (Nippon Telegraph and Telephone)",
+        "bucket": "global",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "No financial data available for comparison; part of larger telecom conglomerate with data center operations embedded."
+      },
+      {
+        "company": "China Telecom",
+        "bucket": "global",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "No financial data available for comparison; state-owned telecom with data center segment not separately disclosed."
+      },
+      {
+        "company": "China Mobile",
+        "bucket": "global",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "No financial data available for comparison; largest telecom operator with data center assets but no segment-level metrics."
+      },
+      {
+        "company": "China Unicom",
+        "bucket": "global",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "No financial data available for comparison; state telecom with data center operations not separately reported."
+      },
+      {
+        "company": "Iron Mountain",
+        "bucket": "global",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "No financial data available for comparison; primarily data storage/management with data center expansion but metrics unavailable."
+      },
+      {
+        "company": "Centerac Technologies Ltd",
+        "bucket": "private",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "Unlisted manufacturer with no public financials; cannot be evaluated against listed integrated service providers."
+      },
+      {
+        "company": "Netweb Technol.",
+        "bucket": "private",
+        "score": 0,
+        "rank": 3,
+        "strengths": [],
+        "reason": "Unlisted manufacturer with no public financials; hardware-focused business model differs from integrated service peers."
+      }
+    ]
+  },
+  "report": {
+    "title": "Data Center Segment: Peer Benchmarking",
+    "summary": "ESDS Software Solution leads the Indian data center segment with exceptional profitability—converting 25.6% of revenue to net profit versus the peer median of 9.55%. Despite similar operating margins, ESDS demonstrates superior cost discipline and cash generation, with negative working capital of -806 days funding growth while maintaining minimal debt. The company's integrated model delivers scale advantages that translate directly to shareholder returns.",
+    "sections": [
+      {
+        "title": "Performance Snapshot",
+        "icon": "sparkles",
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "good",
+            "title": "ESDS Software Solution: Segment Leader",
+            "text": "ESDS achieves 25.6% net profit margin—2.7x the peer median of 9.55%—while maintaining 30.2% return on capital. The company generates ₹121 cr in net profit (vs ₹52.5 cr median) on ₹472 cr revenue, demonstrating exceptional operational leverage. Its negative working capital cycle of -806 days creates a self-funding growth engine with minimal debt burden (0.18 debt-to-equity)."
+          },
+          {
+            "type": "kpis",
+            "items": [
+              {
+                "label": "ESDS Net Profit Margin",
+                "value": "25.6%",
+                "sub": "vs 9.55% median"
+              },
+              {
+                "label": "ESDS Net Profit",
+                "value": "₹121 cr",
+                "sub": "vs ₹52.5 cr median"
+              },
+              {
+                "label": "Return on Capital",
+                "value": "30.2%",
+                "sub": "matches peer median"
+              },
+              {
+                "label": "Working Capital Cycle",
+                "value": "-806 days",
+                "sub": "strong cash generation"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Profitability & Returns",
+        "icon": "trophy",
+        "blocks": [
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "ESDS PAT Margin",
+                "value": 25.6
+              },
+              {
+                "label": "Peer Median PAT Margin",
+                "value": 9.55
+              },
+              {
+                "label": "ESDS EBITDA Margin",
+                "value": 50
+              },
+              {
+                "label": "Peer Median EBITDA Margin",
+                "value": 50.5
+              },
+              {
+                "label": "ESDS ROCE",
+                "value": 30.2
+              },
+              {
+                "label": "Peer Median ROCE",
+                "value": 30.2
+              },
+              {
+                "label": "ESDS ROE",
+                "value": 24.9
+              },
+              {
+                "label": "Peer Median ROE",
+                "value": 24.9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Growth Trajectory",
+        "icon": "trend",
+        "blocks": [
+          {
+            "type": "trend",
+            "unit": "%",
+            "years": [
+              "1-Year",
+              "3-Year CAGR",
+              "5-Year CAGR"
+            ],
+            "series": [
+              {
+                "label": "Revenue Growth (Median)",
+                "values": [
+                  30.7,
+                  31.4,
+                  22.4
+                ]
+              },
+              {
+                "label": "Profit Growth (Median)",
+                "values": [
+                  null,
+                  null,
+                  89.1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Cost Structure",
+        "icon": "donut",
+        "blocks": [
+          {
+            "type": "donut",
+            "items": [
+              {
+                "label": "Raw Materials",
+                "value": 26.85
+              },
+              {
+                "label": "Employee Costs",
+                "value": 19.89
+              },
+              {
+                "label": "Other Costs",
+                "value": 19.87
+              },
+              {
+                "label": "Manufacturing",
+                "value": 0.38
+              },
+              {
+                "label": "Profit (EBITDA)",
+                "value": 50.5
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "ESDS Cost Discipline",
+            "text": "Despite higher employee costs (24.55% vs 19.89% median), ESDS achieves superior margins through operational efficiency. The company converts 50% EBITDA margin into 25.6% net profit—far exceeding the peer median conversion of 9.55%."
+          }
+        ]
+      },
+      {
+        "title": "Cash Generation & Capital Efficiency",
+        "icon": "money",
+        "blocks": [
+          {
+            "type": "kpis",
+            "items": [
+              {
+                "label": "Operating Cash Flow",
+                "value": "₹1,368 cr",
+                "sub": "peer median"
+              },
+              {
+                "label": "Free Cash Flow",
+                "value": "₹1,243 cr",
+                "sub": "peer median"
+              },
+              {
+                "label": "CFO to Operating Profit",
+                "value": "584.6%",
+                "sub": "exceptional conversion"
+              },
+              {
+                "label": "Debt-to-Equity",
+                "value": "0.18",
+                "sub": "low leverage"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Peer Comparison Table",
+        "icon": "table",
+        "blocks": [
+          {
+            "type": "table",
+            "columns": [
+              "Company",
+              "Revenue (₹cr)",
+              "Net Profit (₹cr)",
+              "PAT Margin (%)",
+              "ROCE (%)",
+              "Debt/Equity"
+            ],
+            "rows": [
+              [
+                "ESDS Software Solution",
+                "472",
+                "121",
+                "25.6",
+                "30.2",
+                "0.18"
+              ],
+              [
+                "E2E Networks",
+                "246",
+                "-16",
+                "-6.5",
+                "—",
+                "—"
+              ],
+              [
+                "Peer Median",
+                "359",
+                "52.5",
+                "9.55",
+                "30.2",
+                "0.18"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "info",
+            "title": "Limited Indian Peer Set",
+            "text": "Only two Indian data center companies have public financials. Global peers (Equinix, Digital Realty, NTT, China Telecom, China Mobile, China Unicom, Iron Mountain) and private Indian players (Centerac, Netweb) lack comparable data. ESDS's performance stands out even more given E2E Networks' negative profitability."
+          }
+        ]
+      },
+      {
+        "title": "Valuation & Ownership",
+        "icon": "chart",
+        "blocks": [
+          {
+            "type": "kpis",
+            "items": [
+              {
+                "label": "ESDS Market Cap",
+                "value": "₹16,837 cr",
+                "sub": "vs ₹15,089 cr median"
+              },
+              {
+                "label": "ESDS P/E Ratio",
+                "value": "136x",
+                "sub": "vs 282x median"
+              },
+              {
+                "label": "Promoter Holding",
+                "value": "39.46%",
+                "sub": "stable ownership"
+              },
+              {
+                "label": "Public Holding",
+                "value": "49.9%",
+                "sub": "broad shareholder base"
+              }
+            ]
+          },
+          {
+            "type": "bars",
+            "unit": "%",
+            "items": [
+              {
+                "label": "1-Year Price Growth (Median)",
+                "value": 93
+              },
+              {
+                "label": "3-Year Price CAGR (Median)",
+                "value": 153
+              },
+              {
+                "label": "5-Year Price CAGR (Median)",
+                "value": 171
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "Screener — ESDS Software Solution Ltd",
+      "url": "https://www.screener.in/company/ESDS/"
+    },
+    {
+      "label": "Screener — E2E Networks Ltd",
+      "url": "https://www.screener.in/company/E2E/"
+    },
+    {
+      "label": "Screener.in",
+      "url": "https://www.screener.in/"
+    }
+  ]
+}
