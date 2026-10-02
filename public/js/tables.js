@@ -113,7 +113,7 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
       paneTrends.innerHTML = '';
     } else {
       paneCurrent.innerHTML = currentTableHtml(set, report, showRemove);
-      renderTrends(paneTrends, set, report);
+      renderTrends(paneTrends, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
       wireRowClicks(paneCurrent, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
     }
     if (addForm) addForm.style.display = isCore ? '' : 'none'; // adding a peer stays core-only
@@ -312,7 +312,7 @@ function wireRowClicks(pane, peers, report, onRemove) {
 }
 
 // ---------------------------------------------------------------- Trends
-function renderTrends(pane, peers, report) {
+function renderTrends(pane, peers, report, onRemove) {
   const metrics = metricsWithSeries(peers, report.metrics);
   if (!metrics.length) { pane.innerHTML = emptyState('No multi-year series available for these peers yet.'); return; }
 
@@ -323,7 +323,12 @@ function renderTrends(pane, peers, report) {
     const sec = pane.querySelector(`[data-metric="${m.key}"]`);
     const inner = sec.querySelector('[data-inner]');
     let built = false;
-    const ensure = () => { if (!built) { built = true; inner.innerHTML = trendTableHtml(peers, report, m); } };
+    const ensure = () => {
+      if (built) return;
+      built = true;
+      inner.innerHTML = trendTableHtml(peers, report, m, !!onRemove);
+      if (onRemove) inner.querySelectorAll('[data-remove]').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); onRemove(b.dataset.remove); }));
+    };
     sec.addEventListener('toggle', () => { if (sec.open) ensure(); });
     if (sec.open) ensure();
   });
@@ -342,7 +347,7 @@ function trendSectionHtml(metric, open) {
   </details>`;
 }
 
-function trendTableHtml(peers, report, metric) {
+function trendTableHtml(peers, report, metric, canRemove) {
   const key = metric.key;
   const rows = peersWithSeries(peers, key);
   const years = unionYears(peers, key);
@@ -358,7 +363,8 @@ function trendTableHtml(peers, report, metric) {
       prev = v == null ? prev : v; // compare to most recent real prior year
       return `<td class="num ${cls}">${esc(fmt(v, metric.format))}</td>`;
     }).join('');
-    return `<tr><td class="pv-col1">${companyNameHtml(p, 'font-semibold text-slate-800')}${p.is_seed ? ' <span class="text-amber-500">★</span>' : ''}</td>${cells}</tr>`;
+    const remove = canRemove ? `<button data-remove="${esc(p.name)}" title="Remove ${esc(p.name)}" aria-label="Remove ${esc(p.name)}" class="pv-remove">×</button>` : '';
+    return `<tr><td class="pv-col1">${remove}${companyNameHtml(p, 'font-semibold text-slate-800')}${p.is_seed ? ' <span class="text-amber-500">★</span>' : ''}</td>${cells}</tr>`;
   };
 
   const med = seriesAggregate(peers, key, years, 'median');
