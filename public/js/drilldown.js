@@ -1,6 +1,8 @@
 // drilldown.js — right-hand side panel with a peer's full profile + mini
 // trend sparklines (self-contained inline SVG, so opening/closing is cheap).
 import { esc, fmtUnit, metricMap } from './format.js';
+import { helpIcon } from './help.js';
+import { HIDDEN_TREND_KEYS } from './compute.js';
 
 const root = () => document.getElementById('drilldown-root');
 let escHandler = null;
@@ -42,7 +44,7 @@ function panelHtml(peer, report, mm) {
     const rows = report.metrics.filter((m) => m.group === g).map((m) => {
       const v = cur[m.key];
       return `<div class="flex items-center justify-between py-1">
-        <span class="text-slate-500">${esc(m.label)}</span>
+        <span class="text-slate-500">${esc(m.label)}${helpIcon(m.key, m.label)}</span>
         <span class="num font-semibold ${v == null ? 'text-slate-300' : 'text-slate-800'}">${esc(fmtUnit(v, m))}</span>
       </div>`;
     }).join('');
@@ -53,7 +55,7 @@ function panelHtml(peer, report, mm) {
   }).join('');
 
   const sparks = report.metrics
-    .filter((m) => !m.noTrend && peer.series && peer.series[m.key] && peer.series[m.key].values.some((x) => x != null))
+    .filter((m) => !m.noTrend && !HIDDEN_TREND_KEYS.has(m.key) && peer.series && peer.series[m.key] && peer.series[m.key].values.some((x) => x != null))
     .map((m) => sparkRow(peer.series[m.key], m)).join('');
 
   const src = peer.source && peer.source.url
@@ -107,7 +109,7 @@ function sparkRow(series, metric) {
   }
   return `<div class="flex items-center gap-3 rounded-xl bg-slate-50 px-3 py-2">
     <div class="grow min-w-0">
-      <div class="text-[0.72rem] text-slate-500 truncate">${esc(metric.label)}</div>
+      <div class="text-[0.72rem] text-slate-500">${esc(metric.label)}${helpIcon(metric.key, metric.label)}</div>
       <div class="num text-sm font-semibold text-slate-800">${esc(fmtUnit(last, metric))} ${arrow}</div>
     </div>
     <div class="pv-spark shrink-0">${sparkSvg(series.values)}</div>

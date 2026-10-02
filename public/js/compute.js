@@ -152,10 +152,15 @@ export function seriesAggregate(peers, key, years, kind = 'median') {
   return years.map((y) => fn(peersWithSeries(peers, key).map((p) => seriesValueAt(p, key, y))));
 }
 
+/** Trends intentionally hidden from the year-by-year view (product decision). Applied
+ *  here too — not only via each metric's `noTrend` flag — so it also takes effect on
+ *  reports generated before the flag existed. These stay in the Current grid where shown. */
+export const HIDDEN_TREND_KEYS = new Set(['dividend_payout', 'fcf', 'wc_days']);
+
 /** Which metrics have at least one peer with series data (for the Trends tab).
- *  `noTrend` metrics are kept out of the trends view (they stay in the Current grid). */
+ *  `noTrend` / hidden metrics are kept out of the trends view (they stay in the Current grid). */
 export function metricsWithSeries(peers, metrics) {
-  return metrics.filter((m) => !m.noTrend && peersWithSeries(peers, m.key).length > 0);
+  return metrics.filter((m) => !m.noTrend && !HIDDEN_TREND_KEYS.has(m.key) && peersWithSeries(peers, m.key).length > 0);
 }
 
 // ============================================================================

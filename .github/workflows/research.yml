@@ -56,6 +56,7 @@ jobs:
           PROGRESS_URL: ${{ secrets.PROGRESS_URL }}
           PROGRESS_SECRET: ${{ secrets.PROGRESS_SECRET }}
           JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
         run: node scripts/research-peers.mjs
 
       - name: Commit report + index

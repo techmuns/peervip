@@ -107,3 +107,31 @@ export function bmClass(model) {
   const known = ['Manufacturer', 'Trader-Distributor', 'Importer-Sourcing', 'Integrated'];
   return known.includes(key) ? 'bm-' + key : 'bm-default';
 }
+
+/**
+ * Screener.in company URL for a peer, or '' when we can't/shouldn't link (foreign
+ * listing or unlisted/private — Screener only covers Indian listings). Prefers the
+ * pipeline-set source URL; falls back to building one from the ticker.
+ */
+export function screenerHref(p) {
+  if (!p) return '';
+  const u = (p.source && p.source.url) || '';
+  if (/screener\.in\/company\//i.test(u)) return u;
+  const t = p.ticker ? String(p.ticker).trim() : '';
+  const ex = String(p.exchange || '');
+  const foreign = /NASDAQ|NYSE|LSE|HKEX|SGX|TSX|ASX|TSE|SSE|SZSE|KRX|FRA|AMS|EPA|BIT|OTC|NIKKEI/i.test(ex) || !!p.country;
+  if (t && !foreign) return `https://www.screener.in/company/${encodeURIComponent(t)}/`;
+  return '';
+}
+
+/**
+ * A company name as a Screener link (new tab) when we have one, else plain text.
+ * stopPropagation keeps a click from also triggering a surrounding row handler
+ * (e.g. the drill-down that opens on a table row). `cls` adds extra classes.
+ */
+export function companyNameHtml(p, cls = '') {
+  const name = esc((p && p.name) || '');
+  const href = screenerHref(p);
+  if (!href) return `<span class="${cls}">${name}</span>`;
+  return `<a href="${esc(href)}" target="_blank" rel="noopener" class="pv-clink ${cls}" title="Open ${name} on Screener ↗" onclick="event.stopPropagation()">${name}</a>`;
+}

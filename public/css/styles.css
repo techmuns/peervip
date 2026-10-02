@@ -71,14 +71,13 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
    Data-grid table: sticky header row + frozen first column + h-scroll
    =========================================================================== */
 .pv-scroll {
-  overflow: auto;
-  max-height: 74vh;
+  overflow-x: auto;      /* wide metric grid scrolls sideways WITHIN the table box … */
+  overflow-y: visible;   /* … but never vertically — the whole table (incl. Median/Average) shows and you page-scroll */
   border-radius: 0.9rem;
   border: 1px solid #eef2f7;
   background: #fff; /* clean white grid base so untinted (neutral) cells don't show the page gradient */
   -webkit-overflow-scrolling: touch;
 }
-@media (max-width: 640px) { .pv-scroll { max-height: 68vh; } }
 
 .pv-table { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; font-size: 0.8125rem; }
 .pv-table th, .pv-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #eef2f7; text-align: right; white-space: nowrap; }
@@ -113,6 +112,9 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .pv-table thead tr.pv-metric-head th.pv-col1 { z-index: 5; }
 /* Company column always left-aligned — beats the base `.pv-table td { text-align:right }` on specificity */
 .pv-table td.pv-col1, .pv-table th.pv-col1 { text-align: left; }
+/* Long value-chain names (e.g. "Techno Electric & Engineering / Techno Digital") wrap
+   inside the frozen column instead of overflowing into the number cells. */
+.pv-table td.pv-col1 { vertical-align: top; word-break: break-word; overflow-wrap: anywhere; }
 .pv-table tbody tr:hover .pv-col1 { background: #f8fafc; }
 .pv-table tbody tr.pv-row { cursor: pointer; }
 .pv-table tbody tr.pv-row:hover td { background-color: #f8fafc; }
@@ -289,9 +291,9 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .pv-add-item + .pv-add-item { margin-top: 1px; }
 .pv-add-code { font-size: 0.72rem; font-weight: 800; color: var(--brand-2); flex-shrink: 0; }
 .pv-add-meta { font-size: 0.68rem; color: #64748b; margin-top: 0.1rem; }
-.pv-remove { flex-shrink: 0; width: 1.15rem; height: 1.15rem; line-height: 1; border: 0; border-radius: 999px; background: #fee2e2; color: #dc2626; font-weight: 800; font-size: 0.85rem; cursor: pointer; display: inline-grid; place-items: center; }
+.pv-remove { flex-shrink: 0; width: 1.15rem; height: 1.15rem; line-height: 1; border: 0; border-radius: 999px; background: #fee2e2; color: #dc2626; font-weight: 800; font-size: 0.85rem; cursor: pointer; display: inline-grid; place-items: center; vertical-align: middle; margin-right: 0.35rem; }
 .pv-remove:hover { background: #fecaca; }
-.pv-added { font-size: 0.58rem; font-weight: 800; color: var(--brand-2); background: #f5f3ff; border-radius: 999px; padding: 0.05rem 0.35rem; }
+.pv-added { font-size: 0.58rem; font-weight: 800; color: var(--brand-2); background: #f5f3ff; border-radius: 999px; padding: 0.05rem 0.35rem; margin-left: 0.3rem; vertical-align: middle; white-space: nowrap; }
 
 /* ===========================================================================
    Print stylesheet — the one-pager only
@@ -330,3 +332,24 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
   .pv-industry canvas { max-height: 250px !important; }
   .pv-industry section.pv-card { break-inside: avoid; }
 }
+
+/* "?" help chips on headings + one shared screen-positioned tooltip (help.js) */
+.pv-help {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px; margin-left: 4px; border-radius: 999px;
+  background: #e2e8f0; color: #475569; font-size: 9px; font-weight: 800;
+  line-height: 1; cursor: help; vertical-align: middle; user-select: none; flex: none;
+}
+.pv-help:hover, .pv-help:focus-visible { background: var(--brand-1); color: #fff; outline: none; }
+.pv-help-tip {
+  position: fixed; z-index: 80; max-width: 300px; white-space: normal; text-align: left;
+  background: #0f172a; color: #f8fafc; font-size: 0.72rem; line-height: 1.45; font-weight: 500;
+  padding: 0.55rem 0.7rem; border-radius: 0.5rem; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.28);
+  pointer-events: none; opacity: 0; transform: translateY(2px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+.pv-help-tip.on { opacity: 1; transform: translateY(0); }
+
+/* Company name → Screener links inside tables (dotted underline, brand hover) */
+.pv-clink { color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted #cbd5e1; }
+.pv-clink:hover { color: var(--brand-2); border-bottom-color: var(--brand-2); }

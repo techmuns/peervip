@@ -5,7 +5,8 @@
 //  * Trends: foldable sections (one per metric with series), companies as rows and
 //    years as columns (like-for-like), temporal conditional formatting, and a
 //    per-section Table <-> Charts sub-toggle (Chart.js multi-line + dashed median).
-import { esc, fmt, bmClass } from './format.js';
+import { esc, fmt, bmClass, companyNameHtml } from './format.js';
+import { helpIcon } from './help.js';
 import {
   currentValues, medianRow, averageRow,
   peersWithSeries, unionYears, seriesValueAt, seriesAggregate, metricsWithSeries,
@@ -75,12 +76,26 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
     rerender();
     if (edit.refreshBanner) edit.refreshBanner();
   } : null;
+  // Remove inside a value-chain NODE view: hide a distorting player (e.g. a large
+  // diversified company whose consolidated numbers don't reflect this single node).
+  // Persisted per-report in the overlay; re-renders just the node view.
+  const onRemoveVc = editable ? (name) => {
+    edit.overlay.vcRemoved = edit.overlay.vcRemoved || [];
+    if (!edit.overlay.vcRemoved.some((n) => normName(n) === normName(name))) edit.overlay.vcRemoved.push(name);
+    saveOverlay(edit.slug, edit.overlay);
+    fillPanes();
+  } : null;
 
   // Which players the panes show: the benchmarked core set, or one value-chain node
   // (sorted so names with financials and higher directness lead).
   function activeSet() {
     if (state.node === 'core' || !vc) return peers;
-    return vc.players.filter((p) => (p.value_chain_nodes || []).includes(state.node))
+    const rm = new Set(((editable && edit.overlay.vcRemoved) || []).map(normName));
+    const seen = new Set();
+    return vc.players
+      .filter((p) => (p.value_chain_nodes || []).includes(state.node))
+      // hide user-removed players, and de-dupe a name that appears twice (keep first)
+      .filter((p) => { const k = normName(p.name); if (rm.has(k) || seen.has(k)) return false; seen.add(k); return true; })
       .slice().sort((a, b) => (hasFin(b) - hasFin(a)) || ((b.directness || 0) - (a.directness || 0)));
   }
 
@@ -88,16 +103,17 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
     destroyBucketCharts(container);
     const isCore = state.node === 'core' || !vc;
     const set = activeSet();
-    const canEdit = editable && isCore;
+    const canEditCore = editable && isCore;    // core: add + remove benchmarked peers
+    const showRemove = editable;               // node views also let you hide a distorting player
     if (!set.length) {
-      paneCurrent.innerHTML = emptyState(canEdit ? 'No peers left — add one by name above, or reload to restore the original set.' : 'No listed players mapped to this value-chain node yet.');
+      paneCurrent.innerHTML = emptyState(canEditCore ? 'No peers left — add one by name above, or reload to restore the original set.' : 'No listed players in this value-chain node (or all hidden — reload the page to restore).');
       paneTrends.innerHTML = '';
     } else {
-      paneCurrent.innerHTML = currentTableHtml(set, report, canEdit);
+      paneCurrent.innerHTML = currentTableHtml(set, report, showRemove);
       renderTrends(paneTrends, set, report);
-      wireRowClicks(paneCurrent, set, report, canEdit ? onRemove : null);
+      wireRowClicks(paneCurrent, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
     }
-    if (addForm) addForm.style.display = isCore ? '' : 'none'; // node views are read-only
+    if (addForm) addForm.style.display = isCore ? '' : 'none'; // adding a peer stays core-only
     if (vcNote) {
       const node = isCore ? null : vc.nodes.find((n) => n.key === state.node);
       if (node) { vcNote.hidden = false; vcNote.innerHTML = `<span class="font-semibold text-slate-600">${esc(node.label)}</span> — ${set.length} listed player${set.length === 1 ? '' : 's'}.${node.use ? ` ${esc(node.use)}` : ''}`; }
@@ -243,7 +259,7 @@ function currentTableHtml(peers, report, editable) {
 
   const head = `<thead>${band}<tr class="pv-metric-head">
     <th class="pv-col1">Company</th>
-    ${metrics.map((m) => `<th title="${esc(m.label)}${m.unit ? ' (' + esc(m.unit) + ')' : ''}">${esc(m.label)}<span class="pv-th-unit">${esc(unitLabel(m))}</span></th>`).join('')}
+    ${metrics.map((m) => `<th title="${esc(m.label)}${m.unit ? ' (' + esc(m.unit) + ')' : ''}">${esc(m.label)}${helpIcon(m.key, m.label)}<span class="pv-th-unit">${esc(unitLabel(m))}</span></th>`).join('')}
     <th style="text-align:center">Business<br>Model</th>
   </tr></thead>`;
 
@@ -258,7 +274,7 @@ function currentTableHtml(peers, report, editable) {
     const added = p.added_by === 'user' ? '<span class="pv-added" title="Added by you">+you</span>' : '';
     return `<tr class="pv-row" data-peer-idx="${idx}">
       <td class="pv-col1">
-        <div class="font-semibold text-slate-800 flex items-center gap-1.5">${remove}${esc(p.name)}${p.is_seed ? '<span class="text-amber-500" title="Searched company">★</span>' : ''}${added}</div>
+        <div class="font-semibold text-slate-800 leading-snug">${remove}${companyNameHtml(p)}${p.is_seed ? ' <span class="text-amber-500" title="Searched company">★</span>' : ''}${added}</div>
         <div class="text-[0.7rem] text-slate-400 num">${esc(p.ticker || p.country || '')}</div>
       </td>
       ${cells}
@@ -312,7 +328,7 @@ function trendSectionHtml(metric, open) {
     <summary class="flex items-center justify-between gap-3 px-4 py-3">
       <span class="flex items-center gap-2 min-w-0">
         <svg class="pv-chev shrink-0 text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-        <span class="font-display font-bold text-slate-800 truncate">${esc(metric.label)}</span>
+        <span class="font-display font-bold text-slate-800 truncate">${esc(metric.label)}</span>${helpIcon(metric.key, metric.label)}
         <span class="text-[0.68rem] text-slate-400 hidden sm:inline">${esc(metric.group)}${metric.unit ? ' · ' + esc(metric.unit) : ''}</span>
       </span>
     </summary>
@@ -336,14 +352,14 @@ function trendTableHtml(peers, report, metric) {
       prev = v == null ? prev : v; // compare to most recent real prior year
       return `<td class="num ${cls}">${esc(fmt(v, metric.format))}</td>`;
     }).join('');
-    return `<tr><td class="pv-col1"><span class="font-semibold text-slate-800">${esc(p.name)}</span>${p.is_seed ? ' <span class="text-amber-500">★</span>' : ''}</td>${cells}</tr>`;
+    return `<tr><td class="pv-col1">${companyNameHtml(p, 'font-semibold text-slate-800')}${p.is_seed ? ' <span class="text-amber-500">★</span>' : ''}</td>${cells}</tr>`;
   };
 
   const med = seriesAggregate(peers, key, years, 'median');
   const avg = seriesAggregate(peers, key, years, 'average');
   const refRow = (label, vals) => `<tr class="pv-ref"><td class="pv-col1">${label}</td>${vals.map((v) => `<td class="num">${esc(fmt(v, metric.format))}</td>`).join('')}</tr>`;
 
-  return `<div class="pv-scroll" style="max-height:56vh"><table class="pv-table">
+  return `<div class="pv-scroll"><table class="pv-table">
     ${head}<tbody>${rows.map(bodyRow).join('')}${refRow('Median', med)}${refRow('Average', avg)}</tbody>
   </table></div>`;
 }
