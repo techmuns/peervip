@@ -187,6 +187,37 @@
       "updated_at": "2026-10-01T13:10:37.424Z",
       "peer_count": 11,
       "sample": false
+    },
+    {
+      "slug": "solar-energy",
+      "name": "Onix Solar Energy Ltd",
+      "type": "company",
+      "query": "solar energy",
+      "seed_company": "Onix Solar Energy Ltd",
+      "aliases": [
+        "solar energy",
+        "solar energy encompasses photovoltaic panels, solar modules, inverters, balance-of-system components, solar thermal systems, and integrated renewable energy solutions for power generation.",
+        "onix solar energy ltd",
+        "adani green energy ltd",
+        "waaree energies ltd",
+        "premier energies ltd",
+        "emmvee photovoltaic power ltd",
+        "waaree renewable technologies ltd",
+        "websol energy system ltd",
+        "surana solar ltd",
+        "kpi green energy ltd",
+        "ujaas energy ltd",
+        "solarworld energy solutions ltd",
+        "solarium green energy ltd",
+        "borosil renewables ltd",
+        "larsen & toubro ltd",
+        "nhpc ltd",
+        "vikram solar (subsidiary of waaree renewable technologies)",
+        "emmvee solar systems (emmvee photovoltaic power)"
+      ],
+      "updated_at": "2026-10-02T10:01:42.652Z",
+      "peer_count": 17,
+      "sample": false
     }
   ]
 }
