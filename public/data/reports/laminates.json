@@ -14,7 +14,7 @@
       "with_full_financials": 6,
       "confidence": "high"
     },
-    "enriched_at": "2026-09-29T10:36:35.307Z"
+    "enriched_at": "2026-10-02T04:47:39.776Z"
   },
   "outperformer": {
     "company": "Stylam Industries Ltd",
@@ -423,14 +423,14 @@
         "note": "",
         "source": {
           "label": "Screener",
-          "url": "https://www.screener.in/company/CENTURYPLY/"
+          "url": "https://www.screener.in/company/CENTURYPLY/consolidated/"
         },
         "current": {
           "revenue": 5397,
           "rev_growth_1y": 19.2,
           "rev_cagr_3y": 14,
           "rev_cagr_5y": 20.4,
-          "market_cap": 14893,
+          "market_cap": 14807,
           "ebitda_margin": 12,
           "pat_margin": 5,
           "roce": 11.5,
@@ -445,7 +445,7 @@
           "promoter_holding": 71.83,
           "fii_holding": 3.86,
           "dii_holding": 19.41,
-          "pe": 50.2,
+          "pe": 49.9,
           "pb": 5.7,
           "dividend_yield": 0.15,
           "dividend_payout": 8,
@@ -462,9 +462,9 @@
           "tax_rate": 25,
           "avg_roe_3y": 12,
           "avg_roe_5y": 15,
-          "price_cagr_1y": -14,
-          "price_cagr_3y": 2,
-          "price_cagr_5y": 8,
+          "price_cagr_1y": -17,
+          "price_cagr_3y": 1,
+          "price_cagr_5y": 7,
           "total_debt": 1765,
           "net_worth": 2610,
           "total_assets": 5072,
@@ -1508,7 +1508,8 @@
               8
             ]
           }
-        }
+        },
+        "basis": "consolidated"
       },
       {
         "name": "Stylam Industries Ltd",
@@ -1524,10 +1525,10 @@
           "revenue": 1129,
           "rev_growth_1y": 10.1,
           "rev_cagr_3y": 5.8,
-          "rev_cagr_5y": 18.9,
-          "market_cap": 5649,
+          "rev_cagr_5y": 18.7,
+          "market_cap": 5457,
           "ebitda_margin": 20,
-          "pat_margin": 13.3,
+          "pat_margin": 13.2,
           "roce": 26.6,
           "roe": 19.9,
           "debtor_days": 67,
@@ -1536,30 +1537,30 @@
           "ccc": 150,
           "wc_days": 100,
           "debt_equity": 0.04,
-          "interest_coverage": 55.3,
+          "interest_coverage": 55,
           "promoter_holding": 56.86,
           "fii_holding": 2.62,
           "dii_holding": 12.14,
-          "pe": 33.3,
-          "pb": 7,
+          "pe": 32.2,
+          "pb": 6.8,
           "dividend_yield": 0,
           "dividend_payout": 0,
           "rm_cost_pct": 53,
           "gross_margin": 47,
-          "net_profit": 150,
-          "operating_profit": 221,
-          "eps": 88.43,
-          "profit_cagr_3y": 16,
-          "profit_cagr_5y": 22.2,
+          "net_profit": 149,
+          "operating_profit": 220,
+          "eps": 88.19,
+          "profit_cagr_3y": 15.8,
+          "profit_cagr_5y": 22.1,
           "manufacturing_cost_pct": 9,
           "employee_cost_pct": 8,
           "other_cost_pct": 9,
           "tax_rate": 26,
           "avg_roe_3y": 22,
-          "avg_roe_5y": 23,
-          "price_cagr_1y": 101,
+          "avg_roe_5y": 22,
+          "price_cagr_1y": 93,
           "price_cagr_3y": 24,
-          "price_cagr_5y": 25,
+          "price_cagr_5y": 24,
           "total_debt": 29,
           "net_worth": 806,
           "total_assets": 979,
@@ -1567,7 +1568,7 @@
           "cwip": 221,
           "cfo": 177,
           "fcf": -2,
-          "cfo_op": 80.1,
+          "cfo_op": 80.5,
           "investing_cf": -156,
           "public_holding": 28.39,
           "num_shareholders": 31135
@@ -1575,6 +1576,10 @@
         "series": {
           "revenue": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1585,9 +1590,13 @@
               "Mar 2026"
             ],
             "values": [
+              214,
+              264,
+              294,
+              339,
               461,
               462,
-              476,
+              480,
               659,
               952,
               914,
@@ -1597,6 +1606,10 @@
           },
           "ebitda_margin": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1607,9 +1620,13 @@
               "Mar 2026"
             ],
             "values": [
+              11,
+              11,
+              16,
+              15,
               17,
               17,
-              20,
+              21,
               16,
               16,
               20,
@@ -1619,6 +1636,10 @@
           },
           "pat_margin": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1629,18 +1650,26 @@
               "Mar 2026"
             ],
             "values": [
+              4.2,
+              4.5,
+              6.8,
+              5.9,
               8.5,
               4.1,
-              11.6,
+              11.5,
               9.3,
               10.1,
               14,
               11.9,
-              13.3
+              13.2
             ]
           },
           "roce": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1651,7 +1680,11 @@
               "Mar 2026"
             ],
             "values": [
-              null,
+              16,
+              18,
+              19,
+              15,
+              20,
               17,
               24,
               25,
@@ -1663,6 +1696,10 @@
           },
           "debtor_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1673,9 +1710,13 @@
               "Mar 2026"
             ],
             "values": [
+              57,
+              55,
+              58,
+              62,
               63,
               69,
-              76,
+              75,
               66,
               48,
               64,
@@ -1685,6 +1726,10 @@
           },
           "inventory_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1695,6 +1740,10 @@
               "Mar 2026"
             ],
             "values": [
+              71,
+              111,
+              128,
+              117,
               93,
               98,
               106,
@@ -1707,6 +1756,10 @@
           },
           "ccc": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1717,9 +1770,13 @@
               "Mar 2026"
             ],
             "values": [
+              92,
+              116,
+              143,
+              111,
               117,
               115,
-              106,
+              105,
               139,
               131,
               147,
@@ -1755,6 +1812,10 @@
           },
           "net_profit": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1765,6 +1826,10 @@
               "Mar 2026"
             ],
             "values": [
+              9,
+              12,
+              20,
+              20,
               39,
               19,
               55,
@@ -1772,11 +1837,15 @@
               96,
               128,
               122,
-              150
+              149
             ]
           },
           "operating_profit": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1787,18 +1856,26 @@
               "Mar 2026"
             ],
             "values": [
+              23,
+              30,
+              46,
+              50,
               80,
               80,
-              95,
+              99,
               104,
               155,
               184,
               185,
-              221
+              220
             ]
           },
           "eps": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1809,18 +1886,26 @@
               "Mar 2026"
             ],
             "values": [
+              6.43,
+              8.32,
+              13.45,
+              12.31,
               23.82,
-              11.03,
-              32.61,
-              35.93,
-              56.63,
-              75.78,
-              71.91,
-              88.43
+              11.19,
+              32.72,
+              36,
+              56.61,
+              75.76,
+              71.88,
+              88.19
             ]
           },
           "tax_rate": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -1831,6 +1916,10 @@
               "Mar 2026"
             ],
             "values": [
+              32,
+              38,
+              37,
+              39,
               25,
               44,
               22,
@@ -1993,6 +2082,10 @@
           },
           "roe": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2003,6 +2096,10 @@
               "Mar 2026"
             ],
             "values": [
+              20.5,
+              21.4,
+              26.3,
+              13.8,
               21.1,
               9.3,
               21.2,
@@ -2010,11 +2107,15 @@
               23.3,
               23.9,
               18.6,
-              18.6
+              18.5
             ]
           },
           "payable_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2025,6 +2126,10 @@
               "Mar 2026"
             ],
             "values": [
+              37,
+              51,
+              44,
+              68,
               38,
               52,
               76,
@@ -2037,6 +2142,10 @@
           },
           "wc_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2047,9 +2156,13 @@
               "Mar 2026"
             ],
             "values": [
+              4,
+              11,
+              -25,
+              10,
               30,
               36,
-              72,
+              71,
               82,
               82,
               108,
@@ -2059,6 +2172,10 @@
           },
           "debt_equity": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2069,6 +2186,10 @@
               "Mar 2026"
             ],
             "values": [
+              1.86,
+              2.09,
+              2.42,
+              0.88,
               1.02,
               0.58,
               0.23,
@@ -2081,6 +2202,10 @@
           },
           "total_debt": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2091,6 +2216,10 @@
               "Mar 2026"
             ],
             "values": [
+              82,
+              117,
+              184,
+              127,
               189,
               118,
               59,
@@ -2103,6 +2232,10 @@
           },
           "net_worth": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2113,6 +2246,10 @@
               "Mar 2026"
             ],
             "values": [
+              44,
+              56,
+              76,
+              145,
               185,
               204,
               259,
@@ -2125,6 +2262,10 @@
           },
           "total_assets": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2135,18 +2276,26 @@
               "Mar 2026"
             ],
             "values": [
+              149,
+              211,
+              303,
+              328,
               438,
               395,
               407,
               489,
               538,
               606,
-              778,
+              779,
               979
             ]
           },
           "fixed_assets": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2157,6 +2306,10 @@
               "Mar 2026"
             ],
             "values": [
+              49,
+              56,
+              80,
+              186,
               233,
               195,
               188,
@@ -2169,6 +2322,10 @@
           },
           "cwip": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2179,6 +2336,10 @@
               "Mar 2026"
             ],
             "values": [
+              31,
+              56,
+              109,
+              0,
               13,
               11,
               0,
@@ -2191,6 +2352,10 @@
           },
           "cfo": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2201,6 +2366,10 @@
               "Mar 2026"
             ],
             "values": [
+              6,
+              11,
+              26,
+              19,
               28,
               66,
               79,
@@ -2213,6 +2382,10 @@
           },
           "fcf": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2223,6 +2396,10 @@
               "Mar 2026"
             ],
             "values": [
+              -7,
+              -27,
+              -51,
+              10,
               -17,
               42,
               73,
@@ -2235,6 +2412,10 @@
           },
           "cfo_op": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2245,18 +2426,26 @@
               "Mar 2026"
             ],
             "values": [
+              26.1,
+              36.7,
+              56.5,
+              38,
               35,
               82.5,
-              83.2,
+              79.8,
               5.8,
               42.6,
               59.2,
               57.8,
-              80.1
+              80.5
             ]
           },
           "investing_cf": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2267,12 +2456,16 @@
               "Mar 2026"
             ],
             "values": [
+              -12,
+              -38,
+              -77,
+              -8,
               -53,
               19,
-              -5,
+              -6,
               -30,
               -12,
-              -36,
+              -37,
               -126,
               -156
             ]
@@ -2383,6 +2576,10 @@
           },
           "dividend_payout": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
               "Mar 2019",
               "Mar 2020",
               "Mar 2021",
@@ -2396,6 +2593,10 @@
               0,
               0,
               0,
+              0,
+              0,
+              0,
+              0,
               7,
               0,
               3,
@@ -2403,7 +2604,8 @@
               0
             ]
           }
-        }
+        },
+        "basis": "standalone"
       },
       {
         "name": "Greenlam Industries Ltd",
@@ -2413,14 +2615,14 @@
         "note": "",
         "source": {
           "label": "Screener",
-          "url": "https://www.screener.in/company/GREENLAM/"
+          "url": "https://www.screener.in/company/GREENLAM/consolidated/"
         },
         "current": {
           "revenue": 3046,
           "rev_growth_1y": 18.6,
           "rev_cagr_3y": 14.6,
           "rev_cagr_5y": 20.5,
-          "market_cap": 5447,
+          "market_cap": 5450,
           "ebitda_margin": 11,
           "pat_margin": 1.8,
           "roce": 8.12,
@@ -2437,7 +2639,7 @@
           "dii_holding": 10.89,
           "pe": 59.1,
           "pb": 4.6,
-          "dividend_yield": 0.18,
+          "dividend_yield": 0.19,
           "dividend_payout": 18,
           "rm_cost_pct": 49.43,
           "gross_margin": 50.6,
@@ -2452,9 +2654,9 @@
           "tax_rate": 37,
           "avg_roe_3y": 8,
           "avg_roe_5y": 10,
-          "price_cagr_1y": -7,
-          "price_cagr_3y": 2,
-          "price_cagr_5y": 10,
+          "price_cagr_1y": -15,
+          "price_cagr_3y": 1,
+          "price_cagr_5y": 9,
           "total_debt": 1160,
           "net_worth": 1180,
           "total_assets": 2999,
@@ -3498,7 +3700,8 @@
               18
             ]
           }
-        }
+        },
+        "basis": "consolidated"
       },
       {
         "name": "Greenply Industries Ltd",
@@ -3508,14 +3711,14 @@
         "note": "",
         "source": {
           "label": "Screener",
-          "url": "https://www.screener.in/company/GREENPLY/"
+          "url": "https://www.screener.in/company/GREENPLY/consolidated/"
         },
         "current": {
           "revenue": 2739,
           "rev_growth_1y": 10.1,
           "rev_cagr_3y": 18.1,
           "rev_cagr_5y": 18.6,
-          "market_cap": 3516,
+          "market_cap": 3793,
           "ebitda_margin": 9,
           "pat_margin": 3.3,
           "roce": 14.3,
@@ -3530,9 +3733,9 @@
           "promoter_holding": 51.93,
           "fii_holding": 4.44,
           "dii_holding": 31.42,
-          "pe": 31.5,
-          "pb": 3.9,
-          "dividend_yield": 0.18,
+          "pe": 34,
+          "pb": 4.2,
+          "dividend_yield": 0.16,
           "dividend_payout": 7,
           "rm_cost_pct": 67,
           "gross_margin": 33,
@@ -3547,9 +3750,9 @@
           "tax_rate": 28,
           "avg_roe_3y": 11,
           "avg_roe_5y": 13,
-          "price_cagr_1y": -5,
-          "price_cagr_3y": 19,
-          "price_cagr_5y": 9,
+          "price_cagr_1y": 2,
+          "price_cagr_3y": 22,
+          "price_cagr_5y": 11,
           "total_debt": 515,
           "net_worth": 894,
           "total_assets": 1960,
@@ -4593,7 +4796,8 @@
               7
             ]
           }
-        }
+        },
+        "basis": "consolidated"
       },
       {
         "name": "Rushil Decor Ltd",
@@ -4606,122 +4810,266 @@
           "url": "https://www.screener.in/company/RUSHIL/"
         },
         "current": {
-          "revenue": 862,
-          "rev_growth_1y": -4,
-          "market_cap": 469,
+          "revenue": 856,
+          "rev_growth_1y": -3.9,
+          "market_cap": 467,
           "ebitda_margin": 8,
-          "pat_margin": 0.7,
-          "roce": 4.5,
-          "roe": 1.04,
+          "pat_margin": 0.9,
+          "roce": 4.68,
+          "roe": 1.27,
           "debtor_days": 83,
-          "inventory_days": 204,
-          "payable_days": 207,
-          "ccc": 79,
+          "inventory_days": 205,
+          "payable_days": 208,
+          "ccc": 80,
           "wc_days": 27,
           "debt_equity": 0.4,
           "interest_coverage": 2.3,
           "promoter_holding": 55.11,
           "fii_holding": 1.13,
           "dii_holding": 0.06,
-          "pe": 20.6,
+          "pe": 19.5,
           "pb": 0.7,
-          "dividend_yield": 0.3,
-          "dividend_payout": 22,
+          "dividend_yield": 0.31,
+          "dividend_payout": 179,
           "rm_cost_pct": 54,
           "gross_margin": 46,
-          "net_profit": 6,
-          "operating_profit": 70,
-          "eps": 0.23,
+          "net_profit": 8,
+          "operating_profit": 71,
+          "eps": 0.28,
           "manufacturing_cost_pct": 15,
           "employee_cost_pct": 9,
           "other_cost_pct": 13,
-          "tax_rate": 35,
-          "avg_roe_3y": 4.3,
-          "avg_roe_5y": 4.3,
-          "price_cagr_1y": -44,
-          "price_cagr_3y": -16,
+          "tax_rate": 29,
+          "avg_roe_3y": 6,
+          "avg_roe_5y": 9,
+          "price_cagr_1y": -45,
+          "price_cagr_3y": -17,
           "price_cagr_5y": -7,
           "total_debt": 260,
-          "net_worth": 651,
-          "total_assets": 1291,
+          "net_worth": 652,
+          "total_assets": 1292,
           "fixed_assets": 730,
           "cwip": 11,
           "cfo": 89,
           "fcf": 22,
-          "cfo_op": 127.1,
+          "cfo_op": 125.4,
           "investing_cf": -62,
           "public_holding": 43.7,
-          "num_shareholders": 50182
+          "num_shareholders": 50182,
+          "rev_cagr_3y": 0.7,
+          "rev_cagr_5y": 20.6,
+          "profit_cagr_3y": -53.2,
+          "profit_cagr_5y": -10.6
         },
         "series": {
           "revenue": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              898,
-              862
+              276,
+              297,
+              306,
+              344,
+              344,
+              336,
+              335,
+              624,
+              838,
+              844,
+              891,
+              856
             ]
           },
           "ebitda_margin": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              10,
+              12,
+              16,
+              16,
+              11,
+              11,
+              10,
+              12,
+              18,
+              14,
               12,
               8
             ]
           },
           "pat_margin": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              5.3,
-              0.7
+              -0.4,
+              2.4,
+              8.2,
+              9,
+              4.1,
+              6.8,
+              4.2,
+              3.7,
+              9.3,
+              5.1,
+              5.4,
+              0.9
             ]
           },
           "roce": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              null,
-              4
+              12,
+              16,
+              22,
+              21,
+              10,
+              6,
+              5,
+              8,
+              17,
+              12,
+              10,
+              5
             ]
           },
           "debtor_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              58,
+              50,
+              57,
+              51,
+              59,
+              67,
+              63,
+              48,
+              52,
+              71,
               76,
               83
             ]
           },
           "inventory_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              119,
+              129,
+              134,
+              168,
+              167,
+              179,
+              169,
+              179,
+              164,
+              186,
               183,
-              204
+              205
             ]
           },
           "ccc": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              92,
-              79
+              72,
+              72,
+              103,
+              91,
+              86,
+              45,
+              72,
+              126,
+              100,
+              115,
+              91,
+              80
             ]
           },
           "promoter_holding": {
@@ -4752,42 +5100,122 @@
           },
           "net_profit": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              -1,
+              7,
+              25,
+              31,
+              14,
+              23,
+              14,
+              23,
+              78,
+              43,
               48,
-              6
+              8
             ]
           },
           "operating_profit": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              106,
-              70
+              28,
+              35,
+              48,
+              56,
+              37,
+              37,
+              35,
+              74,
+              149,
+              120,
+              105,
+              71
             ]
           },
           "eps": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              -0.03,
+              0.28,
+              0.97,
+              1.18,
+              0.54,
+              0.87,
+              0.53,
+              0.86,
+              2.93,
+              1.62,
               1.68,
-              0.23
+              0.28
             ]
           },
           "tax_rate": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              119,
+              60,
+              26,
+              28,
+              37,
+              -17,
+              27,
+              26,
               23,
-              35
+              30,
+              23,
+              29
             ]
           },
           "gross_margin": {
@@ -4942,130 +5370,390 @@
           },
           "roe": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              -1.4,
+              8.8,
+              20,
+              18.1,
+              6.8,
+              10.1,
+              5.3,
+              8,
+              21.5,
+              7.9,
               7.6,
-              0.9
+              1.2
             ]
           },
           "payable_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              167,
-              207
+              104,
+              107,
+              89,
+              129,
+              140,
+              200,
+              160,
+              101,
+              116,
+              141,
+              168,
+              208
             ]
           },
           "wc_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              46,
+              -4,
+              -3,
+              18,
+              17,
+              29,
+              12,
+              -22,
+              2,
+              14,
+              42,
+              45,
               27
             ]
           },
           "debt_equity": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              0.43,
+              1.59,
+              1.3,
+              0.74,
+              0.59,
+              1.19,
+              1.78,
+              1.44,
+              1.46,
+              1.12,
+              0.55,
+              0.42,
               0.4
             ]
           },
           "total_debt": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              272,
+              118,
+              104,
+              93,
+              101,
+              245,
+              405,
+              379,
+              420,
+              406,
+              296,
+              267,
               260
             ]
           },
           "net_worth": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              74,
+              80,
+              125,
+              171,
+              206,
+              228,
+              264,
+              287,
+              363,
+              543,
               633,
-              651
+              652
             ]
           },
           "total_assets": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              1239,
-              1291
+              262,
+              264,
+              296,
+              377,
+              578,
+              786,
+              808,
+              887,
+              998,
+              1099,
+              1230,
+              1292
             ]
           },
           "fixed_assets": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              709,
+              137,
+              139,
+              162,
+              194,
+              204,
+              197,
+              587,
+              594,
+              641,
+              630,
+              702,
               730
             ]
           },
           "cwip": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              7,
+              0,
+              1,
+              2,
+              4,
+              98,
+              338,
+              1,
+              0,
+              0,
+              6,
+              6,
               11
             ]
           },
           "cfo": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              37,
+              33,
+              28,
+              50,
+              19,
+              47,
+              77,
+              -7,
+              115,
+              41,
               108,
               89
             ]
           },
           "fcf": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              2,
+              41,
+              23,
+              18,
+              8,
+              -94,
+              -195,
+              16,
+              -37,
+              42,
+              17,
+              7,
               22
             ]
           },
           "cfo_op": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
-              101.9,
-              127.1
+              132.1,
+              94.3,
+              58.3,
+              89.3,
+              51.4,
+              127,
+              220,
+              -9.5,
+              77.2,
+              34.2,
+              102.9,
+              125.4
             ]
           },
           "investing_cf": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              5,
+              -7,
+              -9,
+              -64,
+              -172,
+              -198,
+              -39,
+              -15,
+              -76,
+              -35,
               -97,
               -62
             ]
@@ -5176,15 +5864,36 @@
           },
           "dividend_payout": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
+              "Mar 2022",
+              "Mar 2023",
+              "Mar 2024",
               "Mar 2025",
               "Mar 2026"
             ],
             "values": [
+              0,
+              10,
+              3,
+              2,
+              5,
+              3,
+              7,
+              4,
+              1,
               6,
-              22
+              6,
+              179
             ]
           }
-        }
+        },
+        "basis": "standalone"
       },
       {
         "name": "Archidply Industries Ltd",
@@ -5197,58 +5906,67 @@
           "url": "https://www.screener.in/company/ARCHIDPLY/"
         },
         "current": {
-          "revenue": 671,
-          "rev_growth_1y": 22,
-          "rev_cagr_3y": 17.2,
-          "market_cap": 206,
+          "revenue": 502,
+          "rev_growth_1y": 9.1,
+          "rev_cagr_3y": 7,
+          "market_cap": 202,
           "ebitda_margin": 6,
-          "pat_margin": 1.2,
-          "roce": 10.2,
-          "roe": 8.23,
+          "pat_margin": 2.2,
+          "roce": 11.5,
+          "roe": 9.39,
           "debtor_days": 82,
-          "inventory_days": 66,
+          "inventory_days": 51,
           "payable_days": 55,
-          "ccc": 93,
-          "wc_days": 16,
-          "debt_equity": 1.63,
-          "interest_coverage": 2.3,
+          "ccc": 79,
+          "wc_days": 20,
+          "debt_equity": 0.68,
+          "interest_coverage": 3.1,
           "promoter_holding": 69.89,
           "fii_holding": 0,
-          "pe": 14.9,
-          "pb": 1.8,
+          "pe": 16.5,
+          "pb": 1.6,
           "dividend_yield": 0,
           "dividend_payout": 0,
-          "rm_cost_pct": 72,
-          "gross_margin": 28,
-          "net_profit": 8,
-          "operating_profit": 42,
-          "eps": 4.02,
-          "profit_cagr_3y": -12.6,
-          "manufacturing_cost_pct": 0,
+          "rm_cost_pct": 73,
+          "gross_margin": 27,
+          "net_profit": 11,
+          "operating_profit": 28,
+          "eps": 5.41,
+          "profit_cagr_3y": -2.9,
+          "manufacturing_cost_pct": 5,
           "employee_cost_pct": 9,
-          "other_cost_pct": 13,
-          "tax_rate": 29,
-          "avg_roe_3y": 3,
-          "avg_roe_5y": 6,
-          "price_cagr_1y": 1,
-          "price_cagr_3y": 15,
-          "price_cagr_5y": 27,
-          "total_debt": 182,
-          "net_worth": 112,
-          "total_assets": 387,
-          "fixed_assets": 135,
+          "other_cost_pct": 8,
+          "tax_rate": 24,
+          "avg_roe_3y": 8,
+          "avg_roe_5y": 9,
+          "price_cagr_1y": -4,
+          "price_cagr_3y": 14,
+          "price_cagr_5y": 26,
+          "total_debt": 89,
+          "net_worth": 130,
+          "total_assets": 295,
+          "fixed_assets": 38,
           "cwip": 0,
-          "cfo": 34,
-          "fcf": 33,
-          "cfo_op": 81,
-          "investing_cf": -1,
+          "cfo": 24,
+          "fcf": 23,
+          "cfo_op": 85.7,
+          "investing_cf": -17,
           "public_holding": 30.11,
           "num_shareholders": 10377,
-          "dii_holding": 0
+          "dii_holding": 0,
+          "rev_cagr_5y": 17.1,
+          "profit_cagr_5y": 40.6
         },
         "series": {
           "revenue": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5256,15 +5974,29 @@
               "Mar 2026"
             ],
             "values": [
+              256,
+              274,
+              265,
+              297,
+              271,
+              264,
+              228,
               303,
-              417,
+              410,
               432,
-              550,
-              671
+              460,
+              502
             ]
           },
           "ebitda_margin": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5272,15 +6004,29 @@
               "Mar 2026"
             ],
             "values": [
+              8,
+              7,
+              8,
+              5,
+              7,
+              6,
+              6,
               6,
               6,
               5,
-              4,
+              4.8,
               6
             ]
           },
           "pat_margin": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5288,15 +6034,29 @@
               "Mar 2026"
             ],
             "values": [
+              2.3,
+              2.2,
+              2.6,
+              1,
+              3,
+              1.5,
+              0.9,
               2.6,
               2.9,
               1.6,
-              -1.3,
-              1.2
+              1.7,
+              2.2
             ]
           },
           "roce": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5304,15 +6064,29 @@
               "Mar 2026"
             ],
             "values": [
-              null,
-              13,
+              10,
+              10,
+              10,
+              7,
               9,
-              4,
-              10
+              9,
+              6,
+              11,
+              14,
+              11,
+              10,
+              11
             ]
           },
           "debtor_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5320,15 +6094,29 @@
               "Mar 2026"
             ],
             "values": [
+              73,
+              76,
+              110,
+              107,
+              108,
+              101,
+              112,
               98,
-              80,
+              82,
               83,
-              91,
+              83,
               82
             ]
           },
           "inventory_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5336,15 +6124,29 @@
               "Mar 2026"
             ],
             "values": [
+              159,
+              112,
+              156,
+              150,
+              109,
+              112,
+              110,
               95,
-              65,
               66,
-              77,
-              66
+              63,
+              53,
+              51
             ]
           },
           "ccc": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5352,11 +6154,18 @@
               "Mar 2026"
             ],
             "values": [
+              154,
+              133,
+              166,
+              155,
+              146,
+              144,
+              159,
               124,
-              94,
-              90,
-              101,
-              93
+              96,
+              96,
+              81,
+              79
             ]
           },
           "promoter_holding": {
@@ -5387,6 +6196,13 @@
           },
           "net_profit": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5394,15 +6210,29 @@
               "Mar 2026"
             ],
             "values": [
+              6,
+              6,
+              7,
+              3,
+              8,
+              4,
+              2,
               8,
               12,
               7,
-              -7,
-              8
+              8,
+              11
             ]
           },
           "operating_profit": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5410,15 +6240,29 @@
               "Mar 2026"
             ],
             "values": [
+              21,
+              20,
+              21,
+              16,
+              20,
+              17,
+              13,
               19,
               24,
               22,
               22,
-              42
+              28
             ]
           },
           "eps": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5426,15 +6270,29 @@
               "Mar 2026"
             ],
             "values": [
+              2.52,
+              2.72,
+              3.03,
+              1.14,
+              3.49,
+              1.71,
+              1.14,
               4.26,
-              6.17,
-              3.57,
-              -3.71,
-              4.02
+              6.16,
+              3.67,
+              3.97,
+              5.41
             ]
           },
           "tax_rate": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5442,11 +6300,18 @@
               "Mar 2026"
             ],
             "values": [
+              12,
+              16,
+              19,
+              34,
+              8,
+              42,
+              52,
               27,
               26,
               42,
-              -5,
-              29
+              26,
+              24
             ]
           },
           "gross_margin": {
@@ -5476,7 +6341,7 @@
               32,
               30,
               27,
-              28
+              27
             ]
           },
           "rm_cost_pct": {
@@ -5506,7 +6371,7 @@
               68,
               70,
               73,
-              72
+              73
             ]
           },
           "manufacturing_cost_pct": {
@@ -5535,8 +6400,8 @@
               8,
               7,
               6,
-              6,
-              0
+              5,
+              5
             ]
           },
           "employee_cost_pct": {
@@ -5565,7 +6430,7 @@
               9,
               7,
               7,
-              7,
+              9,
               9
             ]
           },
@@ -5596,11 +6461,18 @@
               12,
               11,
               8,
-              13
+              8
             ]
           },
           "roe": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5608,15 +6480,29 @@
               "Mar 2026"
             ],
             "values": [
+              5.1,
+              4.9,
+              5.4,
+              2.3,
+              9,
+              4.5,
+              2.4,
               8.7,
               11.5,
               6.3,
-              -6.7,
-              7.1
+              6.7,
+              8.5
             ]
           },
           "payable_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5624,15 +6510,29 @@
               "Mar 2026"
             ],
             "values": [
+              78,
+              55,
+              100,
+              102,
+              71,
+              69,
+              62,
               70,
-              51,
-              58,
-              67,
+              53,
+              50,
+              54,
               55
             ]
           },
           "wc_days": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5641,14 +6541,28 @@
             ],
             "values": [
               49,
+              46,
+              64,
+              47,
+              52,
+              59,
+              45,
+              49,
               28,
-              23,
-              9,
-              16
+              26,
+              12,
+              20
             ]
           },
           "debt_equity": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5656,15 +6570,29 @@
               "Mar 2026"
             ],
             "values": [
+              0.48,
+              0.4,
+              0.47,
+              0.53,
+              0.7,
+              0.65,
+              0.76,
               0.59,
-              0.8,
-              1.32,
-              1.88,
-              1.63
+              0.61,
+              0.64,
+              0.71,
+              0.68
             ]
           },
           "total_debt": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5672,15 +6600,29 @@
               "Mar 2026"
             ],
             "values": [
+              56,
+              49,
+              61,
+              70,
+              62,
+              58,
+              64,
               54,
-              83,
-              148,
-              196,
-              182
+              63,
+              72,
+              85,
+              89
             ]
           },
           "net_worth": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5688,15 +6630,29 @@
               "Mar 2026"
             ],
             "values": [
+              117,
+              123,
+              129,
+              132,
+              89,
+              89,
+              84,
               92,
               104,
               112,
-              104,
-              112
+              119,
+              130
             ]
           },
           "total_assets": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5704,15 +6660,29 @@
               "Mar 2026"
             ],
             "values": [
+              224,
+              215,
+              257,
+              275,
+              203,
+              193,
+              190,
               199,
-              248,
-              327,
-              392,
-              387
+              228,
+              242,
+              274,
+              295
             ]
           },
           "fixed_assets": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5720,15 +6690,29 @@
               "Mar 2026"
             ],
             "values": [
+              57,
+              57,
+              55,
+              66,
+              45,
+              43,
+              48,
               44,
-              64,
-              148,
-              146,
-              135
+              43,
+              42,
+              41,
+              38
             ]
           },
           "cwip": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5737,14 +6721,28 @@
             ],
             "values": [
               0,
-              12,
-              2,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
               0,
               0
             ]
           },
           "cfo": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5752,15 +6750,29 @@
               "Mar 2026"
             ],
             "values": [
-              11,
+              13,
               21,
+              0,
+              18,
+              4,
+              10,
+              25,
               11,
-              -23,
-              34
+              22,
+              13,
+              23,
+              24
             ]
           },
           "fcf": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5768,15 +6780,29 @@
               "Mar 2026"
             ],
             "values": [
+              10,
+              17,
+              -5,
+              3,
+              1,
+              7,
+              16,
               11,
-              -15,
-              -53,
-              -28,
-              33
+              19,
+              12,
+              22,
+              23
             ]
           },
           "cfo_op": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5784,15 +6810,29 @@
               "Mar 2026"
             ],
             "values": [
+              61.9,
+              105,
+              0,
+              112.5,
+              20,
+              58.8,
+              192.3,
               57.9,
-              87.5,
-              50,
-              -104.5,
-              81
+              91.7,
+              59.1,
+              104.5,
+              85.7
             ]
           },
           "investing_cf": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5800,11 +6840,18 @@
               "Mar 2026"
             ],
             "values": [
+              -2,
+              -4,
+              -3,
+              -14,
+              -3,
+              0,
+              -9,
               -1,
-              -49,
-              -69,
-              -5,
-              -1
+              -33,
+              -12,
+              -26,
+              -17
             ]
           },
           "fii_holding": {
@@ -5887,6 +6934,13 @@
           },
           "dividend_payout": {
             "years": [
+              "Mar 2015",
+              "Mar 2016",
+              "Mar 2017",
+              "Mar 2018",
+              "Mar 2019",
+              "Mar 2020",
+              "Mar 2021",
               "Mar 2022",
               "Mar 2023",
               "Mar 2024",
@@ -5894,6 +6948,13 @@
               "Mar 2026"
             ],
             "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
               0,
               0,
               0,
@@ -5927,7 +6988,8 @@
               0
             ]
           }
-        }
+        },
+        "basis": "standalone"
       }
     ],
     "global": [
