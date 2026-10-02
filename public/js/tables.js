@@ -25,13 +25,25 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
     container.innerHTML = emptyState(`No ${bucket} peers in this report.`);
     return;
   }
-  const state = { view: 'current' };
+  const state = { view: 'current', node: 'core' };
+  // Value-chain explorer: present only when the report carries a value_chain
+  // universe (built generically by the research pipeline for any industry).
+  const vc = (report.value_chain && Array.isArray(report.value_chain.players) && report.value_chain.players.length) ? report.value_chain : null;
+  function hasFin(p) { return (p && (Object.keys(p.series || {}).length || Object.values(p.current || {}).some((v) => v != null))) ? 1 : 0; }
+  const nodeCount = (key) => vc ? vc.players.filter((p) => (p.value_chain_nodes || []).includes(key)).length : 0;
 
   container.innerHTML = `
     <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
-      <div class="inline-flex rounded-xl bg-slate-100 p-1 text-sm font-semibold" role="tablist" aria-label="View">
-        <button data-view="current" class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Current</button>
-        <button data-view="trends"  class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Trends</button>
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="inline-flex rounded-xl bg-slate-100 p-1 text-sm font-semibold" role="tablist" aria-label="View">
+          <button data-view="current" class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Current</button>
+          <button data-view="trends"  class="pv-focus rounded-lg px-4 py-1.5 transition" role="tab">Trends</button>
+        </div>
+        ${vc ? `<label class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500">Value chain
+          <select data-vc-select class="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+            <option value="core">★ Core peers (benchmarked)</option>
+            ${vc.nodes.map((n) => `<option value="${esc(n.key)}">${esc(n.label)} (${nodeCount(n.key)})</option>`).join('')}
+          </select></label>` : ''}
       </div>
       ${editable
         ? `<form data-addpeer class="flex items-center gap-2">
@@ -43,12 +55,15 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
            </form>`
         : `<p class="text-xs text-slate-400">${peers.length} peers · click any row for a full profile</p>`}
     </div>
+    <div data-vc-note class="text-xs text-slate-500 mb-3" hidden></div>
     ${editable ? `<div data-addstatus class="text-xs mb-3" hidden></div>` : ''}
     <div data-pane="current"></div>
     <div data-pane="trends" hidden></div>`;
 
   const paneCurrent = container.querySelector('[data-pane="current"]');
   const paneTrends = container.querySelector('[data-pane="trends"]');
+  const vcNote = container.querySelector('[data-vc-note]');
+  const addForm = container.querySelector('[data-addpeer]');
 
   const rerender = () => renderBucketView(container, { peers: report.peers.indian || [], report, bucket, edit });
   const onRemove = editable ? (name) => {
@@ -61,30 +76,55 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
     if (edit.refreshBanner) edit.refreshBanner();
   } : null;
 
-  if (!peers.length) {
-    paneCurrent.innerHTML = emptyState('No peers left — add one by name above, or reload to restore the original set.');
-  } else {
-    paneCurrent.innerHTML = currentTableHtml(peers, report, editable);
-    renderTrends(paneTrends, peers, report);
-    wireRowClicks(paneCurrent, peers, report, onRemove);
+  // Which players the panes show: the benchmarked core set, or one value-chain node
+  // (sorted so names with financials and higher directness lead).
+  function activeSet() {
+    if (state.node === 'core' || !vc) return peers;
+    return vc.players.filter((p) => (p.value_chain_nodes || []).includes(state.node))
+      .slice().sort((a, b) => (hasFin(b) - hasFin(a)) || ((b.directness || 0) - (a.directness || 0)));
   }
-  if (editable) wireAddPeer(container, report, edit, rerender);
 
-  const setView = (v) => {
-    state.view = v;
-    paneCurrent.hidden = v !== 'current';
-    paneTrends.hidden = v !== 'trends';
+  function fillPanes() {
+    destroyBucketCharts(container);
+    const isCore = state.node === 'core' || !vc;
+    const set = activeSet();
+    const canEdit = editable && isCore;
+    if (!set.length) {
+      paneCurrent.innerHTML = emptyState(canEdit ? 'No peers left — add one by name above, or reload to restore the original set.' : 'No listed players mapped to this value-chain node yet.');
+      paneTrends.innerHTML = '';
+    } else {
+      paneCurrent.innerHTML = currentTableHtml(set, report, canEdit);
+      renderTrends(paneTrends, set, report);
+      wireRowClicks(paneCurrent, set, report, canEdit ? onRemove : null);
+    }
+    if (addForm) addForm.style.display = isCore ? '' : 'none'; // node views are read-only
+    if (vcNote) {
+      const node = isCore ? null : vc.nodes.find((n) => n.key === state.node);
+      if (node) { vcNote.hidden = false; vcNote.innerHTML = `<span class="font-semibold text-slate-600">${esc(node.label)}</span> — ${set.length} listed player${set.length === 1 ? '' : 's'}.${node.use ? ` ${esc(node.use)}` : ''}`; }
+      else { vcNote.hidden = true; vcNote.innerHTML = ''; }
+    }
+    applyView();
+  }
+
+  function applyView() {
+    paneCurrent.hidden = state.view !== 'current';
+    paneTrends.hidden = state.view !== 'trends';
     container.querySelectorAll('[data-view]').forEach((b) => {
-      const on = b.dataset.view === v;
+      const on = b.dataset.view === state.view;
       b.setAttribute('aria-selected', on ? 'true' : 'false');
       b.classList.toggle('bg-white', on);
       b.classList.toggle('shadow-sm', on);
       b.classList.toggle('text-indigo-600', on);
       b.classList.toggle('text-slate-500', !on);
     });
-  };
-  container.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => setView(b.dataset.view)));
-  setView('current');
+  }
+
+  container.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => { state.view = b.dataset.view; applyView(); }));
+  const vcSelect = container.querySelector('[data-vc-select]');
+  if (vcSelect) vcSelect.addEventListener('change', () => { state.node = vcSelect.value; fillPanes(); });
+  if (editable) wireAddPeer(container, report, edit, rerender);
+
+  fillPanes();
 }
 
 // Add-peer form: a live stock-search typeahead (muns API via /api/stock-search)

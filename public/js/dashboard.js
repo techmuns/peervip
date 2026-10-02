@@ -33,7 +33,6 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   appEl.innerHTML = `
     <div class="max-w-[110rem] mx-auto px-4 sm:px-6 py-5">
       ${headerHtml(report)}
-      <div data-banner>${bannerHtml(report)}</div>
       <div class="pv-tabs mt-6 border-b border-slate-200 overflow-x-auto">
         <div class="flex gap-1 sm:gap-2 min-w-max relative" role="tablist">
           ${TABS.map((t) => `<button class="pv-tab pv-focus px-3 sm:px-4 py-2.5 text-sm font-semibold text-slate-500" role="tab" data-tab="${t.key}">${t.label}</button>`).join('')}
@@ -90,7 +89,7 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(realignUnderline);
   setTimeout(realignUnderline, 250);
 
-  setTab('overview');
+  setTab('indian'); // Indian Listed is the default view on open
 }
 
 function renderTab(key, pane, report, mm, allPeers, editCtx) {
@@ -216,6 +215,7 @@ function renderOverview(pane, report, mm, allPeers) {
   const share = revenueShare(finPeers);
 
   pane.innerHTML = `
+    ${report.outperformer ? `<div data-banner class="mb-5">${bannerHtml(report)}</div>` : ''}
     <div class="grid gap-5 lg:grid-cols-3">
       <section class="pv-card p-5 lg:col-span-2">
         <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
