@@ -116,7 +116,7 @@ async function main() {
     // the core report (peers.indian) ships regardless if this stage fails.
     let valueChain = null;
     try {
-      valueChain = await buildValueChain({ industry: peerPlan.segment || QUERY, definition: peerPlan.definition || '', about: understanding.about, seedPeers: indian, cap: 60 });
+      valueChain = await buildValueChain({ industry: peerPlan.segment || QUERY, definition: peerPlan.definition || '', about: understanding.about, seedPeers: indian, cap: 85 });
       if (valueChain) console.log(`[valuechain] ${valueChain.nodes.length} nodes, ${valueChain.players.length} listed players`);
     } catch (e) { console.warn('[valuechain] stage failed (report ships without it):', e.message); }
 

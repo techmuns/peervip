@@ -42,11 +42,25 @@ sector reports, rating-agency & consulting reports, industry-association materia
 the annual reports and DRHPs of unquestioned pure-plays, and global leaders'
 investor decks — these often describe the chain most clearly).
 
-## Phase 2 — Discover companies per node (multiple independent routes)
+**Decompose to the smallest economically distinct step — never collapse distinct
+conversions.** (Solar upstream is five nodes — polysilicon → ingot → wafer → cell →
+module — not one "manufacturing" node.) Aim for **12–20 nodes**. A node stays in the
+map **even when no listed player is found for it**: "no clean Indian-listed
+participant" is a research finding, not a reason to delete the bucket.
+
+## Phase 2 — Discover companies per node (web-first, multiple independent routes)
+
+Discovery is **web-first**: reconstruct each node's real-world participant list from
+the open web and primary/registry sources, *then* resolve those names to listed
+entities — never start from a stock screener's keyword hits (that under-recalls and
+biases the universe toward whatever the screener already tags). A financial
+database / screener is **one** discovery route and the source of financials; it is
+**never** the universe or the proof.
 
 Build a keyword dictionary per node (industry terms, product terms, technical terms,
 customer terms, project terms: capacity/plant/campus/order/contract/tender/EPC/
-commissioned). Then discover via, in rough priority:
+commissioned; include an authoritative-list term where one exists — "ALMM", "approved
+vendor list", "PLI beneficiary"). Then discover via, in rough priority:
 
 - Exchange filings keyword search (`site:nsearchives.nseindia.com "<product>"`, orders, subsidiaries, commencement of operations)
 - Institutional sector reports' supplier/market-share/landscape tables
@@ -78,6 +92,18 @@ fabricated), and ownership (subsidiary/JV/associate + %).
 | 2 | Natural supplier — products objectively used by the industry, materiality not yet proven |
 | 1 | Thematic beneficiary — could benefit if the industry grows; **not** a true peer |
 | 0 | False positive — superficial/outdated/unsupported; exclude |
+
+**Directness ≠ size.** Keep *participation* (directness) separate from *materiality*
+(significance, below). Never let a big balance sheet inflate directness, and never let
+a small one hide a genuine pure-play.
+
+### Significance (High / Medium / Low)
+
+The player's **scale within that node today** — operating capacity, node revenue,
+order book, market share — judged independently of directness. A small pure-play can
+be directness 5 / significance Low; a diversified giant with a verified but minor
+segment can be directness 4 / significance Low. Carried as a separate field so the
+dashboard can weight comps by real node presence, not by theme.
 
 ### Evidence grade (A–D)
 
@@ -122,9 +148,11 @@ report.value_chain = {
     {
       "name": "...", "ticker": "...", "exchange": "NSE/BSE",
       "value_chain_nodes": ["<node key>", ...],   // a company may span several nodes
-      "cohort": "A|B|C|D|E|F", "directness": 1-5, "evidence": "A|B|C|D",
+      "cohort": "A|B|C|D|E|F", "directness": 1-5,
+      "significance": "High|Medium|Low",          // scale within the node today
+      "evidence": "A|B|C|D",
       "role": "<one-line what it does>", "note": "<what we found / why included>",
-      "source": { "label": "Screener", "url": "..." },
+      "source": { "label": "Screener", "url": "..." },   // financials source; discovery is web-first
       "current": { /* metric map */ }, "series": { /* trend map */ }
     }
   ]
@@ -139,10 +167,22 @@ additive explorer, so the core comparison is never contaminated by supplier mult
 
 1. Resolve the query to its **true industry** (for a stock query, read the company's
    business first, then classify the industry — don't trust the ticker's sector label).
-2. **Decompose** the value chain into nodes (Phase 1) with a short keyword set each.
-3. **Discover** listed candidates per node (Phase 2) across the independent routes.
-4. **Scrape + verify** each candidate (Screener financials + primary-evidence check).
-5. **Classify** each into node(s) + directness + cohort + evidence (Phase 3).
-6. **Assemble** `report.value_chain` + keep `report.peers.indian` = cohort-A operators.
+2. **Decompose** the value chain into 12–20 nodes (Phase 1), each with a keyword set;
+   keep every economically distinct node even if it ends up with no listed player.
+3. **Discover** listed candidates per node **web-first** (Phase 2): a web search + a
+   read of one grounding/registry source per node, an LLM extract of the Indian-listed
+   names found there, plus the financial-database routes (screener keyword search and
+   the `/market` industry universe) as *additional* routes — unioned, never the start.
+4. **Verify + scrape** each candidate: resolve the name to its listing and pull
+   financials (the financial database aggregates exchange filings), discarding names
+   that don't resolve to an Indian listing.
+5. **Classify** each into node(s) + directness + cohort + **significance** + evidence
+   (Phase 3), judged from the discovered evidence, not a one-line description.
+6. **Assemble** `report.value_chain` (keeping every node) + keep `report.peers.indian`
+   = the clean cohort-A operator set.
 7. Retain important **private / foreign** players as descriptive context (not in the
    listed investable set) so market-share and structure aren't distorted.
+
+This is implemented in `lib/valuechain.mjs` (`buildValueChain`), an additive and
+fail-safe stage of `scripts/research-peers.mjs`: if any part fails the core report
+(`peers.indian`) still ships, just without the `value_chain` explorer.
