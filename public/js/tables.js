@@ -32,6 +32,7 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
   const vc = (report.value_chain && Array.isArray(report.value_chain.players) && report.value_chain.players.length) ? report.value_chain : null;
   function hasFin(p) { return (p && (Object.keys(p.series || {}).length || Object.values(p.current || {}).some((v) => v != null))) ? 1 : 0; }
   const nodeCount = (key) => vc ? vc.players.filter((p) => (p.value_chain_nodes || []).includes(key)).length : 0;
+  const vcAllCount = vc ? new Set(vc.players.map((p) => normName(p.name))).size : 0; // unique across all nodes
 
   container.innerHTML = `
     <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
@@ -43,6 +44,7 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
         ${vc ? `<label class="inline-flex items-center gap-2 text-xs font-semibold text-slate-500">Value chain
           <select data-vc-select class="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">
             <option value="core">★ Core peers (benchmarked)</option>
+            <option value="all">🗂 All value-chain companies (${vcAllCount})</option>
             ${vc.nodes.map((n) => `<option value="${esc(n.key)}">${esc(n.label)} (${nodeCount(n.key)})</option>`).join('')}
           </select></label>` : ''}
       </div>
@@ -92,9 +94,10 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
     if (state.node === 'core' || !vc) return peers;
     const rm = new Set(((editable && edit.overlay.vcRemoved) || []).map(normName));
     const seen = new Set();
-    return vc.players
-      .filter((p) => (p.value_chain_nodes || []).includes(state.node))
-      // hide user-removed players, and de-dupe a name that appears twice (keep first)
+    // 'all' = every value-chain company across all nodes; otherwise one node
+    const inScope = state.node === 'all' ? vc.players : vc.players.filter((p) => (p.value_chain_nodes || []).includes(state.node));
+    return inScope
+      // hide user-removed players, and de-dupe a name that appears in several nodes / twice (keep first)
       .filter((p) => { const k = normName(p.name); if (rm.has(k) || seen.has(k)) return false; seen.add(k); return true; })
       .slice().sort((a, b) => (hasFin(b) - hasFin(a)) || ((b.directness || 0) - (a.directness || 0)));
   }
@@ -114,7 +117,10 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
       wireRowClicks(paneCurrent, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
     }
     if (addForm) addForm.style.display = isCore ? '' : 'none'; // adding a peer stays core-only
-    if (vcNote) {
+    if (vcNote && state.node === 'all' && vc) {
+      vcNote.hidden = false;
+      vcNote.innerHTML = `<span class="font-semibold text-slate-600">All value-chain companies</span> — ${set.length} unique listed player${set.length === 1 ? '' : 's'} across every node (de-duplicated). Click × in Current to hide one.`;
+    } else if (vcNote) {
       const node = isCore ? null : vc.nodes.find((n) => n.key === state.node);
       if (node) { vcNote.hidden = false; vcNote.innerHTML = `<span class="font-semibold text-slate-600">${esc(node.label)}</span> — ${set.length} listed player${set.length === 1 ? '' : 's'}.${node.use ? ` ${esc(node.use)}` : ''}`; }
       else { vcNote.hidden = true; vcNote.innerHTML = ''; }
