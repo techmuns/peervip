@@ -1,0 +1,960 @@
+{
+ "nodes": [
+  {
+   "key": "direct-operator-colocation-dc-platform",
+   "label": "Direct operator / colocation / DC platform",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "cloud-gpu-ai-compute",
+   "label": "Cloud / GPU / AI compute",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "land-powered-shell-digital-real-estate",
+   "label": "Land / powered shell / digital real estate",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "civil-shell-peb-construction",
+   "label": "Civil / shell / PEB construction",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "mep-turnkey-dc-epc",
+   "label": "MEP / turnkey DC EPC",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "grid-substations-hv-equipment",
+   "label": "Grid / substations / HV equipment",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "transformers",
+   "label": "Transformers",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "lv-mv-switchgear-power-distribution",
+   "label": "LV/MV switchgear & power distribution",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "backup-diesel-gensets",
+   "label": "Backup diesel gensets",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "ups-batteries-energy-storage",
+   "label": "UPS / batteries / energy storage",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "power-metering-monitoring-current-sensin",
+   "label": "Power metering / monitoring / current sensing",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "power-control-cables",
+   "label": "Power & control cables",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "fibre-high-speed-connectivity",
+   "label": "Fibre / high-speed connectivity",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "cooling-hvac-thermal",
+   "label": "Cooling / HVAC / thermal",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "bms-controls-fire-physical-security",
+   "label": "BMS / controls / fire / physical security",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "servers-hpc-gpu-hardware",
+   "label": "Servers / HPC / GPU hardware",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "telecom-interconnection-carrier-services",
+   "label": "Telecom / interconnection / carrier services",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  },
+  {
+   "key": "renewable-power-integration",
+   "label": "Renewable / power integration",
+   "use": "Use as a same-node comparison set; do not mix parent-company valuation multiples across materially different business models."
+  }
+ ],
+ "players": [
+  {
+   "name": "ESDS Software Solution",
+   "ticker": "ESDS",
+   "exchange": "NSE/BSE",
+   "role": "Direct DC operator / managed cloud",
+   "cohort": "A",
+   "directness": 5,
+   "evidence": "A",
+   "note": "Own data centers + managed cloud; recently listed",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "cloud-gpu-ai-compute"
+   ]
+  },
+  {
+   "name": "TCC Concept / NES Data",
+   "ticker": "TCC",
+   "exchange": "NSE/BSE",
+   "role": "Direct DC operator via NES Data",
+   "cohort": "A",
+   "directness": 5,
+   "evidence": "A",
+   "note": "NES Data 4 MW Pune facility leased; >100 MW stated ambition",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "land-powered-shell-digital-real-estate"
+   ]
+  },
+  {
+   "name": "Anant Raj",
+   "ticker": "ANANTRAJ",
+   "exchange": "NSE/BSE",
+   "role": "Colocation + cloud + DC real estate",
+   "cohort": "A",
+   "directness": 5,
+   "evidence": "A",
+   "note": "Data-center roadmap to 357 MW",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "land-powered-shell-digital-real-estate"
+   ]
+  },
+  {
+   "name": "Techno Electric & Engineering / Techno Digital",
+   "ticker": "TECHNOE",
+   "exchange": "NSE/BSE",
+   "role": "Hyperscale / edge DC operator + EPC",
+   "cohort": "A",
+   "directness": 5,
+   "evidence": "A",
+   "note": "36 MW Chennai operational; expansion underway",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "mep-turnkey-dc-epc"
+   ]
+  },
+  {
+   "name": "Bharti Airtel / Nxtra Data",
+   "ticker": "BHARTIARTL",
+   "exchange": "NSE/BSE",
+   "role": "Large-scale colocation / hyperscale operator",
+   "cohort": "B",
+   "directness": 5,
+   "evidence": "A",
+   "note": "~300 MW today; target 1 GW",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "telecom-interconnection-carrier-services"
+   ]
+  },
+  {
+   "name": "Adani Enterprises / AdaniConneX",
+   "ticker": "ADANIENT",
+   "exchange": "NSE/BSE",
+   "role": "Hyperscale DC platform via JV",
+   "cohort": "B",
+   "directness": 5,
+   "evidence": "A",
+   "note": "65.4 MW operational; 960+ MW tied-up",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "renewable-power-integration"
+   ]
+  },
+  {
+   "name": "Larsen & Toubro / L&T Vyoma",
+   "ticker": "LT",
+   "exchange": "NSE/BSE",
+   "role": "AI-ready DC developer/operator + EPC",
+   "cohort": "B",
+   "directness": 4,
+   "evidence": "A",
+   "note": "40 MW Navi Mumbai phase within 100 MW campus",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "cloud-gpu-ai-compute",
+    "land-powered-shell-digital-real-estate",
+    "civil-shell-peb-construction",
+    "mep-turnkey-dc-epc"
+   ]
+  },
+  {
+   "name": "Tata Consultancy Services / HyperVault",
+   "ticker": "TCS",
+   "exchange": "NSE/BSE",
+   "role": "AI data-center platform / compute infrastructure",
+   "cohort": "B",
+   "directness": 4,
+   "evidence": "A",
+   "note": "100 MW initial OpenAI partnership; up to 1 GW Hyderabad campus",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "cloud-gpu-ai-compute"
+   ]
+  },
+  {
+   "name": "Reliance Industries",
+   "ticker": "RELIANCE",
+   "exchange": "NSE/BSE",
+   "role": "AI DC developer / managed infrastructure",
+   "cohort": "B",
+   "directness": 4,
+   "evidence": "A",
+   "note": "168 MW built-to-suit Jamnagar data center for Meta",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "cloud-gpu-ai-compute",
+    "renewable-power-integration"
+   ]
+  },
+  {
+   "name": "RailTel Corporation of India",
+   "ticker": "RAILTEL",
+   "exchange": "NSE/BSE",
+   "role": "Colocation + cloud + edge infrastructure",
+   "cohort": "A",
+   "directness": 5,
+   "evidence": "A",
+   "note": "Own Tier-III DCs at Gurugram and Secunderabad; RailCloud",
+   "nodes": [
+    "direct-operator-colocation-dc-platform",
+    "telecom-interconnection-carrier-services"
+   ]
+  },
+  {
+   "name": "ITI Limited",
+   "ticker": "ITI",
+   "exchange": "NSE/BSE",
+   "role": "Cloud / data-center hosting / PSU digital infra",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "D",
+   "note": "Mentioned as DC/cloud infrastructure participant in prior screen",
+   "nodes": [
+    "direct-operator-colocation-dc-platform"
+   ]
+  },
+  {
+   "name": "E2E Networks",
+   "ticker": "E2E",
+   "exchange": "NSE/BSE",
+   "role": "GPU cloud / AI compute infrastructure",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "GPU cloud clusters and enterprise cloud / AI workloads",
+   "nodes": [
+    "cloud-gpu-ai-compute",
+    "servers-hpc-gpu-hardware"
+   ]
+  },
+  {
+   "name": "Tata Communications",
+   "ticker": "TATACOMM",
+   "exchange": "NSE/BSE",
+   "role": "Indirect DC ownership via STT GDC India associate",
+   "cohort": "B",
+   "directness": 3,
+   "evidence": "A",
+   "note": "26% associate stake in STT Global Data Centres India",
+   "nodes": [
+    "telecom-interconnection-carrier-services"
+   ]
+  },
+  {
+   "name": "Sify Technologies",
+   "ticker": "SIFY",
+   "exchange": "NASDAQ",
+   "role": "Indian colocation / cloud operator",
+   "cohort": "A",
+   "directness": 5,
+   "evidence": "A",
+   "note": "14 operating DCs; 188 MW live capacity",
+   "nodes": [
+    "direct-operator-colocation-dc-platform"
+   ]
+  },
+  {
+   "name": "Lodha Developers",
+   "ticker": "LODHA",
+   "exchange": "NSE/BSE",
+   "role": "Land / powered-shell / digital real estate",
+   "cohort": "D",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included as data-center land/powered-shell exposure in prior value-chain screen",
+   "nodes": [
+    "land-powered-shell-digital-real-estate"
+   ]
+  },
+  {
+   "name": "Mindspace Business Parks REIT",
+   "ticker": "MINDSPACE",
+   "exchange": "NSE/BSE",
+   "role": "Data-center real estate / campus exposure",
+   "cohort": "D",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included as digital-real-estate / DC property exposure in prior screen",
+   "nodes": [
+    "land-powered-shell-digital-real-estate"
+   ]
+  },
+  {
+   "name": "EPACK Prefab Technologies",
+   "ticker": "EPACKPEB",
+   "exchange": "NSE/BSE",
+   "role": "Prefab / PEB / data-center shell construction",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "C",
+   "note": "Prefab/PEB adjacency; listed status verified",
+   "nodes": [
+    "land-powered-shell-digital-real-estate",
+    "civil-shell-peb-construction"
+   ]
+  },
+  {
+   "name": "Aurionpro Solutions",
+   "ticker": "AURIONPRO",
+   "exchange": "NSE/BSE",
+   "role": "Data-center design / MEP / engineering",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "End-to-end electrical, cooling, security and MEP data-center infrastructure",
+   "nodes": [
+    "mep-turnkey-dc-epc"
+   ]
+  },
+  {
+   "name": "Blue Star",
+   "ticker": "BLUESTARCO",
+   "exchange": "NSE/BSE",
+   "role": "Cooling + MEP / turnkey DC infrastructure",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "Named data-center MEP contracts, including CapitaLand campuses",
+   "nodes": [
+    "mep-turnkey-dc-epc",
+    "cooling-hvac-thermal"
+   ]
+  },
+  {
+   "name": "Black Box",
+   "ticker": "BBOX",
+   "exchange": "NSE/BSE",
+   "role": "Structured cabling / networking / AI-ready infrastructure",
+   "cohort": "B",
+   "directness": 3,
+   "evidence": "A",
+   "note": "Hyperscale / power-dense AI-ready infrastructure mandates discussed in annual report",
+   "nodes": [
+    "mep-turnkey-dc-epc",
+    "fibre-high-speed-connectivity"
+   ]
+  },
+  {
+   "name": "Dynacons Systems & Solutions",
+   "ticker": "DSSL",
+   "exchange": "NSE/BSE",
+   "role": "Systems integration / cloud / IT infrastructure",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included as broader private-cloud/system-integration participant",
+   "nodes": [
+    "mep-turnkey-dc-epc",
+    "servers-hpc-gpu-hardware"
+   ]
+  },
+  {
+   "name": "KEC International",
+   "ticker": "KEC",
+   "exchange": "NSE/BSE",
+   "role": "EPC / electrical infrastructure",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Included as broader EPC adjacency in prior screen",
+   "nodes": [
+    "mep-turnkey-dc-epc"
+   ]
+  },
+  {
+   "name": "Lakshya Powertech",
+   "ticker": "LAKSHYA",
+   "exchange": "NSE SME / BSE?",
+   "role": "Power / MEP project services",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Included as a broader MEP/power-services candidate",
+   "nodes": [
+    "mep-turnkey-dc-epc"
+   ]
+  },
+  {
+   "name": "Hitachi Energy India",
+   "ticker": "POWERINDIA",
+   "exchange": "NSE/BSE",
+   "role": "HV / grid / transformers / switchgear",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Identified by PL Capital as positioned for DC power-infrastructure capex",
+   "nodes": [
+    "grid-substations-hv-equipment",
+    "transformers",
+    "lv-mv-switchgear-power-distribution"
+   ]
+  },
+  {
+   "name": "Siemens Energy India",
+   "ticker": "ENRIN",
+   "exchange": "NSE/BSE",
+   "role": "HV grid / transformers / power systems",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Industry map identifies Siemens Energy as DC-capex beneficiary; listing verified",
+   "nodes": [
+    "grid-substations-hv-equipment"
+   ]
+  },
+  {
+   "name": "GE Vernova T&D India",
+   "ticker": "GVT&D",
+   "exchange": "NSE/BSE",
+   "role": "Transmission / HV equipment",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Industry map identifies company in DC electrical stack; listing/core T&D verified",
+   "nodes": [
+    "grid-substations-hv-equipment",
+    "transformers"
+   ]
+  },
+  {
+   "name": "CG Power & Industrial Solutions",
+   "ticker": "CGPOWER",
+   "exchange": "NSE/BSE",
+   "role": "Transformers / motors / power equipment",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Identified in institutional DC electrical-capex map",
+   "nodes": [
+    "grid-substations-hv-equipment",
+    "transformers",
+    "lv-mv-switchgear-power-distribution"
+   ]
+  },
+  {
+   "name": "ABB India",
+   "ticker": "ABB",
+   "exchange": "NSE/BSE",
+   "role": "Switchgear / electrification / automation",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Identified in institutional DC electrical-capex map",
+   "nodes": [
+    "grid-substations-hv-equipment",
+    "lv-mv-switchgear-power-distribution",
+    "bms-controls-fire-physical-security"
+   ]
+  },
+  {
+   "name": "Siemens India",
+   "ticker": "SIEMENS",
+   "exchange": "NSE/BSE",
+   "role": "Electrification / automation / BMS",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Identified in institutional DC electrical-capex map",
+   "nodes": [
+    "grid-substations-hv-equipment",
+    "lv-mv-switchgear-power-distribution",
+    "bms-controls-fire-physical-security"
+   ]
+  },
+  {
+   "name": "Voltamp Transformers",
+   "ticker": "VOLTAMP",
+   "exchange": "NSE/BSE",
+   "role": "Transformers",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included as transformer value-chain candidate in prior screen",
+   "nodes": [
+    "transformers"
+   ]
+  },
+  {
+   "name": "Transformers & Rectifiers India",
+   "ticker": "TARIL",
+   "exchange": "NSE/BSE",
+   "role": "Transformers",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included as transformer value-chain candidate in prior screen",
+   "nodes": [
+    "transformers"
+   ]
+  },
+  {
+   "name": "Schneider Electric Infrastructure",
+   "ticker": "SCHNEIDER",
+   "exchange": "NSE/BSE",
+   "role": "MV/LV switchgear / power distribution",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Identified in institutional DC electrical-capex map",
+   "nodes": [
+    "grid-substations-hv-equipment",
+    "lv-mv-switchgear-power-distribution",
+    "bms-controls-fire-physical-security"
+   ]
+  },
+  {
+   "name": "Bharat Bijlee",
+   "ticker": "BBL",
+   "exchange": "NSE/BSE",
+   "role": "Transformers / motors",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Included as secondary transformer/electrical candidate",
+   "nodes": [
+    "transformers"
+   ]
+  },
+  {
+   "name": "Bharat Heavy Electricals",
+   "ticker": "BHEL",
+   "exchange": "NSE/BSE",
+   "role": "Power equipment / electrical infrastructure",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Included as broad electrical-equipment adjacency",
+   "nodes": []
+  },
+  {
+   "name": "Powerica",
+   "ticker": "POWERICA",
+   "exchange": "NSE/BSE",
+   "role": "Diesel gensets / mission-critical backup power",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "~INR 900 crore DC-specific DG order book at Jul-2026; 20% of Q1FY27 genset revenue",
+   "nodes": [
+    "backup-diesel-gensets"
+   ]
+  },
+  {
+   "name": "Cummins India",
+   "ticker": "CUMMINSIND",
+   "exchange": "NSE/BSE",
+   "role": "Diesel gensets / engines",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Institutional DC capex map identifies Cummins as key genset beneficiary",
+   "nodes": [
+    "backup-diesel-gensets"
+   ]
+  },
+  {
+   "name": "Kirloskar Oil Engines",
+   "ticker": "KIRLOSENG",
+   "exchange": "NSE/BSE",
+   "role": "Diesel gensets / backup power",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "192 MW hyperscale-ready DC power-system order from HyperNext",
+   "nodes": [
+    "backup-diesel-gensets"
+   ]
+  },
+  {
+   "name": "Ashok Leyland",
+   "ticker": "ASHOKLEY",
+   "exchange": "NSE/BSE",
+   "role": "Industrial engines / backup-power adjacency",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Included as secondary genset/engine candidate in prior screen",
+   "nodes": [
+    "backup-diesel-gensets"
+   ]
+  },
+  {
+   "name": "Greaves Cotton",
+   "ticker": "GREAVESCOT",
+   "exchange": "NSE/BSE",
+   "role": "Engines / power solutions adjacency",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Included as secondary backup-power candidate",
+   "nodes": [
+    "backup-diesel-gensets"
+   ]
+  },
+  {
+   "name": "Exide Industries",
+   "ticker": "EXIDEIND",
+   "exchange": "NSE/BSE",
+   "role": "Batteries / backup power",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in UPS/battery value-chain screen",
+   "nodes": [
+    "ups-batteries-energy-storage"
+   ]
+  },
+  {
+   "name": "HBL Engineering",
+   "ticker": "HBLENGINE",
+   "exchange": "NSE/BSE",
+   "role": "Industrial batteries / power backup",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in UPS/battery value-chain screen",
+   "nodes": [
+    "ups-batteries-energy-storage"
+   ]
+  },
+  {
+   "name": "Amara Raja Energy & Mobility",
+   "ticker": "ARE&M",
+   "exchange": "NSE/BSE",
+   "role": "Batteries / energy storage",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in UPS/battery value-chain screen",
+   "nodes": [
+    "ups-batteries-energy-storage"
+   ]
+  },
+  {
+   "name": "Rishabh Instruments",
+   "ticker": "RISHABH",
+   "exchange": "NSE/BSE",
+   "role": "Power metering / SCADA / monitoring",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "Strategic project win for large-scale DC monitoring/control system",
+   "nodes": [
+    "power-metering-monitoring-current-sensin"
+   ]
+  },
+  {
+   "name": "Shivalik Bimetal Controls",
+   "ticker": "SBCL",
+   "exchange": "NSE/BSE",
+   "role": "Current-sensing shunts / bimetals / busbars",
+   "cohort": "B",
+   "directness": 3,
+   "evidence": "C",
+   "note": "Precision current sensing and thermal protection increasingly relevant to DC power systems",
+   "nodes": [
+    "power-metering-monitoring-current-sensin"
+   ]
+  },
+  {
+   "name": "Honeywell Automation India",
+   "ticker": "HONAUT",
+   "exchange": "NSE/BSE",
+   "role": "BMS / controls / security / fire safety",
+   "cohort": "C",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Honeywell offers dedicated DC BMS, environmental, fire/security and OT solutions",
+   "nodes": [
+    "power-metering-monitoring-current-sensin",
+    "bms-controls-fire-physical-security"
+   ]
+  },
+  {
+   "name": "Aditya Infotech / CP Plus",
+   "ticker": "CPPLUS",
+   "exchange": "NSE/BSE",
+   "role": "Physical security / surveillance",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included as physical-security value-chain candidate",
+   "nodes": [
+    "bms-controls-fire-physical-security"
+   ]
+  },
+  {
+   "name": "APAR Industries",
+   "ticker": "APARINDS",
+   "exchange": "NSE/BSE",
+   "role": "Power / speciality cables, transformer oils, fibre",
+   "cohort": "B",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Company-hosted presentation explicitly positions products for data centers and immersion cooling",
+   "nodes": [
+    "power-control-cables"
+   ]
+  },
+  {
+   "name": "Polycab India",
+   "ticker": "POLYCAB",
+   "exchange": "NSE/BSE",
+   "role": "Power / control / data cables",
+   "cohort": "B",
+   "directness": 3,
+   "evidence": "A",
+   "note": "Annual report identifies DCs as sunrise sector; cables ~8\u201310% of DC capex",
+   "nodes": [
+    "power-control-cables"
+   ]
+  },
+  {
+   "name": "Diamond Power Infrastructure",
+   "ticker": "DIACABS",
+   "exchange": "NSE/BSE",
+   "role": "HT/LT power cables",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "B",
+   "note": "INR 435.71 crore order for 310 MW Hyderabad data-center projects",
+   "nodes": [
+    "power-control-cables"
+   ]
+  },
+  {
+   "name": "KEI Industries",
+   "ticker": "KEI",
+   "exchange": "NSE/BSE",
+   "role": "Power / control cables",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in cable value-chain screen",
+   "nodes": [
+    "power-control-cables"
+   ]
+  },
+  {
+   "name": "RR Kabel",
+   "ticker": "RRKABEL",
+   "exchange": "NSE/BSE",
+   "role": "Power / building / industrial cables",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in cable value-chain screen",
+   "nodes": [
+    "power-control-cables"
+   ]
+  },
+  {
+   "name": "Finolex Cables",
+   "ticker": "FINCABLES",
+   "exchange": "NSE/BSE",
+   "role": "Power / communication cables",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in cable value-chain screen",
+   "nodes": [
+    "power-control-cables"
+   ]
+  },
+  {
+   "name": "Universal Cables",
+   "ticker": "UNIVCABLES",
+   "exchange": "NSE/BSE",
+   "role": "Power cables",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in cable value-chain screen",
+   "nodes": [
+    "power-control-cables"
+   ]
+  },
+  {
+   "name": "Sterlite Technologies",
+   "ticker": "STLTECH",
+   "exchange": "NSE/BSE",
+   "role": "Optical fibre / data-center connectivity",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": ">US$1bn multi-year hyperscaler award for AI-ready data-center build-outs",
+   "nodes": [
+    "fibre-high-speed-connectivity",
+    "telecom-interconnection-carrier-services"
+   ]
+  },
+  {
+   "name": "HFCL",
+   "ticker": "HFCL",
+   "exchange": "NSE/BSE",
+   "role": "Optical fibre / telecom equipment",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in fibre/networking value-chain screen",
+   "nodes": [
+    "fibre-high-speed-connectivity",
+    "telecom-interconnection-carrier-services"
+   ]
+  },
+  {
+   "name": "Tejas Networks",
+   "ticker": "TEJASNET",
+   "exchange": "NSE/BSE",
+   "role": "Networking equipment",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included in networking value-chain screen",
+   "nodes": [
+    "fibre-high-speed-connectivity"
+   ]
+  },
+  {
+   "name": "Voltas",
+   "ticker": "VOLTAS",
+   "exchange": "NSE/BSE",
+   "role": "Data-center cooling / HVAC",
+   "cohort": "B",
+   "directness": 3,
+   "evidence": "B",
+   "note": "Company explicitly targets data-center cooling market",
+   "nodes": [
+    "cooling-hvac-thermal"
+   ]
+  },
+  {
+   "name": "Thermax",
+   "ticker": "THERMAX",
+   "exchange": "NSE/BSE",
+   "role": "Cooling / thermal solutions",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "FY26 annual report says first large DC cooling orders won in India and US",
+   "nodes": [
+    "cooling-hvac-thermal"
+   ]
+  },
+  {
+   "name": "KRN Heat Exchanger & Refrigeration",
+   "ticker": "KRN",
+   "exchange": "NSE/BSE",
+   "role": "Heat exchangers / HVAC components",
+   "cohort": "C",
+   "directness": 2,
+   "evidence": "D",
+   "note": "Included as upstream cooling/heat-exchanger proxy",
+   "nodes": [
+    "cooling-hvac-thermal"
+   ]
+  },
+  {
+   "name": "Venus Pipes & Tubes",
+   "ticker": "VENUSPIPES",
+   "exchange": "NSE/BSE",
+   "role": "Piping / spooling for DC cooling/mechanical systems",
+   "cohort": "A",
+   "directness": 4,
+   "evidence": "A",
+   "note": "INR 185 crore data-center LOI backing spooling/fabrication entry",
+   "nodes": [
+    "cooling-hvac-thermal"
+   ]
+  },
+  {
+   "name": "Netweb Technologies India",
+   "ticker": "NETWEB",
+   "exchange": "NSE/BSE",
+   "role": "HPC / AI systems / data-center servers",
+   "cohort": "B",
+   "directness": 3,
+   "evidence": "B",
+   "note": "HPC, private cloud/HCI, data-center servers and AI systems",
+   "nodes": [
+    "cloud-gpu-ai-compute",
+    "servers-hpc-gpu-hardware"
+   ]
+  },
+  {
+   "name": "NCC",
+   "ticker": "NCC",
+   "exchange": "NSE/BSE",
+   "role": "Civil / construction adjacency",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Screened as potential shell/civil beneficiary",
+   "nodes": [
+    "civil-shell-peb-construction"
+   ]
+  },
+  {
+   "name": "PSP Projects",
+   "ticker": "PSPPROJECT",
+   "exchange": "NSE/BSE",
+   "role": "Civil / construction adjacency",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Screened as potential shell/civil beneficiary",
+   "nodes": [
+    "civil-shell-peb-construction"
+   ]
+  },
+  {
+   "name": "Tata Power",
+   "ticker": "TATAPOWER",
+   "exchange": "NSE/BSE",
+   "role": "Power / renewable supply adjacency",
+   "cohort": "D",
+   "directness": 1,
+   "evidence": "D",
+   "note": "Screened as possible energy supplier beneficiary",
+   "nodes": [
+    "renewable-power-integration"
+   ]
+  }
+ ]
+}
