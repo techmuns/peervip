@@ -22,6 +22,7 @@ import {
   resolveScreenerCode, screenerSearch, screenerLogin, getCompanyHtml, mapCompany, screenerSource, screenerMaterialCost,
 } from '../lib/screener.mjs';
 import { fetchGlobalPeer } from '../lib/global.mjs';
+import { buildValueChain } from '../lib/valuechain.mjs';
 import { jinaSearch, jinaRead, jinaConfigured } from '../lib/jina.mjs';
 import { discoverCandidates } from '../lib/discovery.mjs';
 import { METRICS, METRIC_KEYS, median, canonicalModel } from '../lib/metrics.mjs';
@@ -110,10 +111,19 @@ async function main() {
     const whyGrounding = await groundOutliers({ indian, global }, medianTable);
     const verdict = await scoreOutperformer(understanding, { indian, global, private: privateList }, medianTable, whyGrounding);
 
+    // Generic value-chain universe (docs/peer-research-framework.md): decompose the
+    // industry → discover listed players per node → classify. Additive + fail-safe —
+    // the core report (peers.indian) ships regardless if this stage fails.
+    let valueChain = null;
+    try {
+      valueChain = await buildValueChain({ industry: peerPlan.segment || QUERY, definition: peerPlan.definition || '', about: understanding.about, seedPeers: indian, cap: 60 });
+      if (valueChain) console.log(`[valuechain] ${valueChain.nodes.length} nodes, ${valueChain.players.length} listed players`);
+    } catch (e) { console.warn('[valuechain] stage failed (report ships without it):', e.message); }
+
     await postProgress(6, 'running');
     const onePager = await buildReport(understanding, { indian, global, private: privateList }, medianTable, verdict);
 
-    const report = assemble({ understanding, peerPlan, indian, global, private: privateList, verdict, onePager, coverage });
+    const report = assemble({ understanding, peerPlan, indian, global, private: privateList, verdict, onePager, coverage, valueChain });
     writeOutputs(report);
     await postFinal(report);
     console.log(`Done: ${indian.length} indian, ${global.length} global, ${privateList.length} private. Bedrock ${bedrockCalls - bedrockFails}/${bedrockCalls} ok, jinaReads ${jinaReadsUsed}.`);
@@ -432,7 +442,7 @@ function minimalReport(u, peers, verdict) {
 }
 
 /* ------------------------------------------------------------- assemble / io */
-function assemble({ understanding, peerPlan, indian, global, private: priv, verdict, onePager, coverage }) {
+function assemble({ understanding, peerPlan, indian, global, private: priv, verdict, onePager, coverage, valueChain }) {
   const segment = peerPlan.segment || understanding.segment || QUERY;
   const seedCompany = understanding.seedCompany || (indian[0] && indian[0].name) || '';
   const name = understanding.isCompany && seedCompany ? seedCompany : titleCase(segment);
@@ -452,6 +462,7 @@ function assemble({ understanding, peerPlan, indian, global, private: priv, verd
     },
     metrics: METRICS,
     peers: { indian, global, private: priv },
+    ...(valueChain && valueChain.players && valueChain.players.length ? { value_chain: valueChain } : {}),
     scorecard: verdict.scorecard || { ranking: [] },
     report: onePager,
     sources: collectSources(indian, global),
