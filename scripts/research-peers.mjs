@@ -179,6 +179,7 @@ async function verifyIndianPeers(page, peerPlan) {
         name: m.name || name, ticker: hit.code, about: m.about || '',
         products: c.products || '', segment: c.segment || '', note: c.note || '', business_model: c.business_model || '',
         current, series, marketCap: (current.market_cap ?? c.marketCap ?? null),
+        basis: res.basis, sourceUrl: res.url,
         is_seed: closeName(hit.name || name, QUERY),
       });
       console.log(`  scraped: ${m.name || name} (${hit.code}) ${Object.keys(current).length}/${METRIC_KEYS.length}`);
@@ -203,7 +204,9 @@ async function verifyIndianPeers(page, peerPlan) {
     business_model: canonicalModel(gate.model(p.name) || p.business_model || ''),
     products: gate.products(p.name) || p.products || (p.about ? p.about.slice(0, 180) : ''),
     note: p.note || '',
-    source: screenerSource(p.ticker), current: p.current, series: p.series,
+    ...(p.basis ? { basis: p.basis } : {}),
+    source: p.sourceUrl ? { label: 'Screener', url: p.sourceUrl } : screenerSource(p.ticker),
+    current: p.current, series: p.series,
   }));
   return { indian, movedToPrivate };
 }

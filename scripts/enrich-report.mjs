@@ -29,10 +29,18 @@ async function enrichPeer(peer) {
   if ((!res || res.error) && peer.ticker) res = await fetchPeer(peer.ticker).catch(() => null);
   if (!res || res.error || !res.current) return { ok: false, reason: (res && res.error) || 'no data' };
   const before = Object.values(peer.current || {}).filter((v) => v != null).length;
+  // The re-fetch now picks the richer accounting basis (consolidated vs standalone),
+  // so each freshly-read series overwrites the old (possibly truncated) one of the
+  // same key — a peer like E2E, whose old series were a 1-year consolidated stub,
+  // gets its full history back. Unioning (rather than replacing) keeps any metric
+  // the fetch couldn't reproduce this time, so nothing is ever lost. Basis + citation
+  // are refreshed to whatever basis the data actually came from.
   peer.current = mergeCurrent(peer.current, res.current);
   peer.series = { ...(peer.series || {}), ...(res.series || {}) };
+  if (res.basis) peer.basis = res.basis;
+  if (res.source && res.source.url) peer.source = res.source;
   const after = Object.values(peer.current).filter((v) => v != null).length;
-  return { ok: true, before, after, series: Object.keys(peer.series).length };
+  return { ok: true, before, after, basis: res.basis, series: Object.keys(peer.series).length };
 }
 
 async function enrichReport(slug) {

@@ -206,6 +206,14 @@ function rangesByTitle(html, re) {
 }
 function pickKey(map, re) { for (const k of Object.keys(map)) if (re.test(k)) return map[k]; return null; }
 
+// How many fiscal-year columns a page's P&L carries (excludes TTM) — a proxy for
+// how much annual history an accounting basis has, used to pick the richer page.
+function plYearSpan(html) {
+  const pl = sectionTable(html, 'profit-loss');
+  if (!pl) return 0;
+  return pl.periods.filter((p) => /\d{4}/.test(p) && !/ttm/i.test(p)).length;
+}
+
 /* -------------------------------------------------------------- resolve + map */
 const normName = (s) => String(s || '').toLowerCase().replace(/\b(ltd|limited|industries|india|the|inc|plc|corp|company|co)\b/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 
@@ -240,8 +248,30 @@ export async function fetchPeer(name) {
   const hit = await resolveCode(q);
   if (!hit) return { error: `No listed company found on Screener for "${q}".` };
 
-  const html = await getText(`${BASE}/company/${encodeURIComponent(hit.code)}/consolidated/`)
-    || await getText(`${BASE}/company/${encodeURIComponent(hit.code)}/`);
+  // Screener reports on two accounting bases: CONSOLIDATED (whole group, incl.
+  // subsidiaries) and STANDALONE (parent only). Consolidated is normally the
+  // better view — but a company that only STARTED consolidating recently (e.g.
+  // E2E Networks, which got a subsidiary in FY26) has just 1–2 years on its
+  // /consolidated/ page while its full 2015+ history lives on standalone.
+  // Fetching consolidated-first and using it blindly truncated EVERY trend for
+  // such peers to that stub. Fix: fetch BOTH, then keep the basis whose P&L has
+  // more fiscal years (tie → consolidated, the richer basis), so each trend goes
+  // back as far as Screener actually has data — one consistent basis, never mixed.
+  const consUrl = `${BASE}/company/${encodeURIComponent(hit.code)}/consolidated/`;
+  const stdUrl = `${BASE}/company/${encodeURIComponent(hit.code)}/`;
+  const consHtml = await getText(consUrl);
+  const stdHtml = await getText(stdUrl);
+  let html, basis, sourceUrl;
+  if (consHtml && stdHtml) {
+    const useStd = plYearSpan(stdHtml) > plYearSpan(consHtml);
+    html = useStd ? stdHtml : consHtml;
+    basis = useStd ? 'standalone' : 'consolidated';
+    sourceUrl = useStd ? stdUrl : consUrl;
+  } else {
+    html = consHtml || stdHtml;
+    basis = consHtml ? 'consolidated' : 'standalone';
+    sourceUrl = consHtml ? consUrl : stdUrl;
+  }
   if (!html) return { error: `Could not load Screener page for ${hit.name}.` };
 
   const pl = sectionTable(html, 'profit-loss');
@@ -401,7 +431,8 @@ export async function fetchPeer(name) {
     business_model: '',
     products: '',
     note: '',
-    source: { label: 'Screener', url: `${BASE}/company/${encodeURIComponent(hit.code)}/` },
+    basis, // 'consolidated' | 'standalone' — which Screener basis the trends came from
+    source: { label: 'Screener', url: sourceUrl },
     current,
     series,
   };
