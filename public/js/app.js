@@ -105,14 +105,14 @@ async function renderHome() {
             <div class="pv-searchbar">
               <span class="text-slate-400 shrink-0">${I_SEARCH}</span>
               <input name="q" type="text" autocomplete="off" aria-label="Search a company or industry"
-                placeholder="Type a company or industry — Stylam, laminates, refractories…" />
+                placeholder="Type a company or industry — solar energy, data center, Waaree…" />
             </div>
           </div>
           <button type="submit" class="pv-focus shrink-0 inline-flex items-center justify-center gap-2 rounded-xl brand-gradient px-5 py-3 font-semibold text-white shadow-sm hover:opacity-95 transition">
             Research it ${I_ARROW}
           </button>
         </form>
-        <p class="text-center text-xs text-slate-400 mt-3">Try “laminates”, “Asian Paints”, or “refractories” — or pick a past run from the suggestions to open it instantly.</p>
+        <p class="text-center text-xs text-slate-400 mt-3">Try “solar energy”, “data center”, or any stock — or pick a past run from the suggestions to open it instantly.</p>
 
         <div class="mt-12">
           <div class="flex items-center justify-between mb-2 px-1">

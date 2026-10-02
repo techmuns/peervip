@@ -4,7 +4,7 @@
 // aggregated live across the Indian listed set, recomputed on add/remove peer.
 // Minimal prose; each chart carries one computed insight line. PDF via the shared
 // #print-region + window.print().
-import { esc, fmt, metricMap } from './format.js';
+import { esc, fmt, metricMap, companyNameHtml } from './format.js';
 import { makeLine, makeDoughnut, makeHBar, destroyChart } from './charts.js';
 import { industryLine, leaderShareLine, dispersionLine, revenueShare, median, currentValues, winnerForMetric } from './compute.js';
 
@@ -262,11 +262,13 @@ export function renderIndustry(pane, report) {
     { cat: 'Best returns', key: 'roce' }, { cat: 'Fastest growing', key: 'rev_growth_1y' },
     { cat: 'Best cash conversion', key: 'cfo_op' }, { cat: 'Leanest balance sheet', key: 'debt_equity' },
   ];
+  const byNameInd = new Map(peers.map((p) => [String(p.name || '').toLowerCase().replace(/\s+/g, ' ').trim(), p]));
   const lbHtml = lbSpec.map((x) => {
     const mt = mm[x.key]; if (!mt) return '';
     const w = winnerForMetric(peers, mt); if (!w) return '';
+    const wp = byNameInd.get(String(w.name || '').toLowerCase().replace(/\s+/g, ' ').trim()) || { name: w.name };
     return `<div class="flex items-center justify-between gap-3 py-2 border-b border-slate-50 last:border-0">
-      <div class="min-w-0"><div class="text-[0.66rem] font-bold uppercase tracking-wide text-slate-400">${esc(x.cat)}</div><div class="font-semibold text-slate-800 truncate">${esc(w.name)}</div></div>
+      <div class="min-w-0"><div class="text-[0.66rem] font-bold uppercase tracking-wide text-slate-400">${esc(x.cat)}</div><div class="font-semibold text-slate-800 truncate">${companyNameHtml(wp)}</div></div>
       <div class="num font-semibold text-slate-700 shrink-0">${esc(unitFmt(w.value, mt.unit))}</div></div>`;
   }).join('');
 
