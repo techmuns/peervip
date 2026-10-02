@@ -1,24 +1,21 @@
 // dashboard.js — the dashboard view: header + actions, outperformer banner,
-// animated tabs, and the Overview / Private tabs. Delegates Indian/Global to
-// tables.js, Scorecard to scorecard.js and the one-pager to report.js.
+// animated tabs, and the Overview + Global/Private tabs. Delegates the Indian
+// numbers table to tables.js, Scorecard to scorecard.js, Industry to industry.js.
 import { esc, fmtDate, fmtCompact, metricMap, bmClass } from './format.js';
 import { median, compositeScores, redFlags, revenueShare } from './compute.js';
 import { setupCharts, makeHBar, makeDoughnut, destroyChart } from './charts.js';
 import { renderBucketView } from './tables.js';
 import { renderScorecard } from './scorecard.js';
-import { renderReport } from './report.js';
 import { renderIndustry } from './industry.js';
 import { applyOverlay } from './peers.js';
 
 const normN = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
 const TABS = [
   { key: 'overview', label: 'Overview' },
-  { key: 'industry', label: 'Industry' },
   { key: 'indian', label: 'Indian Listed' },
-  { key: 'global', label: 'Global Listed' },
-  { key: 'private', label: 'Private' },
+  { key: 'external', label: 'Global & Private' },
   { key: 'scorecard', label: 'Scorecard' },
-  { key: 'report', label: 'Report' },
+  { key: 'industry', label: 'Industry' },
 ];
 const BM_BUCKETS = ['Manufacturer', 'Trader-Distributor', 'Importer-Sourcing', 'Integrated'];
 
@@ -28,10 +25,7 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
   const editCtx = { slug: report.meta && report.meta.slug, overlay };
   editCtx.refreshBanner = () => {
     const b = appEl.querySelector('[data-banner]');
-    if (!b) return;
-    b.innerHTML = bannerHtml(report);
-    const g = b.querySelector('[data-goto-report]');
-    if (g) g.addEventListener('click', () => setTab('report'));
+    if (b) b.innerHTML = bannerHtml(report);
   };
   const mm = metricMap(report.metrics);
   const allPeers = [...(report.peers.indian || []), ...(report.peers.global || []), ...(report.peers.private || [])];
@@ -58,11 +52,8 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
     catch (err) { console.error(err); alert('Could not build the Excel file.'); }
     finally { btn.disabled = false; btn.innerHTML = old; }
   });
-  appEl.querySelector('[data-onepager]').addEventListener('click', () => { setTab('report'); setTimeout(() => window.print(), 350); });
   const refreshBtn = appEl.querySelector('[data-refresh]');
   if (refreshBtn) refreshBtn.addEventListener('click', () => { if (onRefresh) onRefresh(report.meta && report.meta.query); });
-  const goReport = appEl.querySelector('[data-goto-report]');
-  if (goReport) goReport.addEventListener('click', () => setTab('report'));
 
   const content = appEl.querySelector('#tab-content');
   const underline = appEl.querySelector('.pv-tab-underline');
@@ -107,10 +98,8 @@ function renderTab(key, pane, report, mm, allPeers, editCtx) {
     case 'overview': return renderOverview(pane, report, mm, allPeers);
     case 'industry': return renderIndustry(pane, report);
     case 'indian': return renderBucketView(pane, { peers: report.peers.indian || [], report, bucket: 'Indian Listed', edit: editCtx });
-    case 'global': return renderDescriptive(pane, report.peers.global || [], { title: 'Global Listed peers', subtitle: 'Global financials come back patchy, so these are shown by name and business for landscape context — not benchmarked. The numbers table focuses on the Indian listed set.' });
-    case 'private': return renderDescriptive(pane, report.peers.private || [], { title: 'Private & unlisted peers', subtitle: 'Financials are not publicly disclosed for these players — shown for completeness of the peer landscape.' });
+    case 'external': return renderExternalPeers(pane, report);
     case 'scorecard': return renderScorecard(pane, report);
-    case 'report': return renderReport(pane, report);
   }
 }
 
@@ -132,9 +121,6 @@ function headerHtml(report) {
       </button>
       <button data-excel class="pv-focus inline-flex items-center gap-1.5 rounded-xl bg-white ring-1 ring-emerald-200 px-3.5 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13l6 6M15 13l-6 6"/></svg> Export Excel
-      </button>
-      <button data-onepager class="pv-focus inline-flex items-center gap-1.5 rounded-xl brand-gradient px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg> One-pager
       </button>
       <button data-refresh title="Re-research this ${esc(report.meta.type === 'company' ? 'company' : 'industry')} with fresh data" class="pv-focus inline-flex items-center gap-1.5 rounded-xl bg-white ring-1 ring-slate-200 px-3.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg> Refresh
@@ -181,7 +167,6 @@ function bannerHtml(report) {
         <div class="grow min-w-0">
           <p class="text-slate-800 font-semibold leading-snug">${esc(o.headline || '')}</p>
           ${o.reason ? `<p class="text-sm text-slate-600 mt-1 leading-relaxed">${esc(o.reason)}</p>` : ''}
-          ${(!live && o.reason) ? `<button data-goto-report class="text-xs text-indigo-500 font-semibold hover:underline mt-1.5">More in the Report →</button>` : ''}
           ${live ? `<p class="text-[0.7rem] text-slate-400 mt-1">The AI's original crowned pick was removed — this is the current leader by the live score.</p>` : ''}
         </div>
         ${o.india_vs_global ? `<div class="shrink-0 sm:max-w-xs">
@@ -307,6 +292,39 @@ function bmBucket(model) {
   const first = String(model).split(/[\s(]/)[0];
   const found = BM_BUCKETS.find((b) => first === b || model === b);
   return found || (BM_BUCKETS.includes(first) ? first : 'Other');
+}
+
+// ------------------------------------------------- Global + Private (one tab, dropdown)
+function renderExternalPeers(pane, report) {
+  const buckets = {
+    global: {
+      peers: report.peers.global || [],
+      title: 'Global Listed peers',
+      subtitle: 'Global financials come back patchy, so these are shown by name and business for landscape context — not benchmarked. The numbers table focuses on the Indian listed set.',
+    },
+    private: {
+      peers: report.peers.private || [],
+      title: 'Private & unlisted peers',
+      subtitle: 'Financials are not publicly disclosed for these players — shown for completeness of the peer landscape.',
+    },
+  };
+  // Default to whichever bucket actually has peers (prefer Global).
+  const start = buckets.global.peers.length || !buckets.private.peers.length ? 'global' : 'private';
+  pane.innerHTML = `
+    <div class="flex items-center gap-2 mb-4">
+      <span class="text-xs font-semibold text-slate-500">Show</span>
+      <select data-ext-select class="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+        <option value="global">Global Listed (${buckets.global.peers.length})</option>
+        <option value="private">Private &amp; unlisted (${buckets.private.peers.length})</option>
+      </select>
+    </div>
+    <div data-ext-body></div>`;
+  const sel = pane.querySelector('[data-ext-select]');
+  const body = pane.querySelector('[data-ext-body]');
+  sel.value = start;
+  const draw = (k) => { const b = buckets[k]; renderDescriptive(body, b.peers, { title: b.title, subtitle: b.subtitle }); };
+  draw(start);
+  sel.addEventListener('change', () => draw(sel.value));
 }
 
 // ------------------------------------------------- Descriptive (Global + Private)

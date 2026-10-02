@@ -35,7 +35,10 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
       </div>
       ${editable
         ? `<form data-addpeer class="flex items-center gap-2">
-             <input name="pname" class="pv-add-input" placeholder="Add a peer by name…" autocomplete="off" aria-label="Add a peer by name" />
+             <div class="relative" data-addwrap>
+               <input name="pname" class="pv-add-input" placeholder="Search a stock to add…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-label="Search a stock to add" />
+               <div data-addresults class="pv-add-results" role="listbox" hidden></div>
+             </div>
              <button type="submit" class="pv-add-btn">+ Add peer</button>
            </form>`
         : `<p class="text-xs text-slate-400">${peers.length} peers · click any row for a full profile</p>`}
@@ -84,37 +87,89 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
   setView('current');
 }
 
-// Add-peer form: fetch one company on demand from /api/peer and fold it in.
+// Add-peer form: a live stock-search typeahead (muns API via /api/stock-search)
+// to pick the right listing, then fetch its financials on demand from /api/peer.
 function wireAddPeer(container, report, edit, rerender) {
   const form = container.querySelector('[data-addpeer]');
   const statusEl = container.querySelector('[data-addstatus]');
   if (!form) return;
+  const input = form.pname;
+  const results = form.querySelector('[data-addresults]');
   const setStatus = (msg, tone) => {
     const col = tone === 'bad' ? 'text-rose-600' : tone === 'warn' ? 'text-amber-600' : tone === 'good' ? 'text-emerald-600' : 'text-slate-500';
     statusEl.hidden = !msg;
     statusEl.className = `text-xs mb-3 ${col}`;
     statusEl.textContent = msg || '';
   };
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const name = form.pname.value.trim();
-    if (!name) return;
-    const btn = form.querySelector('button');
+
+  const closeMenu = () => { if (results) { results.hidden = true; results.innerHTML = ''; } input.setAttribute('aria-expanded', 'false'); };
+
+  // Fetch one company's financials by name/ticker and fold it into the set.
+  const addPeer = async (query, label) => {
+    const q = String(query || '').trim();
+    if (!q) return;
+    closeMenu();
+    const btn = form.querySelector('button[type="submit"]');
     const old = btn.textContent; btn.disabled = true; btn.textContent = 'Adding…';
-    setStatus(`Fetching “${name}” from Screener…`, 'info');
+    setStatus(`Fetching ${label || q} from Screener…`, 'info');
     let res = null;
-    try { res = await (await fetch('/api/peer?name=' + encodeURIComponent(name))).json(); } catch (_) { res = null; }
+    try { res = await (await fetch('/api/peer?name=' + encodeURIComponent(q))).json(); } catch (_) { res = null; }
     btn.disabled = false; btn.textContent = old;
     if (!res || !res.ok || !res.peer) { setStatus((res && res.error) || 'Could not fetch that company — check the name and try again.', 'bad'); return; }
     const peer = res.peer; peer.added_by = 'user';
-    if ((report.peers.indian || []).some((x) => normName(x.name) === normName(peer.name))) { setStatus(`${peer.name} is already in the set.`, 'warn'); return; }
+    if ((report.peers.indian || []).some((x) => normName(x.name) === normName(peer.name))) { setStatus(`${peer.name} is already in the set.`, 'warn'); input.value = ''; return; }
     edit.overlay.removed = edit.overlay.removed.filter((n) => normName(n) !== normName(peer.name));
     edit.overlay.added = [...edit.overlay.added.filter((a) => normName(a.name) !== normName(peer.name)), peer];
     saveOverlay(edit.slug, edit.overlay);
     report.peers.indian = [...(report.peers.indian || []), peer];
+    input.value = '';
     rerender();
     if (edit.refreshBanner) edit.refreshBanner();
+  };
+
+  // ---- live typeahead ----
+  let seq = 0; // guards against out-of-order responses
+  const renderMenu = (rows) => {
+    if (!results) return;
+    if (!rows.length) { closeMenu(); return; }
+    results.innerHTML = rows.map((r, i) => `
+      <button type="button" class="pv-add-item" role="option" data-i="${i}" data-code="${esc(r.code)}" data-name="${esc(r.name)}">
+        <div class="flex items-baseline justify-between gap-2">
+          <span class="truncate">${esc(r.name)}</span>
+          <span class="pv-add-code">${esc(r.code)}</span>
+        </div>
+        <div class="pv-add-meta truncate">${esc([r.country, r.industry].filter(Boolean).join(' · ') || '—')}</div>
+      </button>`).join('');
+    results.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+    results.querySelectorAll('[data-code]').forEach((el) => el.addEventListener('click', () => {
+      // Prefer the Screener-style code (unambiguous); fall back to the name.
+      addPeer(el.dataset.code || el.dataset.name, el.dataset.name);
+    }));
+  };
+
+  let debounce = null;
+  const search = async (q) => {
+    const mine = ++seq;
+    let res = null;
+    try { res = await (await fetch('/api/stock-search?q=' + encodeURIComponent(q))).json(); } catch (_) { res = null; }
+    if (mine !== seq) return; // a newer keystroke superseded this one
+    if (!res || !res.ok) { closeMenu(); if (res && res.error) setStatus(res.error, 'warn'); return; }
+    renderMenu(res.results || []);
+  };
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim();
+    setStatus('');
+    clearTimeout(debounce);
+    if (q.length < 2) { closeMenu(); return; }
+    debounce = setTimeout(() => search(q), 220);
   });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+  // close the menu when focus/click leaves the search box
+  document.addEventListener('click', (e) => { if (!form.contains(e.target)) closeMenu(); });
+
+  form.addEventListener('submit', (e) => { e.preventDefault(); addPeer(input.value, input.value.trim()); });
 }
 
 /** Destroy any Chart.js instances inside a container (call before discarding it). */
