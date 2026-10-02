@@ -135,7 +135,7 @@ async function main() {
 /* ------------------------------------------------------------- Stage 0 */
 async function understandBusiness(page) {
   const seed = await resolveScreenerCode(QUERY).catch(() => null);
-  const isCompany = !!seed && closeName(seed.name, QUERY);
+  const isCompany = isCompanyQuery(seed, QUERY);
   let about = '', pros = [], cons = [], screenerPeers = [], seedCompany = '', seedId = null;
   if (isCompany) {
     seedCompany = seed.name; seedId = seed.id;
@@ -512,6 +512,28 @@ function closeName(a, b) {
   const na = String(a || '').toLowerCase().replace(/[^a-z0-9]/g, '');
   const nb = String(b || '').toLowerCase().replace(/[^a-z0-9]/g, '');
   return !!na && !!nb && (na.includes(nb) || nb.includes(na));
+}
+// Does QUERY name a specific listed company (vs a generic industry / theme)?
+// A generic phrase that merely appears as a SUBSTRING of some company's name
+// (e.g. "solar energy" ⊂ "Onix Solar Energy Ltd", "data center" ⊂ "X Data Center
+// Ltd") is NOT that company — it's an industry, and the report should be titled
+// and researched as the industry. Accept a company match ONLY on: an exact core
+// name, a whole-TOKEN prefix of the core name (so "Stylam" → "Stylam Industries",
+// "Reliance" → "Reliance Industries"), or an exact ticker/abbreviation ("L&T"→LT).
+function isCompanyQuery(seed, query) {
+  if (!seed) return false;
+  const strip = (s) => String(s || '').toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\b(ltd|limited|industries|enterprises|corporation|corpn|company|co|inc|plc|group|india|the)\b/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+  const q = strip(query);
+  if (!q) return false;
+  const rawTicker = String(query).toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (seed.code && rawTicker && rawTicker === String(seed.code).toUpperCase()) return true; // ticker / abbreviation
+  const n = strip(seed.name);
+  if (!n) return false;
+  if (n === q) return true;                                               // exact core name
+  return (n + ' ').startsWith(q + ' ') || (q + ' ').startsWith(n + ' ');  // whole-token prefix either way
 }
 function titleCase(s) { return String(s || '').replace(/\w\S*/g, (t) => t.charAt(0).toUpperCase() + t.slice(1)); }
 function compactObj(o) { return Object.entries(o).filter(([, v]) => v != null).map(([k, v]) => `${k}=${v}`).join(', '); }
