@@ -198,6 +198,7 @@ every search is automatic. The site works without them (seeded reports + a frien
   | `GH_REPO` | `peervip` |
   | `GH_REF` | `main` |
   | `PROGRESS_SECRET` | **same value** as the GitHub secret |
+  | `MUNS_TOKEN` | muns bearer token — powers the "Add peer" stock-search typeahead (`/api/stock-search`); store as a **secret** |
 
 ### 3. Mint the `GH_DISPATCH_TOKEN` PAT
 

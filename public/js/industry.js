@@ -175,7 +175,10 @@ export function renderIndustry(pane, report) {
 
   const lastNum = (line) => { const fl = firstLast(line); return fl ? fl.b.v : null; };
   const deltaOf = (line) => { const fl = firstLast(line); return fl ? +(fl.b.v - fl.a.v).toFixed(1) : null; };
-  const cap = (line, unit) => { const fl = firstLast(line); return fl ? `${unitFmt(fl.a.v, unit)} (${fyLabel(fl.a.y)}) → ${unitFmt(fl.b.v, unit)} (${fyLabel(fl.b.y)})` : '—'; };
+  // How many plottable (non-null) years a line has — a line/caption needs ≥2 to
+  // mean anything. With fewer, we show a clean note instead of a broken 1-dot chart.
+  const pts = (line) => (line && line.values ? line.values.filter(isNum).length : 0);
+  const cap = (line, unit) => { if (pts(line) < 2) return ''; const fl = firstLast(line); return fl ? `${unitFmt(fl.a.v, unit)} (${fyLabel(fl.a.y)}) → ${unitFmt(fl.b.v, unit)} (${fyLabel(fl.b.y)})` : ''; };
 
   // ---- headline tiles ----
   const revCagr = cagr(rev);
@@ -364,7 +367,7 @@ export function renderIndustry(pane, report) {
       <section class="pv-card p-5">
         <h3 class="font-display text-lg font-extrabold text-slate-800 mb-1">Institutional interest</h3>
         <p class="text-xs text-slate-400 mb-3">Median FII &amp; DII holding across peers.</p>
-        ${chartBlock('inst', '', `FII ${cap(fii, '%')} · DII ${cap(dii, '%')}`, 220)}
+        ${chartBlock('inst', '', (pts(fii) >= 2 || pts(dii) >= 2) ? `FII ${cap(fii, '%')} · DII ${cap(dii, '%')}` : '', 220)}
       </section>
     </div>`;
 
@@ -423,16 +426,38 @@ export function renderIndustry(pane, report) {
       </div>
     </div>`;
 
+  // Draw a line chart, but when fewer than 2 years are plottable (thin peer sets
+  // with sparse history — e.g. a 2-peer report's institutional holding) a line is
+  // meaningless and renders as a lone dot. Show a clean note (with the single
+  // latest value, if any) instead of a broken chart.
+  const plotLine = (key, cfg) => {
+    const canvas = C(key);
+    if (!canvas) return;
+    const maxPts = Math.max(0, ...cfg.series.map((s) => s.values.filter(isNum).length));
+    if (maxPts >= 2) { makeLine(canvas, cfg); return; }
+    const host = canvas.parentElement;
+    if (!host) return;
+    const bits = cfg.series.map((s) => {
+      let i = -1;
+      for (let j = 0; j < s.values.length; j++) if (isNum(s.values[j])) i = j;
+      return i < 0 ? null : `${esc(s.label)} ${esc(unitFmt(s.values[i], cfg.unit))}${cfg.years[i] ? ` (${esc(cfg.years[i])})` : ''}`;
+    }).filter(Boolean);
+    host.innerHTML = `<div class="flex h-full flex-col items-center justify-center gap-1.5 text-center px-4">
+      <div class="text-xs text-slate-400">Not enough multi-year coverage across these peers to chart a trend.</div>
+      ${bits.length ? `<div class="text-sm font-semibold text-slate-600">${bits.join(' · ')}</div>` : ''}
+    </div>`;
+  };
+
   function drawTrend() {
-    makeLine(C('rev'), { years: rev.years.map(fyLabel), series: [{ label: 'Total revenue', values: rev.values }], unit: 'Rs Cr', area: true });
-    makeLine(C('margin'), { years: margin.years.map(fyLabel), series: [{ label: 'EBITDA margin', values: margin.values }], unit: '%', area: true });
-    makeLine(C('roce'), { years: roce.years.map(fyLabel), series: [{ label: 'ROCE', values: roce.values }], unit: '%', area: true });
-    makeLine(C('ccc'), { years: ccc.years.map(fyLabel), series: [{ label: 'Cash-conversion days', values: ccc.values }], unit: 'days', area: true });
-    makeLine(C('rm'), { years: rm.years.map(fyLabel), series: [{ label: 'Raw material %', values: rm.values }], unit: '%', area: true });
-    makeLine(C('cwip'), { years: cwip.years.map(fyLabel), series: [{ label: 'Capital WIP', values: cwip.values }], unit: 'Rs Cr', area: true });
-    makeLine(C('leader'), { years: leader.years.map(fyLabel), series: [{ label: 'Largest peer', values: leader.top1 }, { label: 'Top 3 combined', values: leader.top3 }], unit: '%', area: false });
-    makeLine(C('disp'), { years: disp.years.map(fyLabel), series: [{ label: 'Margin gap across peers', values: disp.values }], unit: '%', area: true });
-    makeLine(C('inst'), { years: fii.years.map(fyLabel), series: [{ label: 'FII', values: fii.values }, { label: 'DII', values: dii.values }], unit: '%', area: false });
+    plotLine('rev', { years: rev.years.map(fyLabel), series: [{ label: 'Total revenue', values: rev.values }], unit: 'Rs Cr', area: true });
+    plotLine('margin', { years: margin.years.map(fyLabel), series: [{ label: 'EBITDA margin', values: margin.values }], unit: '%', area: true });
+    plotLine('roce', { years: roce.years.map(fyLabel), series: [{ label: 'ROCE', values: roce.values }], unit: '%', area: true });
+    plotLine('ccc', { years: ccc.years.map(fyLabel), series: [{ label: 'Cash-conversion days', values: ccc.values }], unit: 'days', area: true });
+    plotLine('rm', { years: rm.years.map(fyLabel), series: [{ label: 'Raw material %', values: rm.values }], unit: '%', area: true });
+    plotLine('cwip', { years: cwip.years.map(fyLabel), series: [{ label: 'Capital WIP', values: cwip.values }], unit: 'Rs Cr', area: true });
+    plotLine('leader', { years: leader.years.map(fyLabel), series: [{ label: 'Largest peer', values: leader.top1 }, { label: 'Top 3 combined', values: leader.top3 }], unit: '%', area: false });
+    plotLine('disp', { years: disp.years.map(fyLabel), series: [{ label: 'Margin gap across peers', values: disp.values }], unit: '%', area: true });
+    plotLine('inst', { years: fii.years.map(fyLabel), series: [{ label: 'FII', values: fii.values }, { label: 'DII', values: dii.values }], unit: '%', area: false });
   }
   function drawCurrent() {
     if (C('share') && share.length) makeDoughnut(C('share'), { labels: share.map((r) => r.name), values: share.map((r) => r.value) });

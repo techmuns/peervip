@@ -194,9 +194,12 @@ function fillInterior(map) {
 }
 const filledMaps = (peers, key) => peersWithSeries(peers, key).map((p) => fillInterior(peerYearMap(p, key)));
 // Fiscal years where enough peers report to be trustworthy (drops thin early years).
+// The floor is min(3, total) so a small sector (1–2 listed peers, e.g. a niche
+// like data centers) still charts the years its whole set reports, instead of
+// coming back empty; for 3+ peers it's the usual max(3, 40%) and unchanged.
 function gatedYears(maps) {
   const total = maps.filter((m) => m.size).length;
-  const minCov = Math.max(3, Math.ceil(0.4 * total));
+  const minCov = Math.max(Math.min(3, total), Math.ceil(0.4 * total));
   const counts = new Map();
   for (const m of maps) for (const fy of m.keys()) counts.set(fy, (counts.get(fy) || 0) + 1);
   return [...counts.entries()].filter(([, c]) => c >= minCov).map(([fy]) => fy).sort((a, b) => a - b);
