@@ -48,7 +48,7 @@ async function route() {
   if (path !== '/loading') stopLoading();
 
   if (path === '/' || path === '') return renderHome();
-  if (path === '/loading') return renderLoading(decodeURIComponent(params.get('q') || ''));
+  if (path === '/loading') return renderLoading(decodeURIComponent(params.get('q') || ''), params.get('mode') || 'full');
   if (path.startsWith('/r/')) return renderDashboardRoute(decodeURIComponent(path.slice(3)));
   return renderHome();
 }
@@ -61,10 +61,10 @@ async function route() {
  */
 // Refresh / re-research: always dispatch a fresh run (bypass the strong-match
 // cache) and show the live loading screen again (#6).
-function refreshResearch(query) {
+function refreshResearch(query, mode = 'full') {
   if (!query) return;
-  writeRun({ q: query, slug: null, name: query, weak: null, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false });
-  go('#/loading?q=' + encodeURIComponent(query));
+  writeRun({ q: query, slug: null, name: query, weak: null, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false, mode });
+  go('#/loading?q=' + encodeURIComponent(query) + (mode === 'update' ? '&mode=update' : ''));
 }
 
 async function runQuery(query) {
@@ -284,7 +284,7 @@ function cardHtml(r) {
 }
 
 // ============================================================ LOADING (live)
-async function renderLoading(query) {
+async function renderLoading(query, mode = 'full') {
   stopLoading();
   const el = app();
   if (!query) { go('#/'); return; }
@@ -328,7 +328,7 @@ async function renderLoading(query) {
 
   el.querySelector('[data-cancel]').addEventListener('click', (e) => { e.preventDefault(); stopLoading(); clearRun(); go('#/'); });
 
-  loadingCtrl = createLoadingController(el, { query, saved });
+  loadingCtrl = createLoadingController(el, { query, saved, mode });
 }
 
 function stepHtml(label, i) {
@@ -342,7 +342,7 @@ function stepHtml(label, i) {
   </li>`;
 }
 
-function createLoadingController(el, { query, saved }) {
+function createLoadingController(el, { query, saved, mode = 'full' }) {
   const bar = el.querySelector('[data-bar]');
   const pct = el.querySelector('[data-pct]');
   const elapsedEl = el.querySelector('[data-elapsed]');
@@ -460,8 +460,8 @@ function createLoadingController(el, { query, saved }) {
         </div>
       </div>`;
     resultEl.querySelector('[data-retry]').addEventListener('click', () => {
-      writeRun({ q: query, slug: null, name: query, weak, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false });
-      go('#/loading?q=' + encodeURIComponent(query));
+      writeRun({ q: query, slug: null, name: query, weak, startedAt: Date.now(), stageIndex: 0, finished: false, dispatched: false, mode });
+      go('#/loading?q=' + encodeURIComponent(query) + (mode === 'update' ? '&mode=update' : ''));
     });
   }
 
@@ -491,7 +491,7 @@ function createLoadingController(el, { query, saved }) {
     if (slug) { startPolling(slug); return; } // resume an in-flight run
 
     try {
-      const r = await dispatchResearch(query);
+      const r = await dispatchResearch(query, mode);
       if (r && r.slug && r.dispatched) { startPolling(r.slug); return; }
       // Function reachable but not configured to dispatch.
       showUnavailable((r && r.manual) || 'Live research isn\'t configured on this deployment yet.');
@@ -514,7 +514,7 @@ async function renderDashboardRoute(slug) {
   try {
     const report = await loadReport(slug);
     clearRun();
-    renderDashboard(el, report, { onBack: () => go('#/'), onRefresh: (q) => refreshResearch(q || (report.meta && report.meta.query) || slug) });
+    renderDashboard(el, report, { onBack: () => go('#/'), onRefresh: (q, mode) => refreshResearch(q || (report.meta && report.meta.query) || slug, mode) });
     window.scrollTo(0, 0);
   } catch (e) {
     el.innerHTML = `<div class="min-h-screen flex items-center justify-center px-4">

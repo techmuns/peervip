@@ -9,8 +9,14 @@ const COOLDOWN_MS = 5 * 60 * 1000; // don't re-dispatch a run already in flight
 export async function onRequestPost(context) {
   const { request, env } = context;
   try {
-    let query = '';
-    try { const body = await request.json(); query = String((body && body.query) || '').trim(); } catch (_) { /* bad body */ }
+    let query = '', mode = 'full';
+    try {
+      const body = await request.json();
+      query = String((body && body.query) || '').trim();
+      // 'update' = additive top-up (reuse the set, refresh numbers, union new finds);
+      // anything else = 'full' from-scratch rebuild. Default full for safety.
+      mode = String((body && body.mode) || 'full').trim().toLowerCase() === 'update' ? 'update' : 'full';
+    } catch (_) { /* bad body */ }
     if (!query) return json({ ok: false, error: 'query required' }, 400);
 
     const slug = slugify(query);
