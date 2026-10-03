@@ -355,8 +355,24 @@ function wireRowClicks(pane, peers, report, onRemove) {
 }
 
 // ---------------------------------------------------------------- Trends
+// Screener P&L reading order for the Trends sections: revenue → cost lines → total
+// expenses → operating profit / OPM% → interest% / depreciation% → net profit / PAT% /
+// EPS → growth & gross margin; everything else (returns, working capital, balance sheet,
+// cash flow, ownership, valuation) then follows in its catalog order. So the tab scrolls
+// top-to-bottom like a P&L instead of making you hunt around.
+const TREND_FLOW = [
+  'revenue', 'rm_cost_pct', 'manufacturing_cost_pct', 'employee_cost_pct', 'other_cost_pct',
+  'total_expenses_pct', 'operating_profit', 'ebitda_margin', 'interest_pct_sales',
+  'depreciation_pct_sales', 'net_profit', 'pat_margin', 'eps',
+  'gross_margin', 'rev_growth_1y', 'rev_cagr_3y', 'rev_cagr_5y', 'profit_cagr_3y', 'profit_cagr_5y',
+];
+function orderByFlow(metrics) {
+  const rank = (k) => { const i = TREND_FLOW.indexOf(k); return i === -1 ? TREND_FLOW.length : i; };
+  return metrics.map((m, i) => ({ m, i })).sort((a, b) => (rank(a.m.key) - rank(b.m.key)) || (a.i - b.i)).map((x) => x.m);
+}
+
 function renderTrends(pane, peers, report, onRemove) {
-  const metrics = metricsWithSeries(peers, report.metrics);
+  const metrics = orderByFlow(metricsWithSeries(peers, report.metrics));
   if (!metrics.length) { pane.innerHTML = emptyState('No multi-year series available for these peers yet.'); return; }
 
   pane.innerHTML = `<div class="space-y-3">${metrics.map((m) => trendSectionHtml(m, true)).join('')}</div>
