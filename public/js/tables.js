@@ -86,8 +86,24 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
   // diversified company whose consolidated numbers don't reflect this single node).
   // Persisted per-report in the overlay; re-renders just the node view.
   const onRemoveVc = editable ? (name) => {
+    edit.overlay.vcAdded = edit.overlay.vcAdded || [];
     edit.overlay.vcRemoved = edit.overlay.vcRemoved || [];
-    if (!edit.overlay.vcRemoved.some((n) => normName(n) === normName(name))) edit.overlay.vcRemoved.push(name);
+    if (edit.overlay.vcAdded.some((a) => normName(a.name) === normName(name))) {
+      edit.overlay.vcAdded = edit.overlay.vcAdded.filter((a) => normName(a.name) !== normName(name)); // undo a user add
+    } else if (!edit.overlay.vcRemoved.some((n) => normName(n) === normName(name))) {
+      edit.overlay.vcRemoved.push(name); // hide a discovered player
+    }
+    saveOverlay(edit.slug, edit.overlay);
+    fillPanes();
+  } : null;
+  // Add a company into the value chain: tag it with the node currently shown ([] for the
+  // "All" view) and keep it in the overlay so it persists. Instant + manual (you choose the
+  // node by which view you're on) — no AI re-classification needed.
+  const onAddVc = editable ? (peer, nodeKey) => {
+    const vcPeer = { ...peer, added_by: 'user', value_chain_nodes: nodeKey ? [nodeKey] : [] };
+    edit.overlay.vcAdded = (edit.overlay.vcAdded || []).filter((a) => normName(a.name) !== normName(peer.name));
+    edit.overlay.vcAdded.push(vcPeer);
+    edit.overlay.vcRemoved = (edit.overlay.vcRemoved || []).filter((n) => normName(n) !== normName(peer.name));
     saveOverlay(edit.slug, edit.overlay);
     fillPanes();
   } : null;
@@ -96,10 +112,12 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
   // (sorted so names with financials and higher directness lead).
   function activeSet() {
     if (state.node === 'core' || !vc) return peers;
-    const rm = new Set(((editable && edit.overlay.vcRemoved) || []).map(normName));
+    const ov = editable ? edit.overlay : null;
+    const rm = new Set(((ov && ov.vcRemoved) || []).map(normName));
+    const pool = [...vc.players, ...((ov && ov.vcAdded) || [])]; // discovered + user-added
     const seen = new Set();
     // 'all' = every value-chain company across all nodes; otherwise one node
-    const inScope = state.node === 'all' ? vc.players : vc.players.filter((p) => (p.value_chain_nodes || []).includes(state.node));
+    const inScope = state.node === 'all' ? pool : pool.filter((p) => (p.value_chain_nodes || []).includes(state.node));
     return inScope
       // hide user-removed players, and de-dupe a name that appears in several nodes / twice (keep first)
       .filter((p) => { const k = normName(p.name); if (rm.has(k) || seen.has(k)) return false; seen.add(k); return true; })
@@ -113,14 +131,14 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
     const canEditCore = editable && isCore;    // core: add + remove benchmarked peers
     const showRemove = editable;               // node views also let you hide a distorting player
     if (!set.length) {
-      paneCurrent.innerHTML = emptyState(canEditCore ? 'No peers left — add one by name above, or reload to restore the original set.' : 'No listed players in this value-chain node (or all hidden — reload the page to restore).');
+      paneCurrent.innerHTML = emptyState(editable ? 'No companies here yet — add one by name above, or reload the page to restore.' : 'No listed players mapped to this value-chain node yet.');
       paneTrends.innerHTML = '';
     } else {
       paneCurrent.innerHTML = currentTableHtml(set, report, showRemove, state.node === 'all' ? vcLabels : null);
       renderTrends(paneTrends, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
       wireRowClicks(paneCurrent, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
     }
-    if (addForm) addForm.style.display = isCore ? '' : 'none'; // adding a peer stays core-only
+    if (addForm) addForm.style.display = ''; // add works in core, each node, and the All view
     if (vcNote && state.node === 'all' && vc) {
       vcNote.hidden = false;
       vcNote.innerHTML = `<span class="font-semibold text-slate-600">All value-chain companies</span> — ${set.length} unique listed player${set.length === 1 ? '' : 's'} across every node (de-duplicated). Click × in Current to hide one.`;
@@ -148,14 +166,14 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
   container.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => { state.view = b.dataset.view; applyView(); }));
   const vcSelect = container.querySelector('[data-vc-select]');
   if (vcSelect) vcSelect.addEventListener('change', () => { state.node = vcSelect.value; fillPanes(); });
-  if (editable) wireAddPeer(container, report, edit, rerender);
+  if (editable) wireAddPeer(container, report, edit, rerender, { vc, getNode: () => state.node, onAddVc });
 
   fillPanes();
 }
 
 // Add-peer form: a live stock-search typeahead (muns API via /api/stock-search)
 // to pick the right listing, then fetch its financials on demand from /api/peer.
-function wireAddPeer(container, report, edit, rerender) {
+function wireAddPeer(container, report, edit, rerender, vcCtx) {
   const form = container.querySelector('[data-addpeer]');
   const statusEl = container.querySelector('[data-addstatus]');
   if (!form) return;
@@ -183,6 +201,15 @@ function wireAddPeer(container, report, edit, rerender) {
     btn.disabled = false; btn.textContent = old;
     if (!res || !res.ok || !res.peer) { setStatus((res && res.error) || 'Could not fetch that company — check the name and try again.', 'bad'); return; }
     const peer = res.peer; peer.added_by = 'user';
+    // If a value-chain view is open (a node, or All), add the company INTO the value chain
+    // tagged with that node — not into the benchmarked core set.
+    const node = vcCtx && vcCtx.vc ? vcCtx.getNode() : 'core';
+    if (node && node !== 'core') {
+      vcCtx.onAddVc(peer, node === 'all' ? null : node);
+      setStatus(`Added ${peer.name} to the value chain${node === 'all' ? '' : ' node'}.`, 'good');
+      input.value = '';
+      return;
+    }
     if ((report.peers.indian || []).some((x) => normName(x.name) === normName(peer.name))) { setStatus(`${peer.name} is already in the set.`, 'warn'); input.value = ''; return; }
     edit.overlay.removed = edit.overlay.removed.filter((n) => normName(n) !== normName(peer.name));
     edit.overlay.added = [...edit.overlay.added.filter((a) => normName(a.name) !== normName(peer.name)), peer];
