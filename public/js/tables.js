@@ -360,7 +360,7 @@ function renderTrends(pane, peers, report, onRemove) {
   if (!metrics.length) { pane.innerHTML = emptyState('No multi-year series available for these peers yet.'); return; }
 
   pane.innerHTML = `<div class="space-y-3">${metrics.map((m) => trendSectionHtml(m, true)).join('')}</div>
-    <p class="text-[0.72rem] text-slate-400 mt-3">Each series starts where its real data begins (FY16 onward) — blank cells are genuinely missing, never fabricated. Green shades a year that improved vs the prior year, red a year that worsened (flipped for “lower is better” metrics).</p>`;
+    <p class="text-[0.72rem] text-slate-400 mt-3">Each series starts where its real data begins (FY16 onward) — blank cells are genuinely missing, never fabricated. Only the most recent ~6 years are shaded (green = improved vs the prior year, red = worsened; flipped for “lower is better” metrics) to keep the focus on the current trajectory; earlier years show plain values.</p>`;
 
   metrics.forEach((m) => {
     const sec = pane.querySelector(`[data-metric="${m.key}"]`);
@@ -396,14 +396,18 @@ function trendTableHtml(peers, report, metric, canRemove) {
   const years = unionYears(peers, key);
   if (!years.length) return emptyState('No series for this metric.');
 
+  // Only the most recent ~6 FY columns get improve/worsen shading — keeps the picture
+  // clean and focuses the eye on the current trajectory. Older years show plain values.
+  const RECENT_WIN = 6;
+  const hiFrom = Math.max(0, years.length - RECENT_WIN);
   const head = `<thead><tr><th class="pv-col1">Company</th>${years.map((y) => `<th>${esc(y)}</th>`).join('')}</tr></thead>`;
 
   const bodyRow = (p) => {
     let prev = null;
-    const cells = years.map((y) => {
+    const cells = years.map((y, i) => {
       const v = seriesValueAt(p, key, y);
-      const cls = trendClass(v, prev, metric.better);
-      prev = v == null ? prev : v; // compare to most recent real prior year
+      const cls = i >= hiFrom ? trendClass(v, prev, metric.better) : ''; // shade recent years only
+      prev = v == null ? prev : v; // track prior across ALL years so the window's first year still compares to its real predecessor
       return `<td class="num ${cls}">${esc(fmt(v, metric.format))}</td>`;
     }).join('');
     const remove = canRemove ? `<button data-remove="${esc(p.name)}" title="Remove ${esc(p.name)}" aria-label="Remove ${esc(p.name)}" class="pv-remove">×</button>` : '';

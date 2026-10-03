@@ -6,7 +6,7 @@ import { median, compositeScores, redFlags, revenueShare } from './compute.js';
 import { setupCharts, makeHBar, makeDoughnut, destroyChart } from './charts.js';
 import { renderBucketView } from './tables.js';
 import { renderScorecard } from './scorecard.js';
-import { renderIndustry } from './industry.js';
+import { renderTopPicks } from './toppicks-view.js';
 import { applyOverlay } from './peers.js';
 
 const normN = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
@@ -15,7 +15,7 @@ const TABS = [
   { key: 'indian', label: 'Indian Listed' },
   { key: 'external', label: 'Global & Private' },
   { key: 'scorecard', label: 'Scorecard' },
-  { key: 'industry', label: 'Industry' },
+  { key: 'top-picks', label: '★ Top Picks' },
 ];
 const BM_BUCKETS = ['Manufacturer', 'Trader-Distributor', 'Importer-Sourcing', 'Integrated'];
 
@@ -95,7 +95,7 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
 function renderTab(key, pane, report, mm, allPeers, editCtx) {
   switch (key) {
     case 'overview': return renderOverview(pane, report, mm, allPeers);
-    case 'industry': return renderIndustry(pane, report);
+    case 'top-picks': return renderTopPicks(pane, report);
     case 'indian': return renderBucketView(pane, { peers: report.peers.indian || [], report, bucket: 'Indian Listed', edit: editCtx });
     case 'external': return renderExternalPeers(pane, report);
     case 'scorecard': return renderScorecard(pane, report);

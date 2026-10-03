@@ -23,6 +23,7 @@ import {
 } from '../lib/screener.mjs';
 import { fetchGlobalPeer } from '../lib/global.mjs';
 import { buildValueChain } from '../lib/valuechain.mjs';
+import { buildTopPicks } from '../lib/toppicks.mjs';
 import { jinaSearch, jinaRead, jinaConfigured } from '../lib/jina.mjs';
 import { discoverCandidates } from '../lib/discovery.mjs';
 import { METRICS, METRIC_KEYS, median, canonicalModel } from '../lib/metrics.mjs';
@@ -120,10 +121,19 @@ async function main() {
       if (valueChain) console.log(`[valuechain] ${valueChain.nodes.length} nodes, ${valueChain.players.length} listed players`);
     } catch (e) { console.warn('[valuechain] stage failed (report ships without it):', e.message); }
 
+    // Top Picks: a ranked 10-15 best-ideas shortlist synthesised from all the data
+    // (metrics + trajectory + ownership + red flags + value-chain role) plus a fresh
+    // per-company web search. Additive + fail-safe.
+    let topPicks = null;
+    try {
+      topPicks = await buildTopPicks({ industry: peerPlan.segment || QUERY, definition: peerPlan.definition || '', indian, valueChain });
+      if (topPicks) console.log(`[toppicks] ${topPicks.picks.length} picks`);
+    } catch (e) { console.warn('[toppicks] stage failed (report ships without it):', e.message); }
+
     await postProgress(6, 'running');
     const onePager = await buildReport(understanding, { indian, global, private: privateList }, medianTable, verdict);
 
-    const report = assemble({ understanding, peerPlan, indian, global, private: privateList, verdict, onePager, coverage, valueChain });
+    const report = assemble({ understanding, peerPlan, indian, global, private: privateList, verdict, onePager, coverage, valueChain, topPicks });
     writeOutputs(report);
     await postFinal(report);
     console.log(`Done: ${indian.length} indian, ${global.length} global, ${privateList.length} private. Bedrock ${bedrockCalls - bedrockFails}/${bedrockCalls} ok, jinaReads ${jinaReadsUsed}.`);
@@ -442,7 +452,7 @@ function minimalReport(u, peers, verdict) {
 }
 
 /* ------------------------------------------------------------- assemble / io */
-function assemble({ understanding, peerPlan, indian, global, private: priv, verdict, onePager, coverage, valueChain }) {
+function assemble({ understanding, peerPlan, indian, global, private: priv, verdict, onePager, coverage, valueChain, topPicks }) {
   const segment = peerPlan.segment || understanding.segment || QUERY;
   const seedCompany = understanding.seedCompany || (indian[0] && indian[0].name) || '';
   const name = understanding.isCompany && seedCompany ? seedCompany : titleCase(segment);
@@ -463,6 +473,7 @@ function assemble({ understanding, peerPlan, indian, global, private: priv, verd
     metrics: METRICS,
     peers: { indian, global, private: priv },
     ...(valueChain && valueChain.players && valueChain.players.length ? { value_chain: valueChain } : {}),
+    ...(topPicks && topPicks.picks && topPicks.picks.length ? { top_picks: topPicks } : {}),
     scorecard: verdict.scorecard || { ranking: [] },
     report: onePager,
     sources: collectSources(indian, global),
