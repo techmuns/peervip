@@ -524,7 +524,7 @@ async function runUpdate(page, existing) {
   await postProgress(5, 'running');
   let valueChain = existing.value_chain || null;
   try {
-    const vc = await buildValueChain({ industry: segment, definition, about, seedPeers: indian, existing: existing.value_chain || null, light: true, cap: 45 });
+    const vc = await buildValueChain({ industry: segment, definition, about, seedPeers: indian, existing: existing.value_chain || null, discovery: 'deep', cap: 60 });
     if (vc && Array.isArray(vc.players) && vc.players.length) valueChain = vc;
   } catch (e) { console.warn('[update][valuechain] failed — keeping existing:', e.message); }
 
