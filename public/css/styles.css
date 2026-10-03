@@ -322,8 +322,8 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .pv-flag-chip.pv-flag-high { background: #fef2f2; color: #be123c; }
 .pv-flag-chip.pv-flag-med { background: #fffbeb; color: #b45309; }
 
-/* Industry tab: keep the "then vs now" table headers left/right sensible */
-.pv-ind-tvn thead th { text-align: right; }
+/* Industry tab: "then vs now" headers centred to match the centred number cells */
+.pv-ind-tvn thead th { text-align: center; }
 .pv-ind-tvn thead th.pv-col1 { text-align: left; }
 
 /* Industry PDF export — stack the two-up chart grids so nothing squishes on paper */
@@ -353,3 +353,11 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 /* Company name → Screener links inside tables (dotted underline, brand hover) */
 .pv-clink { color: inherit; text-decoration: none; cursor: pointer; border-bottom: 1px dotted #cbd5e1; }
 .pv-clink:hover { color: var(--brand-2); border-bottom-color: var(--brand-2); }
+
+/* All number cells centre-aligned (company/label columns stay left-aligned) */
+.pv-table td.num { text-align: center; }
+/* Help chip stays small and quiet beside the unit on a metric-header sub-line */
+.pv-table thead th .pv-th-unit .pv-help { width: 12px; height: 12px; font-size: 8px; margin-left: 3px; }
+/* "Chain" column chip (All-companies view): indigo, shows the node count; hover lists them */
+.pv-vc { background: #eef2ff; color: var(--brand-1); }
+.pv-vc:hover, .pv-vc:focus-visible { background: var(--brand-1); color: #fff; }

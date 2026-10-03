@@ -33,6 +33,9 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
   function hasFin(p) { return (p && (Object.keys(p.series || {}).length || Object.values(p.current || {}).some((v) => v != null))) ? 1 : 0; }
   const nodeCount = (key) => vc ? vc.players.filter((p) => (p.value_chain_nodes || []).includes(key)).length : 0;
   const vcAllCount = vc ? new Set(vc.players.map((p) => normName(p.name))).size : 0; // unique across all nodes
+  const vcLabels = vc ? Object.fromEntries(vc.nodes.map((n) => [n.key, n.label])) : {}; // node key -> label
+  const vcWith = vc ? vc.nodes.filter((n) => nodeCount(n.key) > 0) : [];   // nodes that have listed players
+  const vcEmpty = vc ? vc.nodes.filter((n) => nodeCount(n.key) === 0) : []; // nodes with none (shown under a sub-group)
 
   container.innerHTML = `
     <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
@@ -45,7 +48,8 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
           <select data-vc-select class="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">
             <option value="core">★ Core peers (benchmarked)</option>
             <option value="all">🗂 All value-chain companies (${vcAllCount})</option>
-            ${vc.nodes.map((n) => `<option value="${esc(n.key)}">${esc(n.label)} (${nodeCount(n.key)})</option>`).join('')}
+            ${vcWith.map((n) => `<option value="${esc(n.key)}">${esc(n.label)} (${nodeCount(n.key)})</option>`).join('')}
+            ${vcEmpty.length ? `<optgroup label="— Nodes with no listed players yet —">${vcEmpty.map((n) => `<option value="${esc(n.key)}">${esc(n.label)} (0)</option>`).join('')}</optgroup>` : ''}
           </select></label>` : ''}
       </div>
       ${editable
@@ -112,7 +116,7 @@ export function renderBucketView(container, { peers, report, bucket, edit }) {
       paneCurrent.innerHTML = emptyState(canEditCore ? 'No peers left — add one by name above, or reload to restore the original set.' : 'No listed players in this value-chain node (or all hidden — reload the page to restore).');
       paneTrends.innerHTML = '';
     } else {
-      paneCurrent.innerHTML = currentTableHtml(set, report, showRemove);
+      paneCurrent.innerHTML = currentTableHtml(set, report, showRemove, state.node === 'all' ? vcLabels : null);
       renderTrends(paneTrends, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
       wireRowClicks(paneCurrent, set, report, showRemove ? (isCore ? onRemove : onRemoveVc) : null);
     }
@@ -240,10 +244,18 @@ export function destroyBucketCharts(container) {
 }
 
 // ---------------------------------------------------------------- Current
-function currentTableHtml(peers, report, editable) {
+function currentTableHtml(peers, report, editable, vcLabels) {
   // Absolute-magnitude / trend-only metrics live in the Trends tab, not this
   // wide cross-sectional grid (keeps it readable and off the composite score).
   const metrics = (report.metrics || []).filter((m) => !m.trendOnly);
+  // "Chain" column: only in the All-companies view, so each company shows which
+  // value-chain node(s) it sits in (a compact count chip; hover lists the nodes).
+  const vcCol = !!vcLabels;
+  const vcChip = (p) => {
+    const ks = (p.value_chain_nodes || []).filter((k) => vcLabels && vcLabels[k]);
+    if (!ks.length) return '<span class="text-slate-300">—</span>';
+    return `<span class="pv-help pv-vc" data-help="${esc('In value chain: ' + ks.map((k) => vcLabels[k]).join(' · '))}">${ks.length}</span>`;
+  };
   const mRow = medianRow(peers, metrics);
   const aRow = averageRow(peers, metrics);
   // per-metric value arrays for conditional formatting (relative to shown peers)
@@ -259,13 +271,15 @@ function currentTableHtml(peers, report, editable) {
   }
   const band = `<tr class="pv-group-band">
     <th class="pv-col1"></th>
+    ${vcCol ? '<th></th>' : ''}
     ${groups.map((g) => `<th colspan="${g.count}">${esc(g.group)}</th>`).join('')}
     <th></th>
   </tr>`;
 
   const head = `<thead>${band}<tr class="pv-metric-head">
     <th class="pv-col1">Company</th>
-    ${metrics.map((m) => `<th title="${esc(m.label)}${m.unit ? ' (' + esc(m.unit) + ')' : ''}">${esc(m.label)}${helpIcon(m.key, m.label)}<span class="pv-th-unit">${esc(unitLabel(m))}</span></th>`).join('')}
+    ${vcCol ? '<th title="Value-chain node(s) this company sits in">Chain</th>' : ''}
+    ${metrics.map((m) => `<th title="${esc(m.label)}${m.unit ? ' (' + esc(m.unit) + ')' : ''}">${esc(m.label)}<span class="pv-th-unit">${esc(unitLabel(m))}${helpIcon(m.key, m.label)}</span></th>`).join('')}
     <th style="text-align:center">Business<br>Model</th>
   </tr></thead>`;
 
@@ -283,6 +297,7 @@ function currentTableHtml(peers, report, editable) {
         <div class="font-semibold text-slate-800 leading-snug">${remove}${companyNameHtml(p)}${p.is_seed ? ' <span class="text-amber-500" title="Searched company">★</span>' : ''}${added}</div>
         <div class="text-[0.7rem] text-slate-400 num">${esc(p.ticker || p.country || '')}</div>
       </td>
+      ${vcCol ? `<td style="text-align:center">${vcChip(p)}</td>` : ''}
       ${cells}
       <td style="text-align:center"><span class="pv-chip ${bmClass(p.business_model)} px-2 py-0.5 text-[0.68rem]">${esc(p.business_model || '—')}</span></td>
     </tr>`;
@@ -290,6 +305,7 @@ function currentTableHtml(peers, report, editable) {
 
   const refRow = (label, row) => `<tr class="pv-ref">
     <td class="pv-col1">${label}</td>
+    ${vcCol ? '<td></td>' : ''}
     ${metrics.map((m) => `<td class="num">${esc(fmt(row[m.key], m.format))}</td>`).join('')}
     <td></td>
   </tr>`;
@@ -353,7 +369,7 @@ function trendTableHtml(peers, report, metric, canRemove) {
   const years = unionYears(peers, key);
   if (!years.length) return emptyState('No series for this metric.');
 
-  const head = `<thead><tr><th class="pv-col1">Company</th>${years.map((y) => `<th style="text-align:right">${esc(y)}</th>`).join('')}</tr></thead>`;
+  const head = `<thead><tr><th class="pv-col1">Company</th>${years.map((y) => `<th>${esc(y)}</th>`).join('')}</tr></thead>`;
 
   const bodyRow = (p) => {
     let prev = null;
