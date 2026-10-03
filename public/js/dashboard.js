@@ -51,8 +51,11 @@ export function renderDashboard(appEl, report, { onBack, onRefresh }) {
     catch (err) { console.error(err); alert('Could not build the Excel file.'); }
     finally { btn.disabled = false; btn.innerHTML = old; }
   });
-  const refreshBtn = appEl.querySelector('[data-refresh]');
-  if (refreshBtn) refreshBtn.addEventListener('click', () => { if (onRefresh) onRefresh(report.meta && report.meta.query); });
+  // Two refresh modes: "Update" (additive top-up — cheap, never drops) and
+  // "Rebuild" (full from-scratch). Each carries its mode in data-refresh.
+  appEl.querySelectorAll('[data-refresh]').forEach((btn) => {
+    btn.addEventListener('click', () => { if (onRefresh) onRefresh(report.meta && report.meta.query, btn.getAttribute('data-refresh') || 'full'); });
+  });
 
   const content = appEl.querySelector('#tab-content');
   const underline = appEl.querySelector('.pv-tab-underline');
@@ -121,8 +124,11 @@ function headerHtml(report) {
       <button data-excel class="pv-focus inline-flex items-center gap-1.5 rounded-xl bg-white ring-1 ring-emerald-200 px-3.5 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13l6 6M15 13l-6 6"/></svg> Export Excel
       </button>
-      <button data-refresh title="Re-research this ${esc(report.meta.type === 'company' ? 'company' : 'industry')} with fresh data" class="pv-focus inline-flex items-center gap-1.5 rounded-xl bg-white ring-1 ring-slate-200 px-3.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg> Refresh
+      <button data-refresh="update" title="Keep every company already here and refresh their numbers, then dig deeper (exchange filings, industry news, primary docs, reverse supply-chain) to pull in anything missed — additive, never drops what you have" class="pv-focus inline-flex items-center gap-1.5 rounded-xl bg-white ring-1 ring-indigo-200 px-3.5 py-2 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 transition">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg> Update
+      </button>
+      <button data-refresh="full" title="Full re-research of this ${esc(report.meta.type === 'company' ? 'company' : 'industry')} from scratch — slower and can change the set" class="pv-focus inline-flex items-center gap-1.5 rounded-xl bg-white ring-1 ring-slate-200 px-3.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg> Rebuild
       </button>
     </div>
   </header>`;

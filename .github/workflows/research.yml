@@ -14,6 +14,10 @@ on:
         description: 'Slug (the Function passes this; leave blank to derive from query)'
         required: false
         default: ''
+      mode:
+        description: 'full = rebuild from scratch; update = additive top-up (reuse the set, refresh numbers, union new finds)'
+        required: false
+        default: 'full'
 
 permissions:
   contents: write
@@ -26,7 +30,7 @@ concurrency:
 jobs:
   research:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 55
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,6 +52,7 @@ jobs:
         env:
           QUERY: ${{ inputs.query }}
           SLUG: ${{ inputs.slug }}
+          MODE: ${{ inputs.mode }}
           BEDROCK_API_KEY: ${{ secrets.BEDROCK_API_KEY }}
           BEDROCK_REGION: ${{ secrets.BEDROCK_REGION }}
           BEDROCK_MODEL_IDS: ${{ secrets.BEDROCK_MODEL_IDS }}

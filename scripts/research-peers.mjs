@@ -30,6 +30,9 @@ import { METRICS, METRIC_KEYS, median, canonicalModel } from '../lib/metrics.mjs
 
 const QUERY = (process.env.QUERY || '').trim();
 const SLUG = (process.env.SLUG || '').trim() || slugify(QUERY);
+// 'update' = additive top-up (reuse the prior report, refresh numbers, union new
+// finds, never drop); anything else = 'full' from-scratch rebuild.
+const MODE = ((process.env.MODE || 'full').trim().toLowerCase() === 'update') ? 'update' : 'full';
 const PROGRESS_URL = (process.env.PROGRESS_URL || '').replace(/\/+$/, '');
 const PROGRESS_SECRET = process.env.PROGRESS_SECRET || '';
 const REPORTS_DIR = path.resolve('public/data/reports');
@@ -79,6 +82,18 @@ async function main() {
   try {
     const loggedIn = await screenerLogin(page);
     console.log(loggedIn ? 'Screener: logged in.' : 'Screener: anonymous (no/failed creds).');
+
+    // Additive "update" mode: build on the prior report instead of from scratch —
+    // keep every company, refresh numbers, union new finds, re-rank. Falls back to a
+    // full build if there is no prior report for this slug to build on.
+    if (MODE === 'update') {
+      const existing = loadExistingReport();
+      if (existing && existing.peers && Array.isArray(existing.peers.indian)) {
+        await runUpdate(page, existing);
+        return;
+      }
+      console.log('[update] no existing report for this slug — running a full build instead.');
+    }
 
     await postProgress(0, 'running');
     const understanding = await understandBusiness(page);
@@ -449,6 +464,97 @@ function minimalReport(u, peers, verdict) {
   if (Object.keys(bm).length) sections.push({ title: 'Business-model split', icon: 'donut', blocks: [{ type: 'donut', items: Object.entries(bm).map(([label, value]) => ({ label, value })) }] });
   if (rows.length) sections.push({ title: 'The peer set at a glance', icon: 'table', blocks: [{ type: 'table', columns: ['Company', 'Revenue (Rs Cr)', 'EBITDA %', 'ROCE %'], rows }] });
   return { title: `${titleCase(u.segment || QUERY)} — Peer Benchmarking`, summary: 'Live peer financials from Screener + global sources.', sections };
+}
+
+/* ------------------------------------------------------------- additive update mode */
+function loadExistingReport() {
+  try { return JSON.parse(fs.readFileSync(path.join(REPORTS_DIR, `${SLUG}.json`), 'utf8')); }
+  catch (_) { return null; }
+}
+
+/** Re-scrape current financials for an existing peer set (no AI). Keeps EVERY peer:
+ *  on any failure the peer is kept with its previous numbers — never dropped. */
+async function rescrapePeers(page, peers) {
+  const out = [];
+  for (const p of (peers || [])) {
+    if (!p || !p.name) continue;
+    try {
+      let hit = p.ticker ? { code: p.ticker, id: null, name: p.name } : await resolveScreenerCode(p.name);
+      if (!hit || !hit.code) { out.push(p); continue; }
+      if (hit.id == null) { const r = (await screenerSearch(p.name))[0] || (await screenerSearch(hit.code))[0]; if (r) hit = { code: r.code, id: r.id, name: r.name }; }
+      const res = await getCompanyHtml(page, hit.code);
+      if (!res) { out.push(p); continue; }
+      const m = mapCompany(res.html);
+      if (!m.listed) { out.push(p); continue; }
+      const current = pickMetrics(m.current);
+      const series = { ...(m.series || {}) };
+      try {
+        const mc = await screenerMaterialCost(hit.id);
+        if (mc && mc.current) { for (const [k, v] of Object.entries(mc.current)) if (v != null && current[k] == null) current[k] = v; Object.assign(series, mc.series || {}); }
+      } catch (_) { /* optional */ }
+      out.push({ ...p, current, series, source: res.url ? { label: 'Screener', url: res.url } : (p.source || screenerSource(hit.code)) });
+      console.log(`  [update] re-scraped ${p.name} (${hit.code}) ${Object.keys(current).length}/${METRIC_KEYS.length}`);
+    } catch (e) {
+      console.warn(`  [update] re-scrape ${p.name} failed — keeping previous numbers: ${e.message}`);
+      out.push(p);
+    }
+    await sleep(300);
+  }
+  return out;
+}
+
+/**
+ * ADDITIVE top-up of an existing report: refresh core-peer numbers, additively
+ * top-up the value chain (keep all, union new finds, refresh numbers) and rebuild
+ * Top Picks over the refreshed universe. The AI narrative (outperformer / report /
+ * scorecard) is CARRIED from the prior run — "Rebuild" regenerates that. Never drops
+ * a company; on failure a stage keeps what the prior report already had.
+ */
+async function runUpdate(page, existing) {
+  const segment = (existing.meta && (existing.meta.segment || existing.meta.query)) || QUERY;
+  const definition = (existing.meta && existing.meta.definition) || '';
+  const about = (existing.meta && existing.meta.seed_company) || '';
+  console.log(`[update] additive refresh of "${SLUG}" (segment="${segment}", jina=${jinaConfigured() ? 'on' : 'off'})`);
+
+  await postProgress(0, 'running');
+  await postProgress(2, 'running');
+  const indian = await rescrapePeers(page, existing.peers.indian || []);
+
+  // Value chain — additive top-up (reuse nodes, refresh existing players, union new).
+  await postProgress(5, 'running');
+  let valueChain = existing.value_chain || null;
+  try {
+    const vc = await buildValueChain({ industry: segment, definition, about, seedPeers: indian, existing: existing.value_chain || null, discovery: 'deep', cap: 60 });
+    if (vc && Array.isArray(vc.players) && vc.players.length) valueChain = vc;
+  } catch (e) { console.warn('[update][valuechain] failed — keeping existing:', e.message); }
+
+  // Top Picks — rebuild over the refreshed universe.
+  let topPicks = existing.top_picks || null;
+  try {
+    const tp = await buildTopPicks({ industry: segment, definition, indian, valueChain });
+    if (tp && Array.isArray(tp.picks) && tp.picks.length) topPicks = tp;
+  } catch (e) { console.warn('[update][toppicks] failed — keeping existing:', e.message); }
+
+  await postProgress(6, 'running');
+  const globalArr = (existing.peers && existing.peers.global) || [];
+  const privArr = (existing.peers && existing.peers.private) || [];
+  const coverage = {
+    peers_total: indian.length + globalArr.length + privArr.length,
+    with_full_financials: indian.filter((p) => p.current && p.current.ebitda_margin != null).length,
+    confidence: indian.length >= 5 ? 'high' : indian.length >= 3 ? 'medium' : 'low',
+  };
+  const report = {
+    ...existing,
+    meta: { ...existing.meta, query: QUERY, segment, generated_at: new Date().toISOString(), sample: false, coverage },
+    metrics: METRICS,
+    peers: { ...existing.peers, indian },
+  };
+  if (valueChain && valueChain.players && valueChain.players.length) report.value_chain = valueChain; else delete report.value_chain;
+  if (topPicks && topPicks.picks && topPicks.picks.length) report.top_picks = topPicks; else delete report.top_picks;
+
+  writeOutputs(report);
+  await postFinal(report);
+  console.log(`[update] done: ${indian.length} indian, VC ${valueChain ? valueChain.players.length : 0} players, picks ${topPicks ? topPicks.picks.length : 0}.`);
 }
 
 /* ------------------------------------------------------------- assemble / io */
