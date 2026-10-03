@@ -289,6 +289,14 @@ export async function fetchPeer(name) {
   const epsSeries = pl && seriesOf(pl, /^eps/i);
   const taxSeries = pl && seriesOf(pl, /^tax ?%/i);
   const divPayoutSeries = pl && seriesOf(pl, /dividend payout/i);
+  // Screener P&L lines → total expenses / interest / depreciation, each as % of sales.
+  const expensesSeries = pl && seriesOf(pl, /^expenses/i);
+  const interestSeries = pl && seriesOf(pl, /^interest/i);
+  const deprSeries = pl && seriesOf(pl, /^depreciation/i);
+  const pctOfSales = (abs) => combineSeries(abs, salesSeries, (a, s) => (isNum(a) && isNum(s) && s !== 0) ? +((a / s) * 100).toFixed(1) : null);
+  const expPctSeries = pctOfSales(expensesSeries);
+  const intPctSeries = pctOfSales(interestSeries);
+  const deprPctSeries = pctOfSales(deprSeries);
   // ---- Ratios ----
   const roceSeries = ratios && seriesOf(ratios, /roce/i);
   const roeSeries = ratios && seriesOf(ratios, /return on equity|^roe/i);
@@ -370,6 +378,9 @@ export async function fetchPeer(name) {
     employee_cost_pct: lastOf(empSeries),
     other_cost_pct: lastOf(othSeries),
     tax_rate: lastOf(taxSeries),
+    total_expenses_pct: lastOf(expPctSeries),
+    interest_pct_sales: lastOf(intPctSeries),
+    depreciation_pct_sales: lastOf(deprPctSeries),
     roce: ribbon(top, /roce/) ?? lastOf(roceSeries),
     roe: ribbon(top, /roe|return on equity/) ?? lastOf(roeCalcSeries),
     avg_roe_3y: pickKey(roeRanges, /3 ?year/) ?? avgLastN(roeCalcSeries, 3),
@@ -409,6 +420,7 @@ export async function fetchPeer(name) {
   const put = (k, s) => { if (s && s.years && s.years.length) series[k] = s; };
   put('revenue', salesSeries); put('ebitda_margin', opmSeries); put('pat_margin', patMarginSeries);
   put('net_profit', npSeries); put('operating_profit', opSeries); put('eps', epsSeries); put('tax_rate', taxSeries);
+  put('total_expenses_pct', expPctSeries); put('interest_pct_sales', intPctSeries); put('depreciation_pct_sales', deprPctSeries);
   put('gross_margin', grossSeries); put('rm_cost_pct', rmSeries);
   put('manufacturing_cost_pct', mfgSeries); put('employee_cost_pct', empSeries); put('other_cost_pct', othSeries);
   put('roce', roceSeries); put('roe', roeCalcSeries);
