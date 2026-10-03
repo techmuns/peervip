@@ -114,7 +114,7 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .pv-table td.pv-col1, .pv-table th.pv-col1 { text-align: left; }
 /* Long value-chain names (e.g. "Techno Electric & Engineering / Techno Digital") wrap
    inside the frozen column instead of overflowing into the number cells. */
-.pv-table td.pv-col1 { vertical-align: top; word-break: break-word; overflow-wrap: anywhere; }
+.pv-table td.pv-col1 { vertical-align: top; white-space: normal; word-break: break-word; overflow-wrap: anywhere; }
 .pv-table tbody tr:hover .pv-col1 { background: #f8fafc; }
 .pv-table tbody tr.pv-row { cursor: pointer; }
 .pv-table tbody tr.pv-row:hover td { background-color: #f8fafc; }
