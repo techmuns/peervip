@@ -62,6 +62,34 @@
       "updated_at": "2026-10-03T10:09:08.298Z",
       "peer_count": 19,
       "sample": false
+    },
+    {
+      "slug": "precision-engineering",
+      "name": "Precision Engineering",
+      "type": "industry",
+      "query": "precision engineering",
+      "seed_company": "Schaeffler India Ltd",
+      "aliases": [
+        "precision engineering",
+        "schaeffler india ltd",
+        "craftsman automation ltd",
+        "sansera engineering ltd",
+        "bharat forge ltd",
+        "azad engineering ltd",
+        "dynamatic technologies ltd",
+        "unimech aerospace and manufacturing ltd",
+        "nrb bearings ltd",
+        "shanthi gears ltd",
+        "precision camshafts ltd",
+        "elecon engineering company ltd",
+        "automotive axles ltd",
+        "bosch ltd",
+        "birla machining & toolings ltd(merged)",
+        "gabriel india ltd"
+      ],
+      "updated_at": "2026-10-11T12:02:47.605Z",
+      "peer_count": 15,
+      "sample": false
     }
   ]
 }
