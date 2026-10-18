@@ -102,7 +102,14 @@ export function renderManual(root, onExit) {
       <button data-move="-1" class="${button}" title="Move up" ${i===0?'disabled':''}>↑</button><button data-move="1" class="${button}" title="Move down" ${i===active.nodes.length-1?'disabled':''}>↓</button>
       <button data-rename-stage class="${button}">Rename</button><button data-remove-stage class="${button} text-rose-600">Delete</button></div>
       <div class="overflow-x-auto"><table class="w-full text-sm"><tbody>${n.players.map((p,pi)=>`<tr class="border-t border-slate-100"><td class="py-2 font-semibold">${esc(p.name)}</td><td class="px-2 text-slate-500">${esc(p.ticker||'')}</td><td class="text-right"><button data-refresh-player="${pi}" class="text-indigo-700 px-2">Refresh</button><button data-remove-player="${pi}" class="text-rose-600 px-2">Remove</button></td></tr>`).join('') || '<tr><td class="text-slate-400 py-3">No players yet</td></tr>'}</tbody></table></div>
-      <form data-add class="mt-3 flex flex-col sm:flex-row gap-2"><input name="company" required class="${cls} flex-1" placeholder="Enter exact company name / Screener code"><button class="${button}">+ Add &amp; fetch financials</button></form>
+      <div data-picker class="mt-3 relative">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <input data-stock-query autocomplete="off" class="${cls} flex-1" placeholder="Search listed companies to select…" aria-label="Search listed companies" aria-expanded="false">
+          <button type="button" data-add-selected class="${button}" disabled>+ Add selected (0)</button>
+        </div>
+        <div data-search-results class="mt-1 rounded-xl ring-1 ring-slate-200 bg-white shadow-lg max-h-64 overflow-y-auto" hidden></div>
+        <div data-selected class="flex flex-wrap gap-2 mt-2"></div>
+      </div>
       <div data-result class="text-xs text-slate-500 mt-2" role="status"></div>
     </section>`).join(''):'<div class="text-slate-400 text-sm">Add your first stage above. The value chain stays blank until you define it.</div>';
     el.querySelectorAll('[data-stage]').forEach((section)=>{
@@ -112,8 +119,93 @@ export function renderManual(root, onExit) {
       section.querySelector('[data-remove-stage]').onclick=()=>{if(confirm('Delete stage and its player assignments?')){active.nodes=active.nodes.filter(x=>x.id!==n.id);if(persist())open(active.id);}};
       section.querySelectorAll('[data-remove-player]').forEach(b=>b.onclick=()=>{n.players.splice(Number(b.dataset.removePlayer),1);if(persist())open(active.id);});
       section.querySelectorAll('[data-refresh-player]').forEach(b=>b.onclick=()=>fetchCompany(n,n.players[Number(b.dataset.refreshPlayer)].ticker||n.players[Number(b.dataset.refreshPlayer)].name,section,Number(b.dataset.refreshPlayer)));
-      section.querySelector('[data-add]').onsubmit=(e)=>{e.preventDefault();fetchCompany(n,e.currentTarget.elements.company.value.trim(),section);};
+      wirePicker(section,n);
     });
+  }
+  function wirePicker(section, node) {
+    const input = section.querySelector('[data-stock-query]');
+    const menu = section.querySelector('[data-search-results]');
+    const chips = section.querySelector('[data-selected]');
+    const add = section.querySelector('[data-add-selected]');
+    const status = section.querySelector('[data-result]');
+    // Selection is local to this stage. It is intentionally NOT deduped across stages.
+    const selected = new Map();
+    let timer = null, seq = 0, results = [];
+    const key = (p) => norm(p.code || p.name);
+    const present = (p) => node.players.some(x => norm(x.ticker || x.name) === key(p) || norm(x.name) === norm(p.name));
+    const drawSelected = () => {
+      chips.innerHTML = [...selected.values()].map(p => `<span class="inline-flex items-center gap-2 rounded-lg bg-indigo-50 text-indigo-800 px-2.5 py-1 text-xs font-semibold">${esc(p.name)}<button type="button" data-unselect="${esc(key(p))}" aria-label="Remove ${esc(p.name)}" class="text-indigo-600">×</button></span>`).join('');
+      chips.querySelectorAll('[data-unselect]').forEach(b=>b.onclick=()=>{selected.delete(b.dataset.unselect);drawSelected();drawResults();});
+      add.disabled = selected.size === 0;
+      add.textContent = '+ Add selected (' + selected.size + ')';
+    };
+    const drawResults = () => {
+      menu.hidden = !results.length;
+      menu.innerHTML = results.map((p,i) => {
+        const checked=selected.has(key(p)), exists=present(p);
+        return `<label class="flex items-center gap-3 p-3 border-b border-slate-100 hover:bg-slate-50 cursor-pointer">
+          <input type="checkbox" data-result-index="${i}" ${checked?'checked':''} ${exists?'disabled':''} class="accent-indigo-600 h-4 w-4">
+          <span class="min-w-0 flex-1"><span class="block text-sm font-semibold text-slate-800">${esc(p.name)}</span><span class="block text-xs text-slate-500">${esc([p.code,p.country,p.industry].filter(Boolean).join(' · '))}</span></span>
+          ${exists?'<span class="text-xs text-slate-400">Already added</span>':''}
+        </label>`;
+      }).join('');
+      menu.querySelectorAll('[data-result-index]').forEach(box=>box.onchange=()=>{
+        const p=results[Number(box.dataset.resultIndex)];
+        if(box.checked)selected.set(key(p),p); else selected.delete(key(p));
+        drawSelected();
+      });
+      input.setAttribute('aria-expanded', String(!menu.hidden));
+    };
+    input.oninput=()=>{
+      const q=input.value.trim(); clearTimeout(timer); ++seq;
+      if(q.length<2){results=[];drawResults();status.textContent='';return;}
+      const requestId=seq;
+      timer=setTimeout(async()=>{
+        status.textContent='Searching stocks…';
+        try {
+          const response=await fetch('/api/stock-search?q='+encodeURIComponent(q),{cache:'no-store'});
+          const data=await response.json();
+          if(requestId!==seq || !section.isConnected)return;
+          if(!response.ok || !data.ok)throw Error(data.error || 'Search unavailable');
+          results=(data.results||[]).filter(p=>p.code && p.name);
+          drawResults();
+          status.textContent=results.length?'Tick any number of companies, then click Add selected.':'No stocks found for this search.';
+        } catch(e) { if(requestId!==seq)return;results=[];drawResults();status.textContent='Stock search unavailable: '+e.message; }
+      },220);
+    };
+    input.onkeydown=(e)=>{if(e.key==='Escape'){results=[];drawResults();}};
+    add.onclick=async()=>{
+      if(!selected.size)return;
+      const picks=[...selected.values()];
+      add.disabled=true;input.disabled=true;
+      let added=0; const errors=[];
+      // Fetch each chosen company's financials, without any industry research.
+      for(let i=0;i<picks.length;i++){
+        const p=picks[i];
+        status.textContent='Fetching financials '+(i+1)+'/'+picks.length+': '+p.name;
+        try {
+          const res=await fetch('/api/peer?name='+encodeURIComponent(p.code),{cache:'no-store'});
+          const data=await res.json();
+          if(!res.ok || !data.ok || !data.peer || !data.peer.name)throw Error(data.error||'Financial data unavailable');
+          const company=data.peer;
+          if(!node.players.some(x=>norm(x.ticker||x.name)===norm(company.ticker||company.name))){
+            node.players.push(company);added++;
+            if(!persist())throw Error('Could not save locally');
+          }
+          selected.delete(key(p));
+        }catch(e){errors.push(p.name+': '+e.message);}
+      }
+      if(added && !errors.length){open(active.id);return;}
+      // Retain failed selections so the user can retry them.
+      add.disabled=false;input.disabled=false;drawSelected();drawResults();
+      status.textContent=added+' added. '+(errors.length?errors.join(' | '):'');
+      if(added) {
+        const rows=section.querySelector('tbody');
+        if(rows)rows.innerHTML=node.players.map((p,pi)=>`<tr class="border-t border-slate-100"><td class="py-2 font-semibold">${esc(p.name)}</td><td class="px-2 text-slate-500">${esc(p.ticker||'')}</td><td class="text-right"><button data-refresh-player="${pi}" class="text-indigo-700 px-2">Refresh</button><button data-remove-player="${pi}" class="text-rose-600 px-2">Remove</button></td></tr>`).join('');
+        section.querySelectorAll('[data-remove-player]').forEach(b=>b.onclick=()=>{node.players.splice(Number(b.dataset.removePlayer),1);if(persist())open(active.id);});
+        section.querySelectorAll('[data-refresh-player]').forEach(b=>b.onclick=()=>fetchCompany(node,node.players[Number(b.dataset.refreshPlayer)].ticker||node.players[Number(b.dataset.refreshPlayer)].name,section,Number(b.dataset.refreshPlayer)));
+      }
+    };
   }
   async function fetchCompany(node, query, section, replaceAt=null) {
     const status=section.querySelector('[data-result]');
