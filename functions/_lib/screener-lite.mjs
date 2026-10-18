@@ -228,6 +228,8 @@ async function resolveCode(name) {
     }
   }
   if (!cands.length) return null;
+  const exactCode = cands.find(c => c.code.toUpperCase() === String(name).trim().toUpperCase());
+  if (exactCode) return exactCode;
   const want = normName(name);
   let best = cands[0], bestScore = -1;
   for (const c of cands) {
@@ -238,7 +240,9 @@ async function resolveCode(name) {
     else if (rn.includes(want) || want.includes(rn)) score = 40;
     if (score > bestScore) { bestScore = score; best = c; }
   }
-  return best;
+  // Never treat an unrelated first autocomplete hit as the requested stock.
+  // This previously resolved BEL to BELRISE when the exact ticker was absent.
+  return bestScore >= 70 ? best : null;
 }
 
 /** Fetch one listed company by name → PeerVIP peer shape, or { error }. */
