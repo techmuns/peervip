@@ -22,6 +22,9 @@ const names = (x) => distinct(x.nodes.flatMap((n) => n.players.map((p) => p.name
 export function renderManual(root, onExit) {
   let active = null;
   let items = read();
+  // Stage-specific selections live outside DOM render functions.
+  const pending = new Map();
+  const pickerActions = new Map();
   const frame = () => {
     root.innerHTML = `<div class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
       <div class="flex justify-between gap-3 items-center mb-7">
@@ -85,6 +88,7 @@ export function renderManual(root, onExit) {
       </form></div>
       <div data-notice role="status" class="text-sm text-rose-600 mb-3"></div>
       <div data-nodes class="space-y-4"></div>
+      <div class="mt-5 flex gap-3 items-center justify-end"><span data-pending-total class="text-sm text-slate-500"></span><button data-add-all class="rounded-xl brand-gradient text-white px-5 py-2 font-semibold" disabled>Add all selected (0)</button></div>
       <p class="text-xs text-slate-500 mt-6">Financials are consolidated company-level metrics, not revenue attributable to this value-chain stage. Nothing is auto-added or auto-removed.</p>
     </div>`;
     root.querySelector('[data-back]').onclick=frame;
@@ -93,9 +97,24 @@ export function renderManual(root, onExit) {
     root.querySelector('[data-delete]').onclick=()=>{if(confirm('Delete this industry and all its manual stages?')){items=items.filter(x=>x.id!==active.id);if(persist())frame();}};
     root.querySelector('[data-node]').onsubmit=(e)=>{e.preventDefault();const title=e.currentTarget.elements.stage.value.trim();if(!title)return;if(active.nodes.some(n=>norm(n.label)===norm(title)))return notice('Stage already exists.');active.nodes.push({id:id(),label:title,players:[]});if(persist())open(active.id);};
     drawNodes();
+    const addAll = root.querySelector('[data-add-all]');
+    addAll.onclick = async () => {
+      addAll.disabled = true;
+      const actions = [...pickerActions.values()];
+      for (const action of actions) if (action.count()) await action.commit();
+      updatePendingTotal();
+    };
+  }
+  function updatePendingTotal() {
+    const count = active ? active.nodes.reduce((sum,n)=>sum+(pending.get(n.id)?.size||0),0) : 0;
+    const all=root.querySelector('[data-add-all]');
+    if(all){all.textContent='Add all selected ('+count+')';all.disabled=!count;}
+    const caption=root.querySelector('[data-pending-total]');
+    if(caption)caption.textContent=count ? count+' pending across value chain' : 'No pending selections';
   }
   function drawNodes() {
     const el=root.querySelector('[data-nodes]');if(!el)return;
+    pickerActions.clear();
     el.innerHTML=active.nodes.length?active.nodes.map((n,i)=>`<section class="pv-card p-4" data-stage="${esc(n.id)}">
       <div class="flex items-center flex-wrap gap-2 mb-3">
       <h3 class="font-display font-extrabold text-lg flex-1">${i+1}. ${esc(n.label)} <span class="font-normal text-xs text-slate-400">(${n.players.length})</span></h3>
@@ -121,6 +140,7 @@ export function renderManual(root, onExit) {
       section.querySelectorAll('[data-refresh-player]').forEach(b=>b.onclick=()=>fetchCompany(n,n.players[Number(b.dataset.refreshPlayer)].ticker||n.players[Number(b.dataset.refreshPlayer)].name,section,Number(b.dataset.refreshPlayer)));
       wirePicker(section,n);
     });
+    updatePendingTotal();
   }
   function wirePicker(section, node) {
     const input = section.querySelector('[data-stock-query]');
@@ -129,7 +149,8 @@ export function renderManual(root, onExit) {
     const add = section.querySelector('[data-add-selected]');
     const status = section.querySelector('[data-result]');
     // Selection is local to this stage. It is intentionally NOT deduped across stages.
-    const selected = new Map();
+    if (!pending.has(node.id)) pending.set(node.id, new Map());
+    const selected = pending.get(node.id);
     let timer = null, seq = 0, results = [];
     const key = (p) => norm(p.code || p.name);
     const present = (p) => node.players.some(x => norm(x.ticker || x.name) === key(p) || norm(x.name) === norm(p.name));
@@ -138,6 +159,7 @@ export function renderManual(root, onExit) {
       chips.querySelectorAll('[data-unselect]').forEach(b=>b.onclick=()=>{selected.delete(b.dataset.unselect);drawSelected();drawResults();});
       add.disabled = selected.size === 0;
       add.textContent = '+ Add selected (' + selected.size + ')';
+      updatePendingTotal();
     };
     const drawResults = () => {
       menu.hidden = !results.length;
@@ -174,7 +196,7 @@ export function renderManual(root, onExit) {
       },220);
     };
     input.onkeydown=(e)=>{if(e.key==='Escape'){results=[];drawResults();}};
-    add.onclick=async()=>{
+    const commit=async()=>{
       if(!selected.size)return;
       const picks=[...selected.values()];
       add.disabled=true;input.disabled=true;
@@ -195,7 +217,8 @@ export function renderManual(root, onExit) {
           selected.delete(key(p));
         }catch(e){errors.push(p.name+': '+e.message);}
       }
-      if(added && !errors.length){open(active.id);return;}
+      // Keep all other stages mounted: their unsaved checkboxes must survive.
+      // Refresh only this stage after successful additions.
       // Retain failed selections so the user can retry them.
       add.disabled=false;input.disabled=false;drawSelected();drawResults();
       status.textContent=added+' added. '+(errors.length?errors.join(' | '):'');
@@ -205,7 +228,11 @@ export function renderManual(root, onExit) {
         section.querySelectorAll('[data-remove-player]').forEach(b=>b.onclick=()=>{node.players.splice(Number(b.dataset.removePlayer),1);if(persist())open(active.id);});
         section.querySelectorAll('[data-refresh-player]').forEach(b=>b.onclick=()=>fetchCompany(node,node.players[Number(b.dataset.refreshPlayer)].ticker||node.players[Number(b.dataset.refreshPlayer)].name,section,Number(b.dataset.refreshPlayer)));
       }
+      updatePendingTotal();
     };
+    add.onclick=commit;
+    pickerActions.set(node.id, {count:()=>selected.size, commit});
+    drawSelected();
   }
   async function fetchCompany(node, query, section, replaceAt=null) {
     const status=section.querySelector('[data-result]');
