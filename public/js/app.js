@@ -11,6 +11,7 @@
 import { loadIndex, loadReport, matchReport } from './data.js';
 import { dispatchResearch, fetchStatus } from './research.js';
 import { renderDashboard } from './dashboard.js';
+import { renderManual } from './manual.js';
 import { setupCharts } from './charts.js';
 import { esc, fmtDate } from './format.js';
 
@@ -48,6 +49,7 @@ async function route() {
   if (path !== '/loading') stopLoading();
 
   if (path === '/' || path === '') return renderHome();
+  if (path === '/manual') return renderManual(app(), () => go('#/'));
   if (path === '/loading') return renderLoading(decodeURIComponent(params.get('q') || ''), params.get('mode') || 'full');
   if (path.startsWith('/r/')) return renderDashboardRoute(decodeURIComponent(path.slice(3)));
   return renderHome();
@@ -92,6 +94,8 @@ async function renderHome() {
           <div class="w-10 h-10 rounded-2xl brand-gradient flex items-center justify-center text-white font-display font-extrabold text-lg shadow-sm">P</div>
           <span class="font-display text-2xl font-extrabold tracking-tight"><span class="text-slate-900">Peer</span><span class="brand-text">VIP</span></span>
         </div>
+
+        <div class="flex justify-center mb-7"><div class="inline-flex rounded-xl p-1 bg-slate-100 ring-1 ring-slate-200"><span class="rounded-lg brand-gradient text-white px-5 py-2 text-sm font-bold">Automatic</span><a href="#/manual" class="px-5 py-2 text-sm font-bold text-slate-600 hover:text-indigo-700">Manual</a></div></div>
 
         <div class="text-center max-w-2xl mx-auto">
           <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
