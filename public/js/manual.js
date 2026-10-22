@@ -22,10 +22,15 @@ const names = (x) => distinct(x.nodes.flatMap((n) => n.players.map((p) => p.name
 export function renderManual(root, onExit) {
   let active = null;
   let items = read();
+  // Ready-made industries bundled with the app (read-only; loaded from /data/manual).
+  // They render alongside — and never touch — the browser-local drafts in `items`.
+  let builtins = [];
+  let onHome = true;
   // Stage-specific selections live outside DOM render functions.
   const pending = new Map();
   const pickerActions = new Map();
   const frame = () => {
+    onHome = true;
     root.innerHTML = `<div class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
       <div class="flex justify-between gap-3 items-center mb-7">
         <div><div class="text-sm text-slate-500 font-semibold">PeerVIP / Manual</div><h1 class="font-display text-3xl font-extrabold">My industries</h1></div>
@@ -67,14 +72,20 @@ export function renderManual(root, onExit) {
       } catch (err) { notice('Import failed: ' + err.message); }
     };
     const list = root.querySelector('[data-list]');
-    list.innerHTML = items.length ? items.map((x) => `<button data-open="${esc(x.id)}" class="pv-card p-5 text-left hover:ring-2 hover:ring-indigo-200">
+    const builtinCards = builtins.map((x) => `<button data-open-builtin="${esc(x.id)}" class="pv-card p-5 text-left hover:ring-2 hover:ring-indigo-200">
+      <div class="flex items-center gap-2 flex-wrap"><div class="text-lg font-extrabold text-slate-800">${esc(x.name)}</div><span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 ring-1 ring-indigo-200 rounded-full px-2 py-0.5 uppercase tracking-wide">Built-in</span></div>
+      <div class="text-xs text-slate-500 mt-2">${x.nodes.length} stages · ${names(x).length} players</div></button>`).join('');
+    const localCards = items.map((x) => `<button data-open="${esc(x.id)}" class="pv-card p-5 text-left hover:ring-2 hover:ring-indigo-200">
       <div class="text-lg font-extrabold text-slate-800">${esc(x.name)}</div>
-      <div class="text-xs text-slate-500 mt-2">${x.nodes.length} stages · ${names(x).length} players</div></button>`).join('') : '<div class="text-slate-400 text-sm">No manually created industries yet.</div>';
+      <div class="text-xs text-slate-500 mt-2">${x.nodes.length} stages · ${names(x).length} players</div></button>`).join('');
+    list.innerHTML = (builtinCards + localCards) || '<div class="text-slate-400 text-sm">No industries yet — create one above.</div>';
     list.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => open(b.dataset.open));
+    list.querySelectorAll('[data-open-builtin]').forEach((b) => b.onclick = () => openBuiltin(b.dataset.openBuiltin));
   };
   function notice(s) { const n=root.querySelector('[data-notice]'); if (n) n.textContent=s; else alert(s); }
   const persist = () => write(items, notice);
   function open(industryId) {
+    onHome = false;
     active = items.find((x) => x.id === industryId);
     if (!active) return frame();
     root.innerHTML = `<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
@@ -250,6 +261,7 @@ export function renderManual(root, onExit) {
     }catch(e){status.textContent='Could not add company: '+e.message+'. Check the listing/name and try again.';}
   }
   async function compare(x) {
+    onHome = false;
     root.innerHTML='<div class="max-w-4xl mx-auto p-8 text-slate-500">Preparing the financial comparison…</div>';
     let metrics=[];
     try { metrics=(await loadReport('data-center')).metrics||[]; } catch (_) {}
@@ -266,9 +278,56 @@ export function renderManual(root, onExit) {
       value_chain:{nodes:x.nodes.map(n=>({key:n.id,label:n.label,use:'Manually defined'})),players:peers},
       sources:peers.filter(p=>p.source).map(p=>p.source)
     };
-    renderDashboard(root,report,{onBack:()=>open(x.id),onRefresh:()=>open(x.id)});
+    const reopen = x.builtin ? () => openBuiltin(x.id) : () => open(x.id);
+    renderDashboard(root,report,{onBack:reopen,onRefresh:reopen});
     root.querySelectorAll('[data-refresh]').forEach(b=>b.remove());
     const title=root.querySelector('h1');if(title)title.title='Manual universe: edit membership via My Industries';
   }
+  // Load the bundled, ready-made industries. Best-effort: any failure leaves the
+  // user's own local industries fully intact (builtins simply don't appear).
+  async function loadBuiltins() {
+    try {
+      const res = await fetch('./data/manual/index.json', { cache: 'no-cache' });
+      if (!res.ok) return [];
+      const manifest = await res.json();
+      const metas = Array.isArray(manifest && manifest.industries) ? manifest.industries : [];
+      const loaded = await Promise.all(metas.map(async (meta) => {
+        try {
+          const r = await fetch('./data/manual/' + meta.file, { cache: 'no-cache' });
+          if (!r.ok) return null;
+          const ind = await r.json();
+          if (!ind || typeof ind.name !== 'string' || !Array.isArray(ind.nodes)) return null;
+          ind.builtin = true;
+          return ind;
+        } catch (_) { return null; }
+      }));
+      return loaded.filter(Boolean);
+    } catch (_) { return []; }
+  }
+  // Read-only detail for a bundled industry. Editing/persistence paths are
+  // deliberately absent — builtins are never written to browser storage.
+  function openBuiltin(industryId) {
+    const b = builtins.find((x) => x.id === industryId);
+    if (!b) return frame();
+    onHome = false;
+    const total = names(b).length;
+    root.innerHTML = `<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <div class="flex flex-wrap justify-between gap-3 items-start mb-5">
+        <div><button data-back class="text-sm text-indigo-700 mb-2">← My industries</button>
+          <h1 class="font-display text-3xl font-extrabold">${esc(b.name)} <span class="align-middle text-xs font-bold text-indigo-700 bg-indigo-50 ring-1 ring-indigo-200 rounded-full px-2 py-0.5">Built-in</span></h1>
+          <p class="text-sm text-slate-500">Ready-made universe · ${b.nodes.length} stages · ${total} players${b.source ? ' · ' + esc(b.source) : ''}</p></div>
+        <div class="flex flex-wrap gap-2"><button data-compare class="rounded-xl brand-gradient text-white px-5 py-2 font-semibold">Financial dashboard</button></div>
+      </div>
+      <p class="text-sm text-slate-500 mb-4">A ready-made industry that ships with PeerVIP. Open the financial dashboard to benchmark every company, or browse the value-chain stages below. Read-only — your own Manual industries stay separate and fully editable.</p>
+      <div class="space-y-4">${b.nodes.map((n, i) => `<section class="pv-card p-4">
+        <h3 class="font-display font-extrabold text-lg mb-3">${i + 1}. ${esc(n.label)} <span class="font-normal text-xs text-slate-400">(${n.players.length})</span></h3>
+        <div class="overflow-x-auto"><table class="w-full text-sm"><tbody>${n.players.map((p) => `<tr class="border-t border-slate-100"><td class="py-2 font-semibold align-top whitespace-nowrap pr-3">${esc(p.name)}</td><td class="px-2 text-slate-500 align-top whitespace-nowrap">${esc(p.ticker || '—')}</td><td class="px-2 text-slate-500 text-xs align-top">${esc(p.business_model || '')}</td></tr>`).join('')}</tbody></table></div>
+      </section>`).join('')}</div>
+      <p class="text-xs text-slate-500 mt-6">Financials are consolidated company-level metrics from Screener, not revenue attributable to a single value-chain stage.</p>
+    </div>`;
+    root.querySelector('[data-back]').onclick = frame;
+    root.querySelector('[data-compare]').onclick = () => compare(b);
+  }
   frame();
+  loadBuiltins().then((b) => { if (b.length) { builtins = b; if (onHome) frame(); } });
 }

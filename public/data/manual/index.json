@@ -1,0 +1,13 @@
+{
+  "industries": [
+    {
+      "id": "builtin-precision-engineering",
+      "slug": "precision-engineering",
+      "name": "Precision Engineering",
+      "file": "precision-engineering.json",
+      "stages": 10,
+      "players": 104,
+      "with_financials": 101
+    }
+  ]
+}
