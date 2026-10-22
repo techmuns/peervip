@@ -39,7 +39,11 @@ export function renderManual(root, onExit) {
       <p class="text-slate-500 mb-5">You decide the industry, every value-chain stage and every company. Only the companies you choose get financial data from Screener. No AI industry or player discovery runs.</p>
       <div class="pv-card p-4 mb-5"><form data-new class="flex flex-col sm:flex-row gap-2">
         <input required maxlength="120" name="industry" class="${cls} flex-1" placeholder="New industry name (e.g. Indian Defence)" aria-label="Industry name">
-        <button class="rounded-xl brand-gradient text-white px-5 py-2 font-semibold">+ Create industry</button></form></div>
+        <button class="rounded-xl brand-gradient text-white px-5 py-2 font-semibold">+ Create industry</button></form>
+        <div class="mt-3 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2">
+          <label class="${button} cursor-pointer">⬆ Import industry from Excel<input data-xlsx type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden></label>
+          <span class="text-xs text-slate-500">Builds a whole industry from a value-chain workbook — reads the “ALL COMPANIES” sheet and fetches live financials.</span>
+        </div></div>
       <div data-notice role="status" class="text-sm text-rose-600 mb-3"></div>
       <div data-list class="grid sm:grid-cols-2 gap-3"></div>
       <div class="mt-5 text-xs text-slate-500">Drafts are stored in this browser only. Export a JSON backup to move them to another device or avoid loss from clearing browser storage.</div>
@@ -71,6 +75,8 @@ export function renderManual(root, onExit) {
         if (write(restored, notice)) { items=restored; frame(); }
       } catch (err) { notice('Import failed: ' + err.message); }
     };
+    const xlsxInput = root.querySelector('[data-xlsx]');
+    if (xlsxInput) xlsxInput.onchange = (e) => { const f = e.target.files[0]; e.target.value = ''; if (f) importExcel(f); };
     const list = root.querySelector('[data-list]');
     const builtinCards = builtins.map((x) => `<button data-open-builtin="${esc(x.id)}" class="pv-card p-5 text-left hover:ring-2 hover:ring-indigo-200">
       <div class="flex items-center gap-2 flex-wrap"><div class="text-lg font-extrabold text-slate-800">${esc(x.name)}</div><span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 ring-1 ring-indigo-200 rounded-full px-2 py-0.5 uppercase tracking-wide">Built-in</span></div>
@@ -327,6 +333,154 @@ export function renderManual(root, onExit) {
     </div>`;
     root.querySelector('[data-back]').onclick = frame;
     root.querySelector('[data-compare]').onclick = () => compare(b);
+  }
+  // ---- Import a whole industry from a value-chain Excel workbook --------------
+  // Fully generic: stage names, stage COUNT, company names and the industry name
+  // all come from the file. The ONLY fixed assumption is the column layout of the
+  // "ALL COMPANIES" sheet (Company / Ticker / Value-chain stage / What it does …).
+  // Produces an ordinary editable local industry — nothing is deployed or shared.
+  function cellText(v) {
+    if (v == null) return '';
+    if (typeof v === 'object') {
+      if (Array.isArray(v.richText)) return v.richText.map((t) => t.text).join('');
+      if (v.text != null) return String(v.text);
+      if (v.result != null) return String(v.result);
+      if (v.hyperlink != null) return String(v.hyperlink);
+      return '';
+    }
+    return String(v);
+  }
+  function hnorm(s) { return cellText(s).toLowerCase().replace(/\s+/g, ' ').trim(); }
+  function excelNote(cells, col) {
+    const get = (k) => (col[k] != null ? cellText(cells[col[k]]).trim() : '');
+    const tag = [get('evidence'), get('exposure') && get('exposure') + ' exposure'].filter(Boolean).join(' · ');
+    const parts = [];
+    if (tag) parts.push('[' + tag + ']');
+    if (get('why')) parts.push(get('why'));
+    if (get('caution')) parts.push('Caution: ' + get('caution'));
+    return parts.join(' ');
+  }
+  // Map header labels -> column indexes by meaning, so column order can vary too.
+  function mapHeader(cells) {
+    const col = {};
+    for (let c = 1; c < cells.length; c++) {
+      const h = hnorm(cells[c]);
+      if (!h) continue;
+      if (h === 'company' || h === 'company name' || h === 'name') col.company = col.company ?? c;
+      else if (/ticker|symbol|code/.test(h)) col.ticker = col.ticker ?? c;
+      else if (/value.?chain stage|^stage$|value chain/.test(h)) col.stage = col.stage ?? c;
+      else if (/what.*does/.test(h)) col.does = col.does ?? c;
+      else if (/why included|source evidence/.test(h)) col.why = col.why ?? c;
+      else if (/evidence status/.test(h)) col.evidence = col.evidence ?? c;
+      else if (/^exposure$/.test(h)) col.exposure = col.exposure ?? c;
+      else if (/caution/.test(h)) col.caution = col.caution ?? c;
+    }
+    return col;
+  }
+  async function parseWorkbook(file) {
+    const buf = await file.arrayBuffer();
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.load(buf);
+    // Prefer an "ALL COMPANIES" sheet, else the first sheet that has a usable header.
+    const sheets = wb.worksheets.slice().sort((a, b) =>
+      (/all companies/i.test(b.name) ? 1 : 0) - (/all companies/i.test(a.name) ? 1 : 0));
+    let found = null;
+    for (const ws of sheets) {
+      const rows = ws.getSheetValues(); // 1-indexed; rows[0] is empty
+      for (let r = 1; r < rows.length; r++) {
+        const cells = rows[r];
+        if (!Array.isArray(cells)) continue;
+        const col = mapHeader(cells);
+        if (col.company != null && col.stage != null) { found = { rows, headerRow: r, col }; break; }
+      }
+      if (found) break;
+    }
+    if (!found) throw new Error('No sheet with “Company” and “Value-chain stage” columns was found.');
+    const { rows, headerRow, col } = found;
+    const stageOrder = [];
+    const byStage = new Map();
+    for (let r = headerRow + 1; r < rows.length; r++) {
+      const cells = rows[r];
+      if (!Array.isArray(cells)) continue;
+      const name = cellText(cells[col.company]).trim();
+      if (!name) continue;
+      const stageRaw = (cellText(cells[col.stage]).trim()) || 'Unassigned';
+      const label = stageRaw.replace(/^\s*\d+\s*[|\-.:]\s*/, '').trim() || stageRaw; // drop any "01 | " style prefix
+      if (!byStage.has(label)) { byStage.set(label, []); stageOrder.push(label); }
+      const tickerRaw = col.ticker != null ? cellText(cells[col.ticker]).trim() : '';
+      const ticker = /verify|symbol|tbd|^[-—–]$/i.test(tickerRaw) ? '' : tickerRaw;
+      byStage.get(label).push({
+        name,
+        ticker,
+        business: col.does != null ? cellText(cells[col.does]).trim() : '',
+        note: excelNote(cells, col),
+      });
+    }
+    // Suggested industry name: the "START HERE" banner's first token, else the file name.
+    let name = '';
+    const startWs = wb.worksheets.find((w) => /start here/i.test(w.name));
+    if (startWs) { const v = cellText(startWs.getCell('A1').value).trim(); if (v) name = v.split('|')[0].trim(); }
+    if (name) name = name.toLowerCase().replace(/\b\w/g, (m) => m.toUpperCase());
+    return { name, stages: stageOrder.map((label) => ({ label, companies: byStage.get(label) })) };
+  }
+  async function importExcel(file) {
+    if (typeof ExcelJS === 'undefined') return notice('Excel library not loaded — check your connection and retry.');
+    let parsed;
+    try { parsed = await parseWorkbook(file); }
+    catch (e) { return notice('Could not read this Excel: ' + e.message); }
+    const total = parsed.stages.reduce((s, st) => s + st.companies.length, 0);
+    if (!total) return notice('No companies found in this workbook.');
+    const fallbackName = (file.name || 'Imported industry').replace(/\.xlsx$/i, '');
+    const chosen = prompt('Name this industry (' + parsed.stages.length + ' stages · ' + total + ' companies found)', parsed.name || fallbackName);
+    if (chosen === null) return;
+    const finalName = chosen.trim() || parsed.name || fallbackName;
+    if (items.some((a) => norm(a.name) === norm(finalName)) && !confirm('An industry named “' + finalName + '” already exists. Import as another copy?')) return;
+    const industry = { id: id(), name: finalName, created_at: new Date().toISOString(), source: file.name || '', nodes: parsed.stages.map((st) => ({ id: id(), label: st.label, players: [] })) };
+    items.unshift(industry);
+    if (!persist()) return;
+    onHome = false;
+    const tasks = [];
+    parsed.stages.forEach((st, si) => st.companies.forEach((c) => tasks.push({ node: industry.nodes[si], c })));
+    let done = 0, okc = 0;
+    const failures = [];
+    const progress = (label) => {
+      const pct = Math.round((done / total) * 100);
+      root.innerHTML = `<div class="max-w-xl mx-auto px-4 py-16 text-center">
+        <div class="text-sm text-slate-500 font-semibold mb-1">PeerVIP / Manual</div>
+        <h1 class="font-display text-2xl font-extrabold mb-2">Importing ${esc(finalName)}</h1>
+        <p class="text-slate-500 mb-5">${industry.nodes.length} stages · ${total} companies · fetching live financials from Screener…</p>
+        <div class="h-3 rounded-full bg-slate-100 overflow-hidden ring-1 ring-slate-200"><div class="h-full brand-gradient" style="width:${pct}%"></div></div>
+        <p class="text-sm text-slate-500 mt-3">${done} / ${total}${label ? ' · ' + esc(label) : ''}</p>
+        <p class="text-xs text-slate-400 mt-1">Please keep this tab open until it finishes.</p>
+      </div>`;
+    };
+    progress('');
+    let cursor = 0;
+    const worker = async () => {
+      while (cursor < tasks.length) {
+        const t = tasks[cursor++];
+        const q = (t.c.ticker || t.c.name || '').trim();
+        try {
+          const res = await fetch('/api/peer?name=' + encodeURIComponent(q), { cache: 'no-store' });
+          const data = await res.json();
+          if (!res.ok || !data.ok || !data.peer || !data.peer.name) throw new Error((data && data.error) || 'not found');
+          const peer = { ...data.peer, added_by: 'user', business_model: t.c.business || data.peer.business_model || '', note: t.c.note || '' };
+          if (!t.node.players.some((p) => norm(p.ticker || p.name) === norm(peer.ticker || peer.name))) t.node.players.push(peer);
+          okc++;
+        } catch (_) {
+          t.node.players.push({ name: t.c.name, ticker: '', added_by: 'user', business_model: t.c.business, products: '', note: (t.c.note ? t.c.note + ' ' : '') + '(Not resolvable on Screener — verify symbol.)', source: null, current: {}, series: {} });
+          failures.push(t.c.name);
+        }
+        done++;
+        persist();
+        progress(t.c.name);
+      }
+    };
+    // A few requests in flight at once — fast, but gentle on Screener.
+    await Promise.all(Array.from({ length: Math.min(3, tasks.length) }, worker));
+    persist();
+    open(industry.id);
+    notice(okc + ' of ' + total + ' companies imported with financials' + (failures.length ? ' · ' + failures.length + ' added without (verify symbol): ' + failures.slice(0, 6).join(', ') + (failures.length > 6 ? '…' : '') : '') + '.');
   }
   frame();
   loadBuiltins().then((b) => { if (b.length) { builtins = b; if (onHome) frame(); } });
